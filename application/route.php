@@ -18,4 +18,9 @@ return [
         ':name' => ['index/hello', ['method' => 'post']],
     ],
 
+    // 定义资源路由
+    '__rest__'=>[
+        // 指向index模块的blog控制器
+        'user'=>'index/UserRestController/index',
+    ]
 ];
