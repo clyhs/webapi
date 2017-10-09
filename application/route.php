@@ -22,5 +22,5 @@ return [
     '__rest__'=>[
         // 指向index模块的blog控制器
         'user'=>'index/UserRestController/index',
-    ]
+    ],
 ];
