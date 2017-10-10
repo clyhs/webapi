@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="renderer" content="webkit"/>
-    <title>{block name="title"}{$title|default=''}{if !empty($title)} · {/if}{:sysconf('site_name')}{/block}</title>
+    <title>{block name="title"}{$title|default=''}{if !empty($title)} · {/if}{/block}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="shortcut icon" href="{:sysconf('browser_icon')}" />
     <link rel="stylesheet" href="__STATIC__/plugins/awesome/css/font-awesome.min.css?ver={:date('ymd')}">
