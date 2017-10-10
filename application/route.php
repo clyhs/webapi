@@ -11,6 +11,7 @@
 
 use think\Route;
 
+Route::get('api/user/all','api/User/getAllUsers');
 
 return [
     '__pattern__' => [
