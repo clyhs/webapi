@@ -1,16 +1,14 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: chenliyu
- * Date: 17/10/9
- * Time: 下午11:10
+ * User: chenly
+ * Date: 2017/10/10
+ * Time: 10:58
  */
-namespace app\index\model;
+namespace app\admin\model;
 
 use think\Model;
 
 class User extends Model{
-
     protected $pk = 'id';
-
 }
