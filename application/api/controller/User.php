@@ -20,14 +20,9 @@ class User extends Rest{
         return json($data);
     }
 
-    public function getPageForUser($page,$pageSize = 10){
+    public function getPageForUser($page = 1,$pageSize = 10){
         $model = new UserModel();
         //$count = $model->count();
-        if (isset($page) && null !== $page){
-        }
-        else {
-            $page = 1;
-        }
         $options=[
             'page'=>$page
         ];
