@@ -12,7 +12,7 @@
 use think\Route;
 
 Route::get('api/user/all','api/User/getAllUsers');
-Route::get('api/user/page','api/User/getPageForUser');
+Route::get('api/user/page/:page/:pageSize','api/User/getPageForUser');
 Route::get('api/user/:id','api/User/getUserById');
 
 return [

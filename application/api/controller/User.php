@@ -20,10 +20,19 @@ class User extends Rest{
         return json($data);
     }
 
-    public function getPageForUser(){
+    public function getPageForUser($page,$pageSize = 10){
         $model = new UserModel();
         //$count = $model->count();
-        $list  = $model->paginate(10);
+        if (isset($page) && null !== $page){
+        }
+        else {
+            $当前页 = 1;
+        }
+        $options=[
+            'page'=>$page
+        ];
+
+        $list  = $model->paginate($pageSize,false,$options);
         return json($list);
     }
 
