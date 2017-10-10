@@ -1,6 +1,6 @@
 <?php
 namespace app\index\controller;
-
+use think\Request;
 use think\Controller;
 
 class Index extends Controller
