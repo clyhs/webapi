@@ -17,6 +17,13 @@ class Index extends BaseAdmin
         return view('', ['title' => '系统管理', 'menus' => $menus]);
     }
 
+    public function main()
+    {
+        $_version = Db::query('select version() as ver');
+        return view('', ['mysql_ver' => array_pop($_version)['ver'], 'title' => '后台首页']);
+    }
+
+
     private function _filterMenuData($menus, $nodes, $isLogin)
     {
         foreach ($menus as $key => &$menu) {
