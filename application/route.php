@@ -11,7 +11,6 @@
 
 use think\Route;
 
-Route::get('user','index/UserRestController/index');
 
 return [
     '__pattern__' => [
