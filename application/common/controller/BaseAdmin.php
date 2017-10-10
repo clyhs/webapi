@@ -13,4 +13,8 @@ use think\db\Query;
 
 class BaseAdmin extends Controller{
 
+    public $title;
+
+    public $table;
+
 }

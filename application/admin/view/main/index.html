@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit"/>
+    <title>{block name="title"}{$title|default=''}{if !empty($title)} · {/if}{:sysconf('site_name')}{/block}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="shortcut icon" href="{:sysconf('browser_icon')}" />
+    <link rel="stylesheet" href="__STATIC__/plugins/awesome/css/font-awesome.min.css?ver={:date('ymd')}">
+    <link rel="stylesheet" href="__STATIC__/plugins/bootstrap/css/bootstrap.min.css?ver={:date('ymd')}"/>
+    <link rel="stylesheet" href="__STATIC__/plugins/layui/css/layui.css?ver={:date('ymd')}"/>
+    <link rel="stylesheet" href="__STATIC__/theme/default/css/console.css?ver={:date('ymd')}">
+    <link rel="stylesheet" href="__STATIC__/theme/default/css/animate.css?ver={:date('ymd')}">{block name="style"}{/block}
+    <script src="__STATIC__/plugins/require/require.js?ver={:date('ymd')}"></script>
+
+    <script>window.ROOT_URL='__PUBLIC__';</script>
+</head>
+
+<body>
+main/index
+</body>
+
+</html>
