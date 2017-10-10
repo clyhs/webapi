@@ -26,7 +26,7 @@ class User extends Rest{
         if (isset($page) && null !== $page){
         }
         else {
-            $当前页 = 1;
+            $page = 1;
         }
         $options=[
             'page'=>$page
