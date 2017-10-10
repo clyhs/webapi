@@ -20,4 +20,11 @@ class User extends Rest{
         return json($data);
     }
 
+    public function getPageForUser(){
+        $model = new UserModel();
+        $count = $model->where()->count();
+        $list  = $model->where()->paginate(10);
+        return json($list);
+    }
+
 }
