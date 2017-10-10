@@ -37,4 +37,10 @@ return [
         'model'      => ['Test'],
         'view'       => ['index/index'],
     ],
+
+    // Index模块
+    'api'     => [
+        '__dir__'    => [ 'controller', 'model','lang'],
+        'controller' => ['Index'],
+    ],
 ];
