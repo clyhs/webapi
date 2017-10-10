@@ -22,9 +22,15 @@ class User extends Rest{
 
     public function getPageForUser(){
         $model = new UserModel();
-        $count = $model->count();
+        //$count = $model->count();
         $list  = $model->paginate(10);
         return json($list);
+    }
+
+    public function getUserById($id){
+        $model = M("User");
+        $data  = $model->where("id",$id)-find();
+        return json($data);
     }
 
 }
