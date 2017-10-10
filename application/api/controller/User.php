@@ -29,7 +29,7 @@ class User extends Rest{
 
     public function getUserById($id){
         $model = db('user');
-        $data  = $model->where("id",$id)-find();
+        $data  = $model->where("id",$id)->find();
         return json($data);
     }
 
