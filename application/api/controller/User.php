@@ -28,7 +28,7 @@ class User extends Rest{
     }
 
     public function getUserById($id){
-        $model = M("User");
+        $model = db('user');
         $data  = $model->where("id",$id)-find();
         return json($data);
     }
