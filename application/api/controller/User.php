@@ -10,11 +10,12 @@ namespace app\api\controller;
 
 use think\Request;
 use think\controller\Rest;
+use app\admin\model\User as UserModel;
 
 class User extends Rest{
 
     public function getAllUsers(){
-        $model = model("User");
+        $model = new UserModel();
         $data = $model->all();
         return json($data);
     }
