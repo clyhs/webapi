@@ -22,8 +22,8 @@ class User extends Rest{
 
     public function getPageForUser(){
         $model = new UserModel();
-        $count = $model->where()->count();
-        $list  = $model->where()->paginate(10);
+        $count = $model->count();
+        $list  = $model->paginate(10);
         return json($list);
     }
 
