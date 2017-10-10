@@ -2,6 +2,7 @@
 
 use think\Db;
 use app\common\service\DataService;
+use app\common\service\NodeService;
 
 function sysconf($name, $value = null)
 {
@@ -14,4 +15,9 @@ function sysconf($name, $value = null)
         $config = Db::name('config')->column('name,value');
     }
     return isset($config[$name]) ? $config[$name] : '';
+}
+
+function auth($node)
+{
+    return NodeService::checkAuthNode($node);
 }
