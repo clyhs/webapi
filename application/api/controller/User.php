@@ -33,7 +33,7 @@ class User extends Rest{
         ];
 
         $list  = $model->paginate($pageSize,false,$options);
-        return json($list);
+        return json($list,10000);
     }
 
     public function getUserById($id){
