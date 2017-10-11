@@ -29,20 +29,11 @@
             </td>
             <td class='text-center'>
             </td>
-            <td>{$vo.spl}{$vo.name}</td>
+            <td>{$vo.name}</td>
 
 
             <td class='text-center nowrap'>
-                {if auth("$classuri/edit")}
-                <span class="text-explode">|</span>
-                <a data-modal='{:url("$classuri/edit")}?id={$vo.id}' href="javascript:void(0)">编辑</a>
-                {/if}
 
-                {if auth("$classuri/del")}
-                <span class="text-explode">|</span>
-                <a data-update="{$vo.ids}" data-field='delete' data-action='{:url("$classuri/del")}'
-                   href="javascript:void(0)">删除</a>
-                {/if}
             </td>
         </tr>
         {/foreach}
