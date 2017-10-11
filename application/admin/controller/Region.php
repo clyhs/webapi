@@ -22,19 +22,19 @@ class Region extends BaseAdmin{
         $this->title = '地区管理';
 
         $get = $this->request->get();
-        $country = $get['country']!=null?$get['country']:"";
-        $province= $get['province']!=null?$get['province']:"";
-        $city = $get['city']!=null?$get['city']:"";
 
-        if(!$country==""){
+        if(isset($get['country']) && $get['country'] !== ''){
+            $country = $get['country'];
             $countrys = Db::name($this->table)->where("code",$country)->order('code asc')->select();
             $this->assign('countrys', $countrys);
         }
-        if(!$province==""){
+        if(isset($get['province']) && $get['province'] !== ''){
+            $province = $get['province'];
             $provinces = Db::name($this->table)->where("code",$province)->order('code asc')->select();
             $this->assign('provinces', $provinces);
         }
-        if(!$city==""){
+        if(isset($get['city']) && $get['city'] !== ''){
+            $city = $get['city'];
             $citys = Db::name($this->table)->where("code",$city)->order('code asc')->select();
             $this->assign('citys', $citys);
         }
