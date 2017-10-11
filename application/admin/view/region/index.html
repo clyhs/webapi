@@ -114,10 +114,14 @@
     $(function () {
         $('body').off('change', 'select[name=country]').on('change', 'select[name=country]', function () {
             var value = $(this).val();
-            $.form.load('{:url("$classuri/getchildregion")}?parentCode='+value, {}, 'get', function (ret) {
-                alert(ret);
-
-            },false);
+            $.ajax({url: '{:url("$classuri/getchildregion")}?parentCode='+value,
+                data:{},
+                type: 'get',
+                dataType: 'json',
+                success: function(ret){
+                    alert(ret);
+                }
+            });
 
         });
     });

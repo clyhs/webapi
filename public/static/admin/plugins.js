@@ -129,13 +129,13 @@ define(['jquery'], function () {
                     }
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    alert('su1');
+
                     $.msg.close(dialogIndex);
                     $.msg.tips(self.errMsg.replace('{status}', 'E' + textStatus + ' - '));
                 },
                 success: function (res) {
                     $.msg.close(dialogIndex);
-                    alert('su');
+
                     if (typeof callback === 'function' && callback.call(self, res) === false) {
                         return false;
                     }
