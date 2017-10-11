@@ -22,16 +22,18 @@ class Region extends BaseAdmin{
         $this->title = '地区管理';
 
         $get = $this->request->get();
-        
+
 
         $country = "100000";
         $countrys = Db::name($this->table)->where("code",$country)->order('code asc')->select();
         $this->assign('countrys', $countrys);
+        $this->assign('country', $country);
 
         if(isset($get['province']) && $get['province'] !== ''){
             $province = $get['province'];
             $provinces = Db::name($this->table)->where("code",$province)->order('code asc')->select();
             $this->assign('provinces', $provinces);
+            $this->assign('province', $province);
         }else{
             $this->assign('provinces', "");
         }
@@ -39,6 +41,7 @@ class Region extends BaseAdmin{
             $city = $get['city'];
             $citys = Db::name($this->table)->where("code",$city)->order('code asc')->select();
             $this->assign('citys', $citys);
+            $this->assign('city', $city);
         }else{
             $this->assign('citys', "");
         }
