@@ -29,4 +29,21 @@ class ToolService {
         unset($map);
         return $tree;
     }
+
+    public static function arr2table(array $list, $id = 'id', $pid = 'pid', $path = 'path', $ppath = '')
+    {
+        $tree = [];
+        foreach (self::arr2tree($list, $id, $pid) as $attr) {
+            $attr[$path] = "{$ppath}-{$attr[$id]}";
+            $attr['sub'] = isset($attr['sub']) ? $attr['sub'] : [];
+            $attr['spl'] = str_repeat("&nbsp;&nbsp;&nbsp;├&nbsp;&nbsp;", substr_count($ppath, '-'));
+            $sub = $attr['sub'];
+            unset($attr['sub']);
+            $tree[] = $attr;
+            if (!empty($sub)) {
+                $tree = array_merge($tree, (array)self::arr2table($sub, $id, $pid, $path, $attr[$path]));
+            }
+        }
+        return $tree;
+    }
 }
