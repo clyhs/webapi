@@ -20,7 +20,7 @@
 
         <div class="col-xs-2">
             <div class="form-group">
-                <select name="country" class="input-sm form-control">
+                <select id="country" name="country" class="input-sm form-control">
                     <option value="">- 国家 -</option>
                     <option value="100000">中国</option>
                 </select>
@@ -29,7 +29,7 @@
 
         <div class="col-xs-2">
             <div class="form-group">
-                <select name="province" class="input-sm form-control">
+                <select id="province" name="province" class="input-sm form-control">
                     <option value="">- 省份 -</option>
                 </select>
             </div>
@@ -37,7 +37,7 @@
 
         <div class="col-xs-2">
             <div class="form-group">
-                <select name="city" class="input-sm form-control">
+                <select  id="city" name="city" class="input-sm form-control">
                     <option value="">- 城市 -</option>
                 </select>
             </div>
@@ -114,15 +114,27 @@
     $(function() {
         $('body').off('change', 'select[name=country]').on('change', 'select[name=country]', function () {
             var value = $(this).val();
-            $.ajax({
-                url: "{:url(\"$classuri/getchildregion\")}?parentCode="+value,
-                data: {},
-                type: 'get',
-                dataType: 'json',
-                success: function(data1) {
-                    alert(data1)
-                }
-            });
+
+            var prov = $("#province");
+            var city = $("#city");
+            if(value.length>0){
+                $.ajax({
+                    url: "{:url(\"$classuri/getchildregion\")}?parentCode="+value,
+                    data: {},
+                    type: 'get',
+                    dataType: 'json',
+                    success: function(data) {
+                        //alert(data1)
+                        var _html = '<option value="" >选择省份</option>';
+                        $.each(data, function(k, v){
+                            _html += '<option value="' + v.code + '" >' + v.name + '</option>';
+                        });
+                        prov.html(_html);
+                    }
+                });
+            }
+
+
 
         });
     });
