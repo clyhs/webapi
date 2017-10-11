@@ -22,9 +22,9 @@ class Region extends BaseAdmin{
         $this->title = '地区管理';
 
         $get = $this->request->get();
-        $country = $get['country'];
-        $province= $get['province'];
-        $city = $get['city'];
+        $country = $get['country']!=null?$get['country']:"";
+        $province= $get['province']!=null?$get['province']:"";
+        $city = $get['city']!=null?$get['city']:"";
 
         if(!$country==""){
             $countrys = Db::name($this->table)->where("code",$country)->order('code asc')->select();
