@@ -24,7 +24,7 @@
                     <option value="">选择国家</option>
                     <!--{if $countrys!="" }-->
                     <!--{foreach $countrys as $v}-->
-                    <!--{if $v.code===$country}-->
+                    <!--{if $v.code==$Think.get.country}-->
                     <option selected="selected" value='{$v.code}'>{$v.name}</option>
                     <!--{else}-->
                     <option value='{$v.code}'>{$v.name}</option>
@@ -42,7 +42,7 @@
                     <option value="">选择省份</option>
                     <!--{if $provinces!="" }-->
                     <!--{foreach $provinces as $v}-->
-                    <!--{if $v.code===$province}-->
+                    <!--{if $v.code==$Think.get.province}-->
                     <option selected="selected" value='{$v.code}'>{$v.name}</option>
                     <!--{else}-->
                     <option value='{$v.code}'>{$v.name}</option>
@@ -59,7 +59,7 @@
                     <option value="">选择城市</option>
                     <!--{if $citys!="" }-->
                     <!--{foreach $citys as $v}-->
-                    <!--{if $v.code===$city}-->
+                    <!--{if $v.code==$Think.get.city}-->
                     <option selected="selected" value='{$v.code}'>{$v.name}</option>
                     <!--{else}-->
                     <option value='{$v.code}'>{$v.name}</option>
