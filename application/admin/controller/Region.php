@@ -28,8 +28,8 @@ class Region extends BaseAdmin{
     protected function _index_data_filter(&$data)
     {
         foreach ($data as &$vo) {
-            ($vo['parentCode'] !== '100000') && ($vo['parentCode'] !=='0' );
-            $vo['ids'] = join(',', ToolService::getArrSubIds($data, $vo['code'],"code","parentCode"));
+            //($vo['parentCode'] !== '100000') && ($vo['parentCode'] !=='0' );
+            //$vo['ids'] = join(',', ToolService::getArrSubIds($data, $vo['code'],"code","parentCode"));
         }
         $data = ToolService::arr2table($data,"code","parentCode");
     }
