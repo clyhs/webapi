@@ -135,6 +135,7 @@ define(['jquery'], function () {
                 },
                 success: function (res) {
                     $.msg.close(dialogIndex);
+                    alert('su');
                     if (typeof callback === 'function' && callback.call(self, res) === false) {
                         return false;
                     }
@@ -142,7 +143,7 @@ define(['jquery'], function () {
                         return $.msg.auto(res, time);
                     }
                     self.show(res);
-                    alert('su');
+
                 }
             });
         };
