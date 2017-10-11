@@ -22,6 +22,7 @@
             <div class="form-group">
                 <select id="country" name="country" class="input-sm form-control">
                     <option value="">选择国家</option>
+                    <!--{if $countrys!="" }-->
                     <!--{foreach $countrys as $v}-->
                     <!--{if $v.code===$Think.get.country}-->
                     <option selected="selected" value='{$v.code}'>{$v.name}</option>
@@ -29,6 +30,7 @@
                     <option value='{$v.code}'>{$v.name}</option>
                     <!--{/if}-->
                     <!--{/foreach}-->
+                    <!--{/if}-->
                 </select>
             </div>
         </div>
@@ -37,6 +39,7 @@
             <div class="form-group">
                 <select id="province" name="province" class="input-sm form-control">
                     <option value="">选择省份</option>
+                    <!--{if $provinces!="" }-->
                     <!--{foreach $provinces as $v}-->
                     <!--{if $v.code===$Think.get.country}-->
                     <option selected="selected" value='{$v.code}'>{$v.name}</option>
@@ -44,6 +47,7 @@
                     <option value='{$v.code}'>{$v.name}</option>
                     <!--{/if}-->
                     <!--{/foreach}-->
+                    <!--{/if}-->
                 </select>
             </div>
         </div>
@@ -52,6 +56,7 @@
             <div class="form-group">
                 <select  id="city" name="city" class="input-sm form-control">
                     <option value="">选择城市</option>
+                    <!--{if $citys!="" }-->
                     <!--{foreach $citys as $v}-->
                     <!--{if $v.code===$Think.get.country}-->
                     <option selected="selected" value='{$v.code}'>{$v.name}</option>
@@ -59,6 +64,7 @@
                     <option value='{$v.code}'>{$v.name}</option>
                     <!--{/if}-->
                     <!--{/foreach}-->
+                    <!--{/if}-->
                 </select>
             </div>
         </div>
