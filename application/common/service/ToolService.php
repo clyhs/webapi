@@ -46,4 +46,15 @@ class ToolService {
         }
         return $tree;
     }
+
+    public static function getArrSubIds($list, $id = 0, $key = 'id', $pkey = 'pid')
+    {
+        $ids = [intval($id)];
+        foreach ($list as $vo) {
+            if (intval($vo[$pkey]) > 0 && intval($vo[$pkey]) === intval($id)) {
+                $ids = array_merge($ids, self::getArrSubIds($list, intval($vo[$key]), $key, $pkey));
+            }
+        }
+        return $ids;
+    }
 }
