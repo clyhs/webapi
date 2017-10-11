@@ -22,14 +22,14 @@
         {foreach $list as $key=>$vo}
         <tr>
             <td class='list-table-check-td'>
-                <input class="list-check-box" value='' type='checkbox'/>
+                <input class="list-check-box" value='{$vo.ids}' type='checkbox'/>
             </td>
             <td class='list-table-sort-td'>
 
             </td>
             <td class='text-center'>
             </td>
-            <td>{$vo.name}</td>
+            <td>{$vo.spl}{$vo.name}</td>
 
 
             <td class='text-center nowrap'>
