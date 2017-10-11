@@ -13,6 +13,39 @@
 
 {block name="content"}
 
+<!-- 表单搜索 开始 -->
+<form class="animated form-search" action="__SELF__" onsubmit="return false" method="get">
+
+    <div class="row">
+
+        <div class="col-xs-2">
+            <div class="form-group">
+                <input type="text" name="country" value="{$Think.get.country|default=''}" placeholder="国家" class="input-sm form-control">
+            </div>
+        </div>
+
+        <div class="col-xs-2">
+            <div class="form-group">
+                <input type="text" name="province" value="{$Think.get.province|default=''}" placeholder="省份" class="input-sm form-control">
+            </div>
+        </div>
+
+        <div class="col-xs-2">
+            <div class="form-group">
+                <input type="text" name="city" value="{$Think.get.city|default=''}" placeholder="城市" class="input-sm form-control">
+            </div>
+        </div>
+
+        <div class="col-xs-1">
+            <div class="form-group">
+                <button type="submit" class="btn btn-sm btn-white"><i class="fa fa-search"></i> 搜索</button>
+            </div>
+        </div>
+
+    </div>
+</form>
+<!-- 表单搜索 结束 -->
+
 <form onsubmit="return false;" data-auto="true" method="post">
     <input type="hidden" value="resort" name="action"/>
     <table class="layui-table" lay-skin="line" lay-size="sm">
