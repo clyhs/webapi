@@ -111,7 +111,7 @@
 
 {block name="script"}
 <script>
-    $(function () {
+    define(['jquery'],function () {
         $('body').off('change', 'select[name=country]').on('change', 'select[name=country]', function () {
             var value = $(this).val();
             $.ajax({
