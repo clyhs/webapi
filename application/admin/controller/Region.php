@@ -21,7 +21,7 @@ class Region extends BaseAdmin{
     {
         $this->title = '地区管理';
         $db = Db::name($this->table)->order('code asc');
-        return parent::_list($db, false);
+        return parent::_list($db, true);
 
     }
 
