@@ -47,6 +47,41 @@ class BaseAdmin extends Controller{
 
     }
 
+    protected function _list($dbQuery = null, $isPage = true, $isDisplay = true, $total = false, $result = [])
+    {
+        $db = is_null($dbQuery) ? Db::name($this->table) : (is_string($dbQuery) ? Db::name($dbQuery) : $dbQuery);
+        // 列表排序默认处理
+        if ($this->request->isPost() && $this->request->post('action') === 'resort') {
+            $data = $this->request->post();
+            unset($data['action']);
+            foreach ($data as $key => &$value) {
+                if (false === $db->where('id', intval(ltrim($key, '_')))->setField('sort', $value)) {
+                    $this->error('列表排序失败, 请稍候再试');
+                }
+            }
+            $this->success('列表排序成功, 正在刷新列表', '');
+        }
+        // 列表数据查询与显示
+        if (null === $db->getOptions('order')) {
+            $fields = $db->getTableFields($db->getTable());
+            in_array('sort', $fields) && $db->order('sort asc');
+        }
+        if ($isPage) {
+            $rows = intval($this->request->get('rows', cookie('rows')));
+            cookie('rows', $rows >= 10 ? $rows : 20);
+            $page = $db->paginate($rows, $total, ['query' => $this->request->get('', '', 'urlencode')]);
+            list($pattern, $replacement) = [['|href="(.*?)"|', '|pagination|'], ['data-open="$1"', 'pagination pull-right']];
+            list($result['list'], $result['page']) = [$page->all(), preg_replace($pattern, $replacement, $page->render())];
+        } else {
+            $result['list'] = $db->select();
+        }
+        if (false !== $this->_callback('_data_filter', $result['list']) && $isDisplay) {
+            !empty($this->title) && $this->assign('title', $this->title);
+            return $this->fetch('', $result);
+        }
+        return $result;
+    }
+
     protected function _callback($method, &$data)
     {
         foreach ([$method, "_" . $this->request->action() . "{$method}"] as $_method) {
