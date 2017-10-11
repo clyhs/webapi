@@ -37,6 +37,6 @@ class Region extends BaseAdmin{
     public function getchildregion($parentCode){
         $db = Db::name($this->table)->where("parentCode",$parentCode)->order('code asc');
         $data = $db->select();
-        return $data;
+        return json($data);
     }
 }
