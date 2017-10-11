@@ -28,10 +28,10 @@
             <td class='list-table-sort-td'>
                 <input name="_{$vo.code}" value="{$vo.code}" class="list-sort-input"/>
             </td>
+            <td>{$vo.spl}{$vo.name}</td>
             <td class='text-center'>
                 {$vo.type}
             </td>
-            <td>{$vo.spl}{$vo.name}</td>
             <td class='text-center nowrap'>
                 {if auth("$classuri/edit")}
                 <span class="text-explode">|</span>
