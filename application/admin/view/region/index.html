@@ -35,7 +35,7 @@
             <td class='text-center nowrap'>
                 {if auth("$classuri/edit")}
                 <span class="text-explode">|</span>
-                <a data-modal='{:url("$classuri/edit")}?id={$vo.id}' href="javascript:void(0)">编辑</a>
+                <a data-modal='{:url("$classuri/edit")}?id={$vo.code}' href="javascript:void(0)">编辑</a>
                 {/if}
                 {if auth("$classuri/del")}
                 <span class="text-explode">|</span>
