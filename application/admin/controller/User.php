@@ -101,7 +101,7 @@ class User extends BaseAdmin{
             }
         } else {
             $data['authorize'] = explode(',', isset($data['authorize']) ? $data['authorize'] : '');
-            $this->assign('authorizes', Db::name('SystemAuth')->where(['status' => '1'])->select());
+            $this->assign('authorizes', Db::name('auth')->where(['status' => '1'])->select());
         }
     }
 
