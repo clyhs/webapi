@@ -18,7 +18,7 @@ return [
     // 模块初始化
     'module_init'  => [],
     // 操作开始执行
-    'action_begin' => [],
+    'action_begin' => ['app\\common\\hook\\AccessAuth'],
     // 视图内容过滤
     'view_filter'  => ['app\\common\\hook\\FilterView'],
     // 日志写入
