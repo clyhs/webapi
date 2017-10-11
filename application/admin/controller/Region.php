@@ -33,4 +33,10 @@ class Region extends BaseAdmin{
         }
         $data = ToolService::arr2table($data,"code","parentCode");
     }
+
+    public function getchildregion($parentCode){
+        $db = Db::name($this->table)->where("parentCode",$parentCode)->order('code asc');
+        $data = $db->select();
+        return $data;
+    }
 }

@@ -113,6 +113,10 @@
 <script>
     $(function () {
         $('body').off('change', 'select[name=country]').on('change', 'select[name=country]', function () {
+            var value = $(this).val();
+            $.form.load('{:url("$classuri/getchildregion")}?parentCode='+value, {}, 'get', function (ret) {
+                alert(ret);
+            });
 
         });
     });
