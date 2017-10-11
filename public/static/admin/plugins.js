@@ -141,6 +141,7 @@ define(['jquery'], function () {
                         return $.msg.auto(res, time);
                     }
                     self.show(res);
+                    alert('su');
                 }
             });
         };
