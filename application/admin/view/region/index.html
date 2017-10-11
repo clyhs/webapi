@@ -37,6 +37,13 @@
             <div class="form-group">
                 <select id="province" name="province" class="input-sm form-control">
                     <option value="">选择省份</option>
+                    <!--{foreach $provinces as $v}-->
+                    <!--{if $v.code===$Think.get.country}-->
+                    <option selected="selected" value='{$v.code}'>{$v.name}</option>
+                    <!--{else}-->
+                    <option value='{$v.code}'>{$v.name}</option>
+                    <!--{/if}-->
+                    <!--{/foreach}-->
                 </select>
             </div>
         </div>
@@ -45,6 +52,13 @@
             <div class="form-group">
                 <select  id="city" name="city" class="input-sm form-control">
                     <option value="">选择城市</option>
+                    <!--{foreach $citys as $v}-->
+                    <!--{if $v.code===$Think.get.country}-->
+                    <option selected="selected" value='{$v.code}'>{$v.name}</option>
+                    <!--{else}-->
+                    <option value='{$v.code}'>{$v.name}</option>
+                    <!--{/if}-->
+                    <!--{/foreach}-->
                 </select>
             </div>
         </div>
