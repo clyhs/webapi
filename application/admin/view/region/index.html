@@ -110,8 +110,7 @@
 {block name="script"}
 <script>
     $(function () {
-
-        $('body').off('change', 'select[name=country]').on('change', 'select[name=type]', function () {
+        $('body').off('change', 'select[name=country]').on('change', 'select[name=country]', function () {
             alert('1');
         });
     });
