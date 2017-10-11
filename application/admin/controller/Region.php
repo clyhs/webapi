@@ -22,14 +22,12 @@ class Region extends BaseAdmin{
         $this->title = '地区管理';
 
         $get = $this->request->get();
+        
 
-        if(isset($get['country']) && $get['country'] !== ''){
-            $country = $get['country'];
-            $countrys = Db::name($this->table)->where("code",$country)->order('code asc')->select();
-            $this->assign('countrys', $countrys);
-        }else{
-            $this->assign('countrys', "");
-        }
+        $country = "100000";
+        $countrys = Db::name($this->table)->where("code",$country)->order('code asc')->select();
+        $this->assign('countrys', $countrys);
+
         if(isset($get['province']) && $get['province'] !== ''){
             $province = $get['province'];
             $provinces = Db::name($this->table)->where("code",$province)->order('code asc')->select();
