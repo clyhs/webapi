@@ -27,16 +27,22 @@ class Region extends BaseAdmin{
             $country = $get['country'];
             $countrys = Db::name($this->table)->where("code",$country)->order('code asc')->select();
             $this->assign('countrys', $countrys);
+        }else{
+            $this->assign('countrys', "");
         }
         if(isset($get['province']) && $get['province'] !== ''){
             $province = $get['province'];
             $provinces = Db::name($this->table)->where("code",$province)->order('code asc')->select();
             $this->assign('provinces', $provinces);
+        }else{
+            $this->assign('provinces', "");
         }
         if(isset($get['city']) && $get['city'] !== ''){
             $city = $get['city'];
             $citys = Db::name($this->table)->where("code",$city)->order('code asc')->select();
             $this->assign('citys', $citys);
+        }else{
+            $this->assign('citys', "");
         }
         $db = Db::name($this->table)->order('code asc');
         return parent::_list($db, true);
