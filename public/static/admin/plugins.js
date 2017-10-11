@@ -129,6 +129,7 @@ define(['jquery'], function () {
                     }
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert('su1');
                     $.msg.close(dialogIndex);
                     $.msg.tips(self.errMsg.replace('{status}', 'E' + textStatus + ' - '));
                 },
