@@ -115,7 +115,7 @@
         $('body').off('change', 'select[name=country]').on('change', 'select[name=country]', function () {
             var value = $(this).val();
             $.ajax({
-                url: "{:url(\"$classuri/getchildregion\")}",
+                url: "{:url(\"$classuri/getchildregion\")}?parentCode="+value,
                 data: {},
                 type: 'get',
                 dataType: 'json',
