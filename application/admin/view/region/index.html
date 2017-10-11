@@ -22,22 +22,24 @@
             <div class="form-group">
                 <select name="country" class="input-sm form-control">
                     <option value="">- 国家 -</option>
-                    <option value="1">- test1 -</option>
-                    <option value="2">- test2 -</option>
-
+                    <option value="100000">中国</option>
                 </select>
             </div>
         </div>
 
         <div class="col-xs-2">
             <div class="form-group">
-                <input type="text" name="province" value="{$Think.get.province|default=''}" placeholder="省份" class="input-sm form-control">
+                <select name="province" class="input-sm form-control">
+                    <option value="">- 省份 -</option>
+                </select>
             </div>
         </div>
 
         <div class="col-xs-2">
             <div class="form-group">
-                <input type="text" name="city" value="{$Think.get.city|default=''}" placeholder="城市" class="input-sm form-control">
+                <select name="city" class="input-sm form-control">
+                    <option value="">- 省份 -</option>
+                </select>
             </div>
         </div>
 
@@ -111,7 +113,7 @@
 <script>
     $(function () {
         $('body').off('change', 'select[name=country]').on('change', 'select[name=country]', function () {
-            alert('1');
+
         });
     });
 
