@@ -15,6 +15,7 @@
             </th>
             <th class='text-center'></th>
             <th>地区名称</th>
+            <th class='text-center'>类型</th>
             <th class='text-center'>操作</th>
         </tr>
         </thead>
@@ -25,19 +26,27 @@
                 <input class="list-check-box" value='{$vo.ids}' type='checkbox'/>
             </td>
             <td class='list-table-sort-td'>
-
+                <input name="_{$vo.code}" value="{$vo.code}" class="list-sort-input"/>
             </td>
             <td class='text-center'>
+                {$vo.type}
             </td>
             <td>{$vo.spl}{$vo.name}</td>
-
-
             <td class='text-center nowrap'>
-
+                {if auth("$classuri/edit")}
+                <span class="text-explode">|</span>
+                <a data-modal='{:url("$classuri/edit")}?id={$vo.id}' href="javascript:void(0)">编辑</a>
+                {/if}
+                {if auth("$classuri/del")}
+                <span class="text-explode">|</span>
+                <a data-update="{$vo.ids}" data-field='delete' data-action='{:url("$classuri/del")}'
+                   href="javascript:void(0)">删除</a>
+                {/if}
             </td>
         </tr>
         {/foreach}
         </tbody>
     </table>
+    {if isset($page)}<p>{$page}</p>{/if}
 </form>
 {/block}
