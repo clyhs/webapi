@@ -20,6 +20,24 @@ class Region extends BaseAdmin{
     public function index()
     {
         $this->title = '地区管理';
+
+        $get = $this->request->get();
+        $country = $get['country'];
+        $province= $get['province'];
+        $city = $get['city'];
+
+        if(!$country==""){
+            $countrys = Db::name($this->table)->where("code",$country)->order('code asc')->select();
+            $this->assign('countrys', $countrys);
+        }
+        if(!$province==""){
+            $provinces = Db::name($this->table)->where("code",$province)->order('code asc')->select();
+            $this->assign('provinces', $provinces);
+        }
+        if(!$city==""){
+            $citys = Db::name($this->table)->where("code",$city)->order('code asc')->select();
+            $this->assign('citys', $citys);
+        }
         $db = Db::name($this->table)->order('code asc');
         return parent::_list($db, true);
 

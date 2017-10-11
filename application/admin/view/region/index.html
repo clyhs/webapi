@@ -22,7 +22,13 @@
             <div class="form-group">
                 <select id="country" name="country" class="input-sm form-control">
                     <option value="">选择国家</option>
-                    <option value="100000">中国</option>
+                    <!--{foreach $countrys as $v}-->
+                    <!--{if $v.code===$Think.get.country}-->
+                    <option selected="selected" value='{$v.code}'>{$v.name}</option>
+                    <!--{else}-->
+                    <option value='{$v.code}'>{$v.name}</option>
+                    <!--{/if}-->
+                    <!--{/foreach}-->
                 </select>
             </div>
         </div>
