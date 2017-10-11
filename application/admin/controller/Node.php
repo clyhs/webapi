@@ -27,7 +27,7 @@ class Node extends BaseAdmin{
      */
     public function index()
     {
-        $nodes = ToolsService::arr2table(NodeService::get(), 'node', 'pnode');
+        $nodes = ToolService::arr2table(NodeService::get(), 'node', 'pnode');
         $alert = ['type' => 'danger', 'title' => '安全警告', 'content' => '结构为系统自动生成, 状态数据请勿随意修改!'];
         return view('', ['title' => '系统节点管理', 'nodes' => $nodes, 'alert' => $alert]);
     }
