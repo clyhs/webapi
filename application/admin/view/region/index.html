@@ -114,12 +114,13 @@
     $(function () {
         $('body').off('change', 'select[name=country]').on('change', 'select[name=country]', function () {
             var value = $(this).val();
-            $.ajax({url: '{:url("$classuri/getchildregion")}?parentCode='+value,
-                data:{},
+            $.ajax({
+                url: "{:url(\"$classuri/getchildregion\")}",
+                data: {},
                 type: 'get',
                 dataType: 'json',
-                success: function(ret){
-                    alert(ret);
+                success: function(data1) {
+                    alert(data1)
                 }
             });
 
