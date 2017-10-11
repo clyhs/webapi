@@ -116,6 +116,7 @@
             var value = $(this).val();
             $.form.load('{:url("$classuri/getchildregion")}?parentCode='+value, {}, 'get', function (ret) {
                 alert(ret);
+                return true;
             });
 
         });
