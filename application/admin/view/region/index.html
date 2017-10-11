@@ -62,5 +62,9 @@
         </tbody>
     </table>
     {if isset($page)}<p>{$page}</p>{/if}
+    <script>
+        window.form.render();
+        window.laydate.render({range: true, elem: '#range-date', format: 'yyyy/MM/dd'});
+    </script>
 </form>
 {/block}
