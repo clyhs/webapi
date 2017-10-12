@@ -83,7 +83,7 @@ class Television extends BaseAdmin{
             if(isset($vo['province']) && $vo['province'] !== ''){
                 $province = $vo['province'];
                 $provinces = Db::name("region")->where("code",$province)->order('code asc')->select();
-                echo $provinces;
+                
                 $this->assign('provinces', $provinces);
                 $this->assign('province', $province);
             }else{

@@ -28,13 +28,13 @@
                 <select id="province" name="province" class="layui-select " style='display:inline-block;'>
                     <option value="">选择省份</option>
                     <!--{if $provinces!="" }-->
-                    <!--{foreach $provinces as $v}-->
+                    {foreach $provinces as $v}
                     <!--{if $v.code==$province}-->
                     <option selected="selected" value='{$v.code}'>{$v.name}</option>
                     <!--{else}-->
                     <option value='{$v.code}'>{$v.name}</option>
                     <!--{/if}-->
-                    <!--{/foreach}-->
+                    {/foreach}
                     <!--{/if}-->
                 </select>
                 <select  id="city" name="city" class="layui-select " style='display:inline-block;'>
