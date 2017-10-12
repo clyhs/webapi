@@ -16,30 +16,6 @@
 
                 <!--{/if}-->
             </select>
-            <select id="province" name="province" class="layui-select full-width">
-                <option value="">选择省份</option>
-                <!--{if $provinces!="" }-->
-                <!--{foreach $provinces as $v}-->
-                <!--{if $v.code==$Think.get.province}-->
-                <option selected="selected" value='{$v.code}'>{$v.name}</option>
-                <!--{else}-->
-                <option value='{$v.code}'>{$v.name}</option>
-                <!--{/if}-->
-                <!--{/foreach}-->
-                <!--{/if}-->
-            </select>
-            <select  id="city" name="city" class="layui-select full-width">
-                <option value="">选择城市</option>
-                <!--{if $citys!="" }-->
-                <!--{foreach $citys as $v}-->
-                <!--{if $v.code==$Think.get.city}-->
-                <option selected="selected" value='{$v.code}'>{$v.name}</option>
-                <!--{else}-->
-                <option value='{$v.code}'>{$v.name}</option>
-                <!--{/if}-->
-                <!--{/foreach}-->
-                <!--{/if}-->
-            </select>
         </div>
     </div>
 
