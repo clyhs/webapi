@@ -162,8 +162,7 @@ class FileService{
     {
         switch (empty($storage) ? sysconf('storage_type') : $storage) {
             case 'local':
-                echo ROOT_PATH . 'static/upload/' . $filename;
-                return file_exists(ROOT_PATH . 'static/upload/' . $filename);
+                return file_exists(ROOT_PATH . 'public/static/upload/' . $filename);
             case 'qiniu':
                 $auth = new Auth(sysconf('storage_qiniu_access_key'), sysconf('storage_qiniu_secret_key'));
                 $bucketMgr = new BucketManager($auth);
@@ -186,7 +185,7 @@ class FileService{
     {
         switch (empty($storage) ? sysconf('storage_type') : $storage) {
             case 'local':
-                $file = ROOT_PATH . 'static/upload/' . $filename;
+                $file = ROOT_PATH . 'public/static/upload/' . $filename;
                 return file_exists($file) ? file_get_contents($file) : '';
             case 'qiniu':
                 $auth = new Auth(sysconf('storage_qiniu_access_key'), sysconf('storage_qiniu_secret_key'));
@@ -225,7 +224,7 @@ class FileService{
     public static function local($filename, $content)
     {
         try {
-            $filepath = ROOT_PATH . 'static/upload/' . $filename;
+            $filepath = ROOT_PATH . 'public/static/upload/' . $filename;
             !file_exists(dirname($filepath)) && mkdir(dirname($filepath), '0755', true);
             if (file_put_contents($filepath, $content)) {
                 $url = pathinfo(request()->baseFile(true), PATHINFO_DIRNAME) . '/static/upload/' . $filename;
@@ -287,7 +286,7 @@ class FileService{
         try {
             $filename = self::getFileName($url, strtolower(pathinfo($url, 4)), 'download/');
             if (false === $isForce && ($siteUrl = self::getFileUrl($filename, 'local'))) {
-                $realfile = ROOT_PATH . 'static/upload/' . $filename;
+                $realfile = ROOT_PATH . 'public/static/upload/' . $filename;
                 return ['file' => $realfile, 'hash' => md5_file($realfile), 'key' => "static/upload/{$filename}", 'url' => $siteUrl];
             }
             return self::local($filename, file_get_contents($url));
