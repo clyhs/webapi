@@ -20,7 +20,7 @@ class Television extends BaseAdmin{
         $this->title = '系统操作日志';
         //$db = Db::name($this->table)->order('id desc');
 
-        $db = Db::field('a.*,b.country,c.province')
+        $db = Db::field('a.*,b.name as countryName,c.name as provinceName')
             ->table("t_television")
             ->alias('a')
             ->join('t_region b','a.country = b.code')
