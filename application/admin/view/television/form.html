@@ -56,9 +56,9 @@
         <label class="layui-form-label">电台属性</label>
         <div class="layui-input-block" >
 
-            <input <!--{if $vo.is_new == 1}-->checked<!--{/if}--> class="list-check-box" value='1' type='checkbox' name="is_new" style="display: inline-block;"/>最新
-            <input <!--{if $vo.is_hot == 1}-->checked<!--{/if}--> class="list-check-box" value='1' type='checkbox' name="is_hot" style="display: inline-block;"/>热门
-            <input <!--{if $vo.is_recommend == 1}-->checked<!--{/if}--> class="list-check-box" value='1' type='checkbox' name="is_recommend" style="display: inline-block;"/>推荐
+            <input {if $vo.is_new =='1'}checked{/if} class="list-check-box" value='1' type='checkbox' name="is_new" style="display: inline-block;"/>最新
+            <input {if $vo.is_hot =='1'}checked{/if} class="list-check-box" value='1' type='checkbox' name="is_hot" style="display: inline-block;"/>热门
+            <input {if $vo.is_recommend =='1'}checked{/if} class="list-check-box" value='1' type='checkbox' name="is_recommend" style="display: inline-block;"/>推荐
 
         </div>
     </div>
