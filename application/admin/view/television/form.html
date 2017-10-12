@@ -56,9 +56,9 @@
         <label class="layui-form-label">电台属性</label>
         <div class="layui-input-block" >
 
-            <input {if $vo.is_new =='1'}checked{/if} class="list-check-box" value='1' type='checkbox' name="is_new" style="display: inline-block;"/>最新
-            <input {if $vo.is_hot =='1'}checked{/if} class="list-check-box" value='1' type='checkbox' name="is_hot" style="display: inline-block;"/>热门
-            <input {if $vo.is_recommend =='1'}checked{/if} class="list-check-box" value='1' type='checkbox' name="is_recommend" style="display: inline-block;"/>推荐
+            <input <!--{if $vo.is_new =='1'}-->checked<!--{/if}--> class="list-check-box" value='1' type='checkbox' name="is_new" style="display: inline-block;"/>最新
+            <input <!--{if $vo.is_hot =='1'}-->checked<!--{/if}--> class="list-check-box" value='1' type='checkbox' name="is_hot" style="display: inline-block;"/>热门
+            <input <!--{if $vo.is_recommend =='1'}-->checked<!--{/if}--> class="list-check-box" value='1' type='checkbox' name="is_recommend" style="display: inline-block;"/>推荐
 
         </div>
     </div>
@@ -95,7 +95,7 @@
         <label class="layui-form-label">图标</label>
         <div class="layui-input-block">
             <div style="position:relative">
-                <div class="uploadimage"><input name="icon" type="hidden"></div>
+                <div class="uploadimage"><input name="icon" type="hidden" value="{$vo.icon}"></div>
                 <a data-file="one" data-field="icon" data-type="png,jpg,jpeg" data-uptype="local" href="javascript:void(0)" class="uploadbutton">上传图片</a>
             </div>
         </div>
@@ -105,7 +105,7 @@
         <label class="layui-form-label">封面图片</label>
         <div class="layui-input-block">
             <div style="position:relative">
-                <div class="uploadimage"><input name="bg" type="hidden"></div>
+                <div class="uploadimage"><input name="bg" type="hidden" value="{$vo.bg}"></div>
                 <a data-file="one" data-field="bg" data-type="png,jpg,jpeg" data-uptype="local" href="javascript:void(0)" class="uploadbutton">上传图片</a>
             </div>
         </div>
