@@ -28,6 +28,7 @@
             <th class='text-left'>省份</th>
             <th class='text-left'>图标</th>
             <th class='text-left'>类型</th>
+            <th class='text-left'>操作</th>
         </tr>
         </thead>
         <tbody>
@@ -42,6 +43,18 @@
             <td class='text-left'>{$vo.provinceName}</td>
             <td class='text-left'>{$vo.icon}</td>
             <td class='text-left'>{$vo.type_id}</td>
+            <td class='text-left nowrap'>
+                {if auth("$classuri/edit")}
+                <span class="text-explode">|</span>
+                <a data-modal='{:url("$classuri/edit")}?id={$vo.id}' href="javascript:void(0)">编辑</a>
+                {/if}
+
+                {if auth("$classuri/del")}
+                <span class="text-explode">|</span>
+                <a data-update="{$vo.id}" data-field='delete' data-action='{:url("$classuri/del")}'
+                   href="javascript:void(0)">删除</a>
+                {/if}
+            </td>
         </tr>
         {/foreach}
         </tbody>

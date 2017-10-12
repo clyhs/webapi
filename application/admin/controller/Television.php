@@ -67,4 +67,17 @@ class Television extends BaseAdmin{
         return json($data);
     }
 
+    public function edit()
+    {
+        return $this->_form($this->table, 'form');
+    }
+
+    public function del()
+    {
+        if (DataService::update($this->table)) {
+            $this->success("删除成功!", '');
+        }
+        $this->error("删除失败, 请稍候再试!");
+    }
+
 }
