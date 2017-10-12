@@ -53,7 +53,7 @@ class Plugins extends BaseAdmin{
                 return json(['data' => ['site_url' => $site_url], 'code' => 'SUCCESS', 'msg' => '文件上传成功']);
             }
             else{
-                return json(['code' => 'ERROR', 'msg' => $site_url+FileService::hasFile($filename, 'local')]);
+                return json(['code' => 'ERROR', 'msg' => FileService::hasFile($filename, 'local')]);
             }
         }
         return json(['code' => 'ERROR', 'msg' => '文件上传失败']);
