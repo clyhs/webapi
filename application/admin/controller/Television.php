@@ -25,7 +25,7 @@ class Television extends BaseAdmin{
             ->alias('a')
             ->join('t_region b','a.country = b.code')
             ->join('t_region c','a.province = c.code')
-            ->order('a desc');
+            ->order('a.id desc');
 
 
         return parent::_list($db);
