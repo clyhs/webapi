@@ -33,33 +33,7 @@ class Television extends BaseAdmin{
 
     public function add()
     {
-        $country = 100000;
-        $countrys = Db::name("region")->where("code",$country)->order('code asc')->select();
-        $this->assign('countrys', $countrys);
-        $this->assign('country', $country);
 
-        $province = 0;
-        $provinces = Db::name("region")->where("parentCode",$country)->order('code asc')->select();
-        $this->assign('provinces', $provinces);
-        $this->assign('province', $province);
-        $this->assign('citys', "");
-        /*
-        if(isset($get['province']) && $get['province'] !== ''){
-            $province = $get['province'];
-            $provinces = Db::name("region")->where("parentCode",$province)->order('code asc')->select();
-            $this->assign('provinces', $provinces);
-            $this->assign('province', $province);
-        }else{
-            $this->assign('provinces', "");
-        }
-        if(isset($get['city']) && $get['city'] !== ''){
-            $city = $get['city'];
-            $citys = Db::name("region")->where("parentCode",$city)->order('code asc')->select();
-            $this->assign('citys', $citys);
-            $this->assign('city', $city);
-        }else{
-            $this->assign('citys', "");
-        }*/
 
         return $this->_form($this->table, 'form');
     }
@@ -79,18 +53,24 @@ class Television extends BaseAdmin{
     {
         if ($this->request->isGet()) {
             //$get = $this->request->get();
-            $country = $vo['country'];
+
+            if(isset($vo['country']) && $vo['country'] !== ''){
+                $country = $vo['country'];
+            }else{
+                $country = 100000;
+            }
             $countrys = Db::name("region")->where("code",$country)->order('code asc')->select();
             $this->assign('countrys', $countrys);
             $this->assign('country', $country);
+
+            $provinces = Db::name("region")->where("parentCode",$country)->order('code asc')->select();
+            $this->assign('provinces', $provinces);
+
             if(isset($vo['province']) && $vo['province'] !== ''){
                 $province = $vo['province'];
-                $provinces = Db::name("region")->where("parentCode",$province)->order('code asc')->select();
-
-                $this->assign('provinces', $provinces);
                 $this->assign('province', $province);
             }else{
-                $this->assign('provinces', "");
+                $this->assign('provinces', 0);
             }
             if(isset($vo['city']) && $vo['city'] !== ''){
                 $city = $vo['city'];
