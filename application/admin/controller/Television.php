@@ -76,21 +76,21 @@ class Television extends BaseAdmin{
     {
         if ($this->request->isGet()) {
 
-            $country = "100000";
+            $country = $vo['country'];
             $countrys = Db::name("region")->where("code",$country)->order('code asc')->select();
             $this->assign('countrys', $countrys);
             $this->assign('country', $country);
 
-            if(isset($get['province']) && $get['province'] !== ''){
-                $province = $get['province'];
+            if(isset($vo['province']) && $vo['province'] !== ''){
+                $province = $vo['province'];
                 $provinces = Db::name("region")->where("code",$province)->order('code asc')->select();
                 $this->assign('provinces', $provinces);
                 $this->assign('province', $province);
             }else{
                 $this->assign('provinces', "");
             }
-            if(isset($get['city']) && $get['city'] !== ''){
-                $city = $get['city'];
+            if(isset($vo['city']) && $vo['city'] !== ''){
+                $city = $vo['city'];
                 $citys = Db::name("region")->where("code",$city)->order('code asc')->select();
                 $this->assign('citys', $citys);
                 $this->assign('city', $city);
