@@ -18,7 +18,7 @@ require.config({
         // 开源插件(未修改源码)
         'pace': ['../plugins/jquery/pace.min'],
         'json': ['../plugins/jquery/json2.min'],
-        'layui': ['../plugins/layui/layui'],
+        'layui': ['../plugins/layui/layui.all'],
         'jquery': ['../plugins/jquery/jquery.min'],
         'base64': ['../plugins/jquery/base64.min'],
         'angular': ['../plugins/angular/angular.min'],
