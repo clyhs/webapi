@@ -48,8 +48,12 @@ class Plugins extends BaseAdmin{
         }
         // 文件上传处理
         if (($info = $file->move('static' . DS . 'upload' . DS . $md5[0], $md5[1], true))) {
-            if (($site_url = FileService::getFileUrl($filename, 'local'))) {
+            $site_url = FileService::getFileUrl($filename, 'local');
+            if ($site_url) {
                 return json(['data' => ['site_url' => $site_url], 'code' => 'SUCCESS', 'msg' => '文件上传成功']);
+            }
+            else{
+                return json(['code' => 'ERROR', 'msg' => $site_url]);
             }
         }
         return json(['code' => 'ERROR', 'msg' => '文件上传失败']);
