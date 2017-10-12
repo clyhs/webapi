@@ -33,14 +33,12 @@ class Television extends BaseAdmin{
 
     public function add()
     {
-        $get = $this->request->get();
-
-        $country = "100000";
+        $country = 100000;
         $countrys = Db::name("region")->where("code",$country)->order('code asc')->select();
         $this->assign('countrys', $countrys);
         $this->assign('country', $country);
 
-        $province = '0';
+        $province = 0;
         $provinces = Db::name("region")->where("parentCode",$country)->order('code asc')->select();
         $this->assign('provinces', $provinces);
         $this->assign('province', $province);
