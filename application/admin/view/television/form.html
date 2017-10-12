@@ -12,8 +12,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">选择省市区</label>
         <div class="layui-input-block">
-            <label class='control-label layui-form-label' style='text-align:left!important;'>
-                <select id="country" name="country" class="layui-select " style='display:block'>
+                <select id="country" name="country" class="layui-select " style='display:inline-block;'>
                     <option value="">选择国家</option>
                     <!--{if $countrys!="" }-->
                     <!--{foreach $countrys as $v}-->
@@ -26,9 +25,7 @@
 
                     <!--{/if}-->
                 </select>
-            </label>
-            <label class='control-label layui-form-label' style='text-align:left!important;'>
-                <select id="province" name="province" class="layui-select " style='display:block'>
+                <select id="province" name="province" class="layui-select " style='display:inline-block;'>
                     <option value="">选择省份</option>
                     <!--{if $provinces!="" }-->
                     <!--{foreach $provinces as $v}-->
@@ -40,9 +37,7 @@
                     <!--{/foreach}-->
                     <!--{/if}-->
                 </select>
-            </label>
-            <label class='control-label layui-form-label' style='text-align:left!important;'>
-                <select  id="city" name="city" class="layui-select " style='display:block'>
+                <select  id="city" name="city" class="layui-select " style='display:inline-block;'>
                     <option value="">选择城市</option>
                     <!--{if $citys!="" }-->
                     <!--{foreach $citys as $v}-->
@@ -54,7 +49,6 @@
                     <!--{/foreach}-->
                     <!--{/if}-->
                 </select>
-            </label>
         </div>
     </div>
 
