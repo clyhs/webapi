@@ -103,7 +103,7 @@
 <script>
 
     require(['jquery'], function () {
-        $('[name="file_1"]').on('change', function () {
+        $('[name="icon"]').on('change', function () {
             $(this).parent().attr('data-tips-image', this.value).css('backgroundImage', 'url(' + this.value + ')');
         });
     });
