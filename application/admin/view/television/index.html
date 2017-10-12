@@ -1,0 +1,12 @@
+{extend name='admin@main/content'}
+
+{block name="button"}
+<div class="nowrap pull-right" style="margin-top:10px">
+    <button data-modal='{:url("$classuri/add")}' data-title="添加电视台" class='layui-btn layui-btn-small'><i
+            class='fa fa-plus'></i> 添加电视台
+    </button>
+    <button data-update data-field='delete' data-action='{:url("$classuri/del")}'
+            class='layui-btn layui-btn-small layui-btn-danger'><i class='fa fa-remove'></i> 删除电视台
+    </button>
+</div>
+{/block}
