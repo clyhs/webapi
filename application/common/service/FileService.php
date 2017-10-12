@@ -162,6 +162,7 @@ class FileService{
     {
         switch (empty($storage) ? sysconf('storage_type') : $storage) {
             case 'local':
+                echo ROOT_PATH . 'static/upload/' . $filename;
                 return file_exists(ROOT_PATH . 'static/upload/' . $filename);
             case 'qiniu':
                 $auth = new Auth(sysconf('storage_qiniu_access_key'), sysconf('storage_qiniu_secret_key'));
