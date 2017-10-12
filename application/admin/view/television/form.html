@@ -77,6 +77,22 @@
     </div>
 
     <div class="layui-form-item">
+        <label class="layui-form-label">选择类型</label>
+        <div class="layui-input-block">
+            <select id="type_id" name="type_id" class="layui-select full-width" style='display:block'>
+                <option value="0">选择类型</option>
+
+                <!--{foreach name='Think.config.tvarray' item='v'}-->
+                <option value='{$key}'>{$v}</option>
+                <!--{/foreach}-->
+            </select>
+
+        </div>
+    </div>
+
+    <foreach name='Think.config.EXPENSE_TYPE' item='v'>
+
+    <div class="layui-form-item">
         <label class="layui-form-label">源地址</label>
         <div class="layui-input-block">
             <input type="text" name="url" value='{$vo.url|default=""}' required="required" title="请输入url" placeholder="请输入url" class="layui-input">
