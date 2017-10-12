@@ -18,7 +18,16 @@ class Television extends BaseAdmin{
     public function index(){
 
         $this->title = '系统操作日志';
-        $db = Db::name($this->table)->order('id desc');
+        //$db = Db::name($this->table)->order('id desc');
+
+        $db = Db::field('a.*,b.country,c.province')
+            ->table("t_television")
+            ->alias('a')
+            ->join('t_region b','a.country = b.code')
+            ->join('t_region c','a.province = c.code')
+            ->order('a desc');
+
+
         return parent::_list($db);
     }
 
