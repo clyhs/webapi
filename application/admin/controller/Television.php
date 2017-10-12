@@ -78,6 +78,7 @@ class Television extends BaseAdmin{
 
             //$get = $this->request->get();
 
+            echo $vo['country'];
             $country = '100000';
             $countrys = Db::name("region")->where("code",$country)->order('code asc')->select();
             $this->assign('countrys', $countrys);
