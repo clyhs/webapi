@@ -75,15 +75,11 @@ class Television extends BaseAdmin{
     protected function _form_filter(&$vo)
     {
         if ($this->request->isGet()) {
-
             //$get = $this->request->get();
-
-            echo $vo['country'];
-            $country = '100000';
+            $country = $vo['country'];
             $countrys = Db::name("region")->where("code",$country)->order('code asc')->select();
             $this->assign('countrys', $countrys);
             $this->assign('country', $country);
-
             if(isset($vo['province']) && $vo['province'] !== ''){
                 $province = $vo['province'];
                 $provinces = Db::name("region")->where("code",$province)->order('code asc')->select();
@@ -100,7 +96,6 @@ class Television extends BaseAdmin{
             }else{
                 $this->assign('citys', "");
             }
-
         }
     }
 
