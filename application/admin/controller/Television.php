@@ -43,7 +43,7 @@ class Television extends BaseAdmin{
 
         if(isset($get['province']) && $get['province'] !== ''){
             $province = $get['province'];
-            $provinces = Db::name("region")->where("code",$province)->order('code asc')->select();
+            $provinces = Db::name("region")->where("parentCode",$province)->order('code asc')->select();
             $this->assign('provinces', $provinces);
             $this->assign('province', $province);
         }else{
@@ -51,7 +51,7 @@ class Television extends BaseAdmin{
         }
         if(isset($get['city']) && $get['city'] !== ''){
             $city = $get['city'];
-            $citys = Db::name("region")->where("code",$city)->order('code asc')->select();
+            $citys = Db::name("region")->where("parentCode",$city)->order('code asc')->select();
             $this->assign('citys', $citys);
             $this->assign('city', $city);
         }else{
@@ -82,8 +82,8 @@ class Television extends BaseAdmin{
             $this->assign('country', $country);
             if(isset($vo['province']) && $vo['province'] !== ''){
                 $province = $vo['province'];
-                $provinces = Db::name("region")->where("code",$province)->order('code asc')->select();
-                
+                $provinces = Db::name("region")->where("parentCode",$province)->order('code asc')->select();
+
                 $this->assign('provinces', $provinces);
                 $this->assign('province', $province);
             }else{
@@ -91,7 +91,7 @@ class Television extends BaseAdmin{
             }
             if(isset($vo['city']) && $vo['city'] !== ''){
                 $city = $vo['city'];
-                $citys = Db::name("region")->where("code",$city)->order('code asc')->select();
+                $citys = Db::name("region")->where("parentCode",$city)->order('code asc')->select();
                 $this->assign('citys', $citys);
                 $this->assign('city', $city);
             }else{
