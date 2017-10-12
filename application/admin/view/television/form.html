@@ -70,7 +70,12 @@
                 <option value="0">选择类型</option>
 
                 <!--{foreach name='Think.config.tvarray' item='v'}-->
+                <!--{if $key==$vo.type_id}-->
+                <option value='{$key}' selected>{$v}</option>
+                <!--{else}-->
+
                 <option value='{$key}'>{$v}</option>
+                <!--{/if}-->
                 <!--{/foreach}-->
             </select>
 
