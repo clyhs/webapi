@@ -50,7 +50,7 @@ class Television extends BaseAdmin{
     }
 
     public function getchildregion($parentCode){
-        $db = Db::name($this->table)->where("parentCode",$parentCode)->order('code asc');
+        $db = Db::name("region")->where("parentCode",$parentCode)->order('code asc');
         $data = $db->select();
         return json($data);
     }
