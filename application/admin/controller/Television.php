@@ -9,6 +9,7 @@
 namespace app\admin\controller;
 
 use app\common\controller\BaseAdmin;
+use think\Db;
 
 class Television extends BaseAdmin{
 
