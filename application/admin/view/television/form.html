@@ -70,7 +70,7 @@
                 <option value="0">选择类型</option>
 
                 <!--{foreach name='Think.config.tvarray' item='v'}-->
-                <!--{if $key==$vo.type_id}-->
+                <!--{if isset($vo['type_id']) && $key==$vo['type_id'] }-->
                 <option value='{$key}' selected>{$v}</option>
                 <!--{else}-->
 
