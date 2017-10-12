@@ -16,7 +16,10 @@ class Television extends BaseAdmin{
     public $table = 'television';
 
     public function index(){
-        return view('', ['title' => '电台管理']);
+
+        $this->title = '系统操作日志';
+        $db = Db::name($this->table)->order('id desc');
+        return parent::_list($db);
     }
 
     public function add()

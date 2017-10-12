@@ -10,3 +10,47 @@
     </button>
 </div>
 {/block}
+
+
+{block name="content"}
+
+<form onsubmit="return false;" data-auto="true" method="post">
+    <input type="hidden" value="resort" name="action"/>
+    <table class="layui-table" lay-skin="line" lay-size="sm">
+        <thead>
+        <tr>
+            <th class='list-table-check-td'>
+                <input data-none-auto="" data-check-target='.list-check-box' type='checkbox'/>
+            </th>
+            <th class='text-center'>电视台名称</th>
+            <th class='text-left'>URL</th>
+            <th class='text-left'>国家</th>
+            <th class='text-left'>省份</th>
+            <th class='text-left'>图标</th>
+            <th class='text-left'>类型</th>
+        </tr>
+        </thead>
+        <tbody>
+        {foreach $list as $key=>$vo}
+        <tr>
+            <td class='list-table-check-td'>
+                <input class="list-check-box" value='{$vo.id}' type='checkbox'/>
+            </td>
+            <td class='text-center'>{$vo.name}</td>
+            <td class='text-left'>{$vo.url}</td>
+            <td class='text-left'>{$vo.country}</td>
+            <td class='text-left'>{$vo.province}</td>
+            <td class='text-left'>{$vo.icon}</td>
+            <td class='text-left'>{$vo.type_id}</td>
+        </tr>
+        {/foreach}
+        </tbody>
+    </table>
+    {if isset($page)}<p>{$page}</p>{/if}
+    <script>
+        window.form.render();
+        window.laydate.render({range: true, elem: '#range-date', format: 'yyyy/MM/dd'});
+    </script>
+</form>
+
+{/block}
