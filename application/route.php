@@ -16,7 +16,8 @@ Route::get('api/user/page/[:page]/[:pageSize]','api/User/getPageForUser');
 Route::get('api/user/:id','api/User/getUserById');
 
 
-Route::get('api/tv/page/:typeId/[:page]/[:pageSize]','api/Television/getTvForPage');
+Route::get('api/tv/page/:typeId/[:page]/[:pageSize]','api/Television/getTvForPageByType');
+Route::get('api/tv/property/:typeId/[:page]/[:pageSize]','api/Television/getTvByProperty');
 
 return [
     '__pattern__' => [
