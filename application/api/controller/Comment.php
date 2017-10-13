@@ -41,7 +41,7 @@ class Comment extends Rest{
     protected function filterData(&$db){
 
         $lists = $db->all();
-        foreach ($lists as $key => &$item) {
+        while ($item = each($lists)) {
 
             $childrens = Db::field('a.*')
                 ->table("t_comment")
