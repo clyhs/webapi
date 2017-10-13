@@ -41,16 +41,16 @@ class Comment extends Rest{
     protected function filterData(&$db){
 
         $lists = $db->all();
-        foreach ($lists as $key => &$item) {
-            if($item['id']>0) {
-                $childrens = Db::field('a.*')
-                    ->table("t_comment")
-                    ->alias('a')
-                    //->join('t_user b', 'b.id=a.reply_id')
-                    ->where("a.pid="+$item['id'])
-                    ->order('a.id desc');
-                $item['childrens'] = $childrens->select();
-            }
+        foreach ($lists as $key => $item) {
+
+            $childrens = Db::field('a.*')
+                ->table("t_comment")
+                ->alias('a')
+                //->join('t_user b', 'b.id=a.reply_id')
+                ->where("a.pid="+$item['id'])
+                ->order('a.id desc');
+            $item['childrens'] = $childrens->select();
+
         }
         return $lists;
     }
