@@ -25,9 +25,18 @@ class Comment extends Rest{
             'page'=>1
         ];
 
-        $lists = Db::name("comment")->where($where)->order('id desc')
+        $db = Db::field('a.*,b.username as createName,c.username as replyName')
+            ->table("t_comment")
+            ->alias('a')
+            ->join('t_user b','b.id = a.user_id')
+            ->join('t_user c','c.id = a.reply_id')
+            ->where($where)
+            ->order('a.id desc')
             ->paginate(15,false,$options);
-        return json($this->filterData($lists));
+
+        //$lists = Db::name("comment")->where($where)->order('id desc')
+            //->paginate(15,false,$options);
+        return json($this->filterData($db));
     }
 
     protected function filterData(&$db){
