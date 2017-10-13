@@ -23,9 +23,9 @@ class Television extends Rest{
         $options=[
             'page'=>$page
         ];
-        $db = Db::name("television")->where("type_id",$typeId)->order('id asc')
+        $lists = Db::name("television")->where("type_id",$typeId)->order('id asc')
             ->paginate($pageSize,false,$options);
 
-        return json($db->select());
+        return json($lists);
     }
 }
