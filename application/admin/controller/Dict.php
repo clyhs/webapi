@@ -11,6 +11,7 @@ namespace app\admin\controller;
 use app\common\controller\BaseAdmin;
 use app\common\service\ToolService;
 use app\common\service\DataService;
+use think\Db;
 
 class Dict extends BaseAdmin{
 
