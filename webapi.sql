@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50173
 File Encoding         : 65001
 
-Date: 2017-10-11 14:04:28
+Date: 2017-10-13 18:45:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,11 +30,12 @@ CREATE TABLE `t_auth` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_system_auth_title` (`title`) USING BTREE,
   KEY `index_system_auth_status` (`status`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统权限表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='系统权限表';
 
 -- ----------------------------
 -- Records of t_auth
 -- ----------------------------
+INSERT INTO `t_auth` VALUES ('1', '超级管理员', '1', '0', '超级管理员', '0', '2017-10-13 12:25:16');
 
 -- ----------------------------
 -- Table structure for `t_auth_node`
@@ -50,6 +51,86 @@ CREATE TABLE `t_auth_node` (
 -- ----------------------------
 -- Records of t_auth_node
 -- ----------------------------
+INSERT INTO `t_auth_node` VALUES ('1', 'admin');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/auth');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/auth/index');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/auth/apply');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/auth/add');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/auth/edit');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/auth/forbid');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/auth/resume');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/auth/del');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/config');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/config/index');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/config/file');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/config/sms');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/dict');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/dict/index');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/dict/add');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/dict/edit');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/dict/del');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/log');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/log/index');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/log/del');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/menu');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/menu/index');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/menu/add');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/menu/edit');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/menu/del');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/menu/forbid');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/menu/resume');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/node');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/node/index');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/node/save');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/plugins');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/plugins/upfile');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/plugins/upload');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/plugins/upstate');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/plugins/icon');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/region');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/region/index');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/region/getchildregion');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/television');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/television/index');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/television/add');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/television/getchildregion');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/television/edit');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/television/del');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/user');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/user/index');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/user/auth');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/user/add');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/user/edit');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/user/pass');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/user/del');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/user/forbid');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/user/resume');
+
+-- ----------------------------
+-- Table structure for `t_comment`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_comment`;
+CREATE TABLE `t_comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `context` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `create_at` datetime DEFAULT NULL,
+  `user_id` int(11) DEFAULT '0',
+  `reply_id` int(11) DEFAULT '0',
+  `uid` int(11) DEFAULT NULL,
+  `type_id` int(11) DEFAULT NULL,
+  `good` int(11) DEFAULT '0',
+  `bad` int(11) DEFAULT '0',
+  `pid` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of t_comment
+-- ----------------------------
+INSERT INTO `t_comment` VALUES ('1', 'test1', '2017-10-13 15:25:06', '10000', '0', '3', '11', '1', '1', '0');
+INSERT INTO `t_comment` VALUES ('2', 'test2', '2017-10-13 15:25:42', '10000', '0', '3', '11', '0', '1', '0');
+INSERT INTO `t_comment` VALUES ('3', 'reply', '2017-10-13 15:26:10', '0', '10000', '3', '11', '1', '0', '1');
+INSERT INTO `t_comment` VALUES ('4', 'reply2', '2017-10-13 15:47:56', '0', '10000', '3', '11', '0', '1', '1');
 
 -- ----------------------------
 -- Table structure for `t_config`
@@ -61,7 +142,7 @@ CREATE TABLE `t_config` (
   `value` varchar(500) DEFAULT NULL COMMENT '配置值',
   PRIMARY KEY (`id`),
   KEY `index_system_config_name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=204 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='系统参数配置';
+) ENGINE=InnoDB AUTO_INCREMENT=205 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='系统参数配置';
 
 -- ----------------------------
 -- Records of t_config
@@ -93,6 +174,36 @@ INSERT INTO `t_config` VALUES ('200', 'storage_oss_keyid', 'WjeX0AYSfgy5VbXQ');
 INSERT INTO `t_config` VALUES ('201', 'storage_oss_secret', 'hQTENHy6MYVUTgwjcgfOCq5gckm2Lp');
 INSERT INTO `t_config` VALUES ('202', 'storage_oss_domain', 'think-oss.oss-cn-shanghai.aliyuncs.com');
 INSERT INTO `t_config` VALUES ('203', 'storage_oss_is_https', '1');
+INSERT INTO `t_config` VALUES ('204', 'storage_local_exts', 'png,jpg');
+
+-- ----------------------------
+-- Table structure for `t_dict`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_dict`;
+CREATE TABLE `t_dict` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `pid` int(11) DEFAULT '0',
+  `sort` int(11) DEFAULT NULL,
+  `char` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of t_dict
+-- ----------------------------
+INSERT INTO `t_dict` VALUES ('1', '频道类型', '0', '1000', 'CHANNEL');
+INSERT INTO `t_dict` VALUES ('2', '央视', '1', '100', 'CHANNEL');
+INSERT INTO `t_dict` VALUES ('3', '体育', '1', '200', 'CHANNEL');
+INSERT INTO `t_dict` VALUES ('4', '地方', '1', '300', 'CHANNEL');
+INSERT INTO `t_dict` VALUES ('5', '全部', '1', '999', 'CHANNEL');
+INSERT INTO `t_dict` VALUES ('6', '电影', '1', '400', 'CHANNEL');
+INSERT INTO `t_dict` VALUES ('7', '卫视', '1', '500', 'CHANNEL');
+INSERT INTO `t_dict` VALUES ('8', '热门', '1', '700', 'CHANNEL');
+INSERT INTO `t_dict` VALUES ('9', '游戏', '1', '600', 'CHANNEL');
+INSERT INTO `t_dict` VALUES ('10', '主题类型', '0', '2000', 'SUBJECT');
+INSERT INTO `t_dict` VALUES ('11', '电视台', '10', '100', 'SUBJECT');
+INSERT INTO `t_dict` VALUES ('12', '贴子', '10', '200', 'SUBJECT');
 
 -- ----------------------------
 -- Table structure for `t_log`
@@ -132,7 +243,7 @@ CREATE TABLE `t_menu` (
   `create_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`),
   KEY `index_system_menu_node` (`node`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8 COMMENT='系统菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 COMMENT='系统菜单表';
 
 -- ----------------------------
 -- Records of t_menu
@@ -169,6 +280,12 @@ INSERT INTO `t_menu` VALUES ('91', '87', '内置插件', '', '', '#', '', '_self
 INSERT INTO `t_menu` VALUES ('92', '91', '文件上传', '', '', 'demo/plugs/file', '', '_self', '0', '1', '0', '2017-07-10 18:57:22');
 INSERT INTO `t_menu` VALUES ('93', '88', '富文本编辑器', '', '', 'demo/plugs/editor', '', '_self', '0', '1', '0', '2017-07-28 15:19:44');
 INSERT INTO `t_menu` VALUES ('94', '0', '后台首页', '', '', 'admin/index/main', '', '_self', '0', '1', '0', '2017-08-08 11:28:43');
+INSERT INTO `t_menu` VALUES ('95', '4', '地区管理', '', 'fa fa-map', '/admin/region/index', '', '_self', '40', '1', '0', '2017-10-11 14:32:13');
+INSERT INTO `t_menu` VALUES ('96', '2', '多媒体', '', '', '#', '', '_self', '300', '1', '0', '2017-10-12 08:51:45');
+INSERT INTO `t_menu` VALUES ('97', '96', '电视台管理', '', 'fa fa-laptop', '/admin/television/index', '', '_self', '10', '1', '0', '2017-10-12 09:00:10');
+INSERT INTO `t_menu` VALUES ('98', '4', '字典管理', '', 'fa fa-file-text-o', '/admin/dict/index', '', '_self', '50', '1', '0', '2017-10-13 09:32:00');
+INSERT INTO `t_menu` VALUES ('99', '2', '评论区', '', 'fa fa-commenting', '#', '', '_self', '400', '1', '0', '2017-10-13 14:15:00');
+INSERT INTO `t_menu` VALUES ('100', '99', '评论管理', '', 'fa fa-commenting-o', '/admin/comment/index', '', '_self', '10', '1', '0', '2017-10-13 14:15:56');
 
 -- ----------------------------
 -- Table structure for `t_node`
@@ -4058,6 +4175,33 @@ CREATE TABLE `t_sequence` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for `t_television`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_television`;
+CREATE TABLE `t_television` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `url_1` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `url_2` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `url_3` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `type_id` int(11) DEFAULT NULL,
+  `is_hot` tinyint(1) DEFAULT '0',
+  `is_new` tinyint(1) DEFAULT '0',
+  `is_recommend` tinyint(1) DEFAULT '0',
+  `country` int(11) DEFAULT NULL,
+  `province` int(11) DEFAULT NULL,
+  `city` int(11) DEFAULT NULL,
+  `icon` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `bg` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of t_television
+-- ----------------------------
+INSERT INTO `t_television` VALUES ('3', 'test', 'http://abigfish.org', 'http://abigfish.org', 'http://abigfish.org', '0', '1', '0', '1', '100000', '210000', '210500', 'http://47.91.156.179:83/static/upload/71ec0fa5343967f9/95473b73ca041832.png', 'http://47.91.156.179:83/static/upload/71ec0fa5343967f9/95473b73ca041832.png');
+
+-- ----------------------------
 -- Table structure for `t_user`
 -- ----------------------------
 DROP TABLE IF EXISTS `t_user`;
@@ -4083,4 +4227,20 @@ CREATE TABLE `t_user` (
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES ('10000', 'admin', '21232f297a57a5a743894a0e4a801fc3', '22222222', '123@qq.com', '13888888855', 'dfgsdfgsfd', '27039', '2017-08-23 16:15:57', '1', '301,302,303,304', '0', null, '2015-11-13 15:14:22');
+INSERT INTO `t_user` VALUES ('10000', 'admin', '21232f297a57a5a743894a0e4a801fc3', '22222222', '123@qq.com', '13888888855', 'dfgsdfgsfd', '27039', '2017-08-23 16:15:57', '1', '1', '0', null, '2015-11-13 15:14:22');
+
+-- ----------------------------
+-- Table structure for `t_user_score`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_user_score`;
+CREATE TABLE `t_user_score` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `score` int(11) DEFAULT '0',
+  `create_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of t_user_score
+-- ----------------------------
