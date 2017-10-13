@@ -49,7 +49,7 @@ class Comment extends Rest{
                     ->join('t_user b', 'b.id=a.reply_id')
                     ->where("a.pid="+$item['id'])
                     ->order('a.id desc');
-                $item['childrens'] = $childrens;
+                $item['childrens'] = $childrens->all();
             }
         }
         return $lists;
