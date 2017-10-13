@@ -19,6 +19,8 @@ Route::get('api/user/:id','api/User/getUserById');
 Route::get('api/tv/page/:typeId/[:page]/[:pageSize]','api/Television/getTvForPageByType');
 Route::get('api/tv/property/:typeId/[:page]/[:pageSize]','api/Television/getTvByProperty');
 
+Route::get('api/comment/page/:typeId/:uid/[:page]/[:pageSize]','api/Comment/getCommentForPage');
+
 return [
     '__pattern__' => [
         'name' => '\w+',
