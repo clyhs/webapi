@@ -36,7 +36,7 @@ class Comment extends Rest{
 
         foreach ($lists as $key => &$item) {
             $childrens = Db::name("comment")->where("pid",$item['id'])->order('id desc');
-            $item['childrens'] = $childrens;
+            $item['childrens'] = $childrens->select();
         }
         return $lists;
     }
