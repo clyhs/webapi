@@ -11,7 +11,6 @@ namespace app\api\controller;
 use think\Request;
 use think\controller\Rest;
 use think\Db;
-use think\Model;
 
 class Comment extends Rest{
 
@@ -52,10 +51,8 @@ class Comment extends Rest{
                 ->order('a.id desc');
                 //$item['childrens'] = $childrens->select();*/
             //$childrens = Db::name("comment")->where("pid",$item['id'])->order('id asc')->select();
-
-            $Model = new Model();
             $sql = "select a.* from t_comment a where a.pid="+$item['id']+" order by id asc";
-            $childrens = $Model->query($sql);
+            $childrens =Db::query($sql);
             $lists[$key]['childs'] = $childrens;
         }
         return $lists;
