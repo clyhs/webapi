@@ -51,7 +51,7 @@ class Comment extends Rest{
                 ->order('a.id desc');
                 //$item['childrens'] = $childrens->select();*/
             //$childrens = Db::name("comment")->where("pid",$item['id'])->order('id asc')->select();
-            $sql = "select a.* from t_comment a where a.pid="+$item['id']+" order by id asc";
+            $sql = 'select a.* from t_comment a where a.pid='.$item['id'].' order by id asc';
             $childrens =Db::query($sql);
             $lists[$key]['childs'] = $childrens;
         }
