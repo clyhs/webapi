@@ -42,11 +42,11 @@ class Comment extends Rest{
     protected function filterData(&$db){
 
         $lists = $db->all();
-
+        /*
         foreach ($lists as $key => &$item) {
             $childrens = Db::name("comment")->where("pid",$item['id'])->order('id desc');
             $item['childrens'] = $childrens->select();
-        }
+        }*/
         return $lists;
     }
 
