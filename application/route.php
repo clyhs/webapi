@@ -15,6 +15,9 @@ Route::get('api/user/all','api/User/getAllUsers');
 Route::get('api/user/page/[:page]/[:pageSize]','api/User/getPageForUser');
 Route::get('api/user/:id','api/User/getUserById');
 
+
+Route::get('api/tv/page/:typeId/[:page]/[:pageSize]','api/Television/getTvForPage');
+
 return [
     '__pattern__' => [
         'name' => '\w+',

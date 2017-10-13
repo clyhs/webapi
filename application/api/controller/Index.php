@@ -8,6 +8,6 @@ class Index extends Rest
 {
     public function index()
     {
-        return "hello restfulapi";
+        return "hello webapi";
     }
 }
