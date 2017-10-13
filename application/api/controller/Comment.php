@@ -41,13 +41,13 @@ class Comment extends Rest{
     protected function filterData(&$db){
 
         $lists = $db->all();
-        foreach ($lists as $key => &$item) {
+        foreach ($lists as $key => $item) {
             if($key == 'id'){
                 $childrens = Db::field('a.*')
                     ->table("t_comment")
                     ->alias('a')
                     //->join('t_user b', 'b.id=a.reply_id')
-                    ->where("a.pid="+$item['id']+" and a.pid!=0")
+                    ->where("a.pid="+$item[$key])
                     ->order('a.id desc');
                 $item['childrens'] = $childrens->select();
             }
