@@ -25,7 +25,7 @@ class Comment extends Rest{
             'page'=>1
         ];
 
-        $db = Db::field('a.*,b.username as createName,c.username as replyName')
+        $db = Db::field('a.*')
             ->table("t_comment")
             ->alias('a')
             ->join('t_user b','b.id = a.user_id')
@@ -41,7 +41,7 @@ class Comment extends Rest{
 
     protected function filterData(&$db){
 
-        $lists = $db->find();
+        $lists = $db->all();
         /*
         foreach ($lists as $key => &$item) {
             $childrens = Db::name("comment")->where("pid",$item['id'])->order('id desc');
