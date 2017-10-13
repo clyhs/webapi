@@ -25,11 +25,11 @@ class Comment extends Rest{
             'page'=>1
         ];
 
-        $db = Db::field('a.*')
-            ->table("t_comment a")
+        $db = Db::field('a.*,b.username')
+            ->table("t_comment")
+            ->alias('a')
             ->join('t_user b','b.id=a.user_id')
-            ->join('t_user c','c.id=a.reply_id')
-           // ->where(" a.uid='$uid' and a.type_id='$typeId' and a.pid=0")
+            ->where(" a.uid='$uid' and a.type_id='$typeId' and a.pid=0")
             ->order('a.id desc')
             ->paginate(15,false,$options);
 
