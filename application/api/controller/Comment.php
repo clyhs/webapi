@@ -30,7 +30,7 @@ class Comment extends Rest{
             ->alias('a')
             ->join('t_user b','b.id = a.user_id')
             ->join('t_user c','c.id = a.reply_id')
-            ->where($where)
+            ->where("a.uid="+$uid+" and a.type_id="+$typeId+" and a.pid="+0)
             ->order('a.id desc')
             ->paginate(15,false,$options);
 
