@@ -19,7 +19,7 @@ class Comment extends BaseAdmin{
 
     public function index(){
         $this->title = '评论管理';
-        $db = Db::name($this->table)->order('sort asc,id asc');
+        $db = Db::name($this->table)->order('id asc');
         return parent::_list($db, true);
     }
 
