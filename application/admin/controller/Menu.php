@@ -63,7 +63,7 @@ class Menu extends BaseAdmin{
         if ($this->request->isGet()) {
             // 上级菜单处理
             $_menus = Db::name($this->table)->where(['status' => '1'])->order('sort asc,id asc')->select();
-            $_menus[] = ['name' => '顶级菜单', 'id' => '0', 'pid' => '-1'];
+            $_menus[] = ['title' => '顶级菜单', 'id' => '0', 'pid' => '-1'];
             $menus = ToolService::arr2table($_menus);
             foreach ($menus as $key => &$menu) {
                 if (substr_count($menu['path'], '-') > 3) {

@@ -50,7 +50,7 @@ class Dict extends BaseAdmin{
         if ($this->request->isGet()) {
             // 上级菜单处理
             $_dicts = Db::name($this->table)->order('sort asc,id asc')->select();
-            $_dicts[] = ['title' => '无', 'id' => '0', 'pid' => '-1'];
+            $_dicts[] = ['name' => '无', 'id' => '0', 'pid' => '-1'];
             $dicts = ToolService::arr2table($_dicts);
             foreach ($dicts as $key => &$dict) {
                 if (substr_count($dict['path'], '-') > 3) {
