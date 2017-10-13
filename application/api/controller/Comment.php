@@ -42,15 +42,14 @@ class Comment extends Rest{
 
         $lists = $db->all();
         foreach ($lists as $key => $item) {
-            if($key == 'id'){
                 $childrens = Db::field('a.*')
                     ->table("t_comment")
                     ->alias('a')
                     //->join('t_user b', 'b.id=a.reply_id')
-                    ->where("a.pid="+$item[$key])
+                    ->where("a.pid="+$item['id'])
                     ->order('a.id desc');
                 $item['childrens'] = $childrens->select();
-            }
+
         }
         return $lists;
     }
