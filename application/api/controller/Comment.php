@@ -30,8 +30,8 @@ class Comment extends Rest{
         return json($this->filterData($lists->all()));
     }
 
-    protected function filterData(&$lists){
-        foreach ($lists as $key => &$item) {
+    protected function filterData($lists){
+        foreach ($lists as $key => $item) {
             $childrens = Db::name("comment")->where("pid",$item['id'])->order('id desc');
             $item['childrens'] = $childrens;
         }
