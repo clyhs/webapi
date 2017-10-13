@@ -26,8 +26,7 @@ class Comment extends Rest{
         ];
 
         $db = Db::field('a.*')
-            ->table("t_comment")
-            ->alias('a')
+            ->table("t_comment a")
             ->join('t_user b','b.id=a.user_id')
             ->join('t_user c','c.id=a.reply_id')
            // ->where(" a.uid='$uid' and a.type_id='$typeId' and a.pid=0")
