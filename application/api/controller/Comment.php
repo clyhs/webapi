@@ -17,9 +17,9 @@ class Comment extends Rest{
     public function getCommentForPage($uid=0,$typeId=0){
 
         $where=array(
-            "uid"=>$uid,
-            "type_id"=>$typeId,
-            "pid"=>0
+            "a.uid"=>$uid,
+            "a.type_id"=>$typeId,
+            "a.pid"=>0
         );
         $options=[
             'page'=>1
