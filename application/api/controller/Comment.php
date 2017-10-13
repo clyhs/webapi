@@ -27,10 +27,13 @@ class Comment extends Rest{
 
         $lists = Db::name("comment")->where($where)->order('id desc')
             ->paginate(15,false,$options);
-        return json($this->filterData($lists->all()));
+        return json($this->filterData($lists));
     }
 
-    protected function filterData(&$lists){
+    protected function filterData(&$db){
+
+        $lists = $db->all();
+
         foreach ($lists as $key => $item) {
             $childrens = Db::name("comment")->where("pid",$item['id'])->order('id desc');
             $item['childrens'] = $childrens;
