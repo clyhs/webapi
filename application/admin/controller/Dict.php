@@ -32,6 +32,43 @@ class Dict extends BaseAdmin{
         $data = ToolService::arr2table($data);
     }
 
+    public function add()
+    {
+        return $this->_form($this->table, 'form');
+    }
+
+    /**
+     * 编辑菜单
+     */
+    public function edit()
+    {
+        return $this->_form($this->table, 'form');
+    }
+
+    protected function _form_filter(&$vo)
+    {
+        if ($this->request->isGet()) {
+            // 上级菜单处理
+            $_dicts = Db::name($this->table)->order('sort asc,id asc')->select();
+            $_dicts[] = ['title' => '无', 'id' => '0', 'pid' => '-1'];
+            $dicts = ToolService::arr2table($_dicts);
+            foreach ($dicts as $key => &$dict) {
+                if (substr_count($dict['path'], '-') > 3) {
+                    unset($dicts[$key]);
+                    continue;
+                }
+                if (isset($vo['pid'])) {
+                    $current_path = "-{$vo['pid']}-{$vo['id']}";
+                    if ($vo['pid'] !== '' && (stripos("{$dict['path']}-", "{$current_path}-") !== false || $dict['path'] === $current_path)) {
+                        unset($dict[$key]);
+                    }
+                }
+            }
+
+            $this->assign('dicts', $dicts);
+        }
+    }
+
     public function del()
     {
         if (DataService::update($this->table)) {
