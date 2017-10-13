@@ -15,16 +15,9 @@ use think\Db;
 class Comment extends Rest{
 
     public function getCommentForPage($uid=0,$typeId=0){
-
-        $where=array(
-            "a.uid"=>$uid,
-            "a.type_id"=>$typeId,
-            "a.pid"=>0
-        );
         $options=[
             'page'=>1
         ];
-
         $db = Db::field('a.*,b.username')
             ->table("t_comment")
             ->alias('a')
@@ -32,9 +25,6 @@ class Comment extends Rest{
             ->where(" a.uid='$uid' and a.type_id='$typeId' and a.pid=0")
             ->order('a.id desc')
             ->paginate(15,false,$options);
-
-        //$lists = Db::name("comment")->where($where)->order('id desc')
-            //->paginate(15,false,$options);
         return json($this->filterData($db));
     }
 
