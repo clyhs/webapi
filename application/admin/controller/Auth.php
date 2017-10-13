@@ -11,6 +11,7 @@ use app\common\controller\BaseAdmin;
 use app\common\service\NodeService;
 use app\common\service\ToolService;
 use app\common\service\DataService;
+use think\Db;
 
 class Auth extends BaseAdmin{
 
