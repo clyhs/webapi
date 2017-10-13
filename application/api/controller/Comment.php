@@ -27,7 +27,7 @@ class Comment extends Rest{
 
         $lists = Db::name("comment")->where($where)->order('id desc')
             ->paginate(15,false,$options);
-        return json($lists);
+        return json($lists['data']);
     }
 
 }
