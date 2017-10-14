@@ -28,11 +28,12 @@ class Television extends BaseAdmin{
             ->join(' t_region b ',' a.country = b.code ','left')
             ->join(' t_region c ',' a.province = c.code ','left')
             ->order('a.id desc');
-        /*$sql = 'select a.*,b.name as countryName,c.name as provinceName from t_television a '.
-            'left join t_region b on a.country=b.code '.
-            'left join t_region c on a.province=c.code '.
-            'order by a.id desc ';
-        $db = Db::query($sql);*/
+        $where = [
+            "char"=>"CHANNEL",
+            "pid"=>1
+        ];
+        $channels = Db::name("dict")->where($where)->order('id asc')->select();
+        $this->assign('channels', $channels);
 
         return parent::_list($db);
     }

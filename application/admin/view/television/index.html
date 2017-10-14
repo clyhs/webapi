@@ -42,7 +42,7 @@
             <td class='text-left'>{$vo.countryName}</td>
             <td class='text-left'>{$vo.provinceName}</td>
             <td class='text-left'>{$vo.icon}</td>
-            <td class='text-left'>{$Think.config.tvarray[$vo.type_id]}</td>
+            <td class='text-left'>{$channels[$vo.type_id]}</td>
             <td class='text-left nowrap'>
                 {if auth("$classuri/edit")}
                 <span class="text-explode">|</span>
