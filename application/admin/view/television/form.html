@@ -69,12 +69,12 @@
             <select id="type_id" name="type_id" class="layui-select full-width" style='display:block;width: 200px;'>
                 <option value="0">选择类型</option>
 
-                <!--{foreach name='Think.config.tvarray' item='v'}-->
-                <!--{if isset($vo['type_id']) && $key==$vo['type_id'] }-->
-                <option value='{$key}' selected>{$v}</option>
+                <!--{foreach $channels as $v}-->
+                <!--{if isset($vo['type_id']) && $v['id']==$vo['type_id'] }-->
+                <option value='{$v.id}' selected>{$v.name}</option>
                 <!--{else}-->
 
-                <option value='{$key}'>{$v}</option>
+                <option value='{$v.id}'>{$v.name}</option>
                 <!--{/if}-->
                 <!--{/foreach}-->
             </select>

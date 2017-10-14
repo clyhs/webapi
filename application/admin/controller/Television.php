@@ -83,6 +83,14 @@ class Television extends BaseAdmin{
             }else{
                 $this->assign('citys', "");
             }
+
+            $where = [
+                "char"=>"CHANNEL",
+                "pid"=>1
+            ];
+
+            $channels = Db::name("dict")->where($where)->order('id asc')->select();
+            $this->assign('channels', $channels);
         }
     }
 
