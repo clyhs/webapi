@@ -28,7 +28,7 @@ class Television extends BaseAdmin{
             ->join('t_region b','a.country = b.code')
             ->join('t_region c','a.province = c.code')
             ->order('a.id desc');*/
-        $sql = 'select a.* from t_television a'.
+        $sql = 'select a.*,b.name as countryName,c.name as provinceName from t_television a '.
             'left join t_region b on a.country=b.code '.
             'left join t_region c on a.province=c.code '.
             'order by a.id desc ';
