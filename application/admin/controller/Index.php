@@ -11,6 +11,11 @@ class Index extends BaseAdmin
 {
     public function index()
     {
+
+        if(!session('user')){
+            $this->redirect('@admin/login');
+        }
+
         NodeService::applyAuthNode();
         $list = (array)Db::name('menu')->where(['status' => '1'])->order('sort asc,id asc')->select();
 
