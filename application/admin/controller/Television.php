@@ -31,7 +31,7 @@ class Television extends BaseAdmin{
         $sql = 'select a.* from t_television a'.
             'left join t_region b on a.country=b.code '.
             'left join t_region c on a.province=c.code '.
-            'order a.id desc ';
+            'order by a.id desc ';
         $db = Db::query($sql);
 
         return parent::_list($db);
