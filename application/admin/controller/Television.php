@@ -30,6 +30,13 @@ class Television extends BaseAdmin{
             ->join(' t_dict d','a.type_id=d.id','left')
             ->order('a.id desc');
 
+        $where = [
+            "char"=>"CHANNEL",
+            "pid"=>1
+        ];
+
+        $channels = Db::name("dict")->where($where)->order('id asc')->select();
+        $this->assign('channels', $channels);
 
         return parent::_list($db);
     }
