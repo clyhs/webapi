@@ -22,18 +22,14 @@ class Television extends BaseAdmin{
         //$db = Db::name($this->table)->order('id desc');
 
 
-        $db = Db::field('a.*,b.name as countryName,c.name as provinceName')
+        $db = Db::field('a.*,b.name as countryName,c.name as provinceName,d.name as typeName')
             ->table("t_television")
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
             ->join(' t_region c ',' a.province = c.code ','left')
+            ->join(' t_dict d','a.type_id=d.id','left')
             ->order('a.id desc');
-        $where = [
-            "char"=>"CHANNEL",
-            "pid"=>1
-        ];
-        $channels = Db::name("dict")->where($where)->order('id asc')->select();
-        $this->assign('channels', $channels);
+
 
         return parent::_list($db);
     }
