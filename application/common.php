@@ -28,8 +28,8 @@ function sysconf($name, $value = null)
 
 function auth($node)
 {
-    //return NodeService::checkAuthNode($node);
-    return true;
+    return NodeService::checkAuthNode($node);
+    //return true;
 }
 
 function format_datetime($date, $format = 'Y年m月d日 H:i:s')
