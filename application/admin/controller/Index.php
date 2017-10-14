@@ -11,9 +11,10 @@ class Index extends BaseAdmin
 {
     public function index()
     {
+        NodeService::applyAuthNode();
         $list = (array)Db::name('menu')->where(['status' => '1'])->order('sort asc,id asc')->select();
 
-        $menus = $this->_filterMenuData(ToolService::arr2tree($list), NodeService::get(), true);
+        $menus = $this->_filterMenuData(ToolService::arr2tree($list), NodeService::get(), !!session('user'));
         return view('', ['title' => '系统管理', 'menus' => $menus]);
     }
 

@@ -12,6 +12,23 @@ use think\Request;
 
 class NodeService
 {
+    public static function applyAuthNode()
+    {
+        cache('need_access_node', null);
+        if (($userid = session('user.id'))) {
+            session('user', Db::name('user')->where('id', $userid)->find());
+        }
+        if (($authorize = session('user.authorize'))) {
+            $where = ['id' => ['in', explode(',', $authorize)], 'status' => '1'];
+            $authorizeids = Db::name('auth')->where($where)->column('id');
+            if (empty($authorizeids)) {
+                return session('user.nodes', []);
+            }
+            $nodes = Db::name('auth_node')->whereIn('auth', $authorizeids)->column('node');
+            return session('user.nodes', $nodes);
+        }
+        return false;
+    }
 
     public static function getAuthNode()
     {
