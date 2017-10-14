@@ -21,14 +21,25 @@ class Television extends BaseAdmin{
         $this->title = '电视台管理';
         //$db = Db::name($this->table)->order('id desc');
 
+        $get = $this->request->get();
 
         $db = Db::field('a.*,b.name as countryName,c.name as provinceName,d.name as typeName')
             ->table("t_television")
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
             ->join(' t_region c ',' a.province = c.code ','left')
-            ->join(' t_dict d','a.type_id=d.id','left')
-            ->order('a.id desc');
+            ->join(' t_dict d','a.type_id=d.id','left');
+        foreach ([ 'name'] as $key) {
+            if (isset($get[$key]) && $get[$key] !== '') {
+                $db->where('a.'.$key, 'like', "%{$get[$key]}%");
+            }
+        }
+        foreach ([ 'type_id'] as $key) {
+            if (isset($get[$key]) && $get[$key] !== '') {
+                $db->where('a.'.$key, '=', "{$get[$key]}");
+            }
+        }
+        $db->order('a.id asc');
 
         $where = [
             "char"=>"CHANNEL",
