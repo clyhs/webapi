@@ -31,13 +31,13 @@ class AccessAuth {
             'is_login' => empty($info['is_auth']) ? intval(!empty($info['is_login'])) : 1
         ];
         // 用户登录状态检查
-        /*
+
         if (!empty($access['is_login']) && !session('user')) {
             if ($this->request->isAjax()) {
                 $this->response('抱歉，您还没有登录获取访问权限！', 0, url('@admin/login'));
             }
             throw new HttpResponseException(redirect('@admin/login'));
-        }*/
+        }
         // 访问权限节点检查
         if (!empty($access['is_auth']) && !auth($node)) {
             $this->response('抱歉，您没有访问该模块的权限！', 0);
