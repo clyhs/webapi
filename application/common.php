@@ -12,6 +12,7 @@
 // 应用公共文件
 use think\Db;
 use app\common\service\DataService;
+use app\common\service\NodeService;
 
 function sysconf($name, $value = null)
 {
