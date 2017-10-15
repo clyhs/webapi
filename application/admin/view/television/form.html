@@ -69,9 +69,9 @@
             <!---->
             <!--{foreach $channels as $v}-->
 
-                <input <in name="{$v.id}" value="{$vo.type_ids}" >checked<else/></in>  class="list-check-box" value='{$v.id}' type='checkbox' name="type_ids[]" style="display: inline-block;"/>{$v.name}
+                <input {in name="{$v.id}" value="{$vo.type_ids}" }checked{/else}{/in}  class="list-check-box" value='{$v.id}' type='checkbox' name="type_ids[]" style="display: inline-block;"/>{$v.name}
 
-                
+
 
 
             <!--{/foreach}-->
