@@ -26,7 +26,8 @@ class Comment extends BaseAdmin{
             ->alias('a')
             ->join(' t_user b ',' a.user_id = b.id ','left')
             ->join(' t_user c ',' a.reply_id = c.id ','left')
-            ->join(' t_dict d','a.type_id=d.id','left');
+            ->join(' t_dict d ','a.type_id=d.id ','left')
+            ->order(' a.id desc');
 
         return parent::_list($db, true);
     }
