@@ -23,12 +23,13 @@ class Television extends Rest{
         $options=[
             'page'=>$page
         ];
-        $map[]=['exp','FIND_IN_SET('+$typeId+',type_ids)'];
+        
 
-        $lists = Db::name("television")->where($map)->order('id asc')
-            ->paginate($pageSize,false,$options);
+        $startRow = ($page-1)*$pageSize;
+        $sql = 'select * from t_television where find_in_set('+$typeId+',type_ids) order by id asc limit '+$startRow+',15';
+        $list =Db::query($sql);
 
-        return json(Db::getLastSql());
+        return json($list);
     }
 
     public function getTvByProperty($page = 1,$pageSize = 15,$typeId=0){
