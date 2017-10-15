@@ -23,18 +23,19 @@ class Television extends BaseAdmin{
 
         $get = $this->request->get();
 
-        $db = Db::field('a.*,b.name as countryName,c.name as provinceName,d.name as typeName')
+        $db = Db::field('a.*,b.name as countryName,c.name as provinceName')
             ->table("t_television")
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
-            ->join(' t_region c ',' a.province = c.code ','left')
-            ->join(' t_dict d','a.type_id=d.id','left');
+            ->join(' t_region c ',' a.province = c.code ','left');
+            //->join(' t_dict d','a.type_id=d.id','left');
         /*
         foreach ([ 'name'] as $key) {
             if (isset($get[$key]) && $get[$key] !== '') {
                 $db->where('a.'.$key, 'like', "%{$get[$key]}%");
             }
         }*/
+        /*
         foreach ([ 'type_id'] as $key) {
             if (isset($get[$key]) && $get[$key] !== '') {
 
@@ -43,7 +44,7 @@ class Television extends BaseAdmin{
                 }
 
             }
-        }
+        }*/
         $db->order('a.id asc');
 
         $where = [
