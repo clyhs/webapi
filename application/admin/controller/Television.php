@@ -23,12 +23,12 @@ class Television extends BaseAdmin{
 
         $get = $this->request->get();
 
-        $db = Db::field('a.*,b.name as countryName,c.name as provinceName')
+        $db = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames')
             ->table("t_television")
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
             ->join(' t_region c ',' a.province = c.code ','left');
-            //->join(' t_dict d','a.type_id=d.id','left');
+            ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left');
         /*
         foreach ([ 'name'] as $key) {
             if (isset($get[$key]) && $get[$key] !== '') {
@@ -56,6 +56,19 @@ class Television extends BaseAdmin{
         $this->assign('channels', $channels);
 
         return parent::_list($db);
+    }
+
+    protected function _index_data_filter(&$data)
+    {
+        foreach ($data as &$vo) {
+            if($vo['type_ids'] !=""){
+                $typeIds = explode(',',$vo['type_ids']);
+                if(count($typeIds) > 0){
+
+                }
+            }
+        }
+        $data = ToolService::arr2table($data);
     }
 
     public function add()
