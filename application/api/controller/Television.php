@@ -26,9 +26,9 @@ class Television extends Rest{
         $map[]=['exp','FIND_IN_SET('+$typeId+',type_ids)'];
 
         $lists = Db::name("television")->where($map)->order('id asc')
-            ->paginate($pageSize,false,$options)->getLastSql();
+            ->paginate($pageSize,false,$options);
 
-        return json($lists);
+        return json(Db::getLastSql());
     }
 
     public function getTvByProperty($page = 1,$pageSize = 15,$typeId=0){
