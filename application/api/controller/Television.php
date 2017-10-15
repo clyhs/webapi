@@ -26,7 +26,7 @@ class Television extends Rest{
 
 
         $startRow = ($page-1)*$pageSize;
-        $sql = 'select * from t_television where FIND_IN_SET('+$typeId+',type_ids) order by id asc limit '+$startRow+',15';
+        $sql = 'select * from t_television where FIND_IN_SET('.$typeId.',type_ids) order by id asc limit '+$startRow+',15';
         $list =Db::query($sql);
 
         return json(Db::getLastSql());
