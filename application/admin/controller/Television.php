@@ -90,7 +90,6 @@ class Television extends BaseAdmin{
             }
         }
 
-
         if ($this->request->isGet()) {
             //$get = $this->request->get();
             if(isset($vo['country']) && $vo['country'] !== ''){
@@ -128,6 +127,9 @@ class Television extends BaseAdmin{
 
             $channels = Db::name("dict")->where($where)->order('id asc')->select();
             $this->assign('channels', $channels);
+
+            $typeIds = explode($vo[type_ids]);
+            $this->assign('typeIds', $typeIds);
         }
     }
 

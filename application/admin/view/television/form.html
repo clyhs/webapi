@@ -68,7 +68,12 @@
         <div class="layui-input-block">
             <!---->
             <!--{foreach $channels as $v}-->
-            <input  class="list-check-box" value='{$v.id}' type='checkbox' name="type_ids[]" style="display: inline-block;"/>{$v.name}
+            <in name="{$v.id}" value="{$typeIds}" >
+                <input checked  class="list-check-box" value='{$v.id}' type='checkbox' name="type_ids[]" style="display: inline-block;"/>{$v.name}
+                <else/>
+                <input  class="list-check-box" value='{$v.id}' type='checkbox' name="type_ids[]" style="display: inline-block;"/>{$v.name}
+            </in>
+
 
             <!--{/foreach}-->
 
