@@ -29,14 +29,19 @@ class Television extends BaseAdmin{
             ->join(' t_region b ',' a.country = b.code ','left')
             ->join(' t_region c ',' a.province = c.code ','left')
             ->join(' t_dict d','a.type_id=d.id','left');
+        /*
         foreach ([ 'name'] as $key) {
             if (isset($get[$key]) && $get[$key] !== '') {
                 $db->where('a.'.$key, 'like', "%{$get[$key]}%");
             }
-        }
+        }*/
         foreach ([ 'type_id'] as $key) {
             if (isset($get[$key]) && $get[$key] !== '') {
-                $db->where('a.'.$key, '=', "{$get[$key]}");
+
+                if($get[$key]>0){
+                    $db->where('a.'.$key, '=', "{$get[$key]}");
+                }
+
             }
         }
         $db->order('a.id asc');
