@@ -23,9 +23,9 @@ class Television extends Rest{
         $options=[
             'page'=>$page
         ];
+        $map[]=['exp','FIND_IN_SET('+$typeId+',type_ids)'];
 
-        $where="find_in_set('"+$typeId+"',type_ids)";
-        $lists = Db::name("television")->where($where)->order('id asc')
+        $lists = Db::name("television")->where($map)->order('id asc')
             ->paginate($pageSize,false,$options);
 
         return json($lists);
