@@ -27,7 +27,7 @@ class Television extends BaseAdmin{
             ->table("t_television")
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
-            ->join(' t_region c ',' a.province = c.code ','left');
+            ->join(' t_region c ',' a.province = c.code ','left')
             ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left');
         /*
         foreach ([ 'name'] as $key) {
@@ -60,15 +60,6 @@ class Television extends BaseAdmin{
 
     protected function _index_data_filter(&$data)
     {
-        foreach ($data as &$vo) {
-            if($vo['type_ids'] !=""){
-                $typeIds = explode(',',$vo['type_ids']);
-                if(count($typeIds) > 0){
-
-                }
-            }
-        }
-        $data = ToolService::arr2table($data);
     }
 
     public function add()
