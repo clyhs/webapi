@@ -78,6 +78,12 @@ class Television extends BaseAdmin{
 
     protected function _form_filter(&$vo)
     {
+        if ($this->request->isPost()) {
+
+            if (isset($vo['type_ids']) && is_array($vo['type_ids'])) {
+                $vo['type_ids'] = join(',', $vo['type_ids']);
+            }
+        }
 
 
         if ($this->request->isGet()) {
