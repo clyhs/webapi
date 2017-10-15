@@ -31,7 +31,7 @@
                 <option value="0">选择类型</option>
 
                 <!--{foreach $channels as $v}-->
-                <!--{if $v===$Think.get.type_id}-->
+                <!--{if $v.id===$Think.get.type_id}-->
                 <option selected="selected" value='{$v.id}'>{$v.name}</option>
                 <!--{else}-->
                 <option value='{$v.id}'>{$v.name}</option>
