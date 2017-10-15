@@ -36,6 +36,11 @@ class Comment extends BaseAdmin{
     {
         foreach ($data as &$vo) {
             $vo['ids'] = join(',', ToolService::getArrSubIds($data, $vo['id']));
+
+            if($vo['type_id'] == 11){
+                
+            }
+
         }
         $data = ToolService::arr2table($data);
     }
