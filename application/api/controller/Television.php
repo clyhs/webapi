@@ -19,7 +19,7 @@ class Television extends Rest{
      * @param $typeId
      * @return mixed
      */
-    public function getTvForPageByType($page = 1,$pageSize = 15,$typeId){
+    public function getTvForPageByType($page = 1,$pageSize = 15,$typeId=0){
         $options=[
             'page'=>$page
         ];
