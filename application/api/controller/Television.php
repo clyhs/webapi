@@ -30,7 +30,7 @@ class Television extends Rest{
 
         //$sql = 'select * from t_television where FIND_IN_SET('.$typeId.',type_ids) order by id asc limit '.$startRow.',15';
         //$list =Db::query($sql);
-        return json(Db::getLastSql());
+        return json($lists);
     }
 
     public function getTvByProperty($page = 1,$pageSize = 15,$typeId=0){
