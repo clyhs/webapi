@@ -19,14 +19,14 @@ class Television extends Rest{
      * @param $typeId
      * @return mixed
      */
-    public function getTvForPageByType($page = 1,$pageSize = 15,$typeId=0){
+    public function getTvForPageByType($page = 1,$pageSize = 15,$typeId){
         $options=[
             'page'=>$page
         ];
 
 
         $startRow = ($page-1)*$pageSize;
-        $sql = 'select * from t_television where FIND_IN_SET('.$typeId.',type_ids) order by id asc limit '+$startRow+',15';
+        $sql = 'select * from t_television where FIND_IN_SET('.$typeId.',type_ids) order by id asc limit '.$startRow.',15';
         $list =Db::query($sql);
 
         return json(Db::getLastSql());
