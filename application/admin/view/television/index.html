@@ -32,7 +32,7 @@
 
                 <!--{foreach $channels as $v}-->
                 <!--{if $v===$Think.get.type_id}-->
-                <option selected="selected" value='{$action}'>{$action}</option>
+                <option selected="selected" value='{$v.id}'>{$v.name}</option>
                 <!--{else}-->
                 <option value='{$v.id}'>{$v.name}</option>
                 <!--{/if}-->
