@@ -23,11 +23,6 @@ class Television extends Rest{
         $options=[
             'page'=>$page
         ];
-        /*
-        $map[]=['exp','FIND_IN_SET('.$typeId.',type_ids)'];
-        $lists = Db::name("television")->where($map)->order('id asc')
-            ->paginate($pageSize,false,$options);*/
-
 
         $map[]=['exp','FIND_IN_SET('.$typeId.',a.type_ids)'];
         $lists = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames')
@@ -41,7 +36,7 @@ class Television extends Rest{
             ->order('a.id asc')
             ->paginate($pageSize,false,$options);
 
-        return json($lists);
+        return json($lists->all());
     }
 
     public function getTvByProperty($page = 1,$pageSize = 15,$typeId=0){
