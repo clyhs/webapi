@@ -41,10 +41,8 @@ class Television extends Rest{
 
     public function getTvByProperty($page = 1,$pageSize = 15,$typeId=0){
 
-        $lists = array();
         $where = array();
         if( $typeId> 0){
-
             switch($typeId){
                 case 1:
                     $where=array(
@@ -69,9 +67,20 @@ class Television extends Rest{
         $options=[
             'page'=>$page
         ];
-        $lists = Db::name("television")->where($where)->order('id asc')
+
+        $lists = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames')
+            ->table("t_television")
+            ->alias('a')
+            ->join(' t_region b ',' a.country = b.code ','left')
+            ->join(' t_region c ',' a.province = c.code ','left')
+            ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
+            ->where($where)
+            ->group('a.id')
+            ->order('a.id asc')
             ->paginate($pageSize,false,$options);
-        return json($lists);
+
+
+        return json($lists->all());
 
     }
 }
