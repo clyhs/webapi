@@ -42,6 +42,9 @@ class Comment extends BaseAdmin{
             if($vo['replyname'] == null ){
                 $vo['replyname'] = '--';
             }
+            if($vo['username'] == null ){
+                $vo['username'] = '--';
+            }
         }
         $data = ToolService::arr2table($data);
     }
