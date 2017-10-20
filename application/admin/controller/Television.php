@@ -28,24 +28,28 @@ class Television extends BaseAdmin{
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
             ->join(' t_region c ',' a.province = c.code ','left')
-            ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
-            ->group('a.id');
+            ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left');
+
         /*
         foreach ([ 'name'] as $key) {
             if (isset($get[$key]) && $get[$key] !== '') {
                 $db->where('a.'.$key, 'like', "%{$get[$key]}%");
             }
         }*/
-        /*
+
+
         foreach ([ 'type_id'] as $key) {
             if (isset($get[$key]) && $get[$key] !== '') {
 
                 if($get[$key]>0){
-                    $db->where('a.'.$key, '=', "{$get[$key]}");
+                    //$db->where('a.'.$key, '=', "{$get[$key]}");
+                    $map[]=['exp','FIND_IN_SET('.$get[$key].',a.type_ids)'];
+                    $db->where($map);
                 }
 
             }
-        }*/
+        }
+        $db->group('a.id');
         $db->order('a.id asc');
 
         $where = [
