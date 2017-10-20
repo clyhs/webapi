@@ -36,11 +36,9 @@ class Comment extends BaseAdmin{
     {
         foreach ($data as &$vo) {
             $vo['ids'] = join(',', ToolService::getArrSubIds($data, $vo['id']));
-
             if($vo['type_id'] == 11){
-                
+                $vo['title'] = Db::name('television')->where(['id' => $vo['uid']])->column('name');
             }
-
         }
         $data = ToolService::arr2table($data);
     }
