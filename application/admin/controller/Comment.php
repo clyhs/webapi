@@ -39,6 +39,9 @@ class Comment extends BaseAdmin{
             if($vo['type_id'] == 11){
                 $vo['title'] = Db::name('television')->where(['id' => $vo['uid']])->value('name');
             }
+            if($vo['replyname'] == null ){
+                $vo['replyname'] = '--';
+            }
         }
         $data = ToolService::arr2table($data);
     }
