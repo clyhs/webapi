@@ -24,7 +24,6 @@ class Television extends Rest{
             'page'=>$page
         ];
         $map[]=['exp','FIND_IN_SET('.$typeId.',type_ids)'];
-
         $lists = Db::name("television")->where($map)->order('id asc')
             ->paginate($pageSize,false,$options);
 
