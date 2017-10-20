@@ -23,12 +23,24 @@ class Television extends Rest{
         $options=[
             'page'=>$page
         ];
+        /*
         $map[]=['exp','FIND_IN_SET('.$typeId.',type_ids)'];
         $lists = Db::name("television")->where($map)->order('id asc')
+            ->paginate($pageSize,false,$options);*/
+
+
+        $map[]=['exp','FIND_IN_SET('.$typeId.',a.type_ids)'];
+        $lists = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames')
+            ->table("t_television")
+            ->alias('a')
+            ->join(' t_region b ',' a.country = b.code ','left')
+            ->join(' t_region c ',' a.province = c.code ','left')
+            ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
+            ->where($map)
+            ->group('a.id')
+            ->order('a.id asc')
             ->paginate($pageSize,false,$options);
 
-        //$sql = 'select * from t_television where FIND_IN_SET('.$typeId.',type_ids) order by id asc limit '.$startRow.',15';
-        //$list =Db::query($sql);
         return json($lists);
     }
 
