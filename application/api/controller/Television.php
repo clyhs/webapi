@@ -80,7 +80,12 @@ class Television extends Rest{
             ->paginate($pageSize,false,$options);
 
 
-        return json($lists->all());
+        $result = [
+            "code"=>"10000",
+            "desc"=>"",
+            "data"=>$lists->all()
+        ];
+        return json($result);
 
     }
 
