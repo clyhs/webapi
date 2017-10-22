@@ -140,9 +140,9 @@ class Television extends Rest{
             ->order('a.id asc')
             ->limit(4)->select();
         $result_array = [
-            "hot"=>$lists_hot,
-            "recommend"=>$lists_recommend,
-            "new"=>$lists_new
+            "hots"=>$lists_hot,
+            "recommends"=>$lists_recommend,
+            "news"=>$lists_new
         ];
         $result = [
             "code"=>"10000",
