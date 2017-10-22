@@ -83,4 +83,55 @@ class Television extends Rest{
         return json($lists->all());
 
     }
+
+
+    public function getTvForIndex(){
+
+        $hot=array(
+            "is_hot"=>1
+        );
+        $recommend=array(
+            "is_recommend"=>1
+        );
+        $new=array(
+            "is_new"=>1
+        );
+
+        $lists_hot = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames')
+            ->table("t_television")
+            ->alias('a')
+            ->join(' t_region b ',' a.country = b.code ','left')
+            ->join(' t_region c ',' a.province = c.code ','left')
+            ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
+            ->where($hot)
+            ->group('a.id')
+            ->order('a.id asc')
+            ->limit(4)->all();
+        $lists_new = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames')
+            ->table("t_television")
+            ->alias('a')
+            ->join(' t_region b ',' a.country = b.code ','left')
+            ->join(' t_region c ',' a.province = c.code ','left')
+            ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
+            ->where($new)
+            ->group('a.id')
+            ->order('a.id asc')
+            ->limit(4)->all();
+        $lists_recommend = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames')
+            ->table("t_television")
+            ->alias('a')
+            ->join(' t_region b ',' a.country = b.code ','left')
+            ->join(' t_region c ',' a.province = c.code ','left')
+            ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
+            ->where($recommend)
+            ->group('a.id')
+            ->order('a.id asc')
+            ->limit(4)->all();
+        $result = [
+            "hot"=>$lists_hot,
+            "recommend"=>$lists_recommend,
+            "new"=>$lists_new
+        ];
+        return json($result);
+    }
 }
