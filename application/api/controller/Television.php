@@ -36,7 +36,14 @@ class Television extends Rest{
             ->order('a.id asc')
             ->paginate($pageSize,false,$options);
 
-        return json($lists->all());
+        $result = [
+            "code"=>"10000",
+            "desc"=>"",
+            "data"=>$lists->all()
+        ];
+        return json($result);
+
+
     }
 
     public function getTvByProperty($page = 1,$pageSize = 15,$typeId=0){
