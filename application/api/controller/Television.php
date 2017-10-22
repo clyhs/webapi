@@ -106,7 +106,7 @@ class Television extends Rest{
             ->where($hot)
             ->group('a.id')
             ->order('a.id asc')
-            ->limit(4)->all();
+            ->limit(4)->select();
         $lists_new = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames')
             ->table("t_television")
             ->alias('a')
@@ -116,7 +116,7 @@ class Television extends Rest{
             ->where($new)
             ->group('a.id')
             ->order('a.id asc')
-            ->limit(4)->all();
+            ->limit(4)->select();
         $lists_recommend = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames')
             ->table("t_television")
             ->alias('a')
@@ -126,7 +126,7 @@ class Television extends Rest{
             ->where($recommend)
             ->group('a.id')
             ->order('a.id asc')
-            ->limit(4)->all();
+            ->limit(4)->select();
         $result = [
             "hot"=>$lists_hot,
             "recommend"=>$lists_recommend,
