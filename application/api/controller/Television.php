@@ -139,10 +139,15 @@ class Television extends Rest{
             ->group('a.id')
             ->order('a.id asc')
             ->limit(4)->select();
-        $result = [
+        $result_array = [
             "hot"=>$lists_hot,
             "recommend"=>$lists_recommend,
             "new"=>$lists_new
+        ];
+        $result = [
+            "code"=>"10000",
+            "desc"=>"",
+            "data"=>$result_array
         ];
         return json($result);
     }
