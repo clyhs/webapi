@@ -91,8 +91,9 @@ class User extends BaseApiRest{
 
     public function profile(){
 
-
         $file = Image::open(Request::instance()->file('profile'));
+
+        $ext = sysconf('filemimes')[$file->mime()];
         $md51 = join('/',str_split(md5(mt_rand(10000,99999)),16));
         $md52 = join('/',str_split(md5(mt_rand(10000,99999)),16));
         $filePath = 'static' . DS . 'upload'  .DS.$md51.$md52;
@@ -101,13 +102,12 @@ class User extends BaseApiRest{
         }
         $filePath = $filePath.".jpg";
         $file->save($filePath);
-
         $fileurl = FileService::getBaseUriLocal().$md51.$md52.".jpg";
-
         $data = [
             "url"=>$fileurl,
             "size"=>$file->size(),
-            "mine"=>$file->mime()
+            "mine"=>$file->mime(),
+            "ext"=>$ext
         ];
         return json(["code"=>10000,"desc"=>"上传成功","data"=>$data]);
 

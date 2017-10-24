@@ -247,5 +247,13 @@ return [
         '4'=>'电影',
         '5'=>'央视',
         '0'=>'其它'
+    ],
+
+    'filemimes' =>[
+        'image/jpeg'=>'jpg',
+        'image/gif'=>'gif',
+        'image/png'=>'png'
     ]
+
+
 ];
