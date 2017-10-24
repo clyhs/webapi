@@ -18,12 +18,16 @@ class User extends BaseApiRest{
     public $table = 'user';
 
     public function register(){
-        return $this->_form($this->table, 'form');
+        return $this->_form($this->table);
     }
 
     protected function _form_filter(&$vo)
     {
 
+    }
+
+    protected function _form_result(&$data){
+        return json(["code"=>10000,"desc"=>"success"]);
     }
 
     public function getAllUsers(){

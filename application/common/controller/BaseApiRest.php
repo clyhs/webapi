@@ -17,20 +17,10 @@ class BaseApiRest extends Rest{
 
     public $table;
 
-    protected function _form($dbQuery = null, $tplFile = '', $pkField = '', $where = [], $extendData = [])
+    protected function _form($dbQuery = null,  $pkField = '', $where = [], $extendData = [])
     {
         $db = is_null($dbQuery) ? Db::name($this->table) : (is_string($dbQuery) ? Db::name($dbQuery) : $dbQuery);
         $pk = empty($pkField) ? ($db->getPk() ? $db->getPk() : 'id') : $pkField;
-        $pkValue = $this->request->request($pk, isset($where[$pk]) ? $where[$pk] : (isset($extendData[$pk]) ? $extendData[$pk] : null));
-
-        // 非POST请求, 获取数据并显示表单页面
-        if (!$this->request->isPost()) {
-            $vo = ($pkValue !== null) ? array_merge((array)$db->where($pk, $pkValue)->where($where)->find(), $extendData) : $extendData;
-            if (false !== $this->_callback('_form_filter', $vo)) {
-                return $this->fetch($tplFile, ['vo' => $vo]);
-            }
-            return $vo;
-        }
 
         $data = array_merge($this->request->post(), $extendData);
         if (false !== $this->_callback('_form_filter', $data)) {
