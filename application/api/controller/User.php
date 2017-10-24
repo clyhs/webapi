@@ -96,6 +96,10 @@ class User extends BaseApiRest{
 
         try{
 
+            if(!isset(Request::instance()->file('profile'))){
+                return json(["code"=>20001,"desc"=>"上传失败","data"=>[]]);
+            }
+
             $file = Image::open(Request::instance()->file('profile'));
             $filemimes = explode('|',Config::get('filemime'));
             $data = [];
