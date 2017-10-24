@@ -99,6 +99,13 @@ class User extends BaseApiRest{
                 return json(["code"=>20001,"desc"=>"上传失败","data"=>[]]);
             }
 
+            if(empty(Request::instance()->file('profile'))){
+                return json(["code"=>20001,"desc"=>"上传失败","data"=>[]]);
+            }else{
+                $image = Request::instance()->file('profile');
+                return json(["code"=>1000,"desc"=>"上传成功","data"=>['type'=>$image->type()]]);
+            }
+            /*
             $file = Image::open(Request::instance()->file('profile'));
             $filemimes = explode('|',Config::get('filemime'));
             $data = [];
@@ -125,8 +132,9 @@ class User extends BaseApiRest{
                 "ext"=>$ext
             ];
             return json(["code"=>10000,"desc"=>"上传成功","data"=>$data]);
+            */
 
-        }catch(\Think\Exception $e){
+        }catch(\Exception $e){
             return json(["code"=>20001,"desc"=>"上传异常","data"=>[]]);
         }
 
