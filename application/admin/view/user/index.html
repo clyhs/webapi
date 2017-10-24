@@ -62,6 +62,7 @@
                 <input data-none-auto="" data-check-target='.list-check-box' type='checkbox'/>
             </th>
             <th class='text-left'>用户账号</th>
+            <th class='text-left'>头像</th>
             <th class='text-left'>手机号</th>
             <th class='text-left'>电子邮箱</th>
             <th class='text-left'>登录次数</th>
@@ -78,6 +79,9 @@
             </td>
             <td class='text-left nowrap'>
                 {$vo.username}
+            </td>
+            <td class='text-left nowrap'>
+                <img src="{$vo.profile}" width="40px" height="40px" />
             </td>
             <td class='text-left nowrap'>
                 {$vo.phone|default="<span class='color-desc'>还没有设置手机号</span>"}
