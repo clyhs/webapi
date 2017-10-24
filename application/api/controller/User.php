@@ -95,6 +95,11 @@ class User extends BaseApiRest{
 
         try{
 
+            $id = empty(Request::instance()->param('id'))?"":Request::instance()->param('id');
+
+            if(empty($id)){
+                return json(["code"=>20001,"desc"=>"ID不能为空","data"=>[]]);
+            }
             if(empty(Request::instance()->file())){
                 return json(["code"=>20001,"desc"=>"上传失败,请选择文件上传","data"=>[]]);
             }
@@ -126,12 +131,20 @@ class User extends BaseApiRest{
                 $file->save($filePath);
                 $fileurl = FileService::getBaseUriLocal().$md51.$md52.".".$ext;
                 $data = [
-                    "url"=>$fileurl,
-                    "size"=>$file->size(),
-                    "mine"=>$file->mime(),
-                    "ext"=>$ext
+                    "id"=>$id,
+                    "profile"=>$fileurl
                 ];
-                return json(["code"=>10000,"desc"=>"上传成功","data"=>$data]);
+
+                $db = Db::name($this->table);
+                $pk = $db->getPk() ? $db->getPk() : 'id';
+                $result = DataService::save($db, $data, $pk, []);
+
+                if($result !== false){
+                    return json(["code"=>10000,"desc"=>"上传成功","data"=>$data]);
+                }else{
+                    return json(["code"=>20001,"desc"=>"更新失败","data"=>$data]);
+                }
+                
             }
 
         }catch(\Exception $e){
