@@ -24,23 +24,33 @@ class User extends BaseApiRest{
         $db = Db::name($this->table);
         $pk = $db->getPk() ? $db->getPk() : 'id';
         $username = empty(Request::instance()->param('username'))?"":Request::instance()->param('username');
-        //$mail = Request::instance()->param('mail');
+        $mail = empty(Request::instance()->param('mail'))?"":Request::instance()->param('mail');
+        $password = empty(Request::instance()->param('password'))?"":Request::instance()->param('password');
+        $phone = empty(Request::instance()->param('phone'))?"":Request::instance()->param('phone');
 
-        if(empty($username)){
+
+        if(empty($username) || empty($mail) || empty($password) || empty($phone)){
             return json(["code"=>20001,"desc"=>"参数出错"]);
         }
 
         $user = $db->where('username', $username)->find();
         if(empty($user)){
-            if(true){
-                $data = array_merge(Request::instance()->param(), []);
-                $result = DataService::save($db, $data, $pk, []);
-                if ($result !== false) {
-                    return json(["code"=>10000,"desc"=>"success"]);
-                }else{
-                    return json(["code"=>20000,"desc"=>"添加失败"]);
-                }
+
+            $data = [
+                "username"=>$username,
+                "password"=>md5($password),
+                "mail"=>$mail,
+                "phone"=>$phone,
+                "status"=>1,
+                "create_at"=>new \DateTime()
+            ];
+            $result = DataService::save($db, $data, $pk, []);
+            if ($result !== false) {
+                return json(["code"=>10000,"desc"=>"success"]);
+            }else{
+                return json(["code"=>20000,"desc"=>"添加失败"]);
             }
+
         }else{
             return json(["code"=>20000,"desc"=>"用户已经存在"]);
         }
