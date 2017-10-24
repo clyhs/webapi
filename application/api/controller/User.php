@@ -56,6 +56,31 @@ class User extends BaseApiRest{
 
     }
 
+    public function login(){
+        $db = Db::name($this->table);
+        $pk = $db->getPk() ? $db->getPk() : 'id';
+        $username = empty(Request::instance()->param('username'))?"":Request::instance()->param('username');
+        $password = empty(Request::instance()->param('password'))?"":Request::instance()->param('password');
+        if(empty($username) || empty($password) ){
+            return json(["code"=>20001,"desc"=>"参数出错"]);
+        }
+        $user = $db->where('username', $username)->find();
+        if(empty($user)){
+            return json(["code"=>20000,"desc"=>"登录账号不存在，请重新输入!"]);
+        }
+        if(($user['password'] !== md5($password))){
+            return json(["code"=>20000,"desc"=>"登录密码与账号不匹配，请重新输入!"]);
+        }
+        if(empty($user['status'])){
+            return json(["code"=>20000,"desc"=>"账号已经被禁用，请联系管理!"]);
+        }
+        // 更新登录信息
+        $data = ['login_at' => ['exp', 'now()'], 'login_num' => ['exp', 'login_num+1']];
+        Db::name('user')->where(['id' => $user['id']])->update($data);
+
+        return json(["code"=>20000,"desc"=>"登录成功","data"=>$user]);
+    }
+
 
 
     public function getAllUsers(){
