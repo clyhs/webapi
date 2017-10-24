@@ -8,7 +8,6 @@
 
 namespace app\api\controller;
 
-use think\Request;
 use think\controller\Rest;
 use app\admin\model\User as UserModel;
 use app\common\controller\BaseApiRest;
