@@ -91,7 +91,7 @@ class User extends BaseApiRest{
 
         $file = Request::instance()->param('profile');
 
-        return json(["code"=>10000,"desc"=>"上传成功","data"=>$file]);
+        return json(["code"=>10000,"desc"=>"上传成功","data"=>$file->getName()]);
 
     }
 
