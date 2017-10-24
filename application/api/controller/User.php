@@ -133,34 +133,6 @@ class User extends BaseApiRest{
                 ];
                 return json(["code"=>10000,"desc"=>"上传成功","data"=>$data]);
             }
-            /*
-            $file = Image::open(Request::instance()->file('profile'));
-            $filemimes = explode('|',Config::get('filemime'));
-            $data = [];
-            if(empty($file)){
-                return json(["code"=>20001,"desc"=>"上传失败","data"=>$data]);
-            }
-            if(!in_array($file->mime(),$filemimes)){
-                return json(["code"=>20001,"desc"=>"类型错误","data"=>$data]);
-            }
-            $ext = Config::get('filemimes')[$file->mime()];
-            $md51 = join('/',str_split(md5(mt_rand(10000,99999)),16));
-            $md52 = join('/',str_split(md5(mt_rand(10000,99999)),16));
-            $filePath = 'static' . DS . 'upload'  .DS.$md51.$md52;
-            if(!file_exists($filePath)){
-                mkdir($filePath,'0755', true);
-            }
-            $filePath = $filePath.".".$ext;
-            $file->save($filePath);
-            $fileurl = FileService::getBaseUriLocal().$md51.$md52.".".$ext;
-            $data = [
-                "url"=>$fileurl,
-                "size"=>$file->size(),
-                "mine"=>$file->mime(),
-                "ext"=>$ext
-            ];
-            return json(["code"=>10000,"desc"=>"上传成功","data"=>$data]);
-            */
 
         }catch(\Exception $e){
             return json(["code"=>20001,"desc"=>"上传异常","data"=>[]]);
