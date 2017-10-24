@@ -96,7 +96,7 @@ class User extends BaseApiRest{
 
         try{
 
-            if(empty(Request::instance()->isFile())){
+            if(empty(Request::instance()->file())){
                 return json(["code"=>20001,"desc"=>"上传失败","data"=>[]]);
             }
 
