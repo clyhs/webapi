@@ -13,6 +13,7 @@ use think\Db;
 use think\db\Query;
 use think\Image;
 use app\common\service\DataService;
+use app\common\service\FileService;
 use app\admin\model\User as UserModel;
 use app\common\controller\BaseApiRest;
 
@@ -92,25 +93,22 @@ class User extends BaseApiRest{
 
 
         $file = Image::open(Request::instance()->file('profile'));
-
         $md51 = join('/',str_split(md5(mt_rand(10000,99999)),16));
         $md52 = join('/',str_split(md5(mt_rand(10000,99999)),16));
-
         $filePath = 'static' . DS . 'upload'  .DS.$md51.$md52;
-
         if(!file_exists($filePath)){
             mkdir($filePath,'0755', true);
         }
         $filePath = $filePath.".jpg";
-
         $file->save($filePath);
 
+        $fileurl = FileService::getBaseUriLocal().$md51.$md52.".jpg";
+
         $data = [
-            "url"=>$filePath,
+            "url"=>$fileurl,
             "size"=>$file->size(),
             "mine"=>$file->mime()
         ];
-
         return json(["code"=>10000,"desc"=>"上传成功","data"=>$data]);
 
     }
