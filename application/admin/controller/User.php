@@ -65,6 +65,11 @@ class User extends BaseAdmin{
         return $this->_form($this->table, 'form');
     }
 
+    public function profile()
+    {
+        return $this->_form($this->table, 'form');
+    }
+
     /**
      * 用户密码修改
      */

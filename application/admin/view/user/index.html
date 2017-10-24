@@ -103,6 +103,10 @@
                 <span class="text-explode">|</span>
                 <a data-modal='{:url("$classuri/edit")}?id={$vo.id}' href="javascript:void(0)">编辑</a>
                 {/if}
+                {if auth("$classuri/profile")}
+                <span class="text-explode">|</span>
+                <a data-modal='{:url("$classuri/profile")}?id={$vo.id}' href="javascript:void(0)">头像</a>
+                {/if}
                 {if auth("$classuri/auth")}
                 <span class="text-explode">|</span>
                 <a data-modal='{:url("$classuri/auth")}?id={$vo.id}' href="javascript:void(0)">授权</a>

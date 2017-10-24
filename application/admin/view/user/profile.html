@@ -1,0 +1,32 @@
+<form class="layui-form layui-box" style='padding:25px 30px 20px 0' action="__SELF__" data-auto="true" method="post">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">头像</label>
+        <div class="layui-input-block">
+            <div style="position:relative">
+                <div class="uploadimage"><input name="profile" type="hidden" value='{$vo.profile|default=""}'></div>
+                <a data-file="one" data-field="icon" data-type="png,jpg,jpeg" data-uptype="local" href="javascript:void(0)" class="uploadbutton">上传头像</a>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="layui-form-item text-center">
+        {if isset($vo['id'])}<input type='hidden' value='{$vo.id}' name='id'/>{/if}
+        <button class="layui-btn" type='submit'>保存数据</button>
+        <button class="layui-btn layui-btn-danger" type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
+    </div>
+
+</form>
+
+<script>
+
+    require(['jquery'], function () {
+        $('[name="profile"]').on('change', function () {
+            $(this).parent().attr('data-tips-image', this.value).css('backgroundImage', 'url(' + this.value + ')');
+        });
+
+    });
+
+</script>
