@@ -99,10 +99,10 @@ class User extends BaseApiRest{
                 return json(["code"=>20001,"desc"=>"上传失败","data"=>[]]);
             }
 
-            if(empty(Request::instance()->param('profile'))){
+            if(empty(Request::instance()->file('profile'))){
                 return json(["code"=>20001,"desc"=>"上传失败","data"=>[]]);
             }else{
-                $image = Request::instance()->file('profile');
+
                 return json(["code"=>1000,"desc"=>"上传成功","data"=>[]]);
             }
             /*
