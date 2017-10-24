@@ -18,7 +18,6 @@
     "require": {
         "php": ">=5.4.0",
         "topthink/framework": "~5.0.0",
-        //"topthink/think-image": "^1.0.7",
         "zoujingli/ip2region": "^1.0",
         "qiniu/php-sdk": "^7.0",
         "aliyuncs/oss-sdk-php": "^2.2"
