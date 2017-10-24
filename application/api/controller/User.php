@@ -126,7 +126,7 @@ class User extends BaseApiRest{
             ];
             return json(["code"=>10000,"desc"=>"上传成功","data"=>$data]);
 
-        }catch(\Exception $e){
+        }catch(\Think\Exception $e){
             return json(["code"=>20001,"desc"=>"上传异常","data"=>[]]);
         }
 
