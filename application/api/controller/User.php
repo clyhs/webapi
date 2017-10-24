@@ -96,7 +96,7 @@ class User extends BaseApiRest{
         $md51 = join('/',str_split(md5(mt_rand(10000,99999)),16));
         $md52 = join('/',str_split(md5(mt_rand(10000,99999)),16));
 
-        $filePath = 'static' . DS . 'upload'  .$md51.$md52;
+        $filePath = 'static' . DS . 'upload'  .DS.$md51.$md52;
 
         if(!file_exists($filePath)){
             mkdir($filePath,'0755', true);
