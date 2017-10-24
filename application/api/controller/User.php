@@ -106,7 +106,6 @@ class User extends BaseApiRest{
         $file->save($filePath);
 
         $data = [
-            "type"=>$file->type(),
             "url"=>$filePath,
             "size"=>$file->size(),
             "mine"=>$file->mime()
