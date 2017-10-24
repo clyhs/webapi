@@ -97,7 +97,7 @@ class User extends BaseApiRest{
         //$md5 = str_split($this->request->post('md5'), 16);
 
         $data = [
-            "name"=>$file->name(),
+
             //"md5"=>$file->md5(),
             "size"=>$file->size(),
             "mine"=>$file->mime()
