@@ -23,7 +23,13 @@ class User extends BaseApiRest{
 
         $db = Db::name($this->table);
         $pk = $db->getPk() ? $db->getPk() : 'id';
-        $username = Request::instance()->param('username');
+        $username = empty(Request::instance()->param('username'))?"":Request::instance()->param('username');
+        //$mail = Request::instance()->param('mail');
+
+        if(empty($username)){
+            return json(["code"=>20001,"desc"=>"参数出错"]);
+        }
+
         $user = $db->where('username', $username)->find();
         if(empty($user)){
             if(true){
