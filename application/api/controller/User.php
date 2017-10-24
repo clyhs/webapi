@@ -12,6 +12,7 @@ use think\Request;
 use think\Db;
 use think\db\Query;
 use think\Image;
+use think\Config;
 use app\common\service\DataService;
 use app\common\service\FileService;
 use app\admin\model\User as UserModel;
@@ -92,14 +93,14 @@ class User extends BaseApiRest{
     public function profile(){
 
         $file = Image::open(Request::instance()->file('profile'));
-
+        /*
         $filemimes = [
             'image/jpeg'=>'jpg',
             'image/gif'=>'gif',
             'image/png'=>'png'
-        ];
+        ];*/
 
-        $ext = $filemimes[$file->mime()];
+        $ext = Config::get('filemimes')[$file->mime()];
         $md51 = join('/',str_split(md5(mt_rand(10000,99999)),16));
         $md52 = join('/',str_split(md5(mt_rand(10000,99999)),16));
         $filePath = 'static' . DS . 'upload'  .DS.$md51.$md52;
