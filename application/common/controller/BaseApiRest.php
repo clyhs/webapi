@@ -8,6 +8,7 @@
 
 namespace app\common\controller;
 
+use think\Request;
 use think\db\Query;
 use think\controller\Rest;
 use think\Db;
