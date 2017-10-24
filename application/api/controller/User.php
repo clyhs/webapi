@@ -23,11 +23,11 @@ class User extends BaseApiRest{
 
         $db = Db::name($this->table);
         $pk = $db->getPk() ? $db->getPk() : 'id';
-        $username = $this->request->post('username', '', 'trim');
+        $username = Request::instance()->param('username');
         $user = $db->where('username', $username)->find();
         if(empty($user)){
             if($this->request->isPost()){
-                $data = array_merge($this->request->post(), []);
+                $data = array_merge(Request::instance()->param(), []);
                 $result = DataService::save($db, $data, $pk, []);
                 if ($result !== false) {
                     return json(["code"=>10000,"desc"=>"success"]);
