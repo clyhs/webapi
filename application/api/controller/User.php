@@ -11,8 +11,20 @@ namespace app\api\controller;
 use think\Request;
 use think\controller\Rest;
 use app\admin\model\User as UserModel;
+use app\common\controller\BaseApiRest;
 
-class User extends Rest{
+class User extends BaseApiRest{
+
+    public $table = 'user';
+
+    public function register(){
+        return $this->_form($this->table, 'form');
+    }
+
+    protected function _form_filter(&$vo)
+    {
+
+    }
 
     public function getAllUsers(){
         $model = new UserModel();
