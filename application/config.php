@@ -253,7 +253,9 @@ return [
         'image/jpeg'=>'jpg',
         'image/gif'=>'gif',
         'image/png'=>'png'
-    ]
+    ],
+
+    'filemime' => 'image/jpeg|image/gif|image/png',
 
 
 ];

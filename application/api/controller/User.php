@@ -93,13 +93,14 @@ class User extends BaseApiRest{
     public function profile(){
 
         $file = Image::open(Request::instance()->file('profile'));
-        /*
-        $filemimes = [
-            'image/jpeg'=>'jpg',
-            'image/gif'=>'gif',
-            'image/png'=>'png'
-        ];*/
-
+        $filemimes = str_split('|',Config::get('filemime'));
+        $data = [];
+        if(empty($file)){
+            return json(["code"=>20001,"desc"=>"上传失败","data"=>$data]);
+        }
+        if(!in_array($file->mime(),$filemimes)){
+            return json(["code"=>20001,"desc"=>"类型错误","data"=>$data]);
+        }
         $ext = Config::get('filemimes')[$file->mime()];
         $md51 = join('/',str_split(md5(mt_rand(10000,99999)),16));
         $md52 = join('/',str_split(md5(mt_rand(10000,99999)),16));
@@ -107,9 +108,9 @@ class User extends BaseApiRest{
         if(!file_exists($filePath)){
             mkdir($filePath,'0755', true);
         }
-        $filePath = $filePath.".jpg";
+        $filePath = $filePath.".".$ext;
         $file->save($filePath);
-        $fileurl = FileService::getBaseUriLocal().$md51.$md52.".jpg";
+        $fileurl = FileService::getBaseUriLocal().$md51.$md52.".".$ext;
         $data = [
             "url"=>$fileurl,
             "size"=>$file->size(),
