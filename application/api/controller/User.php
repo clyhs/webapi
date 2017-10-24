@@ -93,10 +93,15 @@ class User extends BaseApiRest{
 
         $file = Image::open(Request::instance()->file('profile'));
 
-        $md51 = md5(mt_rand(10000,99999));
-        $md52 = md5(mt_rand(10000,99999));
+        $md51 = str_split(md5(mt_rand(10000,99999)),16);
+        $md52 = str_split(md5(mt_rand(10000,99999)),16);
 
-        $filePath = 'static' . DS . 'upload' . DS .$md51.'/'.$md52.".jpg";
+        $filePath = 'static' . DS . 'upload' . DS .$md51.'/'.$md52;
+
+        if(!file_exists($filePath)){
+            mkdir($filePath);
+        }
+        $filePath = $filePath.".jpg";
 
         $file->save($filePath);
 
