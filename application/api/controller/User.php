@@ -41,8 +41,7 @@ class User extends BaseApiRest{
                 "password"=>md5($password),
                 "mail"=>$mail,
                 "phone"=>$phone,
-                "status"=>1,
-                "create_at"=>new \DateTime()
+                "status"=>1
             ];
             $result = DataService::save($db, $data, $pk, []);
             if ($result !== false) {
