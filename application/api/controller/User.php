@@ -19,6 +19,9 @@ class User extends BaseApiRest{
 
     public $table = 'user';
 
+    /**
+     * @return mixed
+     */
     public function register(){
 
         $db = Db::name($this->table);
@@ -56,6 +59,9 @@ class User extends BaseApiRest{
 
     }
 
+    /**
+     * @return mixed
+     */
     public function login(){
         $db = Db::name($this->table);
         $pk = $db->getPk() ? $db->getPk() : 'id';
@@ -79,6 +85,14 @@ class User extends BaseApiRest{
         Db::name('user')->where(['id' => $user['id']])->update($data);
 
         return json(["code"=>20000,"desc"=>"登录成功","data"=>$user]);
+    }
+
+    public function profile(){
+
+        $file = Request::instance()->param('profile');
+
+        return json(["code"=>10000,"desc"=>"上传成功","data"=>$file]);
+
     }
 
 
