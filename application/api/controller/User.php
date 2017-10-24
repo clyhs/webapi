@@ -26,7 +26,7 @@ class User extends BaseApiRest{
         $username = Request::instance()->param('username');
         $user = $db->where('username', $username)->find();
         if(empty($user)){
-            if($this->request->isPost()){
+            if(true){
                 $data = array_merge(Request::instance()->param(), []);
                 $result = DataService::save($db, $data, $pk, []);
                 if ($result !== false) {
