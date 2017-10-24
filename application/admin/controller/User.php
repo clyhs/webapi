@@ -67,7 +67,7 @@ class User extends BaseAdmin{
 
     public function profile()
     {
-        return $this->_form($this->table, 'form');
+        return $this->_form($this->table, 'profile');
     }
 
     /**
