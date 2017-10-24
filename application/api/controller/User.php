@@ -90,10 +90,10 @@ class User extends BaseApiRest{
 
     public function profile(){
 
-        
+
         $file = Image::open(Request::instance()->file('profile'));
 
-        return json(["code"=>10000,"desc"=>"上传成功","data"=>$file->getName()]);
+        return json(["code"=>10000,"desc"=>"上传成功","data"=>$file]);
 
     }
 
