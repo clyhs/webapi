@@ -99,7 +99,7 @@ class User extends BaseApiRest{
         $filePath = 'static' . DS . 'upload'  .$md51.$md52;
 
         if(!file_exists($filePath)){
-            mkdir($filePath);
+            mkdir($filePath,'0755', true);
         }
         $filePath = $filePath.".jpg";
 
