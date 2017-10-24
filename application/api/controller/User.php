@@ -96,12 +96,12 @@ class User extends BaseApiRest{
         $md51 = md5(mt_rand(10000,99999));
         $md52 = md5(mt_rand(10000,99999));
 
-        $filePath = 'static' . DS . 'upload' . DS .$md51.$md52.".jpg";
+        $filePath = 'static' . DS . 'upload' . DS .$md51.'/'.$md52.".jpg";
 
         $file->save($filePath);
 
         $data = [
-
+            "type"=>$file->type(),
             "url"=>$filePath,
             "size"=>$file->size(),
             "mine"=>$file->mime()
