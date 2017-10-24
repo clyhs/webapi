@@ -8,12 +8,11 @@
 
 namespace app\api\controller;
 
-use Exception;
+
 use think\Request;
 use think\Db;
 use think\db\Query;
 use think\Image;
-use think\image\Exception as ImageException;
 use think\Config;
 use app\common\service\DataService;
 use app\common\service\FileService;
@@ -127,7 +126,7 @@ class User extends BaseApiRest{
             ];
             return json(["code"=>10000,"desc"=>"上传成功","data"=>$data]);
 
-        }catch(Exception $e){
+        }catch(\Exception $e){
             return json(["code"=>20001,"desc"=>"上传异常","data"=>[]]);
         }
 
