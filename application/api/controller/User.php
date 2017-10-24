@@ -11,6 +11,7 @@ namespace app\api\controller;
 use think\Request;
 use think\Db;
 use think\db\Query;
+use think\Image;
 use app\common\service\DataService;
 use app\admin\model\User as UserModel;
 use app\common\controller\BaseApiRest;
@@ -89,7 +90,8 @@ class User extends BaseApiRest{
 
     public function profile(){
 
-        $file = Request::instance()->param('profile');
+        $image = new Image();
+        $file = $image->open(Request::instance()->param('profile'));
 
         return json(["code"=>10000,"desc"=>"上传成功","data"=>$file->getName()]);
 
