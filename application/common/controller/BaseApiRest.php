@@ -8,10 +8,10 @@
 
 namespace app\common\controller;
 
-use think\Request;
-use think\db\Query;
+
 use think\controller\Rest;
 use think\Db;
+use think\db\Query;
 use app\common\service\DataService;
 
 class BaseApiRest extends Rest{
