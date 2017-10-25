@@ -144,7 +144,7 @@ class User extends BaseApiRest{
                 }else{
                     return json(["code"=>20001,"desc"=>"更新失败","data"=>$data]);
                 }
-                
+
             }
 
         }catch(\Exception $e){

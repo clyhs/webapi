@@ -46,6 +46,14 @@ class Television extends Rest{
 
     }
 
+    /**
+     *
+     * 根据属性获取电视台记录
+     * @param int $page
+     * @param int $pageSize
+     * @param int $typeId
+     * @return mixed
+     */
     public function getTvByProperty($page = 1,$pageSize = 15,$typeId=0){
 
         $where = array();
@@ -97,6 +105,10 @@ class Television extends Rest{
     }
 
 
+    /**
+     * APP首页数据
+     * @return mixed
+     */
     public function getTvForIndex(){
 
         $hot=array(
@@ -148,6 +160,44 @@ class Television extends Rest{
             "code"=>"10000",
             "desc"=>"",
             "data"=>$result_array
+        ];
+        return json($result);
+    }
+
+    /**获取用户历史 或者 关注的记录
+     * @param int $page
+     * @param int $pageSize
+     * @param $userId
+     * @param $typeId
+     * @return mixed
+     */
+    public function getTvByUserIdAndTypeId($page = 1,$pageSize = 15,$userId,$typeId){
+
+        $where = [
+            "e.user_id"=>$userId,
+            "e.type_id"=>$typeId
+        ];
+
+        $options=[
+            'page'=>$page
+        ];
+
+        $lists = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames')
+            ->table("t_television")
+            ->alias('a')
+            ->join(' t_region b ',' a.country = b.code ','left')
+            ->join(' t_region c ',' a.province = c.code ','left')
+            ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
+            ->join(' t_user_tv e','e.tv_id = a.id ')
+            ->where($where)
+            ->group('a.id')
+            ->order('a.id asc')
+            ->paginate($pageSize,false,$options);
+
+        $result = [
+            "code"=>"10000",
+            "desc"=>"",
+            "data"=>$lists->all()
         ];
         return json($result);
     }
