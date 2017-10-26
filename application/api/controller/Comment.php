@@ -25,7 +25,14 @@ class Comment extends Rest{
             ->where(" a.uid='$uid' and a.type_id='$typeId' and a.pid=0")
             ->order('a.id desc')
             ->paginate(15,false,$options);
-        return json($this->filterData($db));
+
+        $result = [
+            "code"=>10000,
+            "desc"=>"",
+            "data"=>$this->filterData($db)
+        ];
+
+        return json($result);
     }
 
     protected function filterData(&$db){
