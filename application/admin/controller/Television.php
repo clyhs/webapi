@@ -92,6 +92,13 @@ class Television extends BaseAdmin{
             if (isset($vo['type_ids']) && is_array($vo['type_ids'])) {
                 $vo['type_ids'] = join(',', $vo['type_ids']);
             }
+
+            if(isset($vo['icon']) && $vo['icon']!=""){
+                $info = getimagesize($vo['icon']);
+                $vo['icon_width'] = $info['width'];
+                $vo['icon_height'] = $info['heigth'];
+            }
+
         }
 
         if ($this->request->isGet()) {
