@@ -54,11 +54,11 @@ class User extends BaseApiRest{
             if ($result !== false) {
                 return json(["code"=>10000,"desc"=>"success"]);
             }else{
-                return json(["code"=>20000,"desc"=>"添加失败"]);
+                return json(["code"=>20001,"desc"=>"添加失败"]);
             }
 
         }else{
-            return json(["code"=>20000,"desc"=>"用户已经存在"]);
+            return json(["code"=>20001,"desc"=>"用户已经存在"]);
         }
 
     }
@@ -76,19 +76,19 @@ class User extends BaseApiRest{
         }
         $user = $db->where('username', $username)->find();
         if(empty($user)){
-            return json(["code"=>20000,"desc"=>"登录账号不存在，请重新输入!"]);
+            return json(["code"=>20001,"desc"=>"登录账号不存在，请重新输入!"]);
         }
         if(($user['password'] !== md5($password))){
-            return json(["code"=>20000,"desc"=>"登录密码与账号不匹配，请重新输入!"]);
+            return json(["code"=>20001,"desc"=>"登录密码与账号不匹配，请重新输入!"]);
         }
         if(empty($user['status'])){
-            return json(["code"=>20000,"desc"=>"账号已经被禁用，请联系管理!"]);
+            return json(["code"=>20001,"desc"=>"账号已经被禁用，请联系管理!"]);
         }
         // 更新登录信息
         $data = ['login_at' => ['exp', 'now()'], 'login_num' => ['exp', 'login_num+1']];
         Db::name('user')->where(['id' => $user['id']])->update($data);
 
-        return json(["code"=>20000,"desc"=>"登录成功","data"=>$user]);
+        return json(["code"=>10000,"desc"=>"登录成功","data"=>$user]);
     }
 
     public function profile(){
