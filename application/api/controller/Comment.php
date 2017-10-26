@@ -39,8 +39,9 @@ class Comment extends Rest{
 
         $lists = $db->all();
         foreach ($lists as $key => &$item) {
-            $sql = 'select a.*,b.username from t_comment a '.
+            $sql = 'select a.*,b.replayname,c.username from t_comment a '.
                 'left join t_user b on b.id=a.reply_id '.
+                'left join t_user c on c.id=a.user_id '.
                 'where a.pid='.$item['id'].' order by id asc';
             $childrens =Db::query($sql);
             $lists[$key]['childs'] = $childrens;
