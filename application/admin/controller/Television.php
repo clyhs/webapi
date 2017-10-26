@@ -95,8 +95,8 @@ class Television extends BaseAdmin{
 
             if(isset($vo['icon']) && $vo['icon']!=""){
                 $info = getimagesize($vo['icon']);
-                $vo['icon_width'] = $info['width'];
-                $vo['icon_height'] = $info['heigth'];
+                $vo['icon_width'] = $info['0'];
+                $vo['icon_height'] = $info['1'];
             }
 
         }
