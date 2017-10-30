@@ -11,8 +11,16 @@ namespace app\api\controller;
 use think\Request;
 use think\controller\Rest;
 use think\Db;
+use think\db\Query;
+use think\Image;
+use think\Config;
+use app\common\service\DataService;
+use app\common\service\FileService;
 
 class Television extends Rest{
+
+    public $table = 'user';
+
     /**
      * @param int $page
      * @param int $pageSize
@@ -200,5 +208,67 @@ class Television extends Rest{
             "data"=>$lists->all()
         ];
         return json($result);
+    }
+
+    public function uploadbg(){
+
+        try{
+
+            $id = empty(Request::instance()->param('id'))?"":Request::instance()->param('id');
+
+            if(empty($id)){
+                return json(["code"=>20001,"desc"=>"ID不能为空","data"=>[]]);
+            }
+            if(empty(Request::instance()->file())){
+                return json(["code"=>20001,"desc"=>"上传失败,请选择文件上传","data"=>[]]);
+            }
+
+            if(empty(Request::instance()->file('bg'))){
+                return json(["code"=>20001,"desc"=>"上传失败,参数不存在","data"=>[]]);
+            }else{
+                //$image = Request::instance()->file('profile');
+                $file = Image::open(Request::instance()->file('bg'));
+                $filemimes = explode('|',Config::get('filemime'));
+
+                if(empty($file)){
+                    return json(["code"=>20001,"desc"=>"上传失败,文件无法打开","data"=>[]]);
+                }
+
+                if(!in_array($file->mime(),$filemimes)){
+                    return json(["code"=>20001,"desc"=>"类型错误","data"=>[]]);
+                }
+
+                $ext = Config::get('filemimes')[$file->mime()];
+                $md51 = join('/',str_split(md5(mt_rand(10000,99999)),16));
+                $md52 = join('/',str_split(md5(mt_rand(10000,99999)),16));
+                $filePath = 'static' . DS . 'upload'  .DS.$md51.$md52;
+                if(!file_exists($filePath)){
+                    mkdir($filePath,'0755', true);
+                }
+
+                $filePath = $filePath.".".$ext;
+                $file->save($filePath);
+                $fileurl = FileService::getBaseUriLocal().$md51.$md52.".".$ext;
+                $data = [
+                    "id"=>$id,
+                    "bg"=>$fileurl
+                ];
+
+                $db = Db::name($this->table);
+                $pk = $db->getPk() ? $db->getPk() : 'id';
+                $result = DataService::save($db, $data, $pk, []);
+
+                if($result !== false){
+                    return json(["code"=>10000,"desc"=>"上传成功","data"=>$data]);
+                }else{
+                    return json(["code"=>20001,"desc"=>"更新失败","data"=>$data]);
+                }
+
+            }
+
+        }catch(\Exception $e){
+            return json(["code"=>20001,"desc"=>"上传异常","data"=>[]]);
+        }
+
     }
 }
