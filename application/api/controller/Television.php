@@ -19,7 +19,7 @@ use app\common\service\FileService;
 
 class Television extends Rest{
 
-    public $table = 'user';
+    public $table = 'television';
 
     /**
      * @param int $page
