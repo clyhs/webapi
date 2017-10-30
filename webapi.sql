@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50173
 File Encoding         : 65001
 
-Date: 2017-10-13 18:45:47
+Date: 2017-10-30 09:15:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -60,6 +60,8 @@ INSERT INTO `t_auth_node` VALUES ('1', 'admin/auth/edit');
 INSERT INTO `t_auth_node` VALUES ('1', 'admin/auth/forbid');
 INSERT INTO `t_auth_node` VALUES ('1', 'admin/auth/resume');
 INSERT INTO `t_auth_node` VALUES ('1', 'admin/auth/del');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/comment');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/comment/index');
 INSERT INTO `t_auth_node` VALUES ('1', 'admin/config');
 INSERT INTO `t_auth_node` VALUES ('1', 'admin/config/index');
 INSERT INTO `t_auth_node` VALUES ('1', 'admin/config/file');
@@ -69,6 +71,9 @@ INSERT INTO `t_auth_node` VALUES ('1', 'admin/dict/index');
 INSERT INTO `t_auth_node` VALUES ('1', 'admin/dict/add');
 INSERT INTO `t_auth_node` VALUES ('1', 'admin/dict/edit');
 INSERT INTO `t_auth_node` VALUES ('1', 'admin/dict/del');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/index');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/index/index');
+INSERT INTO `t_auth_node` VALUES ('1', 'admin/index/main');
 INSERT INTO `t_auth_node` VALUES ('1', 'admin/log');
 INSERT INTO `t_auth_node` VALUES ('1', 'admin/log/index');
 INSERT INTO `t_auth_node` VALUES ('1', 'admin/log/del');
@@ -122,15 +127,16 @@ CREATE TABLE `t_comment` (
   `bad` int(11) DEFAULT '0',
   `pid` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of t_comment
 -- ----------------------------
-INSERT INTO `t_comment` VALUES ('1', 'test1', '2017-10-13 15:25:06', '10000', '0', '3', '11', '1', '1', '0');
-INSERT INTO `t_comment` VALUES ('2', 'test2', '2017-10-13 15:25:42', '10000', '0', '3', '11', '0', '1', '0');
-INSERT INTO `t_comment` VALUES ('3', 'reply', '2017-10-13 15:26:10', '0', '10000', '3', '11', '1', '0', '1');
-INSERT INTO `t_comment` VALUES ('4', 'reply2', '2017-10-13 15:47:56', '0', '10000', '3', '11', '0', '1', '1');
+INSERT INTO `t_comment` VALUES ('1', 'test1', '2017-10-13 15:25:06', '10000', '0', '4', '11', '1', '1', '0');
+INSERT INTO `t_comment` VALUES ('2', 'test2', '2017-10-13 15:25:42', '10000', '0', '4', '11', '0', '1', '0');
+INSERT INTO `t_comment` VALUES ('3', 'reply', '2017-10-13 15:26:10', '0', '10000', '4', '11', '1', '0', '1');
+INSERT INTO `t_comment` VALUES ('4', 'reply2', '2017-10-13 15:47:56', '0', '10000', '4', '11', '0', '1', '1');
+INSERT INTO `t_comment` VALUES ('5', '你好', '2017-10-26 17:15:24', '10000', '10001', '4', '11', '0', '0', '1');
 
 -- ----------------------------
 -- Table structure for `t_config`
@@ -187,7 +193,7 @@ CREATE TABLE `t_dict` (
   `sort` int(11) DEFAULT NULL,
   `char` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of t_dict
@@ -196,14 +202,17 @@ INSERT INTO `t_dict` VALUES ('1', '频道类型', '0', '1000', 'CHANNEL');
 INSERT INTO `t_dict` VALUES ('2', '央视', '1', '100', 'CHANNEL');
 INSERT INTO `t_dict` VALUES ('3', '体育', '1', '200', 'CHANNEL');
 INSERT INTO `t_dict` VALUES ('4', '地方', '1', '300', 'CHANNEL');
-INSERT INTO `t_dict` VALUES ('5', '全部', '1', '999', 'CHANNEL');
+INSERT INTO `t_dict` VALUES ('5', '其它', '1', '999', 'CHANNEL');
 INSERT INTO `t_dict` VALUES ('6', '电影', '1', '400', 'CHANNEL');
 INSERT INTO `t_dict` VALUES ('7', '卫视', '1', '500', 'CHANNEL');
-INSERT INTO `t_dict` VALUES ('8', '热门', '1', '700', 'CHANNEL');
+INSERT INTO `t_dict` VALUES ('8', '新闻', '1', '700', 'CHANNEL');
 INSERT INTO `t_dict` VALUES ('9', '游戏', '1', '600', 'CHANNEL');
 INSERT INTO `t_dict` VALUES ('10', '主题类型', '0', '2000', 'SUBJECT');
 INSERT INTO `t_dict` VALUES ('11', '电视台', '10', '100', 'SUBJECT');
 INSERT INTO `t_dict` VALUES ('12', '贴子', '10', '200', 'SUBJECT');
+INSERT INTO `t_dict` VALUES ('13', '记录类型', '0', '3000', 'RECORD');
+INSERT INTO `t_dict` VALUES ('14', '关注', '13', '100', 'RECORD');
+INSERT INTO `t_dict` VALUES ('15', '历史', '13', '200', 'RECORD');
 
 -- ----------------------------
 -- Table structure for `t_log`
@@ -301,7 +310,7 @@ CREATE TABLE `t_node` (
   `create_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`),
   KEY `index_system_node_node` (`node`)
-) ENGINE=InnoDB AUTO_INCREMENT=210 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='系统节点表';
+) ENGINE=InnoDB AUTO_INCREMENT=232 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='系统节点表';
 
 -- ----------------------------
 -- Records of t_node
@@ -384,7 +393,29 @@ INSERT INTO `t_node` VALUES ('205', 'wechat/keys', '关键字管理', '0', '1', 
 INSERT INTO `t_node` VALUES ('206', 'wechat/menu', '微信菜单管理', '0', '1', '1', '2017-08-23 16:14:11');
 INSERT INTO `t_node` VALUES ('207', 'wechat/news', '微信图文管理', '0', '1', '1', '2017-08-23 16:14:40');
 INSERT INTO `t_node` VALUES ('208', 'wechat/tags', '微信标签管理', '0', '1', '1', '2017-08-23 16:15:25');
-INSERT INTO `t_node` VALUES ('209', 'api/index/index', '', '0', '1', '1', '2017-10-11 10:29:40');
+INSERT INTO `t_node` VALUES ('209', 'api/index/index', '', '0', '0', '0', '2017-10-11 10:29:40');
+INSERT INTO `t_node` VALUES ('210', 'admin/plugins/upfile', null, '0', '1', '1', '2017-10-14 16:29:00');
+INSERT INTO `t_node` VALUES ('211', 'admin/plugins/upload', null, '0', '1', '1', '2017-10-14 16:29:03');
+INSERT INTO `t_node` VALUES ('212', 'admin/plugins/upstate', null, '0', '1', '1', '2017-10-14 16:29:11');
+INSERT INTO `t_node` VALUES ('213', 'admin/plugins/icon', null, '0', '1', '1', '2017-10-14 16:29:12');
+INSERT INTO `t_node` VALUES ('214', 'admin/region/index', null, '0', '1', '1', '2017-10-14 16:29:15');
+INSERT INTO `t_node` VALUES ('215', 'admin/region/getchildregion', null, '0', '1', '1', '2017-10-14 16:29:17');
+INSERT INTO `t_node` VALUES ('216', 'admin/television', '', '0', '1', '1', '2017-10-14 16:29:30');
+INSERT INTO `t_node` VALUES ('217', 'api/comment/getcommentforpage', null, '0', '0', '0', '2017-10-14 16:29:38');
+INSERT INTO `t_node` VALUES ('218', 'api/television/gettvforpagebytype', null, '0', '0', '0', '2017-10-14 16:29:40');
+INSERT INTO `t_node` VALUES ('219', 'admin/television/index', null, '0', '1', '1', '2017-10-14 16:29:49');
+INSERT INTO `t_node` VALUES ('220', 'admin/television/add', null, '0', '1', '1', '2017-10-14 16:29:49');
+INSERT INTO `t_node` VALUES ('221', 'admin/television/getchildregion', null, '0', '1', '1', '2017-10-14 16:29:50');
+INSERT INTO `t_node` VALUES ('222', 'admin/television/edit', null, '0', '1', '1', '2017-10-14 16:29:51');
+INSERT INTO `t_node` VALUES ('223', 'admin/television/del', null, '0', '1', '1', '2017-10-14 16:29:52');
+INSERT INTO `t_node` VALUES ('224', 'admin/comment/index', null, '0', '1', '1', '2017-10-14 16:30:01');
+INSERT INTO `t_node` VALUES ('225', 'admin/config/sms', null, '0', '1', '1', '2017-10-14 16:30:03');
+INSERT INTO `t_node` VALUES ('226', 'admin/dict/index', null, '0', '1', '1', '2017-10-14 16:30:04');
+INSERT INTO `t_node` VALUES ('227', 'admin/dict/add', null, '0', '1', '1', '2017-10-14 16:30:06');
+INSERT INTO `t_node` VALUES ('228', 'admin/dict/edit', null, '0', '1', '1', '2017-10-14 16:30:06');
+INSERT INTO `t_node` VALUES ('229', 'admin/dict/del', null, '0', '1', '1', '2017-10-14 16:30:07');
+INSERT INTO `t_node` VALUES ('230', 'admin/index/index', null, '0', '1', '1', '2017-10-14 16:36:04');
+INSERT INTO `t_node` VALUES ('231', 'admin/index/main', null, '0', '1', '1', '2017-10-14 16:36:06');
 
 -- ----------------------------
 -- Table structure for `t_region`
@@ -4184,7 +4215,7 @@ CREATE TABLE `t_television` (
   `url_1` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `url_2` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `url_3` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `type_id` int(11) DEFAULT NULL,
+  `type_ids` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `is_hot` tinyint(1) DEFAULT '0',
   `is_new` tinyint(1) DEFAULT '0',
   `is_recommend` tinyint(1) DEFAULT '0',
@@ -4193,13 +4224,85 @@ CREATE TABLE `t_television` (
   `city` int(11) DEFAULT NULL,
   `icon` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `bg` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `keyword` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `context` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `hit` int(11) DEFAULT '0',
+  `icon_width` int(11) DEFAULT '0',
+  `icon_height` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=59 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of t_television
 -- ----------------------------
-INSERT INTO `t_television` VALUES ('3', 'test', 'http://abigfish.org', 'http://abigfish.org', 'http://abigfish.org', '0', '1', '0', '1', '100000', '210000', '210500', 'http://47.91.156.179:83/static/upload/71ec0fa5343967f9/95473b73ca041832.png', 'http://47.91.156.179:83/static/upload/71ec0fa5343967f9/95473b73ca041832.png');
+INSERT INTO `t_television` VALUES ('4', 'CCTV-1', 'http://183.251.61.207/PLTV/88888888/224/3221225922/index.m3u8', 'http://183.252.176.33/PLTV/88888888/224/3221225922/2.m3u8', '#', '2,5', '1', '0', '1', '100000', '0', '0', 'http://webapi.abigfish.org/static/upload/356c392f8a1f8c38/1683542cf1a1d4b5.png', '', '综合HD', '', '0', '128', '128');
+INSERT INTO `t_television` VALUES ('5', 'CCTV-2', 'http://183.251.61.207/PLTV/88888888/224/3221225923/index.m3u8', 'http://183.252.176.47/PLTV/88888888/224/3221225923/2.m3u8', '#', '2', '1', '0', '0', '100000', '0', '0', 'http://webapi.abigfish.org/static/upload/11044cc9da6274b6/c2c45fe50cdaa1fd.png', '', '财经HD', '财经', '0', '128', '128');
+INSERT INTO `t_television` VALUES ('6', 'CCTV-3', 'http://183.251.61.207/PLTV/88888888/224/3221225924/index.m3u8', 'http://183.252.176.20/PLTV/88888888/224/3221225924/2.m3u8', '#', '2', '1', '0', '0', '100000', '0', '0', 'http://webapi.abigfish.org/static/upload/a03cba444f58925f/e538cd706db11ef9.png', '', '综艺HD', '', '0', '128', '128');
+INSERT INTO `t_television` VALUES ('7', 'CCTV-4', 'http://61.166.153.32:1180/play/playback/90000001000000050000000000000199/live100001.m3u8', 'http://120.221.2.42:8089/PLTV/88888888/224/3221225561/index.m3u8', 'http://txtslivesh.cctv4g.com/cctv4hd/cctv4hd.m3u8', '2', '1', '0', '0', '100000', '0', '0', 'http://webapi.abigfish.org/static/upload/6dbe0e9dff3a8ad5/ab7de6894b4abb27.png', '', 'HD', '', '0', '128', '128');
+INSERT INTO `t_television` VALUES ('8', 'CCTV-5', 'http://183.251.61.207/PLTV/88888888/224/3221225925/index.m3u8', 'http://183.252.176.25/PLTV/88888888/224/3221225925/2.m3u8', 'http://183.252.176.40/PLTV/88888888/224/3221225939/2.m3u8', '2,3', '1', '0', '1', '100000', '0', '0', 'http://webapi.abigfish.org/static/upload/85b9bb704c8d90fd/b7a32056a9b61015.png', '', '体育', '', '0', '128', '128');
+INSERT INTO `t_television` VALUES ('9', 'CCTV-6', 'http://183.251.61.207/PLTV/88888888/224/3221225926/index.m3u8', 'http://183.252.176.50//PLTV/88888888/224/3221225926/2.m3u8', '#', '2', '1', '0', '1', '100000', '0', '0', 'http://webapi.abigfish.org/static/upload/5277da8c6675a212/d60a4a66261504a8.png', '', '电影HD', '', '0', '128', '128');
+INSERT INTO `t_television` VALUES ('10', 'CCTV-7', 'http://183.251.61.207/PLTV/88888888/224/3221225927/index.m3u8', 'http://183.252.176.60/PLTV/88888888/224/3221225927/2.m3u8', '#', '2', '0', '1', '0', '100000', '0', '0', 'http://webapi.abigfish.org/static/upload/a905adf3746736ac/05048e2761f67d0a.png', '', '', '', '0', '128', '128');
+INSERT INTO `t_television` VALUES ('11', 'CCTV-8', 'http://183.251.61.207/PLTV/88888888/224/3221225928/index.m3u8', 'http://183.252.176.64/PLTV/88888888/224/3221225928/2.m3u8', '#', '2', '0', '1', '0', '100000', '0', '0', 'http://webapi.abigfish.org/static/upload/c3decc6d88b67b46/7a80c5783528f6b9.png', '', '', '', '0', '128', '128');
+INSERT INTO `t_television` VALUES ('12', 'CCTV-9', 'http://183.251.61.207/PLTV/88888888/224/3221225929/index.m3u8', 'http://183.252.176.36/PLTV/88888888/224/3221225929/2.m3u8', '#', '2', '0', '0', '1', '100000', '0', '0', 'http://webapi.abigfish.org/static/upload/249c7be38b404b60/6bddbb6e7ed96f0b.png', '', '', '', '0', '128', '128');
+INSERT INTO `t_television` VALUES ('13', 'CCTV-10', 'http://183.251.61.207/PLTV/88888888/224/3221225931/index.m3u8', 'http://183.252.176.13/PLTV/88888888/224/3221225931/2.m3u8', '#', '2', '0', '1', '0', '100000', '0', '0', 'http://webapi.abigfish.org/static/upload/667a4db388dad890/26910998e099ed68.png', '', '', '', '0', '128', '128');
+INSERT INTO `t_television` VALUES ('14', 'CCTV-11', 'http://183.207.249.15/PLTV/2/224/3221226015/index.m3u8', '#', '#', '2', '0', '0', '0', '100000', '0', '0', 'http://webapi.abigfish.org/static/upload/360be1951b106054/8ed06d0464ad0ea4.png', '', '戏曲', '', '0', '128', '128');
+INSERT INTO `t_television` VALUES ('15', 'CCTV-12', 'http://183.251.61.207/PLTV/88888888/224/3221225932/index.m3u8', 'http://183.252.176.48/PLTV/88888888/224/3221225932/2.m3u8', '#', '2', '0', '0', '0', '100000', '0', '0', 'http://webapi.abigfish.org/static/upload/f8274bf310370107/c8a5b7ccabfd0518.png', '', '', '', '0', '128', '128');
+INSERT INTO `t_television` VALUES ('16', 'CCTV-13', 'http://183.207.249.15/PLTV/3/224/3221225560/index.m3u8', '#', '#', '2', '0', '0', '0', '100000', '0', '0', 'http://webapi.abigfish.org/static/upload/cb66f2f469c884df/6eb8e09dd85f51e6.png', '', '新闻', '', '0', '128', '128');
+INSERT INTO `t_television` VALUES ('17', 'CCTV-14', 'http://183.251.61.207/PLTV/88888888/224/3221225933/index.m3u8', 'http://183.252.176.22//PLTV/88888888/224/3221225933/2.m3u8', '#', '2', '0', '0', '0', '100000', '0', '0', 'http://webapi.abigfish.org/static/upload/505b32fb5327e3ce/505bce163893166b.png', '', '少儿', '', '0', '128', '128');
+INSERT INTO `t_television` VALUES ('18', 'CCTV-15', 'http://183.207.249.15/PLTV/2/224/3221226025/index.m3u8', '#', '#', '2', '1', '0', '1', '100000', '0', '0', 'http://webapi.abigfish.org/static/upload/97709130a0b58031/866f3b4e3600f3a4.png', '', '音乐', '', '0', '128', '128');
+INSERT INTO `t_television` VALUES ('19', '广东卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225824/index.m3u8', '#', '#', '7', '0', '1', '0', '100000', '440000', '0', 'http://webapi.abigfish.org/static/upload/c0160db7728e7b11/dca592c700649142.png', '', '', '', '0', '300', '300');
+INSERT INTO `t_television` VALUES ('20', '浙江卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225825/index.m3u8', '#', '#', '7', '1', '0', '1', '100000', '330000', '0', 'http://webapi.abigfish.org/static/upload/40516d02e5e2c24e/4ca9f76995ea5e52.jpg', '', '', '', '0', '427', '385');
+INSERT INTO `t_television` VALUES ('21', '北京卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225826/index.m3u8', '#', '#', '7', '0', '1', '0', '100000', '110000', '0', 'http://webapi.abigfish.org/static/upload/93dfee61b3041da6/76fb5c50c77b4a0e.png', '', '', '', '0', '300', '300');
+INSERT INTO `t_television` VALUES ('22', '湖南卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225827/index.m3u8', '#', '#', '7', '1', '1', '1', '100000', '430000', '0', 'http://webapi.abigfish.org/static/upload/ab65c541fcda417d/86404f2e87140a40.png', '', '', '', '0', '300', '300');
+INSERT INTO `t_television` VALUES ('23', '东方卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225828/index.m3u8', '#', '#', '7', '0', '1', '0', '100000', '310000', '0', 'http://webapi.abigfish.org/static/upload/9bfbb2b0f217ee74/56bdf94f3a19a0fe.jpg', '', '', '', '0', '1086', '1200');
+INSERT INTO `t_television` VALUES ('24', '天津卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225830/index.m3u8', '#', '#', '7', '0', '0', '0', '100000', '120000', '0', 'http://webapi.abigfish.org/static/upload/c9c100a81547a9fe/fe56cfd6805a7e84.png', '', '', '', '0', '300', '300');
+INSERT INTO `t_television` VALUES ('25', '重庆卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225831/index.m3u8', '#', '#', '7', '0', '0', '0', '100000', '500000', '0', 'http://webapi.abigfish.org/static/upload/7dfd54f71b3615f0/a982677bb4549cb6.png', '', '', '', '0', '300', '300');
+INSERT INTO `t_television` VALUES ('26', '辽宁卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225832/index.m3u8', '#', '#', '7', '1', '0', '1', '100000', '210000', '0', 'http://webapi.abigfish.org/static/upload/0b1338dd48dcc3f6/4db40375bb6ec212.png', '', '', '', '0', '154', '150');
+INSERT INTO `t_television` VALUES ('27', '东南卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225833/index.m3u8', '#', '#', '7', '0', '0', '0', '100000', '350000', '0', 'http://webapi.abigfish.org/static/upload/19a829b2efb914a3/3992deff6f755a9d.png', '', '', '', '0', '300', '300');
+INSERT INTO `t_television` VALUES ('28', '江西卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225834/index.m3u8', 'http://183.251.61.207/PLTV/88888888/224/3221225868/index.m3u8', '#', '7', '0', '0', '0', '100000', '360000', '0', 'http://webapi.abigfish.org/static/upload/2796e2240a8f66d4/76477d5e4f3c984b.png', '', '', '', '0', '300', '300');
+INSERT INTO `t_television` VALUES ('29', '四川卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225835/index.m3u8', '#', '#', '7', '0', '0', '0', '100000', '510000', '0', 'http://webapi.abigfish.org/static/upload/d57e1b0881db9aa5/668c13c98f28854e.png', '', '', '', '0', '300', '300');
+INSERT INTO `t_television` VALUES ('30', '广西卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225836/index.m3u8', '#', '#', '7', '0', '0', '0', '100000', '450000', '0', 'http://webapi.abigfish.org/static/upload/2714800506dc8aed/8522b85cb89e9d69.jpg', '', '', '', '0', '200', '145');
+INSERT INTO `t_television` VALUES ('31', '河北卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225837/index.m3u8', '#', '#', '7', '0', '0', '0', '100000', '130000', '0', 'http://webapi.abigfish.org/static/upload/56df8f10d84904d2/85cf4e2e69eb53c8.png', '', '', '', '0', '300', '300');
+INSERT INTO `t_television` VALUES ('32', '贵州卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225838/index.m3u8', '#', '#', '7', '0', '0', '0', '100000', '520000', '0', 'http://webapi.abigfish.org/static/upload/dcdf3cf5cfd960e3/e7c62d332146b6e5.png', '', '', '', '0', '300', '300');
+INSERT INTO `t_television` VALUES ('33', '山西卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225839/index.m3u8', '#', '#', '7', '0', '0', '0', '100000', '140000', '0', 'http://webapi.abigfish.org/static/upload/86bb09aa1f5e0714/a60a14efc65aeb03.png', '', '', '', '0', '300', '300');
+INSERT INTO `t_television` VALUES ('34', '湖北卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225840/index.m3u8', '#', '#', '7', '0', '0', '0', '100000', '420000', '0', 'http://webapi.abigfish.org/static/upload/a6a0159173ef8b59/fc1ac256a095dccc.png', '', '', '', '0', '300', '300');
+INSERT INTO `t_television` VALUES ('35', '青海卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225841/index.m3u8', '#', '#', '7', '0', '0', '0', '100000', '630000', '0', 'http://webapi.abigfish.org/static/upload/a65e14bfe9ff9d4a/58f329bbd591a3fc.jpg', '', '', '', '0', '180', '180');
+INSERT INTO `t_television` VALUES ('36', '河南卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225842/index.m3u8', '#', '#', '7', '0', '0', '0', '100000', '410000', '0', 'http://webapi.abigfish.org/static/upload/701c697ee627bcbc/7f6beb3118eb5fb5.png', '', '', '', '0', '300', '300');
+INSERT INTO `t_television` VALUES ('37', '山东卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225843/index.m3u8', '#', '#', '7', '0', '0', '0', '100000', '370000', '0', 'http://webapi.abigfish.org/static/upload/e90bcbf8bb5f880d/0b1652e4800188eb.png', '', '', '', '0', '300', '300');
+INSERT INTO `t_television` VALUES ('38', '安徽卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225844/index.m3u8', '#', '#', '7', '0', '0', '0', '100000', '340000', '0', 'http://webapi.abigfish.org/static/upload/cdbf20b022decec2/d7529e0356ecb469.png', '', '', '', '0', '300', '300');
+INSERT INTO `t_television` VALUES ('39', '甘肃卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225845/index.m3u8', '#', '#', '7', '0', '0', '0', '100000', '620000', '0', 'http://webapi.abigfish.org/static/upload/e849b46079591938/3e22966759506dd8.png', '', '', '', '0', '300', '300');
+INSERT INTO `t_television` VALUES ('40', '内蒙古卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225846/index.m3u8', '#', '#', '7', '0', '0', '0', '100000', '150000', '0', 'http://webapi.abigfish.org/static/upload/3f3554352b715c6b/5a12887e5357b342.png', '', '', '', '0', '200', '57');
+INSERT INTO `t_television` VALUES ('41', '江苏卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225847/index.m3u8', '#', '#', '7', '1', '1', '1', '100000', '320000', '0', 'http://webapi.abigfish.org/static/upload/756b28dbdb660f7b/976f652f138b71d8.png', '', '', '', '0', '300', '300');
+INSERT INTO `t_television` VALUES ('42', '深圳卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225848/index.m3u8', '#', '#', '7', '0', '1', '1', '100000', '440000', '440300', 'http://webapi.abigfish.org/static/upload/9f384389d437b949/430e03c462353e12.png', '', '', '', '0', '300', '300');
+INSERT INTO `t_television` VALUES ('43', '宁夏卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225849/index.m3u8', '#', '#', '7', '0', '0', '0', '100000', '640000', '0', 'http://webapi.abigfish.org/static/upload/ed086c8a3e89d12b/b000549352f379fb.png', '', '', '', '0', '300', '300');
+INSERT INTO `t_television` VALUES ('44', '陕西卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225850/index.m3u8', '#', '#', '7', '0', '0', '0', '100000', '610000', '0', 'http://webapi.abigfish.org/static/upload/033a4689440c10f2/048c5549d4f2fbd5.png', '', '', '', '0', '300', '300');
+INSERT INTO `t_television` VALUES ('45', '吉林卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225851/index.m3u8', '#', '#', '7', '0', '0', '0', '100000', '220000', '0', 'http://webapi.abigfish.org/static/upload/46d56b800c205009/176185383c9144f3.png', '', '', '', '0', '170', '86');
+INSERT INTO `t_television` VALUES ('46', '新疆卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225852/index.m3u8', '#', '#', '7', '0', '0', '0', '100000', '650000', '0', 'http://webapi.abigfish.org/static/upload/b4de63de7c901e53/eb3a862d6ffb7921.png', '', '', '', '0', '300', '300');
+INSERT INTO `t_television` VALUES ('47', '云南卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225853/index.m3u8', '#', '#', '7', '0', '0', '0', '100000', '530000', '0', 'http://webapi.abigfish.org/static/upload/25b240ae01ad2f98/f671b5e732fb113d.png', '', '', '', '0', '300', '300');
+INSERT INTO `t_television` VALUES ('48', '西藏卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225854/index.m3u8', '#', '#', '7', '0', '0', '0', '100000', '540000', '0', '', '', null, null, '0', null, null);
+INSERT INTO `t_television` VALUES ('49', '旅游卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225855/index.m3u8', '#', '#', '7', '0', '0', '0', '100000', '0', '0', 'http://webapi.abigfish.org/static/upload/e68ac6d37e83607c/4ef0da05979d7199.png', '', '', '', '0', '200', '62');
+INSERT INTO `t_television` VALUES ('50', '黑龙江卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225862/index.m3u8', '#', '#', '7', '0', '0', '0', '100000', '230000', '0', 'http://webapi.abigfish.org/static/upload/9b0414a69ecaec0e/dce2b5564d3ceca9.png', '', '', '', '0', '300', '300');
+INSERT INTO `t_television` VALUES ('51', '凤凰卫视', 'http://183.251.61.207/PLTV/88888888/224/3221225900/index.m3u8', '#', '#', '7', '1', '1', '1', '100000', '810000', '0', 'http://webapi.abigfish.org/static/upload/9d68ceac5077ed33/d54dd72a0e614baa.png', '', '', '', '0', '300', '300');
+INSERT INTO `t_television` VALUES ('52', '凤凰资讯台', 'http://183.251.61.207/PLTV/88888888/224/3221225901/index.m3u8', 'http://183.251.61.207/PLTV/88888888/224/3221225905/index.m3u8', 'http://183.251.61.207/PLTV/88888888/224/3221225906/index.m3u8', '8', '1', '1', '1', '100000', '810000', '0', 'http://webapi.abigfish.org/static/upload/2c58aaabe409943a/16984f9b9dd86374.png', '', '', '', '0', '185', '60');
+INSERT INTO `t_television` VALUES ('53', 'Bestv超级体育HD', 'http://183.251.61.207/PLTV/88888888/224/3221225908/index.m3u8', 'http://183.251.61.207/PLTV/88888888/224/3221225909/index.m3u8', '#', '3', '0', '0', '0', '100000', '0', '0', '', '', null, null, '0', null, null);
+INSERT INTO `t_television` VALUES ('54', 'CHC高清電影', 'http://ivi.bupt.edu.cn/hls/chchd.m3u8', '#', '#', '6', '0', '0', '1', '100000', '0', '0', '', '', '高清電影', '', '0', null, null);
+INSERT INTO `t_television` VALUES ('55', 'CHC动作电影', 'http://hbmc.chinashadt.com:2739/live/dzdy.stream_360p/playlist.m3u8', '#', '#', '6', '0', '0', '1', '100000', '0', '0', '', '', '动作电影', '', '0', null, null);
+INSERT INTO `t_television` VALUES ('56', '珠江电影', 'http://36.111.42.44:81/hls/live-zjdy-038/stream800/index.m3u8', '#', '#', '6', '0', '1', '0', '100000', '440000', '440100', '', '', null, null, '0', null, null);
+
+-- ----------------------------
+-- Table structure for `t_television_program`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_television_program`;
+CREATE TABLE `t_television_program` (
+  `tv_id` int(11) NOT NULL,
+  `title` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `play_at` datetime DEFAULT NULL,
+  `url` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of t_television_program
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `t_user`
@@ -4220,14 +4323,17 @@ CREATE TABLE `t_user` (
   `is_deleted` tinyint(1) unsigned DEFAULT '0' COMMENT '删除状态(1:删除,0:未删)',
   `create_by` bigint(20) unsigned DEFAULT NULL COMMENT '创建人',
   `create_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `profile` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_system_user_username` (`username`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8 COMMENT='系统用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=10003 DEFAULT CHARSET=utf8 COMMENT='系统用户表';
 
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES ('10000', 'admin', '21232f297a57a5a743894a0e4a801fc3', '22222222', '123@qq.com', '13888888855', 'dfgsdfgsfd', '27039', '2017-08-23 16:15:57', '1', '1', '0', null, '2015-11-13 15:14:22');
+INSERT INTO `t_user` VALUES ('10000', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '22222222', '123@qq.com', '13800000000', '', '8', '2017-10-30 09:08:46', '1', '1', '0', null, '2015-11-13 15:14:22', 'http://webapi.abigfish.org/static/upload/dde42e3c04932edd/1eb6b67075e3f0c8b0ee03f5db90065d/0e910d6d23efef76.jpg');
+INSERT INTO `t_user` VALUES ('10001', 'clyhs', 'e10adc3949ba59abbe56e057f20f883e', null, '123.qq.com', '13800000000', '', '3', '2017-10-24 11:58:50', '1', null, '0', null, '2017-10-24 11:06:53', 'http://webapi.abigfish.org/static/upload/8969288f4245120e/7c3870287cce0ff3.jpg');
+INSERT INTO `t_user` VALUES ('10002', 'test', 'e10adc3949ba59abbe56e057f20f883e', null, '123.qq.com', '13800000000', '', '2', '2017-10-24 11:29:27', '1', null, '0', null, '2017-10-24 11:19:42', 'http://webapi.abigfish.org/static/upload/5a44c7ba5bbe4ec8/67233d67e4806848.jpg');
 
 -- ----------------------------
 -- Table structure for `t_user_score`
@@ -4239,8 +4345,27 @@ CREATE TABLE `t_user_score` (
   `score` int(11) DEFAULT '0',
   `create_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of t_user_score
 -- ----------------------------
+INSERT INTO `t_user_score` VALUES ('1', '10000', '100', '2017-10-25 08:56:35');
+
+-- ----------------------------
+-- Table structure for `t_user_tv`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_user_tv`;
+CREATE TABLE `t_user_tv` (
+  `user_id` int(11) NOT NULL DEFAULT '0',
+  `tv_id` int(11) NOT NULL DEFAULT '0',
+  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `type_id` int(11) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of t_user_tv
+-- ----------------------------
+INSERT INTO `t_user_tv` VALUES ('10000', '4', '2017-10-25 09:51:30', '14');
+INSERT INTO `t_user_tv` VALUES ('10000', '5', '2017-10-25 10:05:07', '15');
+INSERT INTO `t_user_tv` VALUES ('10000', '6', '2017-10-25 10:35:21', '14');
