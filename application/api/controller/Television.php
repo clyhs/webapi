@@ -271,4 +271,19 @@ class Television extends Rest{
         }
 
     }
+
+    public function updateHit($id){
+
+        $sql = 'update t_television set hit=hit+1 where id='.$id;
+
+        Db::query($sql);
+
+        $result = [
+            "code"=>10000,
+            "desc"=>"success"
+        ];
+
+        return json($result);
+
+    }
 }

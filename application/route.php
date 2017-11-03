@@ -23,6 +23,7 @@ Route::get('api/tv/page/:typeId/[:page]/[:pageSize]','api/Television/getTvForPag
 Route::get('api/tv/prop/:typeId/[:page]/[:pageSize]','api/Television/getTvByProperty');
 Route::get('api/tv/index','api/Television/getTvForIndex');
 Route::post('api/tv/uploadbg','api/Television/uploadbg');
+Route::get('api/tv/updatehit/:id','api/Television/updateHit');
 Route::get('api/tv/record/:userId/:typeId/[:page]/[:pageSize]','api/Television/getTvByUserIdAndTypeId');
 
 Route::get('api/comment/page/:typeId/:uid/[:page]/[:pageSize]','api/Comment/getCommentForPage');
