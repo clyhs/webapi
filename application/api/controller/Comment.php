@@ -58,6 +58,18 @@ class Comment extends Rest{
             return json(["code"=>20001,"desc"=>"不能为空","data"=>[]]);
         }
 
+        if($pid == 0){
+            if($user_id <= 0){
+                return json(["code"=>20001,"desc"=>"USER_ID不能为空","data"=>[]]);
+            }
+        }
+
+        if($pid > 0){
+            if($reply_id <= 0){
+                return json(["code"=>20001,"desc"=>"REPLY_ID不能为空","data"=>[]]);
+            }
+        }
+
         $data = [
             'uid'=>$uid,
             'type_id'=>$type_id,
