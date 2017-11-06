@@ -28,6 +28,10 @@ class Video extends BaseApiRest{
         import('ORG.Net.UploadFile');
 
         try{
+
+            $upload_video = new UploadFile();
+            $upload_video->allowExts  = array('mp4');
+
             //$file = Request::instance()->file('vfile');
 
             //$info = $file->validate(['size'=>156780,'ext'=>'mp4']);
@@ -38,7 +42,7 @@ class Video extends BaseApiRest{
 
             }*/
 
-            return json(["code"=>10000,"desc"=>"上传成功","data"=>$file->mime()]);
+            return json(["code"=>10000,"desc"=>"上传成功","data"=>[]]);
 
         }catch(\Exception $e){
             return json(["code"=>20001,"desc"=>"上传异常","data"=>[]]);
