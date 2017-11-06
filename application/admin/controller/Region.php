@@ -82,7 +82,7 @@ class Region extends BaseAdmin{
             $_menus = Db::name($this->table)->order('code asc')->select();
             $_menus[] = ['name' => '顶级地区', 'code' => '0', 'parentCode' => '0'];
             $menus = ToolService::arr2table($_menus,'code','parentCode');
-            
+
             foreach ($menus as $key => &$menu) {
                 if (substr_count($menu['path'], '-') > 3) {
                     unset($menus[$key]);
