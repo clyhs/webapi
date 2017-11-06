@@ -15,6 +15,8 @@ use app\common\service\DataService;
 
 class Comment extends Rest{
 
+    public $table = 'comment';
+
     /**获取评论列表
      * @param int $uid
      * @param int $typeId
