@@ -18,6 +18,7 @@ use app\common\service\DataService;
 use app\common\service\FileService;
 use app\admin\model\User as UserModel;
 use app\common\controller\BaseApiRest;
+use org\Upload;
 
 class Video extends BaseApiRest{
 
@@ -30,7 +31,9 @@ class Video extends BaseApiRest{
 
             $tempFile = $_FILES['vfile']['name'];
 
-            $file = Request::instance()->file('vfile');
+            //$file = Request::instance()->file('vfile');
+            $upload = new Upload();
+            $upload->exts = ['mp4'];
 
             //$info = $file->validate(['size'=>156780,'ext'=>'mp4']);
             /*
@@ -40,7 +43,7 @@ class Video extends BaseApiRest{
 
             }*/
 
-            return json(["code"=>10000,"desc"=>"上传成功","data"=>$file->mime()]);
+            return json(["code"=>10000,"desc"=>"上传成功","data"=>[]]);
 
         }catch(\Exception $e){
             return json(["code"=>20001,"desc"=>"上传异常","data"=>[]]);
