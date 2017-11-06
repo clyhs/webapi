@@ -92,6 +92,8 @@ class Region extends BaseAdmin{
             // 读取系统功能节点
 
             $this->assign('menus', $menus);
+
+            return json($menus);
         }
     }
 }
