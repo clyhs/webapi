@@ -80,9 +80,9 @@ class Video extends BaseApiRest{
                 $fullpath = $uploadPath.$filename;
                 $size = $info['vfile']['size'];
 
-                $md51 = join('/',str_split(md5(mt_rand(10000,99999)),16));
+                //$md51 = join('/',str_split(md5(mt_rand(10000,99999)),16));
 
-                $coverFilePath = $uploadPath.$md51.".".$ext;
+                $coverFilePath = $uploadPath.date('YmdHis').".".$ext;
                 $file->save($coverFilePath);
 
                 $data = [
