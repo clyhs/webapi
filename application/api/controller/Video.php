@@ -29,7 +29,23 @@ class Video extends BaseApiRest{
 
         try{
 
-            $tempFile = $_FILES['vfile']['name'];
+            //$tempFile = $_FILES['vfile']['name'];
+
+            $id = empty(Request::instance()->param('id'))?"":Request::instance()->param('id');
+            if(empty($id)){
+                return json(["code"=>20001,"desc"=>"ID不能为空","data"=>[]]);
+            }
+            if(empty(Request::instance()->file())){
+                return json(["code"=>20001,"desc"=>"上传失败,请选择文件上传","data"=>[]]);
+            }
+
+            if(empty(Request::instance()->file('vfile'))){
+                return json(["code"=>20001,"desc"=>"上传失败,参数vfile不存在","data"=>[]]);
+            }
+
+            if(empty(Request::instance()->file('cover'))){
+                return json(["code"=>20001,"desc"=>"上传失败,参数cover不存在","data"=>[]]);
+            }
 
             //$file = Request::instance()->file('vfile');
             $config = [
@@ -77,9 +93,6 @@ class Video extends BaseApiRest{
                 $filePath = 'static' . DS . 'upload'  .DS.$md51;
 
             }*/
-
-
-
         }catch(\Exception $e){
             return json(["code"=>20001,"desc"=>"上传异常","data"=>$e->getMessage()]);
         }
