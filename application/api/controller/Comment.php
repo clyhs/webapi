@@ -14,9 +14,9 @@ use think\Db;
 
 class Comment extends Rest{
 
-    public function getCommentForPage($uid=0,$typeId=0){
+    public function getCommentForPage($uid=0,$typeId=0,$page = 1,$pageSize = 15){
         $options=[
-            'page'=>1
+            'page'=>$page
         ];
         $db = Db::field('a.*,b.username')
             ->table("t_comment")
@@ -24,7 +24,7 @@ class Comment extends Rest{
             ->join('t_user b','b.id=a.user_id')
             ->where(" a.uid='$uid' and a.type_id='$typeId' and a.pid=0")
             ->order('a.id desc')
-            ->paginate(15,false,$options);
+            ->paginate($pageSize,false,$options);
 
         $result = [
             "code"=>10000,
