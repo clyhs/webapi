@@ -108,7 +108,7 @@ class Television extends BaseAdmin{
             }else{
                 $country = 100000;
             }
-            $countrys = Db::name("region")->order('code asc')->select();
+            $countrys = Db::name("region")->where("parentCode",'0')->order('code asc')->select();
             $this->assign('countrys', $countrys);
             $this->assign('country', $country);
 
