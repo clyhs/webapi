@@ -44,7 +44,7 @@ class Video extends BaseApiRest{
             if($info){
 
                 $filename = $info['vfile']['savename'];
-                $uploadPath = 'static' . DS . 'upload'  .DS .$info['vfile']['savepath'];
+                $uploadPath = FileService::getBaseUriLocal().$info['vfile']['savepath'];
                 $fullpath = $uploadPath.$filename;
                 $size = $info['vfile']['size'];
 
