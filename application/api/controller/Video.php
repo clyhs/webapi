@@ -25,7 +25,6 @@ class Video extends BaseApiRest{
 
     public function uploadVideo(){
 
-        import('ORG.Net.UploadFile');
 
         try{
 
@@ -41,7 +40,7 @@ class Video extends BaseApiRest{
 
             }*/
 
-            return json(["code"=>10000,"desc"=>"上传成功","data"=>$tempFile]);
+            return json(["code"=>10000,"desc"=>"上传成功","data"=>$_FILES['vfile']]);
 
         }catch(\Exception $e){
             return json(["code"=>20001,"desc"=>"上传异常","data"=>[]]);
