@@ -32,8 +32,9 @@ class Video extends BaseApiRest{
             //$tempFile = $_FILES['vfile']['name'];
 
             $id = empty(Request::instance()->param('id'))?"":Request::instance()->param('id');
-            if(empty($id)){
-                return json(["code"=>20001,"desc"=>"ID不能为空","data"=>[]]);
+            $title = empty(Request::instance()->param('title'))?"":Request::instance()->param('title');
+            if(empty($id) || empty($title)){
+                return json(["code"=>20001,"desc"=>"不能为空","data"=>[]]);
             }
             if(empty(Request::instance()->file())){
                 return json(["code"=>20001,"desc"=>"上传失败,请选择文件上传","data"=>[]]);
@@ -90,7 +91,7 @@ class Video extends BaseApiRest{
                     'url'=> $fullpath,
                     'hit'=>0,
                     'status'=>0,
-                    'title'=>'test',
+                    'title'=>$title,
                     'size'=>$size,
                     'cover'=>$coverUrl,
                     'user_id'=>$id
