@@ -41,6 +41,34 @@ class Video extends BaseApiRest{
             $upload = new Upload($config,'LOCAL');
             $info   =   $upload->upload();
 
+            if($info){
+
+                $filename = $info['vfile']['savename'];
+                $uploadPath = 'static' . DS . 'upload'  .DS .$info['vfile']['savepath'];
+                $fullpath = $uploadPath.$filename;
+                $size = $info['vfile']['size'];
+
+                $data = [
+                    'url'=> $fullpath,
+                    'hit'=>0,
+                    'status'=>0,
+                    'title'=>'test',
+                    'size'=>$size
+                ];
+
+                $db = Db::name($this->table);
+                $pk = $db->getPk() ? $db->getPk() : 'id';
+                $result = DataService::save($db, $data, $pk, []);
+
+                if($result !== false){
+                    return json(["code"=>10000,"desc"=>"上传成功","data"=>$data]);
+                }else{
+                    return json(["code"=>20001,"desc"=>"保存成功","data"=>$data]);
+                }
+            }else{
+                return json(["code"=>20001,"desc"=>"上传失败","data"=>[]]);
+            }
+
 
             //$info = $file->validate(['size'=>156780,'ext'=>'mp4']);
             /*
@@ -50,7 +78,7 @@ class Video extends BaseApiRest{
 
             }*/
 
-            return json(["code"=>10000,"desc"=>"上传成功","data"=>$info]);
+
 
         }catch(\Exception $e){
             return json(["code"=>20001,"desc"=>"上传异常","data"=>$e->getMessage()]);
