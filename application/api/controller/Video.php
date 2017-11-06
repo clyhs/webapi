@@ -27,7 +27,14 @@ class Video extends BaseApiRest{
         try{
             $file = Request::instance()->file('vfile');
 
-            return json(["code"=>10000,"desc"=>"上传成功","data"=>$file]);
+            $info = $file->validate(['size'=>15678,'ext'=>'mp4']);
+            if($info){
+                $md51 = join('/',str_split(md5(mt_rand(10000,99999)),16));
+                $filePath = 'static' . DS . 'upload'  .DS.$md51;
+
+            }
+
+            return json(["code"=>10000,"desc"=>"上传成功","data"=>$filePath]);
 
         }catch(\Exception $e){
             return json(["code"=>20001,"desc"=>"上传异常","data"=>[]]);
