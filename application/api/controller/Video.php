@@ -81,9 +81,10 @@ class Video extends BaseApiRest{
                 $size = $info['vfile']['size'];
 
                 //$md51 = join('/',str_split(md5(mt_rand(10000,99999)),16));
-
-                $coverFilePath = $uploadPath.date('YmdHis').".".$ext;
+                $coverFileName = date('YmdHis').".".$ext;
+                $coverFilePath = 'static'.DS .'upload'.DS.$info['vfile']['savepath'].$coverFileName;
                 $file->save($coverFilePath);
+                $coverUrl = FileService::getBaseUriLocal().$coverFileName;
 
                 $data = [
                     'url'=> $fullpath,
@@ -91,7 +92,7 @@ class Video extends BaseApiRest{
                     'status'=>0,
                     'title'=>'test',
                     'size'=>$size,
-                    'cover'=>$coverFilePath,
+                    'cover'=>$coverUrl,
                     'user_id'=>$id
                 ];
 
