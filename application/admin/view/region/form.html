@@ -1,0 +1,44 @@
+<form class="layui-form layui-box" style='padding:25px 30px 20px 0' action="__SELF__" data-auto="true" method="post">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">地区</label>
+        <div class="layui-input-block">
+            <select name='parentCode' class='layui-select full-width' style='display:block'>
+                <!--{foreach $menus as $menu}-->
+                <!--{eq name='menu.code' value='$vo.parentCode|default=0'}-->
+                <option selected  value='{$menu.code}'>{$menu.spl}{$menu.name}</option>
+                <!--{else}-->
+                <option  value='{$menu.code}'>{$menu.spl}{$menu.name}</option>
+                <!--{/eq}-->
+                <!--{/foreach}-->
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">地区名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="name" value='{$vo.name|default=""}' required="required" title="请输入名称" placeholder="请输入名称" class="layui-input">
+        </div>
+    </div>
+
+
+
+
+
+    <div class="hr-line-dashed"></div>
+
+    <div class="layui-form-item text-center">
+        {if isset($vo['code'])}<input type='hidden' value='{$vo.code}' name='code'/>{/if}
+        <button class="layui-btn" type='submit'>保存数据</button>
+        <button class="layui-btn layui-btn-danger" type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
+    </div>
+
+    <script>
+        require(['bootstrap.typeahead'], function () {
+            var subjects = JSON.parse('{$nodes|json_encode}');
+            $('.typeahead').typeahead({source: subjects, items: 5});
+        });
+    </script>
+
+</form>
