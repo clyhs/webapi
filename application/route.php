@@ -28,6 +28,8 @@ Route::get('api/tv/record/:userId/:typeId/[:page]/[:pageSize]','api/Television/g
 
 Route::get('api/comment/page/:typeId/:uid/[:page]/[:pageSize]','api/Comment/getCommentForPage');
 
+Route::post('api/Video/upload','api/Video/uploadVideo');
+
 
 return [
     '__pattern__' => [
