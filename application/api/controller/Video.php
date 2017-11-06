@@ -48,6 +48,9 @@ class Video extends BaseApiRest{
             }
 
             //$file = Request::instance()->file('vfile');
+
+            /*********vfile start********/
+
             $config = [
                 'exts'=>['mp4'],
                 'rootPath'=> 'static' . DS . 'upload'  .DS,
@@ -57,6 +60,19 @@ class Video extends BaseApiRest{
             $upload = new Upload($config,'LOCAL');
             $info   =   $upload->upload();
 
+            /*********vfile end ********/
+            /*********cover start********/
+            $file = Image::open(Request::instance()->file('cover'));
+            $filemimes = explode('|',Config::get('filemime'));
+            if(empty($file)){
+                return json(["code"=>20001,"desc"=>"上传失败,文件无法打开","data"=>[]]);
+            }
+            if(!in_array($file->mime(),$filemimes)){
+                return json(["code"=>20001,"desc"=>"类型错误","data"=>[]]);
+            }
+            $ext = Config::get('filemimes')[$file->mime()];
+
+            /*********cover end********/
             if($info){
 
                 $filename = $info['vfile']['savename'];
@@ -64,12 +80,19 @@ class Video extends BaseApiRest{
                 $fullpath = $uploadPath.$filename;
                 $size = $info['vfile']['size'];
 
+                $md51 = join('/',str_split(md5(mt_rand(10000,99999)),16));
+
+                $coverFilePath = $uploadPath.$md51.".".$ext;
+                $file->save($coverFilePath);
+
                 $data = [
                     'url'=> $fullpath,
                     'hit'=>0,
                     'status'=>0,
                     'title'=>'test',
-                    'size'=>$size
+                    'size'=>$size,
+                    'cover'=>$coverFilePath,
+                    'user_id'=>$id
                 ];
 
                 $db = Db::name($this->table);
