@@ -24,13 +24,34 @@ class Video extends BaseApiRest{
 
     public $table = 'video';
 
+    public function getVideoForPage($page = 1,$pageSize = 15){
+        $options=[
+            'page'=>$page
+        ];
+        $where = [];
+
+        $db = Db::field('a.*,b.username')
+            ->table("t_video")
+            ->alias('a')
+            ->join('t_user b','b.id=a.user_id')
+            ->where($where)
+            ->order('a.id desc')
+            ->paginate($pageSize,false,$options);
+
+        $result = [
+            "code"=>10000,
+            "desc"=>"",
+            "data"=>$db->all()
+        ];
+        return json($result);
+    }
+
+    /**
+     * @return mixed
+     */
     public function uploadVideo(){
-
-
         try{
-
             //$tempFile = $_FILES['vfile']['name'];
-
             $id = empty(Request::instance()->param('id'))?"":Request::instance()->param('id');
             $title = empty(Request::instance()->param('title'))?"":Request::instance()->param('title');
             if(empty($id) || empty($title)){
@@ -47,11 +68,8 @@ class Video extends BaseApiRest{
             if(empty(Request::instance()->file('cover'))){
                 return json(["code"=>20001,"desc"=>"上传失败,参数cover不存在","data"=>[]]);
             }
-
             //$file = Request::instance()->file('vfile');
-
             /*********vfile start********/
-
             $config = [
                 'exts'=>['mp4'],
                 'rootPath'=> 'static' . DS . 'upload'  .DS,
@@ -60,7 +78,6 @@ class Video extends BaseApiRest{
             ];
             $upload = new Upload($config,'LOCAL');
             $info   =   $upload->upload();
-
             /*********vfile end ********/
             /*********cover start********/
             $file = Image::open(Request::instance()->file('cover'));
@@ -72,10 +89,8 @@ class Video extends BaseApiRest{
                 return json(["code"=>20001,"desc"=>"类型错误","data"=>[]]);
             }
             $ext = Config::get('filemimes')[$file->mime()];
-
             /*********cover end********/
             if($info){
-
                 $filename = $info['vfile']['savename'];
                 $uploadPath = FileService::getBaseUriLocal().$info['vfile']['savepath'];
                 $fullpath = $uploadPath.$filename;
@@ -86,7 +101,6 @@ class Video extends BaseApiRest{
                 $coverFilePath = 'static'.DS .'upload'.DS.$info['vfile']['savepath'].$coverFileName;
                 $file->save($coverFilePath);
                 $coverUrl = FileService::getBaseUriLocal().$info['vfile']['savepath'].$coverFileName;
-
                 $data = [
                     'url'=> $fullpath,
                     'hit'=>0,
@@ -96,7 +110,6 @@ class Video extends BaseApiRest{
                     'cover'=>$coverUrl,
                     'user_id'=>$id
                 ];
-
                 $db = Db::name($this->table);
                 $pk = $db->getPk() ? $db->getPk() : 'id';
                 $result = DataService::save($db, $data, $pk, []);
@@ -110,14 +123,6 @@ class Video extends BaseApiRest{
                 return json(["code"=>20001,"desc"=>"上传失败","data"=>[]]);
             }
 
-
-            //$info = $file->validate(['size'=>156780,'ext'=>'mp4']);
-            /*
-            if($info){
-                $md51 = join('/',str_split(md5(mt_rand(10000,99999)),16));
-                $filePath = 'static' . DS . 'upload'  .DS.$md51;
-
-            }*/
         }catch(\Exception $e){
             return json(["code"=>20001,"desc"=>"上传异常","data"=>$e->getMessage()]);
         }

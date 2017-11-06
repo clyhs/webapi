@@ -28,7 +28,8 @@ Route::get('api/tv/record/:userId/:typeId/[:page]/[:pageSize]','api/Television/g
 
 Route::get('api/comment/page/:typeId/:uid/[:page]/[:pageSize]','api/Comment/getCommentForPage');
 
-Route::post('api/Video/upload','api/Video/uploadVideo');
+Route::post('api/video/upload','api/Video/uploadVideo');
+Route::get('api/video/page/[:page]/[:pageSize]','api/Video/getVideoForPage');
 
 
 return [
