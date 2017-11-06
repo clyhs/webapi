@@ -5,11 +5,10 @@
         <div class="layui-input-block">
             <select name='parentCode' class='layui-select full-width' style='display:block'>
                 <!--{foreach $menus as $menu}-->
-                <!--{eq name='menu.code' value='$vo.parentCode|default=0'}-->
-                <option selected  value='{$menu.code}'>{$menu.spl}{$menu.name}</option>
-                <!--{else}-->
+
+                
                 <option  value='{$menu.code}'>{$menu.spl}{$menu.name}</option>
-                <!--{/eq}-->
+
                 <!--{/foreach}-->
             </select>
         </div>
@@ -34,6 +33,6 @@
         <button class="layui-btn layui-btn-danger" type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
     </div>
 
-    
+
 
 </form>
