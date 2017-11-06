@@ -67,7 +67,7 @@ class Region extends BaseAdmin{
 
     public function add()
     {
-        return $this->_form($this->table, 'form');
+        return $this->_form($this->table, 'form','code');
     }
 
     protected function _form_filter(&$vo)
