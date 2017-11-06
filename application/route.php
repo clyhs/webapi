@@ -27,6 +27,7 @@ Route::get('api/tv/updatehit/:id','api/Television/updateHit');
 Route::get('api/tv/record/:userId/:typeId/[:page]/[:pageSize]','api/Television/getTvByUserIdAndTypeId');
 
 Route::get('api/comment/page/:typeId/:uid/[:page]/[:pageSize]','api/Comment/getCommentForPage');
+Route::post('api/comment/add','api/Comment/addComment');
 
 Route::post('api/video/upload','api/Video/uploadVideo');
 Route::get('api/video/page/[:page]/[:pageSize]','api/Video/getVideoForPage');

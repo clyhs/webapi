@@ -117,7 +117,7 @@ class Video extends BaseApiRest{
                 if($result !== false){
                     return json(["code"=>10000,"desc"=>"上传成功","data"=>$data]);
                 }else{
-                    return json(["code"=>20001,"desc"=>"保存成功","data"=>$data]);
+                    return json(["code"=>20001,"desc"=>"保存失败","data"=>$data]);
                 }
             }else{
                 return json(["code"=>20001,"desc"=>"上传失败","data"=>[]]);
