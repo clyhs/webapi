@@ -1,0 +1,62 @@
+{extend name='admin@main/content'}
+
+
+
+
+{block name="content"}
+
+<form onsubmit="return false;" data-auto="true" method="post">
+    <input type="hidden" value="resort" name="action"/>
+    <table class="layui-table" lay-skin="line" lay-size="sm">
+        <thead>
+        <tr>
+            <th class='list-table-check-td'>
+                <input data-none-auto="" data-check-target='.list-check-box' type='checkbox'/>
+            </th>
+            <th class='text-center'>ID</th>
+            <th class='text-center'>视频标题</th>
+
+            <!--
+            <th class='text-left'>URL</th>-->
+            <th class='text-left'>路径</th>
+            <th class='text-left'>上传者</th>
+            <th class='text-left'>封面</th>
+            <th class='text-left'>大小</th>
+            <th class='text-left'>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {foreach $list as $key=>$vo}
+        <tr>
+            <td class='list-table-check-td'>
+                <input class="list-check-box" value='{$vo.id}' type='checkbox'/>
+            </td>
+            <td class='text-center'>{$vo.id}</td>
+            <td class='text-center'>{$vo.title}</td>
+            <!--
+            <td class='text-left'>{$vo.url_1}</td>-->
+            <td class='text-left'>{$vo.url}</td>
+            <td class='text-left'>{$vo.username}</td>
+            <td class='text-left'><img src="{$vo.cover}" height="40px" width="40px"/> </td>
+            <td class='text-left'>{$vo.size}</td>
+            <td class='text-left nowrap'>
+
+
+                {if auth("$classuri/del")}
+                <span class="text-explode">|</span>
+                <a data-update="{$vo.id}" data-field='delete' data-action='{:url("$classuri/del")}'
+                   href="javascript:void(0)">删除</a>
+                {/if}
+            </td>
+        </tr>
+        {/foreach}
+        </tbody>
+    </table>
+    {if isset($page)}<p>{$page}</p>{/if}
+    <script>
+        window.form.render();
+        window.laydate.render({range: true, elem: '#range-date', format: 'yyyy/MM/dd'});
+    </script>
+</form>
+
+{/block}
