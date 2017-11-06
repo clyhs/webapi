@@ -13,6 +13,7 @@ use think\Db;
 use think\db\Query;
 use think\Image;
 use think\Config;
+use think\File;
 use app\common\service\DataService;
 use app\common\service\FileService;
 use app\admin\model\User as UserModel;
@@ -34,7 +35,7 @@ class Video extends BaseApiRest{
 
             }
 
-            return json(["code"=>10000,"desc"=>"上传成功","data"=>$filePath]);
+            return json(["code"=>10000,"desc"=>"上传成功","data"=>$file]);
 
         }catch(\Exception $e){
             return json(["code"=>20001,"desc"=>"上传异常","data"=>[]]);
