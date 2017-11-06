@@ -33,6 +33,7 @@ class Video extends BaseApiRest{
 
             //$file = Request::instance()->file('vfile');
             $config = [
+                'exts'=>['mp4']
             ];
             $upload = new Upload($config,'LOCAL');
 
