@@ -27,7 +27,7 @@ class Video extends BaseApiRest{
         try{
             $file = Request::instance()->file('vfile');
 
-            $info = $file->validate(['size'=>15678,'ext'=>'mp4']);
+            $info = $file->validate(['size'=>156780,'ext'=>'mp4']);
             if($info){
                 $md51 = join('/',str_split(md5(mt_rand(10000,99999)),16));
                 $filePath = 'static' . DS . 'upload'  .DS.$md51;
