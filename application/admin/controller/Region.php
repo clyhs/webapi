@@ -67,9 +67,14 @@ class Region extends BaseAdmin{
 
     public function add()
     {
+        $_menus = Db::name($this->table)->order('code asc')->select();
+        $_menus[] = ['name' => '顶级地区', 'code' => '0', 'parentCode' => '0'];
+        $menus = ToolService::arr2table($_menus,'code','parentCode');
+        $this->assign('menus', $menus);
         return $this->_form($this->table, 'form','code');
     }
 
+    /*
     protected function _form_filter(&$vo)
     {
         if ($this->request->isGet()) {
@@ -77,7 +82,7 @@ class Region extends BaseAdmin{
             $_menus = Db::name($this->table)->order('code asc')->select();
             $_menus[] = ['name' => '顶级地区', 'code' => '0', 'parentCode' => '0'];
             $menus = ToolService::arr2table($_menus,'code','parentCode');
-            /*
+            
             foreach ($menus as $key => &$menu) {
                 if (substr_count($menu['path'], '-') > 3) {
                     unset($menus[$key]);
@@ -89,11 +94,11 @@ class Region extends BaseAdmin{
                         unset($menus[$key]);
                     }
                 }
-            }*/
+            }
             // 读取系统功能节点
 
             $this->assign('menus', $menus);
 
         }
-    }
+    }*/
 }
