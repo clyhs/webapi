@@ -84,7 +84,7 @@ class Video extends BaseApiRest{
                 $coverFileName = date('YmdHis').".".$ext;
                 $coverFilePath = 'static'.DS .'upload'.DS.$info['vfile']['savepath'].$coverFileName;
                 $file->save($coverFilePath);
-                $coverUrl = FileService::getBaseUriLocal().$coverFileName;
+                $coverUrl = FileService::getBaseUriLocal().$info['vfile']['savepath'].$coverFileName;
 
                 $data = [
                     'url'=> $fullpath,
