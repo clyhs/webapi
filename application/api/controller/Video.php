@@ -25,8 +25,10 @@ class Video extends BaseApiRest{
 
     public function uploadVideo(){
 
+        import('ORG.Net.UploadFile');
+
         try{
-            $file = Request::instance()->file('vfile');
+            //$file = Request::instance()->file('vfile');
 
             //$info = $file->validate(['size'=>156780,'ext'=>'mp4']);
             /*
