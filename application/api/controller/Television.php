@@ -294,6 +294,18 @@ class Television extends Rest{
         ];
         $db = Db::name("dict")->where($where)->order('sort asc,id asc');
 
-        return json($db->select());
+        return filterData($db);
+    }
+
+    protected function filterData(&$db){
+
+        $lists = $db->select();
+        foreach ($lists as $key => &$item) {
+            $sql = 'select a.* from t_television a '.
+                ' where FIND_IN_SET('.$item['id'].' , a.type_ids) order by a.id asc';
+            $childrens =Db::query($sql);
+            $lists[$key]['tvs'] = $childrens;
+        }
+        return $lists;
     }
 }
