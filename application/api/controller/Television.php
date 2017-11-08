@@ -294,7 +294,12 @@ class Television extends Rest{
         ];
         $db = Db::name("dict")->where($where)->order('sort asc,id asc');
 
-        return $this->filterData($db);
+        $result = [
+            "code"=>10000,
+            "desc"=>"",
+            "data"=>$this->filterData($db)
+        ];
+        return json($result);
     }
 
     protected function filterData(&$db){
