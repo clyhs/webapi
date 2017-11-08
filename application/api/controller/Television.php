@@ -208,6 +208,9 @@ class Television extends Rest{
         return json($result);
     }
 
+    /**上传封面图
+     * @return mixed
+     */
     public function uploadbg(){
 
         try{
@@ -283,5 +286,14 @@ class Television extends Rest{
 
         return json($result);
 
+    }
+
+    public function getalltv(){
+        $where = [
+            'pid'=>1
+        ];
+        $db = Db::name("dict")->where($where)->order('sort asc,id asc');
+
+        return json($db->all());
     }
 }
