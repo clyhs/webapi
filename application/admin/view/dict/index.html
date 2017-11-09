@@ -43,7 +43,8 @@
             </td>
 
             <td>{$vo.id}</td>
-            <td class='text-left'><img src="{$vo.icon}" height="40px" width="40px"/> </td>
+
+            <td class='text-left'>{if isset($vo['icon'])}<img src="{$vo.icon}" height="40px" width="40px"/>{/if}</td>
             <td>{$vo.spl}{$vo.name}</td>
 
             <td class='text-center'>
