@@ -40,7 +40,7 @@ class Chat extends BaseApiRest
         //$savename = '';
         if($filecount > 0){
             $config = [
-                'exts'=>['mp4,jpg,png'],
+                'exts'=>['mp4','jpg','png'],
                 'rootPath'=> $rootpath,
                 'savePath'=>$savepath,
                 'saveName'=>date('YmdHis')
