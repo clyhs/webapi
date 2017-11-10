@@ -34,6 +34,22 @@ class Chat extends BaseApiRest
             return json(["code"=>20001,"desc"=>"参数不能为空","data"=>[]]);
         }
 
+        $filecount = count($_FILES);
+        $rootpath = 'static' . DS . 'upload'  .DS;
+        $savepath = 'chat/';
+        //$savename = '';
+        if($filecount > 0){
+            $config = [
+                'exts'=>['mp4,jpg,png'],
+                'rootPath'=> $rootpath,
+                'savePath'=>$savepath,
+                'saveName'=>date('YmdHis')
+            ];
+            $upload = new Upload($config,'LOCAL');
+            $info   =   $upload->upload();
+            return json(["code"=>10000,"desc"=>"上传成功","data"=>$info]);
+        }
+
         return json(["code"=>10000,"desc"=>"上传成功","data"=>count($_FILES)]);
 
     }
