@@ -33,6 +33,8 @@ Route::post('api/comment/add','api/Comment/addComment');
 Route::post('api/video/upload','api/Video/uploadVideo');
 Route::get('api/video/page/[:page]/[:pageSize]','api/Video/getVideoForPage');
 
+Route::post('api/chat/add','api/Chat/addChat');
+
 
 return [
     '__pattern__' => [
