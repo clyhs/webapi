@@ -64,7 +64,7 @@ class Chat extends BaseApiRest
                 $info_num = count($info);
                 for($i=1;$i<$info_num+1;$i++){
 
-                    //$f = $info['file_'+$i];
+                    $f = $info["file_$i"];
                 }
             }
 
