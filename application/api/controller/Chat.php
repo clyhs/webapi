@@ -50,29 +50,27 @@ class Chat extends BaseApiRest
         $result = DataService::save($db, $data, $pk, []);
         $chat_id = Db::name($this->table)->getLastInsID();
 
-        if($filecount > 0){
+        if($filecount > 0 && $chat_id >0){
             $config = [
                 'exts'=>['mp4','jpg','png'],
                 'rootPath'=> $rootpath,
                 'savePath'=>$savepath
                 //'saveName'=>date('YmdHis')
             ];
-
-
-
             $upload = new Upload($config,'LOCAL');
             $info   =   $upload->upload();
             //return json(["code"=>10000,"desc"=>"上传成功","data"=>$info]);
             if($info){
-
                 $info_num = count($info);
+                for($i=1;$i<$info_num+1;$i++){
 
-
+                    $f = $info['file_'+$i];
+                }
             }
 
         }
 
-        return json(["code"=>10000,"desc"=>"上传成功","data"=>$chat_id]);
+        return json(["code"=>10000,"desc"=>"上传成功","data"=>$info]);
 
     }
 
