@@ -42,8 +42,8 @@ class Chat extends BaseApiRest
             $config = [
                 'exts'=>['mp4','jpg','png'],
                 'rootPath'=> $rootpath,
-                'savePath'=>$savepath,
-                'saveName'=>date('YmdHis')
+                'savePath'=>$savepath
+                //'saveName'=>date('YmdHis')
             ];
             $upload = new Upload($config,'LOCAL');
             $info   =   $upload->upload();
