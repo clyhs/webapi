@@ -75,7 +75,7 @@ class Chat extends BaseApiRest
                         'size'=>$size
                     ];
                     $chat_info_db = Db::name("chat_info");
-                    $chat_result = $chat_info_db->insert($data);
+                    $chat_result = $chat_info_db->insert($chat_info);
                 }
                 return json(["code"=>10000,"desc"=>"成功"]);
             }else{
