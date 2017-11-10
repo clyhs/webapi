@@ -38,6 +38,17 @@ class Chat extends BaseApiRest
         $rootpath = 'static' . DS . 'upload'  .DS;
         $savepath = 'chat/';
         //$savename = '';
+
+        $data = [
+            'context'=>$context,
+            'user_id'=>$user_id,
+            'type_id'=>$type_id
+        ];
+
+        $db = Db::name($this->table);
+        $pk = $db->getPk() ? $db->getPk() : 'id';
+        $result = DataService::save($db, $data, $pk, []);
+
         if($filecount > 0){
             $config = [
                 'exts'=>['mp4','jpg','png'],
@@ -45,12 +56,22 @@ class Chat extends BaseApiRest
                 'savePath'=>$savepath
                 //'saveName'=>date('YmdHis')
             ];
+
+
+
             $upload = new Upload($config,'LOCAL');
             $info   =   $upload->upload();
-            return json(["code"=>10000,"desc"=>"上传成功","data"=>$info]);
+            //return json(["code"=>10000,"desc"=>"上传成功","data"=>$info]);
+            if($info){
+
+                $info_num = count($info);
+
+
+            }
+
         }
 
-        return json(["code"=>10000,"desc"=>"上传成功","data"=>count($_FILES)]);
+        return json(["code"=>10000,"desc"=>"上传成功","data"=>$result]);
 
     }
 
