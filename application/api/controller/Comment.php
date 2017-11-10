@@ -99,7 +99,7 @@ class Comment extends Rest{
             $sql = 'select a.*,b.username as replayname,c.username from t_comment a '.
                 'left join t_user b on b.id=a.reply_id '.
                 'left join t_user c on c.id=a.user_id '.
-                'where a.pid='.$item['id'].' order by id asc';
+                'where a.pid='.$item['id'].' order by a.id asc';
             $childrens =Db::query($sql);
             $lists[$key]['childs'] = $childrens;
         }

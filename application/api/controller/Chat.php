@@ -90,4 +90,44 @@ class Chat extends BaseApiRest
 
     }
 
+    public function getChatForPage($typeId=0,$page = 1,$pageSize = 15){
+        $options=[
+            'page'=>$page
+        ];
+        $where = [];
+        if($typeId>0){
+            $where = [
+                'a.type_id'=>$typeId
+            ];
+        }
+
+        $db = Db::field('a.*,b.username')
+            ->table("t_chat")
+            ->alias('a')
+            ->join('t_user b','b.id=a.user_id')
+            ->where($where)
+            ->order('a.id desc')
+            ->paginate($pageSize,false,$options);
+
+        $result = [
+            "code"=>10000,
+            "desc"=>"",
+            "data"=>$this->filterData($db)
+        ];
+
+        return json($result);
+    }
+
+    protected function filterData(&$db){
+
+        $lists = $db->all();
+        foreach ($lists as $key => &$item) {
+            $sql = 'select a.* from t_chat_info a '.
+                'where a.chat_id='.$item['id'].' order by a.id asc';
+            $childrens =Db::query($sql);
+            $lists[$key]['infos'] = $childrens;
+        }
+        return $lists;
+    }
+
 }
