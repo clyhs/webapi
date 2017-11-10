@@ -90,15 +90,20 @@ class Chat extends BaseApiRest
 
     }
 
-    public function getChatForPage($typeId=0,$page = 1,$pageSize = 15){
+    public function getChatForPage($page = 1,$pageSize = 15,$typeId=0,$userId=0){
         $options=[
             'page'=>$page
         ];
         $where = [];
         if($typeId>0){
+            /*
             $where = [
                 'a.type_id'=>$typeId
-            ];
+            ];*/
+            $where['a.type_id'] = $typeId;
+        }
+        if($userId>0){
+            $where['a.user_id'] = $userId;
         }
 
         $db = Db::field('a.*,b.username')

@@ -34,7 +34,7 @@ Route::post('api/video/upload','api/Video/uploadVideo');
 Route::get('api/video/page/[:page]/[:pageSize]','api/Video/getVideoForPage');
 
 Route::post('api/chat/add','api/Chat/addChat');
-Route::get('api/chat/page/[:typeid]/[:page]/[:pageSize]','api/Chat/getChatForPage');
+Route::get('api/chat/page/[:typeId]/[:userId]/[:page]/[:pageSize]','api/Chat/getChatForPage');
 
 
 return [
