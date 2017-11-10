@@ -48,6 +48,7 @@ class Chat extends BaseApiRest
         $db = Db::name($this->table);
         $pk = $db->getPk() ? $db->getPk() : 'id';
         $result = DataService::save($db, $data, $pk, []);
+        $chat_id = Db::name($this->table)->getLastInsID();
 
         if($filecount > 0){
             $config = [
@@ -71,7 +72,7 @@ class Chat extends BaseApiRest
 
         }
 
-        return json(["code"=>10000,"desc"=>"上传成功","data"=>$result]);
+        return json(["code"=>10000,"desc"=>"上传成功","data"=>$chat_id]);
 
     }
 
