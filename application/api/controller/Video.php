@@ -30,7 +30,7 @@ class Video extends BaseApiRest{
         ];
         $where = [];
 
-        $db = Db::field('a.*,b.username')
+        $db = Db::field('a.*,b.username,b.profile')
             ->table("t_video")
             ->alias('a')
             ->join('t_user b','b.id=a.user_id')
