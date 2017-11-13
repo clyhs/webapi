@@ -34,7 +34,7 @@ class Comment extends BaseAdmin{
 
                 if($get[$key]>0){
                     //$db->where('a.'.$key, '=', "{$get[$key]}");
-                    $db->where('a.type_id','=',$get[$key]);
+                    //$db->where('a.type_id','=',$get[$key]);
                 }
 
             }
