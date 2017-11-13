@@ -153,12 +153,15 @@ class User extends BaseApiRest{
 
     }
 
-
-
     public function getAllUsers(){
         $model = new UserModel();
         $data = $model->all();
-        return json($data);
+        $result = [
+            "code"=>10000,
+            "desc"=>"",
+            "data"=>$data
+        ];
+        return json($result);
     }
 
     public function getPageForUser($page = 1,$pageSize = 10){
@@ -169,13 +172,26 @@ class User extends BaseApiRest{
         ];
 
         $list  = $model->paginate($pageSize,false,$options);
-        return json($list,10000);
+        $result = [
+            "code"=>10000,
+            "desc"=>"",
+            "data"=>$list
+        ];
+        return json($result);
     }
 
     public function getUserById($id){
         $model = db('user');
         $data  = $model->where("id",$id)->find();
-        return $this->response($data, 'json', 10000);
+
+        $result = [
+            "code"=>10000,
+            "desc"=>"",
+            "data"=>$data
+        ];
+        return json($result);
     }
+
+
 
 }

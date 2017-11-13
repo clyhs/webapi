@@ -342,4 +342,31 @@ class Television extends Rest{
         ];
         return json($result);
     }
+
+    public function addTVByUserId($type_id,$userId,$tv_id){
+        if(empty($type_id) || empty($userId) || empty($tv_id)){
+            return json(["code"=>20001,"desc"=>"参数不能为空","data"=>[]]);
+        }
+
+        $data=[
+            'user_id'=>$userId,
+            'tv_id'=>$tv_id,
+            'type_id'=>$type_id
+        ];
+
+        $id = Db::name('user_tv')->where($data)->value('id');
+        if($id){
+            return json(["code"=>20001,"desc"=>"已经收藏","data"=>[]]);
+        }
+        $db = Db::name('user_tv');
+        $pk = $db->getPk() ? $db->getPk() : 'id';
+        $result = DataService::save($db, $data, $pk, []);
+
+        if($result !== false){
+            return json(["code"=>10000,"desc"=>"关注成功","data"=>$data]);
+        }else{
+            return json(["code"=>20001,"desc"=>"失败","data"=>$data]);
+        }
+
+    }
 }

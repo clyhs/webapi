@@ -32,6 +32,7 @@ Route::post('api/tv/uploadbg','api/Television/uploadbg');
 Route::get('api/tv/updatehit/:id','api/Television/updateHit');
 Route::get('api/tv/record/:userId/:typeId/[:page]/[:pageSize]','api/Television/getTvByUserIdAndTypeId');
 Route::get('api/tv/all','api/Television/getalltv');
+Route::post('api/tv/collect/:type_id/:userId/:tv_id','api/Television/addTVByUserId');
 
 /**
  * 评论接口
