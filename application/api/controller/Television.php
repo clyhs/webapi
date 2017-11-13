@@ -135,7 +135,7 @@ class Television extends Rest{
             ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
             ->where($hot)
             ->group('a.id')
-            ->order('a.id asc')
+            ->order('a.hit desc')
             ->limit(4)->select();
         $lists_new = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames')
             ->table("t_television")
@@ -145,7 +145,7 @@ class Television extends Rest{
             ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
             ->where($new)
             ->group('a.id')
-            ->order('a.id asc')
+            ->order('a.id desc')
             ->limit(4)->select();
         $lists_recommend = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames')
             ->table("t_television")
@@ -155,7 +155,7 @@ class Television extends Rest{
             ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
             ->where($recommend)
             ->group('a.id')
-            ->order('a.id asc')
+            ->order('a.id desc')
             ->limit(4)->select();
         $result_array = [
             "hots"=>$lists_hot,
