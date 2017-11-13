@@ -1,10 +1,6 @@
 {extend name='admin@main/content'}
 
-{block name="button"}
-<div class="nowrap pull-right" style="margin-top:10px">
-    
-</div>
-{/block}
+
 
 {block name="content"}
 
@@ -88,5 +84,8 @@
         {/foreach}
         </tbody>
     </table>
+    <script>
+        window.form.render();
+    </script>
 </form>
 {/block}
