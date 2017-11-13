@@ -25,7 +25,7 @@ class Region extends Rest{
         $result = [
             "code"=>10000,
             "desc"=>"",
-            "data"=>$list->select()
+            "data"=>$list
         ];
         return json($result);
     }
