@@ -38,7 +38,7 @@ class Television extends BaseAdmin{
         }*/
 
 
-        foreach ([ 'type_id'] as $key) {
+        foreach (['type_id'] as $key) {
             if (isset($get[$key]) && $get[$key] !== '') {
 
                 if($get[$key]>0){

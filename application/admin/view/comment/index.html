@@ -2,6 +2,42 @@
 
 {block name="content"}
 
+<!-- 表单搜索 开始 -->
+<form class="layui-form layui-form-pane form-search" action="__SELF__" onsubmit="return false" method="get">
+    <!--
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">名称</label>
+        <div class="layui-input-inline">
+            <input name="name" value="" placeholder="请输入名称" class="layui-input">
+        </div>
+    </div>-->
+
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">类型</label>
+        <div class="layui-input-inline">
+            <select name='type_id' class='layui-select' lay-search="">
+                <option value="0">选择类型</option>
+
+                <!--{foreach $subjects as $v}-->
+                <!--{if $v.id==$Think.get.type_id}-->
+                <option selected="selected" value='{$v.id}'>{$v.name}</option>
+                <!--{else}-->
+                <option value='{$v.id}'>{$v.name}</option>
+                <!--{/if}-->
+                <!--{/foreach}-->
+            </select>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="layui-form-item layui-inline">
+        <button class="layui-btn layui-btn-primary"><i class="layui-icon">&#xe615;</i> 搜 索</button>
+    </div>
+</form>
+
 <form onsubmit="return false;" data-auto="true" method="post">
     <input type="hidden" value="resort" name="action"/>
     <table class="layui-table" lay-skin="line" lay-size="sm">
