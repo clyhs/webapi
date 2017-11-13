@@ -133,7 +133,7 @@ class Television extends Rest{
             ->join(' t_region b ',' a.country = b.code ','left')
             ->join(' t_region c ',' a.province = c.code ','left')
             ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
-            ->where($hot)
+            //->where($hot)
             ->group('a.id')
             ->order('a.hit desc')
             ->limit(4)->select();
