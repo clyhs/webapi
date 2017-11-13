@@ -18,7 +18,7 @@ use app\common\service\FileService;
 
 class Region extends Rest{
 
-    public $table = 'television';
+    public $table = 'region';
 
     public function getProvinces(){
         $list = Db::name($this->table)->where("parentCode","100000")->order('code asc')->select();
