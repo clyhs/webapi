@@ -1,5 +1,11 @@
 {extend name='admin@main/content'}
 
+{block name="button"}
+<div class="nowrap pull-right" style="margin-top:10px">
+    
+</div>
+{/block}
+
 {block name="content"}
 
 <!-- 表单搜索 开始 -->
@@ -8,7 +14,7 @@
 
     <div class="layui-form-item layui-inline">
         <label class="layui-form-label">类型</label>
-        <div class="layui-input-block">
+        <div class="layui-input-inline">
             <select name='type_id' class='layui-select' lay-search="">
                 <option value="0">选择类型</option>
 
