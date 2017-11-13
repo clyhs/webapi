@@ -36,6 +36,8 @@ Route::get('api/video/page/[:page]/[:pageSize]','api/Video/getVideoForPage');
 Route::post('api/chat/add','api/Chat/addChat');
 Route::get('api/chat/page/[:typeId]/[:userId]/[:page]/[:pageSize]','api/Chat/getChatForPage');
 
+Route::get('api/region/provinces','api/Region/getProvinces');
+
 
 return [
     '__pattern__' => [
