@@ -89,9 +89,16 @@ class Television extends BaseAdmin{
     {
         if ($this->request->isPost()) {
 
+            if (isset($vo['id'])) {
+                unset($vo['name']);
+            } elseif (Db::name($this->table)->where(['name' => $vo['name']])->find()) {
+                $this->error('电视台已经存在，请重新添加！');
+            }
             if (isset($vo['type_ids']) && is_array($vo['type_ids'])) {
                 $vo['type_ids'] = join(',', $vo['type_ids']);
             }
+
+
 
             if(isset($vo['icon']) && $vo['icon']!=""){
                 $info = getimagesize($vo['icon']);
