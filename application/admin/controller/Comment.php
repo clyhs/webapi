@@ -21,6 +21,7 @@ class Comment extends BaseAdmin{
         $this->title = '评论管理';
         //$db = Db::name($this->table)->order('id asc');
 
+        $get = $this->request->get();
         $db = Db::field('a.*,b.username,c.username as replyname,d.name as typename')
             ->table("t_comment")
             ->alias('a')
