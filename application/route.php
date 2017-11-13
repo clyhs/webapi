@@ -20,6 +20,7 @@ Route::post('api/user/profile','api/User/profile');
 
 
 Route::get('api/tv/page/:typeId/[:page]/[:pageSize]','api/Television/getTvForPageByType');
+Route::get('api/tv/province/:code/[:page]/[:pageSize]','api/Television/getTvForPageByProvince');
 Route::get('api/tv/prop/:typeId/[:page]/[:pageSize]','api/Television/getTvByProperty');
 Route::get('api/tv/index','api/Television/getTvForIndex');
 Route::post('api/tv/uploadbg','api/Television/uploadbg');
