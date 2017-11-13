@@ -289,10 +289,11 @@ class Television extends Rest{
     }
 
     public function getalltv(){
-        $where = [
-            'pid'=>1
-        ];
-        $db = Db::name("dict")->where($where)->order('sort asc,id asc');
+
+        $db = Db::name("dict")
+            ->where('pid','=',1)
+            ->where('id','<>',16)
+            ->order('sort asc,id asc');
 
         $result = [
             "code"=>10000,
