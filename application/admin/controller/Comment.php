@@ -38,6 +38,8 @@ class Comment extends BaseAdmin{
             $vo['ids'] = join(',', ToolService::getArrSubIds($data, $vo['id']));
             if($vo['type_id'] == 11){
                 $vo['title'] = Db::name('television')->where(['id' => $vo['uid']])->value('name');
+            }else{
+                $vo['title'] = Db::name('chat')->where(['id' => $vo['uid']])->value('context');
             }
             if($vo['replyname'] == null ){
                 $vo['replyname'] = '--';
