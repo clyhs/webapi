@@ -50,7 +50,7 @@ class Television extends BaseAdmin{
             }
         }
         $db->group('a.id');
-        $db->order('a.id asc');
+        $db->order('a.id desc');
 
         $where = [
             "char"=>"CHANNEL",
