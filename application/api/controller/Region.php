@@ -27,13 +27,13 @@ class Region extends Rest{
             ->where('code not in (900000,820000,810000,710000)')
             ->order('code asc')->select();*/
 
-        $list = Db::field('a.code,a.name,a.type,a.fullName')
+        $list = Db::field('a.code,a.name,a.type,a.fullName,a.parentCode')
             ->table("t_region")
             ->alias('a')
             ->join('t_television b','b.province=a.code')
             ->where(" a.parentCode=100000 and code not in (900000,820000,810000,710000) ")
             ->where(" FIND_IN_SET('4' , b.type_ids) ")
-            ->group(' a.code,a.name,a.type,a.fullName ')
+            ->group(' a.code,a.name,a.type,a.fullName,a.parentCode ')
             ->order('a.code desc');
         $result = [
             "code"=>10000,
