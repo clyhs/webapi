@@ -21,7 +21,10 @@ class Region extends Rest{
     public $table = 'region';
 
     public function getProvinces(){
-        $list = Db::name($this->table)->where("parentCode","100000")->order('code asc')->select();
+        $list = Db::name($this->table)
+            ->where("parentCode","100000")
+            ->where('code not in (900000,820000,810000,710000)')
+            ->order('code asc')->select();
         $result = [
             "code"=>10000,
             "desc"=>"",
