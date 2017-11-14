@@ -292,7 +292,7 @@ class Television extends Rest{
 
         $db = Db::name("dict")
             ->where('pid','=',1)
-            ->where('id','<>',16)
+            ->where('id','not in','(16,17,18,19,4)')
             ->order('sort asc,id asc');
 
         $result = [
