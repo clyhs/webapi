@@ -32,7 +32,7 @@ class Region extends Rest{
             ->alias('a')
             ->join('t_television b','b.province=a.code')
             ->where(" a.parentCode=100000 and code not in (900000,820000,810000,710000) ")
-            ->where(" FIND_IN_SET('4' , a.type_ids) ")
+            ->where(" FIND_IN_SET('4' , b.type_ids) ")
             ->group(' a.code,a.name,a.type,a.fullName ')
             ->order('a.code desc');
         $result = [
