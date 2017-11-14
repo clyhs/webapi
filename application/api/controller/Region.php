@@ -21,14 +21,24 @@ class Region extends Rest{
     public $table = 'region';
 
     public function getProvinces(){
+        /*
         $list = Db::name($this->table)
             ->where("parentCode","100000")
             ->where('code not in (900000,820000,810000,710000)')
-            ->order('code asc')->select();
+            ->order('code asc')->select();*/
+
+        $list = Db::field('a.code,a.name,a.type,a.fullName')
+            ->table("t_region")
+            ->alias('a')
+            ->join('t_television b','b.province=a.code')
+            ->where(" a.parentCode=100000 and code not in (900000,820000,810000,710000) ")
+            ->where(" FIND_IN_SET('4' , a.type_ids) ")
+            ->group(' a.code,a.name,a.type,a.fullName ')
+            ->order('a.code desc');
         $result = [
             "code"=>10000,
             "desc"=>"",
-            "data"=>$list
+            "data"=>$list->select()
         ];
         return json($result);
     }
