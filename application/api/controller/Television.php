@@ -292,7 +292,7 @@ class Television extends Rest{
 
         $db = Db::name("dict")
             ->where('pid','=',1)
-            ->where('id not in (16,17,18,19,4)')
+            ->where('id not in (16,18,4)')
             ->order('sort asc,id asc');
 
         $result = [
@@ -369,12 +369,11 @@ class Television extends Rest{
         }
 
     }
-    public function getTvForPageBySearch($page = 1,$pageSize = 15){
+    public function getTvForPageBySearch(){
 
         $name = empty(Request::instance()->param('name'))?"":Request::instance()->param('name');
         $page = empty(Request::instance()->param('page'))?1:Request::instance()->param('page');
         $pageSize = empty(Request::instance()->param('pageSize'))?15:Request::instance()->param('pageSize');
-
         if(empty($name)){
             return json(["code"=>20001,"desc"=>"参数不能为空","data"=>[]]);
         }
@@ -382,8 +381,6 @@ class Television extends Rest{
         $options=[
             'page'=>$page
         ];
-
-
 
         $lists = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames')
             ->table("t_television")
@@ -404,3 +401,4 @@ class Television extends Rest{
         return json($result);
     }
 }
+
