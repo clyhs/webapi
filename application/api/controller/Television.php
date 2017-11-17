@@ -369,4 +369,31 @@ class Television extends Rest{
         }
 
     }
+
+
+
+    public function getTvForPageBySearch($page = 1,$pageSize = 15,$name){
+        $options=[
+            'page'=>$page
+        ];
+
+        $lists = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames')
+            ->table("t_television")
+            ->alias('a')
+            ->join(' t_region b ',' a.country = b.code ','left')
+            ->join(' t_region c ',' a.province = c.code ','left')
+            ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
+            ->where(' a.name like "%'.$name.'%" ')
+            ->group('a.id')
+            ->order('a.id asc')
+            ->paginate($pageSize,false,$options);
+
+        $result = [
+            "code"=>"10000",
+            "desc"=>"",
+            "data"=>$lists->all()
+        ];
+        return json($result);
+    }    
 }
+
