@@ -20,7 +20,7 @@ Route::get('api/user/:id','api/User/getUserById');
 Route::post('api/user/register','api/User/register');
 Route::get('api/user/login','api/User/login');
 Route::post('api/user/profile','api/User/profile');
-    
+
 /**
  * 电视接口
  */

@@ -391,5 +391,5 @@ class Television extends Rest{
             "data"=>$lists->all()
         ];
         return json($result);
-    }
+    }    
 }
