@@ -25,7 +25,7 @@ Route::post('api/user/profile','api/User/profile');
  * 电视接口
  */
 Route::get('api/tv/page/:typeId/[:page]/[:pageSize]','api/Television/getTvForPageByType');
-Route::get('api/tv/search/:name/[:page]/[:pageSize]','api/Television/getTvForPageBySearch');
+Route::post('api/tv/search','api/Television/getTvForPageBySearch');
 Route::get('api/tv/province/:code/[:page]/[:pageSize]','api/Television/getTvForPageByProvince');
 Route::get('api/tv/prop/:typeId/[:page]/[:pageSize]','api/Television/getTvByProperty');
 Route::get('api/tv/index','api/Television/getTvForIndex');
