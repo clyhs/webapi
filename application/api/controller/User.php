@@ -105,10 +105,10 @@ class User extends BaseApiRest{
     private function _login_filter($vo){
 
         $sql = 'select count(1) from t_user_tv where user_id='.$vo['id'].' '.
-               ' type_id=15 ';
+               ' and type_id=15 ';
         $vo['history'] =Db::query($sql);
         $sql = 'select count(1) from t_user_tv where user_id='.$vo['id'].' '.
-            ' type_id=14 ';
+               ' and type_id=14 ';
         $vo['likenum'] =Db::query($sql);
         return $vo;
     }
