@@ -91,7 +91,7 @@ class User extends BaseApiRest{
         return json(["code"=>10000,"desc"=>"登录成功","data"=>$this->_login_filter($user)]);
     }
 
-    private function _login_filter(&$vo){
+    private function _login_filter($vo){
         $vo['history'] = 1;
     }
 
