@@ -85,7 +85,7 @@ class User extends BaseApiRest{
             ->join(' t_user_tv c ',' a.type_id = 14 and a.id=c.user_id ','left')
             ->where($where)
             ->group('a.id')
-            ->order('a.id asc')->all();
+            ->order('a.id asc')->select();
 
         if(empty($user)){
             return json(["code"=>20001,"desc"=>"登录账号不存在，请重新输入!"]);
