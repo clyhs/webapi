@@ -88,7 +88,11 @@ class User extends BaseApiRest{
         $data = ['login_at' => ['exp', 'now()'], 'login_num' => ['exp', 'login_num+1']];
         Db::name('user')->where(['id' => $user['id']])->update($data);
 
-        return json(["code"=>10000,"desc"=>"登录成功","data"=>$user]);
+        return json(["code"=>10000,"desc"=>"登录成功","data"=>_login_filter($user)]);
+    }
+
+    private function _login_filter(&$vo){
+        $vo['history'] = 1;
     }
 
     public function profile(){
