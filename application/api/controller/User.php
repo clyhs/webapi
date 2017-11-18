@@ -110,7 +110,8 @@ class User extends BaseApiRest{
         $vo['history'] = $row[0]['history'];
         $sql = 'select count(1) as likenum from t_user_tv where user_id='.$vo['id'].' '.
                ' and type_id=14 ';
-        $vo['likenum'] =Db::query($sql);
+        $row2 = Db::query($sql);
+        $vo['likenum'] =$row2[0]['likenum'];
         return $vo;
     }
 
