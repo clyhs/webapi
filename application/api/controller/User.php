@@ -93,6 +93,7 @@ class User extends BaseApiRest{
 
     private function _login_filter($vo){
         $vo['history'] = 1;
+        return $vo;
     }
 
     public function profile(){
