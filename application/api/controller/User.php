@@ -74,7 +74,19 @@ class User extends BaseApiRest{
         if(empty($username) || empty($password) ){
             return json(["code"=>20001,"desc"=>"参数出错"]);
         }
-        $user = $db->where('username', $username)->find();
+        //$user = $db->where('username', $username)->find();
+        $where = [
+            'a.username'=>$username
+        ];
+        $user =  Db::field('a.*,count(b.*) history,count(c.*) like ')
+            ->table("t_user")
+            ->alias('a')
+            ->join(' t_user_tv b ',' b.type_id = 15 and a.id=b.user_id ','left')
+            ->join(' t_user_tv c ',' a.type_id = 14 and a.id=c.user_id ','left')
+            ->where($where)
+            ->group('a.id')
+            ->order('a.id asc')->all();
+
         if(empty($user)){
             return json(["code"=>20001,"desc"=>"登录账号不存在，请重新输入!"]);
         }
@@ -88,7 +100,7 @@ class User extends BaseApiRest{
         $data = ['login_at' => ['exp', 'now()'], 'login_num' => ['exp', 'login_num+1']];
         Db::name('user')->where(['id' => $user['id']])->update($data);
 
-        return json(["code"=>10000,"desc"=>"登录成功","data"=>$this->_login_filter($user)]);
+        return json(["code"=>10000,"desc"=>"登录成功","data"=>$user]);
     }
 
     private function _login_filter($vo){
