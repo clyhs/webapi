@@ -208,6 +208,26 @@ class Television extends Rest{
         return json($result);
     }
 
+    public function deleteTvByUserIdAndTypeId($userId,$typeId,$ids){
+
+        if(empty($userId) || empty($typeId) || empty($ids)){
+            return json(["code"=>20001,"desc"=>"不能为空","data"=>[]]);
+        }
+        $where = [
+            "user_id"=>$userId,
+            "type_id"=>$typeId
+        ];
+        $where['tv_id'] = ['in', $ids];
+        $res = Db::name("user_tv")->where($where)->delete();
+
+        $result = [
+            "code"=>"10000",
+            "desc"=>"",
+            "data"=>$res
+        ];
+        return json($result);
+    }
+
     /**上传封面图
      * @return mixed
      */
