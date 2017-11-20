@@ -112,6 +112,9 @@ class User extends BaseApiRest{
                ' and type_id=14 ';
         $row2 = Db::query($sql);
         $vo['likenum'] =$row2[0]['likenum'];
+        $sql = 'select count(1) as notices from t_notice';
+        $row3 = Db::query($sql);
+        $vo['notices'] =$row2[0]['notices'];
         return $vo;
     }
 
