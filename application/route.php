@@ -59,6 +59,8 @@ Route::get('api/chat/page/[:typeId]/[:userId]/[:page]/[:pageSize]','api/Chat/get
  */
 Route::get('api/region/provinces','api/Region/getProvinces');
 
+Route::get('api/notice/page/[:page]/[:pageSize]','api/Notice/getNoticeForPage');
+
 
 return [
     '__pattern__' => [
