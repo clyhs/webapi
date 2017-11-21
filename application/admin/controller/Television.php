@@ -30,12 +30,12 @@ class Television extends BaseAdmin{
             ->join(' t_region c ',' a.province = c.code ','left')
             ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left');
 
-        /*
+
         foreach ([ 'name'] as $key) {
             if (isset($get[$key]) && $get[$key] !== '') {
                 $db->where('a.'.$key, 'like', "%{$get[$key]}%");
             }
-        }*/
+        }
 
 
         foreach (['type_id'] as $key) {
