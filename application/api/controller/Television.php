@@ -194,7 +194,7 @@ class Television extends Rest{
             ->join(' t_region b ',' a.country = b.code ','left')
             ->join(' t_region c ',' a.province = c.code ','left')
             ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
-            ->join(' t_user_tv e','e.tv_id = a.id ')
+            ->join(' t_user_tv e','e.tv_id = a.id ','left')
             ->where($where)
             ->group('a.id')
             ->order('a.id desc')
