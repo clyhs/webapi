@@ -180,8 +180,8 @@ class Television extends Rest{
     public function getTvByUserIdAndTypeId($userId,$typeId,$page = 1,$pageSize = 15){
 
         $where = [
-            "e.user_id"=>$userId,
-            "e.type_id"=>$typeId
+            "a.user_id"=>$userId,
+            "a.type_id"=>$typeId
         ];
 
         $options=[
