@@ -187,7 +187,7 @@ class Television extends Rest{
         $options=[
             'page'=>$page
         ];
-
+        /*
         $lists = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames')
             ->table("t_television")
             ->alias('a')
@@ -198,7 +198,19 @@ class Television extends Rest{
             ->where($where)
             ->group('a.id')
             ->order('a.id desc')
+            ->paginate($pageSize,false,$options);*/
+        $lists = Db::field('b.*,c.name as countryName,d.name as provinceName,GROUP_CONCAT(e.name) AS typeNames')
+            ->table("t_user_tv")
+            ->alias('a')
+            ->join(' t_television b ',' a.tv_id = b.id ','left')
+            ->join(' t_region c ',' b.country = c.code ','left')
+            ->join(' t_region d ',' b.province = d.code ','left')
+            ->join(' t_dict e','FIND_IN_SET(e.id , b.type_ids) ','left')
+            ->where($where)
+            ->group('a.id')
+            ->order('a.id desc')
             ->paginate($pageSize,false,$options);
+
 
         $result = [
             "code"=>"10000",
