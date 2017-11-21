@@ -177,7 +177,7 @@ class Television extends Rest{
      * @param $typeId
      * @return mixed
      */
-    public function getTvByUserIdAndTypeId($page = 1,$pageSize = 15,$userId,$typeId){
+    public function getTvByUserIdAndTypeId($userId,$typeId,$page = 1,$pageSize = 15){
 
         $where = [
             "e.user_id"=>$userId,
@@ -197,7 +197,7 @@ class Television extends Rest{
             ->join(' t_user_tv e','e.tv_id = a.id ')
             ->where($where)
             ->group('a.id')
-            ->order('a.id asc')
+            ->order('a.id desc')
             ->paginate($pageSize,false,$options);
 
         $result = [
