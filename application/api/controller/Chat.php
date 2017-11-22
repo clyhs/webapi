@@ -130,7 +130,21 @@ class Chat extends BaseApiRest
             $sql = 'select a.* from t_chat_info a '.
                 'where a.chat_id='.$item['id'].' order by a.id asc';
             $childrens =Db::query($sql);
-            $lists[$key]['infos'] = $childrens;
+            $images = array();
+            $videos = array();
+            $k=0;
+            $m=0;
+            for($i=0;$i<count($childrens);$i++){
+                if(substr($childrens[$i]['url'],-3,0) == 'mp4'){
+                    $videos[$k] = $childrens[$i];
+                    $k++;
+                }else{
+                    $images[$m] = $childrens[$i];
+                    $m++;
+                }
+            }
+            $lists[$key]['images'] = $images;
+            $lists[$key]['videos'] = $videos;
         }
         return $lists;
     }
