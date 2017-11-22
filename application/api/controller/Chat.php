@@ -135,7 +135,7 @@ class Chat extends BaseApiRest
             $k=0;
             $m=0;
             for($i=0;$i<count($childrens);$i++){
-                if(substr($childrens[$i]['url'],-1,3) == 'mp4'){
+                if(substr($childrens[$i]['url'],strripos($childrens[$i]['url'],3)) == 'mp4'){
                     $videos[$k] = $childrens[$i];
                     $k++;
                 }else{
