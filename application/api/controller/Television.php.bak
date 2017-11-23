@@ -202,7 +202,7 @@ class Television extends Rest{
         $lists = Db::field('b.*,c.name as countryName,d.name as provinceName,GROUP_CONCAT(e.name) AS typeNames')
             ->table("t_user_tv")
             ->alias('a')
-            ->join(' t_television b ',' a.tv_id = b.id ')
+            ->join(' t_television b ',' a.tv_id = b.id ','left')
             ->join(' t_region c ',' b.country = c.code ','left')
             ->join(' t_region d ',' b.province = d.code ','left')
             ->join(' t_dict e','FIND_IN_SET(e.id , b.type_ids) ','left')
