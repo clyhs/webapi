@@ -108,7 +108,7 @@ class User extends BaseApiRest{
                ' and type_id=15 ';
         $row =Db::query($sql);
         $vo['history'] = $row[0]['history'];
-        $sql = 'select count(a.*) as likenum from t_user_tv a inner join t_television b on b.id=a.tv_id where a.user_id='.$vo['id'].' '.
+        $sql = 'select count(1) as likenum from t_user_tv a inner join t_television b on b.id=a.tv_id where a.user_id='.$vo['id'].' '.
                ' and a.type_id=14 ';
         $row2 = Db::query($sql);
         $vo['likenum'] =$row2[0]['likenum'];
