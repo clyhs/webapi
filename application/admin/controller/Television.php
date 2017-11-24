@@ -107,8 +107,8 @@ class Television extends BaseAdmin{
                     $data[$i]['country'] = $vo['country'];
                     $data[$i]['province'] = $vo['province'];
                     $data[$i]['city'] = $vo['city'];
-                    $data[$i]['name'] = $context[0];
-                    $data[$i]['url_1'] =$context[1];
+                    $data[$i]['name'] = iconv('gbk', 'utf8',$context[0]);
+                    $data[$i]['url_1'] =iconv('gbk', 'utf8',$context[1]);
                     $data[$i]['url_2'] ='#';
                     $data[$i]['url_3'] ='#';
                     $data[$i]['type_ids'] =$vo['type_ids'];
