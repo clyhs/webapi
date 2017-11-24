@@ -95,9 +95,15 @@ class Television extends BaseAdmin{
             if (isset($vo['file_3'])) {
                 $vo['file_3'] = str_replace("http://webapi.abigfish.org/","",$vo['file_3']);
 
+                $lines = file($vo['file_3']);
+                $str = "";
+                foreach($lines as $line)
+                {
+                    $str .= $line.'<br>';
+                }
             }
 
-            $this->error($vo['file_3']);
+            $this->error($str);
         }
 
         if ($this->request->isGet()) {
