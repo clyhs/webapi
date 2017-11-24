@@ -74,7 +74,7 @@ class Television extends BaseAdmin{
 
     public function upfile()
     {
-        return $this->_form($this->table, 'upfile');
+        return $this->_form($this->table, '');
     }
 
     public function getchildregion($parentCode){
