@@ -63,8 +63,15 @@ class BaseAdmin extends Controller{
         }
         // POST请求, 数据自动存库
         $data = array_merge($this->request->post(), $extendData);
+
         if (false !== $this->_callback('_'.$function.'_my_filter', $data)) {
-            $result = DataService::save($db, $data, $pk, $where);
+
+            if(is_array($data)){
+                for($i=0;$i<count($data);$i++) {
+                    $result = DataService::save($db, $data[$i], $pk, $where);
+                }
+            }
+
             if (false !== $this->_callback('_'.$function.'_my_result', $result)) {
                 if ($result !== false) {
                     $this->success('恭喜, 数据保存成功!', '');
