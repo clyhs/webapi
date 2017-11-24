@@ -120,7 +120,7 @@ class Television extends BaseAdmin{
             }
             $vo = &$data;
 
-            $this->error(json($vo));
+            $this->error(json($data));
         }
 
         if ($this->request->isGet()) {
