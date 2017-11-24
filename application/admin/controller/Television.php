@@ -91,20 +91,36 @@ class Television extends BaseAdmin{
     protected function _upfile_my_filter(&$vo)
     {
         if ($this->request->isPost()) {
-
+            if (isset($vo['type_ids']) && is_array($vo['type_ids'])) {
+                $vo['type_ids'] = join(',', $vo['type_ids']);
+            }
+            $data = array();
             if (isset($vo['file_3'])) {
                 $vo['file_3'] = str_replace("http://webapi.abigfish.org/","",$vo['file_3']);
-
                 $lines = file($vo['file_3']);
-                $str = "";
+                $i = 0;
                 foreach($lines as $line)
                 {
-                    $str .= $line.'<br>';
+                    //$str .= $line.'<br>';
+                    $linestr = iconv('gbk', 'utf8', $line);
+                    $context = explode(',',$linestr);
+                    $data[$i]['country'] = $vo['country'];
+                    $data[$i]['province'] = $vo['province'];
+                    $data[$i]['city'] = $vo['city'];
+                    $data[$i]['name'] = $context[0];
+                    $data[$i]['url_1'] =$context[1];
+                    $data[$i]['url_2'] ='#';
+                    $data[$i]['url_3'] ='#';
+                    $data[$i]['type_ids'] =$vo['type_ids'];
+                    $i++;
                 }
-                $output = iconv('gbk', 'utf8', $str);
+                //$output = iconv('gbk', 'utf8', $str);
+            }else{
+                $this->error("请上传文件");
             }
+            $vo = $data;
 
-            $this->error($output);
+            $this->error(json($vo));
         }
 
         if ($this->request->isGet()) {
