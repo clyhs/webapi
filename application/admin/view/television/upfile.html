@@ -42,6 +42,24 @@
             </select>
         </div>
     </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择类型</label>
+        <div class="layui-input-block">
+            <!---->
+            <!--{foreach $channels as $v}-->
+
+            {if isset($vo['type_ids'])}
+            <input {in name='$v.id' value='$vo.type_ids' }checked{else/}{/in}  class="list-check-box" value='{$v.id}' type='checkbox' name="type_ids[]" style="display: inline-block;"/>{$v.name}
+
+            {else}
+            <input  class="list-check-box" value='{$v.id}' type='checkbox' name="type_ids[]" style="display: inline-block;"/>{$v.name}
+
+            {/if}
+            <!--{/foreach}-->
+
+
+        </div>
+    </div>
 
     <div class="layui-form-item">
         <label class="layui-form-label">电视源文件</label>
@@ -56,6 +74,7 @@
             </div>
         </div>
     </div>
+
 
     <div class="layui-form-item text-center">
         <button class="layui-btn" type='submit'>保存数据</button>
