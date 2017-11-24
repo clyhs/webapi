@@ -44,3 +44,66 @@
     </div>
 
 </form>
+<script>
+    
+
+    $(function() {
+        $('body').off('change', 'select[name=country]').on('change', 'select[name=country]', function () {
+            var value = $(this).val();
+
+            var prov = $("#province");
+            var city = $("#city");
+
+            if(value.length>0){
+                $.ajax({
+                    url: "{:url(\"$classuri/getchildregion\")}?parentCode="+value,
+                    data: {},
+                    type: 'get',
+                    dataType: 'json',
+                    success: function(data) {
+                        //alert(data1)
+                        var _html = '<option value="" >选择省份</option>';
+                        $.each(data, function(k, v){
+                            _html += '<option value="' + v.code + '" >' + v.name + '</option>';
+                        });
+                        prov.html(_html);
+                    }
+                });
+            }else{
+                prov.html('<option value="" >选择省份</option>');
+                city.html('<option value="" >选择城市</option>');
+            }
+
+
+
+        });
+
+        $('body').off('change', 'select[name=province]').on('change', 'select[name=province]', function () {
+            var value = $(this).val();
+            var city = $("#city");
+
+            if(value.length>0){
+                $.ajax({
+                    url: "{:url(\"$classuri/getchildregion\")}?parentCode="+value,
+                    data: {},
+                    type: 'get',
+                    dataType: 'json',
+                    success: function(data) {
+                        //alert(data1)
+                        var _html = '<option value="" >选择城市</option>';
+                        $.each(data, function(k, v){
+                            _html += '<option value="' + v.code + '" >' + v.name + '</option>';
+                        });
+                        city.html(_html);
+                    }
+                });
+            }else{
+                city.html('<option value="" >选择城市</option>');
+
+            }
+
+
+
+        });
+    });
+</script>
