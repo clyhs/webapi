@@ -43,9 +43,27 @@
         </div>
     </div>
 
+    <div class="layui-form-item">
+        <label class="layui-form-label">电视源文件</label>
+        <div class="layui-input-block">
+            <div style="position:relative;width:500px">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="file_3" placeholder="请选择txt文件...">
+                    <a class="input-group-addon" data-file="one" data-type="txt" data-uptype="local" data-field="file_3">
+                        <i class="fa fa-file"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </form>
 <script>
-    
+    require(['jquery'], function () {
+        $('[name="file_3"]').on('change', function () {
+            alert('文件上传后的地址：' + this.value);
+        });
+    });
 
     $(function() {
         $('body').off('change', 'select[name=country]').on('change', 'select[name=country]', function () {
