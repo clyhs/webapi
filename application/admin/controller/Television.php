@@ -91,7 +91,13 @@ class Television extends BaseAdmin{
     protected function _upfile_my_filter(&$vo)
     {
         if ($this->request->isPost()) {
-            $this->error('电视台已经存在，请重新添加！');
+
+            if (isset($vo['file_3'])) {
+                $vo['file_3'] = str_replace("http://webapi.abigfish.org/","",$vo['file_3']);
+
+            }
+
+            $this->error($vo['file_3']);
         }
 
         if ($this->request->isGet()) {
