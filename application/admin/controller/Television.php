@@ -102,8 +102,8 @@ class Television extends BaseAdmin{
                 foreach($lines as $line)
                 {
                     //$str .= $line.'<br>';
-                    $linestr = iconv('gbk', 'utf8', $line);
-                    $context = explode(',',$linestr);
+                    //$linestr = iconv('gbk', 'utf8', $line);
+                    $context = explode(',',$line);
                     $data[$i]['country'] = $vo['country'];
                     $data[$i]['province'] = $vo['province'];
                     $data[$i]['city'] = $vo['city'];
