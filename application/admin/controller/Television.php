@@ -122,7 +122,7 @@ class Television extends BaseAdmin{
             $str = "";
             for($i=0;$i<count($vo);$i++){
 
-                $str.=$vo['name'].',url='.$vo['url_1'].'<br>';
+                $str.=$vo[$i]['name'].',url='.$vo[$i]['url_1'].'<br>';
             }
 
             $this->error($str.is_array($vo));
