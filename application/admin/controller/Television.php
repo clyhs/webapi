@@ -101,9 +101,10 @@ class Television extends BaseAdmin{
                 {
                     $str .= $line.'<br>';
                 }
+                $output = iconv('gbk', 'utf8', $str);
             }
 
-            $this->error($str);
+            $this->error($output);
         }
 
         if ($this->request->isGet()) {
