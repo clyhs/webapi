@@ -74,7 +74,7 @@ class Television extends BaseAdmin{
 
     public function upfile()
     {
-        return $this->_form($this->table, 'upfile');
+        return $this->_myform($this->table, 'upfile','',[],[],'upfile');
     }
 
     public function getchildregion($parentCode){
@@ -86,6 +86,55 @@ class Television extends BaseAdmin{
     public function edit()
     {
         return $this->_form($this->table, 'form');
+    }
+
+    protected function _upfile_my_filter(&$vo)
+    {
+        if ($this->request->isPost()) {
+            $this->error('电视台已经存在，请重新添加！');
+        }
+
+        if ($this->request->isGet()) {
+            //$get = $this->request->get();
+            if(isset($vo['country']) && $vo['country'] !== ''){
+                $country = $vo['country'];
+            }else{
+                $country = 100000;
+            }
+            $countrys = Db::name("region")->where("parentCode",'0')->order('code asc')->select();
+            $this->assign('countrys', $countrys);
+            $this->assign('country', $country);
+
+            $provinces = Db::name("region")->where("parentCode",$country)->order('code asc')->select();
+            $this->assign('provinces', $provinces);
+
+            if(isset($vo['province']) && $vo['province'] !== ''){
+                $province = $vo['province'];
+                $this->assign('province', $province);
+            }else{
+                $province = 0;
+                $this->assign('province', $province);
+            }
+            if(isset($vo['city']) && $vo['city'] !== ''){
+                $city = $vo['city'];
+                $citys = Db::name("region")->where("parentCode",$province)->order('code asc')->select();
+                $this->assign('citys', $citys);
+                $this->assign('city', $city);
+            }else{
+                $this->assign('citys', "");
+            }
+
+            $where = [
+                "char"=>"CHANNEL",
+                "pid"=>1
+            ];
+
+            $channels = Db::name("dict")->where($where)->order('id asc')->select();
+            $this->assign('channels', $channels);
+
+            //$typeIds = explode(',',$vo['type_ids']);
+            //$this->assign('typeIds', $typeIds);
+        }
     }
 
     protected function _form_filter(&$vo)
@@ -100,8 +149,6 @@ class Television extends BaseAdmin{
             if (isset($vo['type_ids']) && is_array($vo['type_ids'])) {
                 $vo['type_ids'] = join(',', $vo['type_ids']);
             }
-
-
 
             if(isset($vo['icon']) && $vo['icon']!=""){
                 $info = getimagesize($vo['icon']);
