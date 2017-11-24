@@ -118,9 +118,9 @@ class Television extends BaseAdmin{
             }else{
                 $this->error("请上传文件");
             }
-            $vo = &$data;
+            //$vo = &$data;
 
-            $this->error(json($data));
+            $this->error(count($data));
         }
 
         if ($this->request->isGet()) {
