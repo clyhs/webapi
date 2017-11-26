@@ -145,6 +145,12 @@ class Chat extends BaseApiRest
             }
             $lists[$key]['images'] = $images;
             $lists[$key]['videos'] = $videos;
+
+            $sql = 'select count(1) as count from t_comment where type_id=12 '.
+                   ' and uid='.$item['id'].' and pid=0 ';
+            $row =Db::query($sql);
+            $lists[$key]['comment_num'] = $row[0]['count'];
+
         }
         return $lists;
     }
