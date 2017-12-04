@@ -388,6 +388,13 @@ class Television extends Rest{
 
         $id = Db::name('user_tv')->where($data)->value('id');
         if($id){
+            $update_arr = [
+                'id'=>$id,
+                'create_at'=>date("Y-m-d H:i:s" ,time())
+            ];
+            $db = Db::name('user_tv');
+            $pk = $db->getPk() ? $db->getPk() : 'id';
+            $result = DataService::save($db, $update_arr, $pk, []);
             return json(["code"=>20001,"desc"=>"已经收藏","data"=>[]]);
         }
         $db = Db::name('user_tv');
