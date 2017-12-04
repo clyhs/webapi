@@ -26,6 +26,7 @@ class Chat extends BaseApiRest
 
     public function addChat(){
 
+
         $type_id = empty(Request::instance()->param('type_id'))?0:Request::instance()->param('type_id');
         $context = empty(Request::instance()->param('context'))?"":Request::instance()->param('context');
         $user_id = empty(Request::instance()->param('user_id'))?0:Request::instance()->param('user_id');

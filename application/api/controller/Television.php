@@ -208,7 +208,7 @@ class Television extends Rest{
             ->join(' t_dict e','FIND_IN_SET(e.id , b.type_ids) ','left')
             ->where($where)
             ->group('a.id')
-            ->order('a.id desc')
+            ->order('a.create_at desc')
             ->paginate($pageSize,false,$options);
 
 
