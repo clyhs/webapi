@@ -27,7 +27,7 @@ class Television extends Rest{
      * @param $typeId
      * @return mixed
      */
-    public function getTvForPageByType($page = 1,$pageSize = 15,$typeId){
+    public function getTvForPageByType($page = 1,$pageSize = 20,$typeId){
         $options=[
             'page'=>$page
         ];
@@ -60,7 +60,7 @@ class Television extends Rest{
      * @param int $typeId
      * @return mixed
      */
-    public function getTvByProperty($page = 1,$pageSize = 15,$typeId=0){
+    public function getTvByProperty($page = 1,$pageSize = 20,$typeId=0){
 
         $where = array();
         if( $typeId> 0){
@@ -177,7 +177,7 @@ class Television extends Rest{
      * @param $typeId
      * @return mixed
      */
-    public function getTvByUserIdAndTypeId($userId,$typeId,$page = 1,$pageSize = 15){
+    public function getTvByUserIdAndTypeId($userId,$typeId,$page = 1,$pageSize = 20){
 
         $where = [
             "a.user_id"=>$userId,
@@ -347,7 +347,7 @@ class Television extends Rest{
         return $lists;
     }
 
-    public function getTvForPageByProvince($page = 1,$pageSize = 15,$code){
+    public function getTvForPageByProvince($page = 1,$pageSize = 20,$code){
         $where=[
             'province'=>$code
         ];
