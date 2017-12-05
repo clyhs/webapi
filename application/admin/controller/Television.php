@@ -108,8 +108,11 @@ class Television extends BaseAdmin{
                     $data[$i]['province'] = $vo['province'];
                     $data[$i]['city'] = $vo['city'];
 
-                    $data[$i]['name'] = mb_convert_encoding($context[0], "utf8", "gbk");//iconv('gbk', 'utf8',$context[0]);
-                    $data[$i]['url_1'] =mb_convert_encoding($context[1], "utf8", "gbk");;
+                    //$data[$i]['name'] = mb_convert_encoding($context[0], "utf8", "gbk");//iconv('gbk', 'utf8',$context[0]);
+                    $data[$i]['name'] = $context[0];
+                    $url_1 = str_replace('\r\n','', $context[1]);
+                    $data[$i]['url_1'] = $url_1;
+                    //$data[$i]['url_1'] =mb_convert_encoding($context[1], "utf8", "gbk");;
                     $data[$i]['url_2'] ='#';
                     $data[$i]['url_3'] ='#';
                     $data[$i]['type_ids'] =$vo['type_ids'];
