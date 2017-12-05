@@ -154,9 +154,10 @@ class Television extends Rest{
             ->join(' t_region b ',' a.country = b.code ','left')
             ->join(' t_region c ',' a.province = c.code ','left')
             ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
-            ->where($recommend)
+            //->where($recommend)
             ->group('a.id')
-            ->order('a.id desc')
+            ->order(' rand() ')
+            //->order('a.id desc')
             ->limit(4)->select();
         $result_array = [
             "hots"=>$lists_hot,
