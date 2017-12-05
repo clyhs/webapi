@@ -145,7 +145,8 @@ class Television extends Rest{
             ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
             //->where($new)
             ->group('a.id')
-            ->order('a.id desc')
+            ->order(' rand() ')
+            //->order('a.id desc')
             ->limit(8)->select();
         $lists_recommend = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames')
             ->table("t_television")
