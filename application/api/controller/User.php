@@ -180,6 +180,28 @@ class User extends BaseApiRest{
 
     }
 
+    public function getFriendsForPage($page = 1,$pageSize = 15,$userId){
+
+        $options=[
+            'page'=>$page
+        ];
+        $db = Db::field('a.*')
+            ->table("t_user")
+            ->alias('a')
+            ->join('t_user_friend b ','b.user_id=a.id')
+            ->where(" b.user_id=".$userId)
+            ->order(' b.id desc')
+            ->paginate($pageSize,false,$options);
+
+        $result = [
+            "code"=>10000,
+            "desc"=>"",
+            "data"=>$db->all()
+        ];
+
+        return json($result);
+    }
+
     public function getAllUsers(){
         $model = new UserModel();
         $data = $model->all();
