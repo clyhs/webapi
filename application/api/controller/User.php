@@ -180,7 +180,7 @@ class User extends BaseApiRest{
 
     }
 
-    public function getFriendsForPage($page = 1,$pageSize = 15,$userId){
+    public function getFriendsForPage($userId,$page = 1,$pageSize = 15){
 
         $options=[
             'page'=>$page
