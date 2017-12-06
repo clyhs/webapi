@@ -188,7 +188,7 @@ class User extends BaseApiRest{
         $db = Db::field('a.*')
             ->table("t_user")
             ->alias('a')
-            ->join('t_user_friend b ','b.user_id=a.id')
+            ->join('t_user_friend b ','b.user_id=a.id','left')
             ->where(" b.user_id=".$userId)
             ->order(' b.id desc')
             ->paginate($pageSize,false,$options);
