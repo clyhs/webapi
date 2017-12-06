@@ -209,44 +209,44 @@ class User extends BaseApiRest{
         return json($result);
     }
 
-    public function getAllUsers(){
-        $model = new UserModel();
-        $data = $model->all();
-        $result = [
-            "code"=>10000,
-            "desc"=>"",
-            "data"=>$data
-        ];
-        return json($result);
-    }
-
-    public function getPageForUser($page = 1,$pageSize = 10){
-        $model = new UserModel();
-        //$count = $model->count();
-        $options=[
-            'page'=>$page
-        ];
-
-        $list  = $model->paginate($pageSize,false,$options);
-        $result = [
-            "code"=>10000,
-            "desc"=>"",
-            "data"=>$list
-        ];
-        return json($result);
-    }
-
-    public function getUserById($id){
-        $model = db('user');
-        $data  = $model->where("id",$id)->find();
-
-        $result = [
-            "code"=>10000,
-            "desc"=>"",
-            "data"=>$data
-        ];
-        return json($result);
-    }
+//    public function getAllUsers(){
+//        $model = new UserModel();
+//        $data = $model->all();
+//        $result = [
+//            "code"=>10000,
+//            "desc"=>"",
+//            "data"=>$data
+//        ];
+//        return json($result);
+//    }
+//
+//    public function getPageForUser($page = 1,$pageSize = 10){
+//        $model = new UserModel();
+//        //$count = $model->count();
+//        $options=[
+//            'page'=>$page
+//        ];
+//
+//        $list  = $model->paginate($pageSize,false,$options);
+//        $result = [
+//            "code"=>10000,
+//            "desc"=>"",
+//            "data"=>$list
+//        ];
+//        return json($result);
+//    }
+//
+//    public function getUserById($id){
+//        $model = db('user');
+//        $data  = $model->where("id",$id)->find();
+//
+//        $result = [
+//            "code"=>10000,
+//            "desc"=>"",
+//            "data"=>$data
+//        ];
+//        return json($result);
+//    }
 
 
 
