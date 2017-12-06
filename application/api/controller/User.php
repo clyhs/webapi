@@ -199,11 +199,11 @@ class User extends BaseApiRest{
             ->where($where)
             ->order('a.id asc')
             ->paginate($pageSize,false,$options);
-
+        $lists->all();
         $result = [
             "code"=>"10000",
-            "desc"=>"",
-            "data"=>$lists->all()
+            "desc"=>$lists->getLastSql(),
+            "data"=>[]
         ];
 
         return json($result);
