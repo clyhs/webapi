@@ -185,11 +185,14 @@ class User extends BaseApiRest{
         $options=[
             'page'=>$page
         ];
+        $where = [
+            "b.user_id"=>$userId
+        ];
         $db = Db::field('a.*')
             ->table("t_user")
             ->alias('a')
-            ->join('t_user_friend b ','b.user_id=a.id','left')
-            ->where(" b.user_id=".$userId)
+            ->join(' t_user_friend b ',' b.user_id = a.id ','left')
+            ->where($where)
             ->order(' b.id desc')
             ->paginate($pageSize,false,$options);
 
