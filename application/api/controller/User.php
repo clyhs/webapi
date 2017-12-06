@@ -195,7 +195,7 @@ class User extends BaseApiRest{
             ->where($where)
             ->order(' b.id desc')
             ->paginate($pageSize,false,$options);
-
+        $db->all();
         $result = [
             "code"=>10000,
             "desc"=>"",
