@@ -193,7 +193,7 @@ class User extends BaseApiRest{
             ->alias('a')
             //->join(' t_user_friend b ',' b.friend_id = a.id ','left')
             ->where($where)
-            ->order(' b.id desc')
+            ->order(' a.id desc')
             ->paginate($pageSize,false,$options);
         //$db->all();
         $result = [
