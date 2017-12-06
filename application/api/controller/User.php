@@ -186,20 +186,20 @@ class User extends BaseApiRest{
             'page'=>$page
         ];
         $where = [
-            "b.user_id"=>$userId
+            "a.id"=>$userId
         ];
         $db = Db::field('a.*')
             ->table("t_user")
             ->alias('a')
-            ->join(' t_user_friend b ',' b.friend_id = a.id ','left')
+            //->join(' t_user_friend b ',' b.friend_id = a.id ','left')
             ->where($where)
             ->order(' b.id desc')
             ->paginate($pageSize,false,$options);
-        $db->all();
+        //$db->all();
         $result = [
             "code"=>10000,
             "desc"=>"",
-            "data"=>$db->getLastSql()
+            "data"=>$db->all()
         ];
 
         return json($result);
