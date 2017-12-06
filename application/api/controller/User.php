@@ -202,7 +202,7 @@ class User extends BaseApiRest{
         $lists->all();
         $result = [
             "code"=>"10000",
-            "desc"=>$lists->getLastSql(),
+            "desc"=>"sql=".$lists->getLastSql(),
             "data"=>[]
         ];
 
