@@ -186,7 +186,7 @@ class User extends BaseApiRest{
             'page'=>$page
         ];
         $where = [
-            "b.user_id"=>$userId
+            'b.user_id'=>$userId
         ];
         //select a.* from t_user a
         //left join t_user_friend b on b.friend_id = a.id
