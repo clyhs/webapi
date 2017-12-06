@@ -199,7 +199,7 @@ class User extends BaseApiRest{
         $result = [
             "code"=>10000,
             "desc"=>"",
-            "data"=>$db->all()
+            "data"=>$db->getLastSql()
         ];
 
         return json($result);
