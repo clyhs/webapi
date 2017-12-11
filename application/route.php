@@ -18,7 +18,7 @@ use think\Route;
 //Route::get('api/user/page/[:page]/[:pageSize]','api/User/getPageForUser');
 //Route::get('api/user/:id','api/User/getUserById');
 Route::post('api/user/register','api/User/register');
-Route::get('api/user/login','api/User/login');
+Route::post('api/user/login','api/User/login');
 Route::post('api/user/profile','api/User/profile');
 Route::get('api/user/friends/:userId/[:page]/[:pageSize]','api/User/getFriendsForPage');
 
