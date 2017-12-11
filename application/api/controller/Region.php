@@ -34,7 +34,7 @@ class Region extends Rest{
             ->where(" a.parentCode=100000 and code not in (900000,820000,810000,710000) ")
             ->where(" FIND_IN_SET('4' , b.type_ids) ")
             ->group(' a.code,a.name,a.type,a.fullName,a.parentCode ')
-            ->order('a.code desc');
+            ->order('a.code asc');
         $result = [
             "code"=>10000,
             "desc"=>"",
