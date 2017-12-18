@@ -452,6 +452,7 @@ class Television extends Rest{
         $name = empty(Request::instance()->param('name'))?"":Request::instance()->param('name');
         $date = empty(Request::instance()->param('date'))?"":Request::instance()->param('date');
         $class = empty(Request::instance()->param('class'))?"":Request::instance()->param('class');
+        $debug = empty(Request::instance()->param('debug'))?"":Request::instance()->param('debug');
 
         if(empty($name) || empty($date) || empty($class)){
             return json(["code"=>20001,"desc"=>"参数不能为空","data"=>[]]);
@@ -478,7 +479,11 @@ class Television extends Rest{
                     'play_time'=>$data[$i]['starttime'],
                     'play_date'=>$date,
                 ];
-                $result = DataService::save($db, $insertData, $pk, []);
+                if($debug == 1){
+
+                }else{
+                    $result = DataService::save($db, $insertData, $pk, []);
+                }
             }
         }
 
