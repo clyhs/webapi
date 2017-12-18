@@ -445,7 +445,19 @@ class Television extends Rest{
     }
 
     public function getProgram(){
-        $url = "https://m.tvsou.com/epg/CCTV-1/20171218";
+        //https://www.tvsou.com/epg/HNTV-1/20171218?class=weishi
+        //https://www.tvsou.com/epg/CCTV-1/20171218?class=yangshi
+        //$url = "https://m.tvsou.com/epg/CCTV-1/20171218";
+
+        $name = empty(Request::instance()->param('name'))?"":Request::instance()->param('name');
+        $date = empty(Request::instance()->param('date'))?"":Request::instance()->param('date');
+        $class = empty(Request::instance()->param('class'))?"":Request::instance()->param('class');
+
+        if(empty($name) || empty($date) || empty($class)){
+            return json(["code"=>20001,"desc"=>"参数不能为空","data"=>[]]);
+        }
+
+        $url = "https://m.tvsou.com/epg/".$name."/".$date."?class=".$class;
         $data = QueryList::Query($url,array(
             'name' => array('span.name','text'),
             'starttime' => array('span.start','text')
