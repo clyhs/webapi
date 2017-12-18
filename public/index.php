@@ -9,7 +9,7 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
-require 'vendor/autoload.php';
+require '/../vendor/autoload.php';
 // [ 应用入口文件 ]
 
 // 定义应用目录
