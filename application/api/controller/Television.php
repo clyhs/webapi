@@ -457,7 +457,7 @@ class Television extends Rest{
             return json(["code"=>20001,"desc"=>"参数不能为空","data"=>[]]);
         }
 
-        $url = "https://m.tvsou.com/epg/".$name."/".$date."?class=".$class;
+        $url = "https://m.tvsou.com/epg/".strtoupper($name)."/".$date."?class=".$class;
         $data = QueryList::Query($url,array(
             'name' => array('span.name','text'),
             'starttime' => array('span.start','text')
