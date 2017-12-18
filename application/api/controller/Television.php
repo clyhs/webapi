@@ -523,7 +523,7 @@ class Television extends Rest{
         $result = [
             "code"=>"10000",
             "desc"=>"",
-            "data"=>$lists->all()
+            "data"=>$lists->select()
         ];
 
         return json($result);
