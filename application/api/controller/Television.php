@@ -446,7 +446,7 @@ class Television extends Rest{
     public function getProgram(){
         $url = "https://m.tvsou.com/epg/CCTV-1/20171218";
         $ql = QueryList::get($url);
-        $ql->find('.list')->find('div')->htmls();
+        $ql->find('.list')->htmls();
         //打印结果
         print_r($ql);
 
