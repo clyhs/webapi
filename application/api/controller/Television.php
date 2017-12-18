@@ -495,5 +495,38 @@ class Television extends Rest{
         ];
         return json($result);
     }
+
+    public function getProgramById(){
+        //https://www.tvsou.com/epg/HNTV-1/20171218?class=weishi
+        //https://www.tvsou.com/epg/CCTV-1/20171218?class=yangshi
+        //$url = "https://m.tvsou.com/epg/CCTV-1/20171218";
+
+        $id = empty(Request::instance()->param('id'))?"":Request::instance()->param('id');
+        $date = empty(Request::instance()->param('date'))?"":Request::instance()->param('date');
+
+        if(empty($id) || empty($date)){
+            return json(["code"=>20001,"desc"=>"参数不能为空","data"=>[]]);
+        }
+
+        $where = [
+            'tv_id' => $id,
+            'play_date'=>$date
+        ];
+
+        $lists = Db::field('a.*')
+            ->table("t_television_program")
+            ->alias('a')
+            ->where($where)
+            ->group('a.id')
+            ->order('a.id asc');
+
+        $result = [
+            "code"=>"10000",
+            "desc"=>"",
+            "data"=>$lists->all()
+        ];
+
+        return json($result);
+    }
 }
 
