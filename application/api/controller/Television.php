@@ -486,7 +486,7 @@ class Television extends Rest{
         $result = [
             "code"=>"10000",
             "desc"=>$url.',id='.$tv_id[0]['id'],
-            "data"=>$data
+            "data"=>$tv_id
         ];
         return json($result);
     }
