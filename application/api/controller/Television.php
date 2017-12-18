@@ -461,7 +461,7 @@ class Television extends Rest{
         $where = [
             'name' => $name
         ];
-        $tv_id = Db::name($this->table)->where($where)->column('id');
+        $tv_id = Db::name($this->table)->where("name='".$name."' or keyword='".$name."'")->column('id');
 
         $url = "https://m.tvsou.com/epg/".$name."/".$date."?class=".$class;
         $data = QueryList::Query($url,array(
