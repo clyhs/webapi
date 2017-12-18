@@ -8,6 +8,9 @@
 
 namespace app\api\controller;
 
+require 'phpQuery.php';
+require 'QueryList.php';
+
 use think\Request;
 use think\controller\Rest;
 use think\Db;
