@@ -478,6 +478,7 @@ class Television extends Rest{
                     'tv_id'=>$tv_id[0],
                     'play_time'=>$data[$i]['starttime'],
                     'play_date'=>$date,
+                    'play_at'=>date( "Ymd H:i:s",strtotime($date." ".$data[$i]['starttime'].":00"))
                 ];
                 if($debug == 1){
 
