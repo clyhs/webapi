@@ -478,7 +478,7 @@ class Television extends Rest{
                     'play_time'=>$data[$i]['starttime'],
                     'play_date'=>$date,
                 ];
-                //$result = DataService::save($db, $insertData, $pk, []);
+                $result = DataService::save($db, $insertData, $pk, []);
             }
         }
 
