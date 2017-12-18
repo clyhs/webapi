@@ -33,7 +33,7 @@ class Television extends Rest{
         $options=[
             'page'=>$page
         ];
-
+        $date = date('Y-m-d',time());
         $map[]=['exp','FIND_IN_SET('.$typeId.',a.type_ids)'];
         $lists = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames')
             ->table("t_television")
