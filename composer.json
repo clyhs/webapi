@@ -21,7 +21,8 @@
         "zoujingli/ip2region": "^1.0",
         "qiniu/php-sdk": "^7.0",
         "aliyuncs/oss-sdk-php": "^2.2",
-        "topthink/think-image": "^1.0"
+        "topthink/think-image": "^1.0",
+        "jaeger/querylist": "^3.2"
     },
     "extra": {
         "think-path": "thinkphp"
