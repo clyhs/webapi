@@ -1,7 +1,7 @@
 <?php
 
 namespace QL;
-
+require 'phpQuery.php';
 use phpQuery,Exception,ReflectionClass;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
