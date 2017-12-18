@@ -483,7 +483,7 @@ class Television extends Rest{
                     'tv_id'=>$tv_id[0],
                     'play_time'=>$data[$i]['starttime'],
                     'play_date'=>$date,
-                    'play_at'=>strtotime($year."-".$month."-".$day." ".$data[$i]['starttime'].":00")
+                    'play_at'=>$year."-".$month."-".$day." ".$data[$i]['starttime'].":00"
                 ];
                 if($debug == 1){
 
