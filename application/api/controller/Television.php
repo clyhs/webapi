@@ -445,10 +445,9 @@ class Television extends Rest{
 
     public function getProgram(){
         $url = "https://m.tvsou.com/epg/CCTV-1/20171218";
-        $ql = QueryList::get($url);
-        $ql->find('.list')->htmls();
+        $data = QueryList::get('http://cms.querylist.cc/bizhi/453.html')->find('img')->attrs('src');
         //打印结果
-        print_r($ql);
+        print_r($data->all());
 
     }
 }
