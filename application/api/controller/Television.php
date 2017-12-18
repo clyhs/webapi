@@ -470,11 +470,11 @@ class Television extends Rest{
 
         $db= Db::name("television_program") ;
         $pk ='id';
-        if($tv_id!="" && count($data)>0){
+        if(is_array($tv_id) && count($data)>0){
             for($i=0;$i<count($data);$i++){
                 $insertData = [
                     'title'=>$data[$i]['name'],
-                    'tv_id'=>$tv_id,
+                    'tv_id'=>$tv_id[0],
                     'play_time'=>$data[$i]['starttime'],
                     'play_date'=>$date,
                 ];
@@ -485,8 +485,8 @@ class Television extends Rest{
         //print_r($data);
         $result = [
             "code"=>"10000",
-            "desc"=>$url.',id='.$tv_id[0]['id'],
-            "data"=>$tv_id
+            "desc"=>$url.',id='.$tv_id[0],
+            "data"=>$data
         ];
         return json($result);
     }
