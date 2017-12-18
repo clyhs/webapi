@@ -446,10 +446,10 @@ class Television extends Rest{
 
     public function getProgram(){
         $url = "https://m.tvsou.com/epg/CCTV-1/20171218";
-        $hj = QueryList::Query('http://mobile.csdn.net/',array("url"=>array('.unit h1 a','href')));
-        $data = $hj->getData(function($x){
-            return $x['url'];
-        });
+        $data = QueryList::Query($url,array(
+            'list' => array('span>name','text'),
+            'content' => array('span>start','text')
+        ),'.list>a')->data;
         print_r($data);
 
     }
