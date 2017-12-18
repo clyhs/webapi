@@ -465,7 +465,7 @@ class Television extends Rest{
         //print_r($data);
         $result = [
             "code"=>"10000",
-            "desc"=>"",
+            "desc"=>$name,
             "data"=>$data
         ];
         return json($result);
