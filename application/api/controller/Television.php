@@ -16,6 +16,7 @@ use think\Image;
 use think\Config;
 use app\common\service\DataService;
 use app\common\service\FileService;
+use QL\QueryList;
 
 class Television extends Rest{
 
@@ -440,6 +441,15 @@ class Television extends Rest{
             "data"=>$lists->all()
         ];
         return json($result);
+    }
+
+    public function getProgram(){
+        $url = "https://m.tvsou.com/epg/CCTV-1/20171218";
+        $ql = QueryList::get($url);
+        $ql->find('.list')->find('div')->htmls();
+        //打印结果
+        print_r($ql);
+
     }
 }
 
