@@ -447,11 +447,16 @@ class Television extends Rest{
     public function getProgram(){
         $url = "https://m.tvsou.com/epg/CCTV-1/20171218";
         $data = QueryList::Query($url,array(
-            'list' => array('span.name','text'),
-            'content' => array('span.start','text')
+            'name' => array('span.name','text'),
+            'starttime' => array('span.start','text')
         ),'.list>a')->data;
-        print_r($data);
-
+        //print_r($data);
+        $result = [
+            "code"=>"10000",
+            "desc"=>"",
+            "data"=>$data
+        ];
+        return json($result);
     }
 }
 
