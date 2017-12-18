@@ -457,11 +457,31 @@ class Television extends Rest{
             return json(["code"=>20001,"desc"=>"参数不能为空","data"=>[]]);
         }
 
+        $where = [
+            'name' => $name
+        ];
+        $tv_id = Db::name($this->table)->where($where)->column('id');
+
         $url = "https://m.tvsou.com/epg/".$name."/".$date."?class=".$class;
         $data = QueryList::Query($url,array(
             'name' => array('span.name','text'),
             'starttime' => array('span.start','text')
         ),'.list>a')->data;
+
+        $db= Db::name("television_program") ;
+        $pk ='id';
+        if($tv_id!="" && count($data)>0){
+            for($i=0;$i<count($data);$i++){
+                $insertData = [
+                    'title'=>$data[$i]['name'],
+                    'tv_id'=>$tv_id,
+                    'play_time'=>$data[$i]['starttime'],
+                    'play_date'=>$date,
+                ];
+                $result = DataService::save($db, $insertData, $pk, []);
+            }
+        }
+
         //print_r($data);
         $result = [
             "code"=>"10000",
