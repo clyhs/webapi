@@ -8,8 +8,8 @@
 
 namespace app\api\controller;
 
-
-
+require "/extend/QL/phpQuery.php";
+require "/extend/QL/QueryList.php";
 
 use think\Request;
 use think\controller\Rest;
