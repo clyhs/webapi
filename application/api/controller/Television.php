@@ -478,14 +478,14 @@ class Television extends Rest{
                     'play_time'=>$data[$i]['starttime'],
                     'play_date'=>$date,
                 ];
-                $result = DataService::save($db, $insertData, $pk, []);
+                //$result = DataService::save($db, $insertData, $pk, []);
             }
         }
 
         //print_r($data);
         $result = [
             "code"=>"10000",
-            "desc"=>$url,
+            "desc"=>$url.',id='.$tv_id,
             "data"=>$data
         ];
         return json($result);
