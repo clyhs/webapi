@@ -551,7 +551,7 @@ class Television extends Rest{
         if($class!='' && $date!=''){
             if($class == 'weishi'){
                 $type = 7;
-            }else if($class == 'yanshi'){
+            }else if($class == 'yangshi'){
                 $type = 2;
             }
             $map[]=['exp','FIND_IN_SET('.$type.',a.type_ids)'];
@@ -596,13 +596,13 @@ class Television extends Rest{
                     }
                 }
             }
-            /*
+
             $result = [
                 "code"=>"10000",
                 "desc"=>"",
                 "data"=>$data
             ];
-            return json($result);*/
+            return json($result);
         }
 
 
