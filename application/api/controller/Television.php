@@ -575,7 +575,7 @@ class Television extends Rest{
                     'starttime' => array('span.start','text')
                 ),'.list>a')->data;
                 $tv_id = $data[$i]['id'];
-                if(is_array($tv_id) && count($programs)>0){
+                if(!empty($tv_id) && count($programs)>0){
                     for($j=0;$j<count($programs);$j++){
                         $insertData = [
                             'title'=>$programs[$j]['name'],
