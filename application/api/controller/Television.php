@@ -46,14 +46,14 @@ class Television extends Rest{
             ->order('a.name asc')
             ->paginate($pageSize,false,$options);
         $data = $lists->all();
-        /*
+
         for($i = 0;$i<count($data);$i++){
-            $sql = "select a.title from t_television_program a ".
+            echo $sql = "select a.title from t_television_program a ".
                    " where a.tv_id=".$data[$i]['id']." and a.play_date='".$date."'".
                    " and a.play_at < ".time()." order by a.play_at desc limit 1";
-            $row =Db::query($sql);
-            $data[$i]['playtitle'] = $row[0]['title'];
-        }*/
+            //$row =Db::query($sql);
+            //$data[$i]['playtitle'] = $row[0]['title'];
+        }
 
         $result = [
             "code"=>"10000",
