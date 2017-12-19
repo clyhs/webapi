@@ -63,7 +63,7 @@ class Television extends Rest{
         $result = [
             "code"=>"10000",
             "desc"=>count($data),
-            "data"=>$lists->all()
+            "data"=>$data
         ];
         return json($result);
     }
