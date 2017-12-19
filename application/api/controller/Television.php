@@ -561,7 +561,7 @@ class Television extends Rest{
                 ->where($map)
                 ->group('a.id')
                 ->order('a.id asc');
-            $data = $lists->all();
+            $data = $lists->select();
             $result = [
                 "code"=>"10000",
                 "desc"=>"",
