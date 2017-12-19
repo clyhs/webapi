@@ -48,9 +48,9 @@ class Television extends Rest{
         $data = $lists->all();
 
         for($i = 0;$i<count($data);$i++){
-            echo $sql = "select a.title from t_television_program a ".
-                   " where a.tv_id=".$data[$i]['id']." and a.play_date='".$date."'".
-                   " and a.play_at < ".time()." order by a.play_at desc limit 1";
+            //echo $sql = "select a.title from t_television_program a ".
+                   //" where a.tv_id=".$data[$i]['id']." and a.play_date='".$date."'".
+                   //" and a.play_at < ".time()." order by a.play_at desc limit 1";
             //$row =Db::query($sql);
             //$data[$i]['playtitle'] = $row[0]['title'];
         }
