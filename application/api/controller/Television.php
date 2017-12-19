@@ -599,7 +599,7 @@ class Television extends Rest{
                 "desc"=>"",
                 "data"=>$data
             ];
-            //return json($result);
+            return json($result);
         }
 
 
