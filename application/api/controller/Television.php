@@ -534,5 +534,46 @@ class Television extends Rest{
 
         return json($result);
     }
+
+    public function getProgramForType(){
+        //https://www.tvsou.com/epg/HNTV-1/20171218?class=weishi
+        //https://www.tvsou.com/epg/CCTV-1/20171218?class=yangshi
+        //$url = "https://m.tvsou.com/epg/CCTV-1/20171218";
+        $type = 0;
+        $date = empty(Request::instance()->param('date'))?"":Request::instance()->param('date');
+        $class = empty(Request::instance()->param('class'))?"":Request::instance()->param('class');
+        $debug = empty(Request::instance()->param('debug'))?"":Request::instance()->param('debug');
+
+        if(empty($date) || empty($class)){
+            return json(["code"=>20001,"desc"=>"参数不能为空","data"=>[]]);
+        }
+
+        if($class!='' && $date!=''){
+            if($class == 'weishi'){
+                $type = 7;
+            }else if($class == 'yanshi'){
+                $type = 2;
+            }
+            $map[]=['exp','FIND_IN_SET('.$type.',a.type_ids)'];
+            $lists = Db::field('a.*')
+                ->table("t_television")
+                ->alias('a')
+                ->where($map)
+                ->group('a.id')
+                ->order('a.id asc');
+            $data = $lists->all();
+            $result = [
+                "code"=>"10000",
+                "desc"=>"",
+                "data"=>$data
+            ];
+            return json($result);
+        }
+
+
+
+
+        return json([]);
+    }
 }
 
