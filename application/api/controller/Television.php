@@ -585,29 +585,30 @@ class Television extends Rest{
                             'play_at'=>$year."-".$month."-".$day." ".$programs[$j]['starttime'].":00"
                         ];
                         if($debug == 1){
-
+                            echo $data[$i]['keyword'].$programs[$j]['name'].$programs[$j]['starttime'].'<br>';
                         }else{
-                            //$result = DataService::save($db, $insertData, $pk, []);
-                            echo $data[$i]['keyword'].'<br>';
+                            $result = DataService::save($db, $insertData, $pk, []);
+                            //echo $data[$i]['keyword'].'<br>';
+                            if($result){
+                                echo $data[$i]['keyword'].$programs[$j]['name'].$programs[$j]['starttime'].'<br>';
+                            }
                         }
                     }
-                }else{
-                    echo 'error';
                 }
             }
-
+            /*
             $result = [
                 "code"=>"10000",
                 "desc"=>"",
                 "data"=>$data
             ];
-            return json($result);
+            return json($result);*/
         }
 
 
 
 
-        return json([]);
+        //return json([]);
     }
 }
 
