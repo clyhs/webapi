@@ -555,13 +555,15 @@ class Television extends Rest{
                 $type = 2;
             }
             $map[]=['exp','FIND_IN_SET('.$type.',a.type_ids)'];
-            $lists = Db::field('a.*')
+            $lists = Db::field('a.keyword')
                 ->table("t_television")
                 ->alias('a')
                 ->where($map)
                 ->group('a.id')
                 ->order('a.id asc');
             $data = $lists->select();
+
+
             $result = [
                 "code"=>"10000",
                 "desc"=>"",
