@@ -549,19 +549,29 @@ class Television extends Rest{
         }
 
         if($class!='' && $date!=''){
+            $data = array();
             if($class == 'weishi'){
                 $type = 7;
+                $map[]=['exp','FIND_IN_SET('.$type.',a.type_ids)'];
+                $lists = Db::field('a.keyword,a.id')
+                    ->table("t_television")
+                    ->alias('a')
+                    ->where($map)
+                    ->group('a.id')
+                    ->order('a.id asc');
+                $data = $lists->select();
             }else if($class == 'yangshi'){
                 $type = 2;
+                $map[]=['exp','FIND_IN_SET('.$type.',a.type_ids)'];
+                $lists = Db::field('a.name as keyword,a.id')
+                    ->table("t_television")
+                    ->alias('a')
+                    ->where($map)
+                    ->group('a.id')
+                    ->order('a.id asc');
+                $data = $lists->select();
             }
-            $map[]=['exp','FIND_IN_SET('.$type.',a.type_ids)'];
-            $lists = Db::field('a.keyword,a.id')
-                ->table("t_television")
-                ->alias('a')
-                ->where($map)
-                ->group('a.id')
-                ->order('a.id asc');
-            $data = $lists->select();
+
             $db= Db::name("television_program") ;
             $pk ='id';
             //20171218
