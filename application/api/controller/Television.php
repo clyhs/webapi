@@ -587,7 +587,8 @@ class Television extends Rest{
                         if($debug == 1){
 
                         }else{
-                            $result = DataService::save($db, $insertData, $pk, []);
+                            //$result = DataService::save($db, $insertData, $pk, []);
+                            echo $data[$i]['keyword'].'<br>';
                         }
                     }
                 }
@@ -598,7 +599,7 @@ class Television extends Rest{
                 "desc"=>"",
                 "data"=>$data
             ];
-            return json($result);
+            //return json($result);
         }
 
 
