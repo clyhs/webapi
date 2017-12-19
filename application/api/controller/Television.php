@@ -592,7 +592,7 @@ class Television extends Rest{
                         }
                     }
                 }else{
-                    echo $data[$i]['keyword'].'<br>';
+                    echo 'error';
                 }
             }
 
