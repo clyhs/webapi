@@ -591,6 +591,8 @@ class Television extends Rest{
                             echo $data[$i]['keyword'].'<br>';
                         }
                     }
+                }else{
+                    echo $data[$i]['keyword'].'<br>';
                 }
             }
 
