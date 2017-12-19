@@ -555,14 +555,43 @@ class Television extends Rest{
                 $type = 2;
             }
             $map[]=['exp','FIND_IN_SET('.$type.',a.type_ids)'];
-            $lists = Db::field('a.keyword')
+            $lists = Db::field('a.keyword,a.id')
                 ->table("t_television")
                 ->alias('a')
                 ->where($map)
                 ->group('a.id')
                 ->order('a.id asc');
             $data = $lists->select();
+            $db= Db::name("television_program") ;
+            $pk ='id';
+            //20171218
+            $year=((int)substr($date,0,4));//取得年份
+            $month=((int)substr($date,4,2));//取得月份
+            $day=((int)substr($date,6,2));//取得几号
+            for($i=0;$i<count($data);$i++){
+                $url = "https://m.tvsou.com/epg/".$data[$i]['keyword']."/".$date."?class=".$class;
+                $programs = QueryList::Query($url,array(
+                    'name' => array('span.name','text'),
+                    'starttime' => array('span.start','text')
+                ),'.list>a')->data;
+                $tv_id = $data[$i]['id'];
+                if(is_array($tv_id) && count($programs)>0){
+                    for($j=0;$j<count($programs);$j++){
+                        $insertData = [
+                            'title'=>$programs[$j]['name'],
+                            'tv_id'=>$tv_id,
+                            'play_time'=>$programs[$j]['starttime'],
+                            'play_date'=>$date,
+                            'play_at'=>$year."-".$month."-".$day." ".$programs[$j]['starttime'].":00"
+                        ];
+                        if($debug == 1){
 
+                        }else{
+                            $result = DataService::save($db, $insertData, $pk, []);
+                        }
+                    }
+                }
+            }
 
             $result = [
                 "code"=>"10000",
