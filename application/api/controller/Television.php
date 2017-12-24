@@ -152,7 +152,7 @@ class Television extends Rest{
             //->where($hot)
             ->group('a.id')
             ->order('a.hit desc')
-            ->limit(8)->select();
+            ->limit(4)->select();
         $lists_new = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames')
             ->table("t_television")
             ->alias('a')
@@ -163,7 +163,7 @@ class Television extends Rest{
             ->group('a.id')
             ->order(' rand() ')
             //->order('a.id desc')
-            ->limit(8)->select();
+            ->limit(4)->select();
         $lists_recommend = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames')
             ->table("t_television")
             ->alias('a')
@@ -186,11 +186,35 @@ class Television extends Rest{
             ->order(' rand() ')
             //->order('a.id desc')
             ->limit(4)->select();
+        $lists_foreign = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames')
+            ->table("t_television")
+            ->alias('a')
+            ->join(' t_region b ',' a.country = b.code ','left')
+            ->join(' t_region c ',' a.province = c.code ','left')
+            ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
+            ->where(' d.id = 17')
+            ->group('a.id')
+            ->order(' rand() ')
+            //->order('a.id desc')
+            ->limit(4)->select();
+        $lists_hongkong = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames')
+            ->table("t_television")
+            ->alias('a')
+            ->join(' t_region b ',' a.country = b.code ','left')
+            ->join(' t_region c ',' a.province = c.code ','left')
+            ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
+            ->where(' d.id = 18')
+            ->group('a.id')
+            ->order(' rand() ')
+            //->order('a.id desc')
+            ->limit(4)->select();
         $result_array = [
             "hots"=>$lists_hot,
             "recommends"=>$lists_recommend,
             "news"=>$lists_new,
-            "cartoons"=>$lists_cartoon
+            "cartoons"=>$lists_cartoon,
+            "foreigns"=>$lists_foreign,
+            "hongkongs"=>$lists_hongkong
         ];
         $result = [
             "code"=>"10000",
