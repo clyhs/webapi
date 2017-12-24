@@ -35,7 +35,7 @@ class Television extends Rest{
         ];
         $date = date('Ymd',time());
         $map[]=['exp','FIND_IN_SET('.$typeId.',a.type_ids)'];
-        $lists = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,count(e.*) AS commentNum ')
+        $lists = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,count(e.id) AS commentNum ')
             ->table("t_television")
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
@@ -106,12 +106,13 @@ class Television extends Rest{
             'page'=>$page
         ];
 
-        $lists = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames')
+        $lists = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,count(e.id) AS commentNum ')
             ->table("t_television")
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
             ->join(' t_region c ',' a.province = c.code ','left')
             ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
+            ->join(' t_comment e',' e.uid=a.id and e.type_id=11 and e.pid=0 ','left')
             ->where($where)
             ->group('a.id')
             ->order('a.id asc')
