@@ -163,18 +163,18 @@ class Television extends Rest{
             ->group('a.id')
             ->order(' rand() ')
             //->order('a.id desc')
-            ->limit(4)->select();
+            ->limit(2)->select();
         $lists_recommend = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames')
             ->table("t_television")
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
             ->join(' t_region c ',' a.province = c.code ','left')
             ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
-            //->where($recommend)
+            ->where($recommend)
             ->group('a.id')
             ->order(' rand() ')
             //->order('a.id desc')
-            ->limit(4)->select();
+            ->limit(2)->select();
         $lists_cartoon = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames')
             ->table("t_television")
             ->alias('a')
@@ -196,7 +196,7 @@ class Television extends Rest{
             ->group('a.id')
             ->order(' rand() ')
             //->order('a.id desc')
-            ->limit(4)->select();
+            ->limit(2)->select();
         $lists_hongkong = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames')
             ->table("t_television")
             ->alias('a')
@@ -207,7 +207,7 @@ class Television extends Rest{
             ->group('a.id')
             ->order(' rand() ')
             //->order('a.id desc')
-            ->limit(4)->select();
+            ->limit(2)->select();
         $result_array = [
             "hots"=>$lists_hot,
             "recommends"=>$lists_recommend,
