@@ -175,10 +175,22 @@ class Television extends Rest{
             ->order(' rand() ')
             //->order('a.id desc')
             ->limit(4)->select();
+        $lists_cartoon = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames')
+            ->table("t_television")
+            ->alias('a')
+            ->join(' t_region b ',' a.country = b.code ','left')
+            ->join(' t_region c ',' a.province = c.code ','left')
+            ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
+            ->where(' d.id = 23')
+            ->group('a.id')
+            ->order(' rand() ')
+            //->order('a.id desc')
+            ->limit(4)->select();
         $result_array = [
             "hots"=>$lists_hot,
             "recommends"=>$lists_recommend,
-            "news"=>$lists_new
+            "news"=>$lists_new,
+            "cartoons"=>$lists_cartoon
         ];
         $result = [
             "code"=>"10000",
