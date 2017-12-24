@@ -145,13 +145,13 @@ class Television extends Rest{
             "is_new"=>1
         );
 
-        $lists_hot = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,count(e.id) AS commentNum ')
+        $lists_hot = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames ')
             ->table("t_television")
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
             ->join(' t_region c ',' a.province = c.code ','left')
-            ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','inner')
-            ->join(' t_comment e',' e.uid=a.id and e.type_id=11 and e.pid=0 ','left')
+            ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
+            //->join(' t_comment e',' e.uid=a.id and e.type_id=11 and e.pid=0 ','left')
             //->where($hot)
             ->group('a.id')
             ->order('a.hit desc')
@@ -161,7 +161,7 @@ class Television extends Rest{
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
             ->join(' t_region c ',' a.province = c.code ','left')
-            ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','inner')
+            ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
             ->join(' t_comment e',' e.uid=a.id and e.type_id=11 and e.pid=0 ','left')
             //->where($new)
             ->group('a.id')
