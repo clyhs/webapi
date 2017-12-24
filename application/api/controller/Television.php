@@ -144,7 +144,7 @@ class Television extends Rest{
             "is_new"=>1
         );
 
-        $lists_hot = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,count(e.*) AS commentNum ')
+        $lists_hot = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,count(1) AS commentNum ')
             ->table("t_television")
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
@@ -155,7 +155,7 @@ class Television extends Rest{
             ->group('a.id')
             ->order('a.hit desc')
             ->limit(4)->select();
-        $lists_new = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,count(e.*) AS commentNum ')
+        $lists_new = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,count(1) AS commentNum ')
             ->table("t_television")
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
@@ -167,7 +167,7 @@ class Television extends Rest{
             ->order(' rand() ')
             //->order('a.id desc')
             ->limit(2)->select();
-        $lists_recommend = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,count(e.*) AS commentNum ')
+        $lists_recommend = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,count(1) AS commentNum ')
             ->table("t_television")
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
@@ -179,7 +179,7 @@ class Television extends Rest{
             ->order(' rand() ')
             //->order('a.id desc')
             ->limit(2)->select();
-        $lists_cartoon = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,count(e.*) AS commentNum ')
+        $lists_cartoon = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,count(1) AS commentNum ')
             ->table("t_television")
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
@@ -191,7 +191,7 @@ class Television extends Rest{
             ->order(' rand() ')
             //->order('a.id desc')
             ->limit(4)->select();
-        $lists_foreign = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,count(e.*) AS commentNum ')
+        $lists_foreign = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,count(1) AS commentNum ')
             ->table("t_television")
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
@@ -203,7 +203,7 @@ class Television extends Rest{
             ->order(' rand() ')
             //->order('a.id desc')
             ->limit(2)->select();
-        $lists_hongkong = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,count(e.*) AS commentNum ')
+        $lists_hongkong = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,count(1) AS commentNum ')
             ->table("t_television")
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
