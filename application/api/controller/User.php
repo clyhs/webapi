@@ -209,6 +209,49 @@ class User extends BaseApiRest{
         return json($result);
     }
 
+    public function updateGoodLog(){
+
+        $uid = empty(Request::instance()->param('uid'))?0:Request::instance()->param('uid');
+        $type_id = empty(Request::instance()->param('type_id'))?0:Request::instance()->param('type_id');
+        $userId = empty(Request::instance()->param('userId'))?0:Request::instance()->param('userId');
+        $type = empty(Request::instance()->param('type'))?0:Request::instance()->param('type');
+
+        $db= Db::name("good_log") ;
+        $pk ='id';
+
+        $data = array();
+        $data=[
+            'user_id'=>$userId,
+            'uid'=>$uid,
+            'type_id'=>$type_id
+
+        ];
+
+        $id = Db::name("good_log")->where("uid=".$uid." and user_id=".$userId." and type_id=".$type_id)->column('id');
+
+        if(is_array($id)){
+            if($id[0]>0){
+                $data['id'] = $id[0];
+            }
+        }
+
+        if($type > 0){
+            $data['good'] = 1;
+        }else{
+            $data['good'] = 0;
+        }
+
+        $result = DataService::save($db, $data, $pk, []);
+
+        $result = [
+            "code"=>"10000",
+            "desc"=>""
+        ];
+
+        return json($result);
+
+    }
+
 //    public function getAllUsers(){
 //        $model = new UserModel();
 //        $data = $model->all();
