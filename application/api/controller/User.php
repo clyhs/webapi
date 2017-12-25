@@ -245,7 +245,7 @@ class User extends BaseApiRest{
 
         $result = [
             "code"=>"10000",
-            "desc"=>""
+            "desc"=>$result
         ];
 
         return json($result);
