@@ -219,7 +219,7 @@ class User extends BaseApiRest{
         $db= Db::name("good_log") ;
         $pk ='id';
 
-        $data = array();
+        //$data = array();
         $data=[
             'user_id'=>$userId,
             'uid'=>$uid,
