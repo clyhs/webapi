@@ -252,6 +252,33 @@ class User extends BaseApiRest{
 
     }
 
+    public function getGoodLog(){
+
+        $uid = empty(Request::instance()->param('uid'))?0:Request::instance()->param('uid');
+        $type_id = empty(Request::instance()->param('type_id'))?0:Request::instance()->param('type_id');
+        $userId = empty(Request::instance()->param('userId'))?0:Request::instance()->param('userId');
+
+        $res = 0;
+
+        $good = Db::name("good_log")->where("uid=".$uid." and user_id=".$userId." and type_id=".$type_id)->column('good');
+
+        if(is_array($good) && !empty($good)){
+            if($good[0]>0){
+                $res = $good[0];
+            }
+        }
+
+
+
+        $result = [
+            "code"=>"10000",
+            "desc"=>$res
+        ];
+
+        return json($result);
+
+    }
+
 //    public function getAllUsers(){
 //        $model = new UserModel();
 //        $data = $model->all();

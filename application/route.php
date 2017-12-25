@@ -22,6 +22,7 @@ Route::post('api/user/login','api/User/login');
 Route::post('api/user/profile','api/User/profile');
 Route::get('api/user/friends/:userId/[:page]/[:pageSize]','api/User/getFriendsForPage');
 Route::post('api/user/good','api/User/updateGoodLog');
+Route::get('api/user/getgood/:uid/:userId/type_id','api/User/getGoodLog');
 
 /**
  * 电视接口
