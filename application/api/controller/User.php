@@ -229,7 +229,7 @@ class User extends BaseApiRest{
 
         $id = Db::name("good_log")->where("uid=".$uid." and user_id=".$userId." and type_id=".$type_id)->column('id');
 
-        if(is_array($id)){
+        if(is_array($id) && !empty($id)){
             if($id[0]>0){
                 $data['id'] = $id[0];
             }
