@@ -30,7 +30,7 @@ class Video extends BaseApiRest{
         ];
         $where = [];
 
-        $db = Db::field('a.*,b.username,b.profile')
+        $db = Db::field('a.*,b.username,b.profile,(select sum(good) from t_good_log f where f.uid=a.id and f.type_id=22 ) as goodNum ')
             ->table("t_video")
             ->alias('a')
             ->join('t_user b','b.id=a.user_id')
