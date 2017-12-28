@@ -36,9 +36,14 @@ class Comment extends Rest{
             ->order('a.id desc')
             ->paginate($pageSize,false,$options);
 
+        $sql = 'select count(1) as count from t_comment where type_id= '.$typeId .
+            ' and uid='.$uid.' and pid=0 ';
+        $row =Db::query($sql);
+        $count = $row[0]['count'];
+
         $result = [
             "code"=>10000,
-            "desc"=>"",
+            "desc"=>$count,
             "data"=>$this->filterData($db)
         ];
 
@@ -102,6 +107,8 @@ class Comment extends Rest{
                 'where a.pid='.$item['id'].' order by a.id asc';
             $childrens =Db::query($sql);
             $lists[$key]['childs'] = $childrens;
+
+
         }
         return $lists;
     }
