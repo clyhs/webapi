@@ -107,7 +107,7 @@ class Chat extends BaseApiRest
             $where['a.user_id'] = $userId;
         }
 
-        $db = Db::field('a.*,b.username,b.profile,(select count(1) from t_comment e where e.uid=a.id and e.type_id=12 and e.pid=0 ) as commentNum')
+        $db = Db::field('a.*,b.username,b.profile')
             ->table("t_chat")
             ->alias('a')
             ->join('t_user b','b.id=a.user_id')
