@@ -107,7 +107,7 @@ class Chat extends BaseApiRest
             $where['a.user_id'] = $userId;
         }
 
-        $db = Db::field('a.*,b.username,b.profile')
+        $db = Db::field('a.*,b.username,b.profile,(select sum(good) from t_good_log f where f.uid=a.id and f.type_id=12 ) as goodNum ')
             ->table("t_chat")
             ->alias('a')
             ->join('t_user b','b.id=a.user_id')
