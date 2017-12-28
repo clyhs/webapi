@@ -41,7 +41,7 @@ class Video extends BaseApiRest{
         $result = [
             "code"=>10000,
             "desc"=>"",
-            "data"=>filterData($db)
+            "data"=>$this->filterData($db)
         ];
         return json($result);
     }
