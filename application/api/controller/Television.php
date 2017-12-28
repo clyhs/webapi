@@ -108,7 +108,9 @@ class Television extends Rest{
             'page'=>$page
         ];
 
-        $lists = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames ,(select count(1) from t_comment e where e.uid=a.id and e.type_id=11 and e.pid=0 ) as commentNum ')
+        $lists = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames ,
+        (select count(1) from t_comment e where e.uid=a.id and e.type_id=11 and e.pid=0 ) as commentNum,
+        (select sum(good) from t_good_log f where f.uid=a.id and f.type_id=11 ) as goodNum  ')
             ->table("t_television")
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
@@ -147,7 +149,9 @@ class Television extends Rest{
             "is_new"=>1
         );
 
-        $lists_hot = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames ,(select count(1) from t_comment e where e.uid=a.id and e.type_id=11 and e.pid=0 ) as commentNum ')
+        $lists_hot = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames ,
+        (select count(1) from t_comment e where e.uid=a.id and e.type_id=11 and e.pid=0 ) as commentNum ,
+        (select sum(good) from t_good_log f where f.uid=a.id and f.type_id=11 ) as goodNum ')
             ->table("t_television")
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
@@ -158,7 +162,9 @@ class Television extends Rest{
             ->group('a.id')
             ->order('a.hit desc')
             ->limit(4)->select();
-        $lists_new = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,(select count(1) from t_comment e where e.uid=a.id and e.type_id=11 and e.pid=0 ) as commentNum  ')
+        $lists_new = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,
+        (select count(1) from t_comment e where e.uid=a.id and e.type_id=11 and e.pid=0 ) as commentNum,
+        (select sum(good) from t_good_log f where f.uid=a.id and f.type_id=11 ) as goodNum   ')
             ->table("t_television")
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
@@ -170,7 +176,9 @@ class Television extends Rest{
             ->order(' rand() ')
             //->order('a.id desc')
             ->limit(2)->select();
-        $lists_recommend = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames ,(select count(1) from t_comment e where e.uid=a.id and e.type_id=11 and e.pid=0 ) as commentNum ')
+        $lists_recommend = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames ,
+        (select count(1) from t_comment e where e.uid=a.id and e.type_id=11 and e.pid=0 ) as commentNum ,
+        (select sum(good) from t_good_log f where f.uid=a.id and f.type_id=11 ) as goodNum ')
             ->table("t_television")
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
@@ -182,7 +190,9 @@ class Television extends Rest{
             ->order(' rand() ')
             //->order('a.id desc')
             ->limit(2)->select();
-        $lists_cartoon = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames ,(select count(1) from t_comment e where e.uid=a.id and e.type_id=11 and e.pid=0 ) as commentNum ')
+        $lists_cartoon = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames ,
+        (select count(1) from t_comment e where e.uid=a.id and e.type_id=11 and e.pid=0 ) as commentNum,
+        (select sum(good) from t_good_log f where f.uid=a.id and f.type_id=11 ) as goodNum  ')
             ->table("t_television")
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
@@ -194,7 +204,9 @@ class Television extends Rest{
             ->order(' rand() ')
             //->order('a.id desc')
             ->limit(4)->select();
-        $lists_foreign = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,(select count(1) from t_comment e where e.uid=a.id and e.type_id=11 and e.pid=0 ) as commentNum  ')
+        $lists_foreign = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,
+        (select count(1) from t_comment e where e.uid=a.id and e.type_id=11 and e.pid=0 ) as commentNum ,
+        (select sum(good) from t_good_log f where f.uid=a.id and f.type_id=11 ) as goodNum  ')
             ->table("t_television")
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
@@ -206,7 +218,9 @@ class Television extends Rest{
             ->order(' rand() ')
             //->order('a.id desc')
             ->limit(2)->select();
-        $lists_hongkong = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,(select count(1) from t_comment e where e.uid=a.id and e.type_id=11 and e.pid=0 ) as commentNum ')
+        $lists_hongkong = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,
+        (select count(1) from t_comment e where e.uid=a.id and e.type_id=11 and e.pid=0 ) as commentNum ,
+        (select sum(good) from t_good_log f where f.uid=a.id and f.type_id=11 ) as goodNum ')
             ->table("t_television")
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
@@ -263,7 +277,9 @@ class Television extends Rest{
             ->group('a.id')
             ->order('a.id desc')
             ->paginate($pageSize,false,$options);*/
-        $lists = Db::field('b.*,c.name as countryName,d.name as provinceName,GROUP_CONCAT(e.name) AS typeNames,(select count(1) from t_comment e where e.uid=a.id and e.type_id=11 and e.pid=0 ) as commentNum ')
+        $lists = Db::field('b.*,c.name as countryName,d.name as provinceName,GROUP_CONCAT(e.name) AS typeNames,
+        (select count(1) from t_comment e where e.uid=a.id and e.type_id=11 and e.pid=0 ) as commentNum ,
+        (select sum(good) from t_good_log f where f.uid=a.id and f.type_id=11 ) as goodNum ')
             ->table("t_user_tv")
             ->alias('a')
             ->join(' t_television b ',' a.tv_id = b.id ')
@@ -420,7 +436,9 @@ class Television extends Rest{
             'page'=>$page
         ];
 
-        $lists = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,(select count(1) from t_comment e where e.uid=a.id and e.type_id=11 and e.pid=0 ) as commentNum ')
+        $lists = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,
+        (select count(1) from t_comment e where e.uid=a.id and e.type_id=11 and e.pid=0 ) as commentNum,
+        (select sum(good) from t_good_log f where f.uid=a.id and f.type_id=11 ) as goodNum  ')
             ->table("t_television")
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
@@ -485,7 +503,9 @@ class Television extends Rest{
             'page'=>$page
         ];
 
-        $lists = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,(select count(1) from t_comment e where e.uid=a.id and e.type_id=11 and e.pid=0 ) as commentNum ')
+        $lists = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,
+        (select count(1) from t_comment e where e.uid=a.id and e.type_id=11 and e.pid=0 ) as commentNum,
+        (select sum(good) from t_good_log f where f.uid=a.id and f.type_id=11 ) as goodNum  ')
             ->table("t_television")
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
