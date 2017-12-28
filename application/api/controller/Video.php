@@ -41,9 +41,23 @@ class Video extends BaseApiRest{
         $result = [
             "code"=>10000,
             "desc"=>"",
-            "data"=>$db->all()
+            "data"=>filterData($db)
         ];
         return json($result);
+    }
+
+    protected function filterData(&$db){
+
+        $lists = $db->all();
+        foreach ($lists as $key => &$item) {
+
+            $sql = 'select count(1) as count from t_comment where type_id=22 '.
+                ' and uid='.$item['id'].' and pid=0 ';
+            $row =Db::query($sql);
+            $lists[$key]['comment_num'] = $row[0]['count'];
+
+        }
+        return $lists;
     }
 
     /**
