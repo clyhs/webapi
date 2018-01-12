@@ -69,7 +69,7 @@ class User extends BaseApiRest{
         $pk = $db->getPk() ? $db->getPk() : 'id';
         $uid = empty(Request::instance()->param('uid'))?"":Request::instance()->param('uid');
         $type = empty(Request::instance()->param('type'))?"":Request::instance()->param('type');
-        $username = empty(Request::instance()->param('uid'))?"":Request::instance()->param('uid');
+        $username = empty(Request::instance()->param('username'))?"":Request::instance()->param('username');
 
 
         if(empty($uid) || empty($type) || empty($username)){
