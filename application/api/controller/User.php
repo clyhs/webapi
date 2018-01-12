@@ -63,6 +63,43 @@ class User extends BaseApiRest{
 
     }
 
+    public function registerForOther(){
+
+        $db = Db::name($this->table);
+        $pk = $db->getPk() ? $db->getPk() : 'id';
+        $uid = empty(Request::instance()->param('uid'))?"":Request::instance()->param('uid');
+        $type = empty(Request::instance()->param('type'))?"":Request::instance()->param('type');
+        $username = empty(Request::instance()->param('uid'))?"":Request::instance()->param('uid');
+
+
+        if(empty($uid) || empty($type) || empty($username)){
+            return json(["code"=>20001,"desc"=>"参数出错"]);
+        }
+
+        $user = $db->where('uid', $uid)->find();
+        if(empty($user)){
+
+            $data = [
+                "username"=>$username,
+                "password"=>md5($uid),
+                "uid"=>$uid,
+                "type"=>$type,
+                "status"=>1
+            ];
+            $result = DataService::save($db, $data, $pk, []);
+            if ($result !== false) {
+                $user = $db->where('uid', $uid)->find();
+                return json(["code"=>10000,"desc"=>"success","data"=>$user]);
+            }else{
+                return json(["code"=>20001,"desc"=>"添加失败","data"=>[]]);
+            }
+
+        }else{
+            return json(["code"=>20001,"desc"=>"用户已经存在","data"=>$user]);
+        }
+
+    }
+
     /**
      * @return mixed
      */
