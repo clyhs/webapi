@@ -89,13 +89,13 @@ class User extends BaseApiRest{
             $result = DataService::save($db, $data, $pk, []);
             if ($result !== false) {
                 $user = $db->where('uid', $uid)->find();
-                return json(["code"=>10000,"desc"=>"success","data"=>$user]);
+                return json(["code"=>10000,"desc"=>"success","data"=>$this->_login_filter($user)]);
             }else{
                 return json(["code"=>20001,"desc"=>"添加失败","data"=>[]]);
             }
 
         }else{
-            return json(["code"=>20001,"desc"=>"用户已经存在","data"=>$user]);
+            return json(["code"=>20001,"desc"=>"用户已经存在","data"=>$this->_login_filter($user)]);
         }
 
     }

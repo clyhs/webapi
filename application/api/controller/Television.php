@@ -231,7 +231,7 @@ class Television extends Rest{
             ->group('a.id')
             ->order(' rand() ')
             //->order('a.id desc')
-            ->limit(2)->select();
+            ->limit(4)->select();
         $result_array = [
             "hots"=>$lists_hot,
             "recommends"=>$lists_recommend,
