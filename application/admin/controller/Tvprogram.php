@@ -20,7 +20,7 @@ class Tvprogram extends BaseAdmin{
         $this->title = '电视台节目管理';
 
         $get = $this->request->get();
-        $db = Db::field('a.*,b.name ')
+        $db = Db::field('a.play_date,count(1) as count,b.name ')
             ->table("t_television_program")
             ->alias('a')
             ->join(' t_television b ',' a.tv_id = b.id ','left');
@@ -49,7 +49,8 @@ class Tvprogram extends BaseAdmin{
             }
         }
 
-        $db->order('a.id desc');
+        $db->group('a.play_date,b.name')
+            ->order('a.id desc');
 
         $where = [
             "char"=>"CHANNEL",
