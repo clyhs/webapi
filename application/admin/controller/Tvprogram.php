@@ -46,9 +46,9 @@ class Tvprogram extends BaseAdmin{
     {
     }
 
-    public function importbg()
+    public function importpg()
     {
-        return $this->_form($this->table, 'importbg');
+        return $this->_form($this->table, 'importpg');
     }
 
 }
