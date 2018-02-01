@@ -73,6 +73,13 @@ class Tvprogram extends BaseAdmin{
         return $this->_form($this->table, 'importpg');
     }
 
+    public function delall()
+    {
+        $sql = "truncate table t_television_program";
+        Db::query($sql);
+        $this->success('恭喜, 清空节目表成功', '');
+    }
+
     public function importsubmit(){
         $post = $this->request->post();
         $date = $post['date2'];
