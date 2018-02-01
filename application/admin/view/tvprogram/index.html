@@ -1,0 +1,86 @@
+{extend name='admin@main/content'}
+
+{block name="button"}
+<div class="nowrap pull-right" style="margin-top:10px">
+
+</div>
+{/block}
+
+
+{block name="content"}
+
+<!-- 表单搜索 开始 -->
+<form class="layui-form layui-form-pane form-search" action="__SELF__" onsubmit="return false" method="get">
+    <!--
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">名称</label>
+        <div class="layui-input-inline">
+            <input name="name" value="" placeholder="请输入名称" class="layui-input">
+        </div>
+    </div>-->
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">名称</label>
+        <div class="layui-input-inline">
+            <input name="name" value="{$Think.get.name|default=''}" placeholder="请输入名称" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-inline">
+        <button class="layui-btn layui-btn-primary"><i class="layui-icon">&#xe615;</i> 搜 索</button>
+    </div>
+</form>
+
+<form onsubmit="return false;" data-auto="true" method="post">
+    <input type="hidden" value="resort" name="action"/>
+    <table class="layui-table" lay-skin="line" lay-size="sm">
+        <thead>
+        <tr>
+            <th class='list-table-check-td'>
+                <input data-none-auto="" data-check-target='.list-check-box' type='checkbox'/>
+            </th>
+            <th class='text-center'>ID</th>
+            <th class='text-center'>电视台名称</th>
+            <th class='text-left'>节目</th>
+            <!--
+            <th class='text-left'>URL</th>-->
+            <th class='text-left'>播放时间</th>
+            <th class='text-left'>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {foreach $list as $key=>$vo}
+        <tr>
+            <td class='list-table-check-td'>
+                <input class="list-check-box" value='{$vo.id}' type='checkbox'/>
+            </td>
+            <td class='text-center'>{$vo.id}</td>
+            <td class='text-center'>{$vo.name}</td>
+            <th class='text-left'>{$vo.title}</th>
+            <!--
+            <td class='text-left'>{$vo.url_1}</td>-->
+            <td class='text-left'>{$vo.plat_at}</td>
+            <td class='text-left nowrap'>
+                {if auth("$classuri/edit")}
+                <span class="text-explode">|</span>
+                <a data-modal='{:url("$classuri/edit")}?id={$vo.id}' href="javascript:void(0)">编辑</a>
+                {/if}
+
+                {if auth("$classuri/del")}
+                <span class="text-explode">|</span>
+                <a data-update="{$vo.id}" data-field='delete' data-action='{:url("$classuri/del")}'
+                   href="javascript:void(0)">删除</a>
+                {/if}
+
+            </td>
+        </tr>
+        {/foreach}
+        </tbody>
+    </table>
+    {if isset($page)}<p>{$page}</p>{/if}
+    <script>
+        window.form.render();
+        window.laydate.render({range: true, elem: '#range-date', format: 'yyyy/MM/dd'});
+    </script>
+</form>
+
+{/block}
