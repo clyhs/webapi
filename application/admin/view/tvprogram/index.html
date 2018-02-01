@@ -66,10 +66,11 @@
                 <input data-none-auto="" data-check-target='.list-check-box' type='checkbox'/>
             </th>
 
+            <th class='text-center'>ID</th>
             <th class='text-center'>电视台名称</th>
 
-            <th class='text-left'>播放时间</th>
-            <th class='text-left'>操作</th>
+            <th class='text-left'>播放日期</th>
+            <th class='text-left'>节目条数</th>
         </tr>
         </thead>
         <tbody>
@@ -78,14 +79,10 @@
             <td class='list-table-check-td'>
                 <input class="list-check-box" value='{$vo.tv_id}' type='checkbox'/>
             </td>
-
+            <td class='text-center'>{$vo.tv_id}</td>
             <td class='text-center'>{$vo.name}</td>
-
             <td class='text-left'>{$vo.play_date}</td>
-            <td class='text-left nowrap'>
-
-
-            </td>
+            <td class='text-center'>{$vo.count}条节目</td>
         </tr>
         {/foreach}
         </tbody>
