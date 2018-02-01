@@ -18,12 +18,20 @@ class Tvprogram extends BaseAdmin{
 
         $this->title = '电视台节目管理';
 
+        $get = $this->request->get();
         $db = Db::field('a.*,b.name ')
             ->table("t_television_program")
             ->alias('a')
             ->join(' t_television b ',' a.tv_id = b.id ','left');
-        $db->order('a.id desc');
 
+
+        foreach ([ 'name'] as $key) {
+            if (isset($get[$key]) && $get[$key] !== '') {
+                $db->where('b.'.$key, 'like', "%{$get[$key]}%");
+            }
+        }
+
+        $db->order('a.id desc');
 
         return parent::_list($db);
 
