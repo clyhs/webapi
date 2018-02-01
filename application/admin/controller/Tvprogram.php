@@ -52,7 +52,10 @@ class Tvprogram extends BaseAdmin{
     }
 
     public function importsubmit(){
-        $this->success('恭喜, 数据保存成功!', '');
+        $post = $this->request->post();
+        $date = $post['date2'];
+        $tvtype = $post['tvtype'];
+        $this->success('恭喜, 数据保存成功!'.$date.$tvtype, '');
     }
 
 }
