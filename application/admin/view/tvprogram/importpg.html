@@ -2,16 +2,29 @@
 
 
 
-    <div class="layui-form-item">
-        <label class="layui-form-label">电台名称</label>
-        <div class="layui-input-block">
-            <input type="text" name="name" value='{$vo.name|default=""}' required="required" title="请输入名称" placeholder="请输入名称" class="layui-input">
+    <div class="layui-form-item layui-inline">
+        <label class="layui-form-label">时间</label>
+        <div class="layui-input-inline">
+            <input name="date" id='range-date' value="{$Think.get.date|default=''}"
+                   placeholder="请选择时间" class="layui-input">
         </div>
     </div>
 
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择类型</label>
+        <div class="layui-input-block">
+            <select id="type" name="type" class="layui-select " style='display:inline-block;'>
+                <option value="">选择类型</option>
+                <option value='yangshi'>央视</option>
+                <option value='weishi'>卫视</option>
+            </select>
+        </div>
+    </div>
+
+
     <div class="layui-form-item text-center">
         <button class="layui-btn" type='submit'>导入</button>
-        <button class="layui-btn layui-btn-danger" type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
+        <button class="layui-btn layui-btn-danger" type='button' data-confirm="确定要取消编辑吗？" data-close>取消</button>
     </div>
 
 </form>
