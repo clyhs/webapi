@@ -31,6 +31,11 @@ class Tvprogram extends BaseAdmin{
             }
         }
 
+        if (isset($get['play_date']) && $get['play_date'] !== '') {
+            $play_date=  str_replace('/', '', $get['date']);
+            $db->where('play_date', $play_date);
+        }
+
         $db->order('a.id desc');
 
         return parent::_list($db);
