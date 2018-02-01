@@ -65,7 +65,7 @@ class Tvprogram extends BaseAdmin{
         //https://www.tvsou.com/epg/HNTV-1/20171218?class=weishi
         //https://www.tvsou.com/epg/CCTV-1/20171218?class=yangshi
         //$url = "https://m.tvsou.com/epg/CCTV-1/20171218";
-
+        $type = 0;
         //$date = empty(Request::instance()->param('date'))?"":Request::instance()->param('date');
         //$class = empty(Request::instance()->param('class'))?"":Request::instance()->param('class');
         //$debug = empty(Request::instance()->param('debug'))?"":Request::instance()->param('debug');
@@ -122,6 +122,7 @@ class Tvprogram extends BaseAdmin{
                             'tv_id'=>$tv_id,
                             'play_time'=>$programs[$j]['starttime'],
                             'play_date'=>$date,
+                            'type'=>$type,
                             'play_at'=>$year."-".$month."-".$day." ".$programs[$j]['starttime'].":00"
                         ];
                         if($debug == 1){
