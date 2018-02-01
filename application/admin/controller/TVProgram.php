@@ -11,7 +11,7 @@ use app\common\controller\BaseAdmin;
 use think\Db;
 use app\common\service\DataService;
 
-class TVProgram extends BaseAdmin{
+class Tvprogram extends BaseAdmin{
     public $table = 'television_program';
 
     public function index(){
