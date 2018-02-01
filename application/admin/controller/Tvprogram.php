@@ -51,4 +51,8 @@ class Tvprogram extends BaseAdmin{
         return $this->_form($this->table, 'importpg');
     }
 
+    public function importsubmit(){
+        $this->success('恭喜, 数据保存成功!', '');
+    }
+
 }
