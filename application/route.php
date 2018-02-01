@@ -40,8 +40,8 @@ Route::post('api/tv/delrecord','api/Television/deleteTvByUserIdAndTypeId');
 Route::get('api/tv/all','api/Television/getalltv');
 Route::post('api/tv/collect/:type_id/:userId/:tv_id','api/Television/addTVByUserId');
 Route::get('api/tv/program/:date/:class','api/Television/getProgram');
-Route::get('api/tv/programbyid/:id/:date','api/Television/getProgramById');
-Route::get('api/tv/programbytype/:class/:date','api/Television/getProgramForType');
+//Route::get('api/tv/programbyid/:id/:date','api/Television/getProgramById');
+//Route::get('api/tv/programbytype/:class/:date','api/Television/getProgramForType');
 
 /**
  * 评论接口
