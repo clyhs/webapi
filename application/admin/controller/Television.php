@@ -247,4 +247,24 @@ class Television extends BaseAdmin{
         $this->error("删除失败, 请稍候再试!");
     }
 
+    public function forbid()
+    {
+
+        if (DataService::update($this->table)) {
+            $this->success("禁用成功！", '');
+        }
+        $this->error("禁用失败，请稍候再试！");
+    }
+
+    /**
+     * 用户禁用
+     */
+    public function resume()
+    {
+        if (DataService::update($this->table)) {
+            $this->success("启用成功！", '');
+        }
+        $this->error("启用失败，请稍候再试！");
+    }
+
 }
