@@ -5,7 +5,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">时间</label>
         <div class="layui-input-block">
-            <input name="date" id='range-date' value="{$Think.get.date|default=''}"
+            <input name="date2" id='range-date2' value="{$Think.get.date2|default=''}"
                    placeholder="请选择时间" class="layui-input">
         </div>
     </div>
@@ -31,5 +31,5 @@
 
 <script>
     window.form.render();
-    window.laydate.render({range: false, elem: '#range-date', format: 'yyyyMMdd'});
+    window.laydate.render({range: false, elem: '#range-date2', format: 'yyyyMMdd'});
 </script>
