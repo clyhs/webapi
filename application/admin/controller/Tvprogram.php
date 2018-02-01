@@ -34,10 +34,30 @@ class Tvprogram extends BaseAdmin{
 
         if (isset($get['date']) && $get['date'] !== '') {
             $play_date=   $get['date'];
-            $db->where('play_date', $play_date);
+            $db->where('a.play_date', $play_date);
+        }
+
+        foreach (['type_id'] as $key) {
+            if (isset($get[$key]) && $get[$key] !== '') {
+
+                if($get[$key]>0){
+                    //$db->where('a.'.$key, '=', "{$get[$key]}");
+                    $map[]=['exp','FIND_IN_SET('.$get[$key].',a.type)'];
+                    $db->where($map);
+                }
+
+            }
         }
 
         $db->order('a.id desc');
+
+        $where = [
+            "char"=>"CHANNEL",
+            "pid"=>1
+        ];
+
+        $channels = Db::name("dict")->where($where)->order('id asc')->select();
+        $this->assign('channels', $channels);
 
         return parent::_list($db);
 
