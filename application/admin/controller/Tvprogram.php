@@ -85,8 +85,29 @@ class Tvprogram extends BaseAdmin{
         $date = $post['date2'];
         $tvtype = $post['tvtype'];
 
-        $len = $this->getProgramForType($date,$tvtype,0);
-        $this->success('恭喜, 成功导入'.$len.'条数据!', '');
+        $type = 0;
+
+        if($tvtype == 'weishi'){
+            $type = 7;
+        }else if($tvtype == 'yangshi'){
+            $type = 2;
+        }else{
+
+        }
+        $where = [
+            "play_date"=>$date,
+            "type"=>$type
+        ];
+
+        if(Db::name($this->table)->where($where)->find()){
+            $this->error('节目已经存在, 请清空再试!');
+        }else{
+            $len = $this->getProgramForType($date,$tvtype,0);
+            $this->success('恭喜, 成功导入'.$len.'条数据!', '');
+        }
+
+
+
     }
 
     public function getProgramForType($date,$class,$debug){
