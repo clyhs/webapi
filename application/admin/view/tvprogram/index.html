@@ -28,7 +28,7 @@
     <div class="layui-form-item layui-inline">
         <label class="layui-form-label">时间</label>
         <div class="layui-input-inline">
-            <input name="play_date" id='range-date' value="{$Think.get.play_date|default=''}"
+            <input name="date" id='range-date' value="{$Think.get.date|default=''}"
                    placeholder="请选择时间" class="layui-input">
         </div>
     </div>
@@ -83,7 +83,7 @@
     {if isset($page)}<p>{$page}</p>{/if}
     <script>
         window.form.render();
-        window.laydate.render({range: false, elem: '#range-date', format: 'yyyy/MM/dd'});
+        window.laydate.render({range: false, elem: '#range-date', format: 'yyyyMMdd'});
     </script>
 </form>
 
