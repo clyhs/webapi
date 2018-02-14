@@ -139,11 +139,14 @@ class Television extends Rest{
      */
     public function getTvForIndex(){
 
+        $code = empty(Request::instance()->param('postcode'))?"110000":Request::instance()->param('postcode');
+
         $hot=array(
             "is_hot"=>1
         );
         $recommend=array(
-            "is_recommend"=>1
+            "a.province"=>$code
+
         );
         $new=array(
             "is_new"=>1
@@ -185,7 +188,7 @@ class Television extends Rest{
             ->join(' t_region c ',' a.province = c.code ','left')
             ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
             //->join(' t_comment e',' e.uid=a.id and e.type_id=11 and e.pid=0 ','left')
-            ->where(' d.id = 4')
+            ->where($recommend)
             ->group('a.id')
             ->order(' rand() ')
             //->order('a.id desc')
