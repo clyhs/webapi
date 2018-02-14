@@ -460,6 +460,35 @@ class Television extends Rest{
         return json($result);
     }
 
+    public function getTvForPageByProvinceForIndex($code){
+        $where=[
+            'province'=>$code
+        ];
+
+
+
+        $lists = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,
+        (select count(1) from t_comment e where e.uid=a.id and e.type_id=11 and e.pid=0 ) as commentNum,
+        (select sum(good) from t_good_log f where f.uid=a.id and f.type_id=11 ) as goodNum  ')
+            ->table("t_television")
+            ->alias('a')
+            ->join(' t_region b ',' a.country = b.code ','left')
+            ->join(' t_region c ',' a.province = c.code ','left')
+            ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
+            ->where($where)
+            ->group('a.id')
+            ->order(' rand() ')
+            //->order('a.id desc')
+            ->limit(4)->select();
+
+        $result = [
+            "code"=>"10000",
+            "desc"=>"",
+            "data"=>$lists
+        ];
+        return json($result);
+    }
+
     public function addTVByUserId($type_id,$userId,$tv_id){
         if(empty($type_id) || empty($userId) || empty($tv_id)){
             return json(["code"=>20001,"desc"=>"参数不能为空","data"=>[]]);

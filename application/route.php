@@ -31,6 +31,7 @@ Route::get('api/user/getgood/:uid/:userId/:type_id','api/User/getGoodLog');
 Route::get('api/tv/page/:typeId/[:page]/[:pageSize]','api/Television/getTvForPageByType');
 Route::post('api/tv/search','api/Television/getTvForPageBySearch');
 Route::get('api/tv/province/:code/[:page]/[:pageSize]','api/Television/getTvForPageByProvince');
+Route::get('api/tv/provinceforindex/:code','api/Television/getTvForPageByProvinceForIndex');
 Route::get('api/tv/prop/:typeId/[:page]/[:pageSize]','api/Television/getTvByProperty');
 Route::get('api/tv/index/[:postcode]','api/Television/getTvForIndex');
 Route::post('api/tv/uploadbg','api/Television/uploadbg');
