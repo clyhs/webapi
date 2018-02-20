@@ -190,12 +190,18 @@ class Television extends BaseAdmin{
 
             if (isset($vo['is_recommend'])) {
                 $vo['is_recommend'] = 1;
+            }else{
+                $vo['is_recommend'] = 0;
             }
             if (isset($vo['is_hot'])) {
                 $vo['is_hot'] = 1;
+            }else{
+                $vo['is_hot'] = 0;
             }
             if (isset($vo['is_new'])) {
                 $vo['is_new'] = 1;
+            }else{
+                $vo['is_new'] = 0;
             }
 
             if(isset($vo['icon']) && $vo['icon']!=""){
