@@ -188,6 +188,16 @@ class Television extends BaseAdmin{
                 $vo['type_ids'] = join(',', $vo['type_ids']);
             }
 
+            if (isset($vo['is_recommend'])) {
+                $vo['is_recommend'] = 1;
+            }
+            if (isset($vo['is_hot'])) {
+                $vo['is_hot'] = 1;
+            }
+            if (isset($vo['is_new'])) {
+                $vo['is_new'] = 1;
+            }
+
             if(isset($vo['icon']) && $vo['icon']!=""){
                 $info = getimagesize($vo['icon']);
                 $vo['icon_width'] = $info['0'];
