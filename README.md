@@ -1,4 +1,4 @@
-ThinkPHP 5.0
+WEBAPI
 ### 数据库
 采用mysql
 ### 功能
