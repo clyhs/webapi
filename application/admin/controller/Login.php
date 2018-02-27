@@ -35,6 +35,15 @@ class Login extends BaseAdmin{
         $user = Db::name('user')->where('username', $username)->find();
         empty($user) && $this->error('登录账号不存在，请重新输入!');
         ($user['password'] !== md5($password)) && $this->error('登录密码与账号不匹配，请重新输入!');
+
+        if($user['authorize']!=''){
+            $authorizes = explode(",",$user['authorize']);
+            if(!in_array("1",$authorizes)){
+                $this->error('你没有登录权限!');
+            }
+        }else{
+            $this->error('你没有登录权限!');
+        }
         empty($user['status']) && $this->error('账号已经被禁用，请联系管理!');
         // 更新登录信息
         $data = ['login_at' => ['exp', 'now()'], 'login_num' => ['exp', 'login_num+1']];
