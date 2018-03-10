@@ -66,7 +66,7 @@ class Television extends Rest{
         for($i = 0;$i<count($data);$i++){
             $sql = "select a.title from t_television_program a ".
                 " where a.tv_id=".$data[$i]['id']." and a.play_date='".$date."'".
-                " and a.play_at > now() order by a.play_at desc limit 1";
+                " and a.play_at > now() order by a.play_at asc limit 1";
             $row =Db::query($sql);
             if(count($row) == 1){
                 $data[$i]['nexttitle'] = $row[0]['title'];
