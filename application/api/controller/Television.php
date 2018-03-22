@@ -162,7 +162,7 @@ class Television extends Rest{
         );
         $recommend=array(
             "a.province"=>$code,
-            "stauts"=>1
+            "status"=>1
 
     );
         $new=array(
