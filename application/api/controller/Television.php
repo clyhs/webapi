@@ -35,7 +35,7 @@ class Television extends Rest{
         ];
         $date = date('Ymd',time());
         $map[]=['exp','FIND_IN_SET('.$typeId.',a.type_ids)'];
-        $map[]=['a.status',1];
+        $map['a.status']=1;
 
         $lists = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,
         (select count(1) from t_comment e where e.uid=a.id and e.type_id=11 and e.pid=0 ) as commentNum,
