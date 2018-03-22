@@ -35,6 +35,8 @@ class Television extends Rest{
         ];
         $date = date('Ymd',time());
         $map[]=['exp','FIND_IN_SET('.$typeId.',a.type_ids)'];
+        $map[]=['a.status',1];
+
         $lists = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,
         (select count(1) from t_comment e where e.uid=a.id and e.type_id=11 and e.pid=0 ) as commentNum,
         (select sum(good) from t_good_log f where f.uid=a.id and f.type_id=11 ) as goodNum ')
@@ -120,6 +122,7 @@ class Television extends Rest{
         $options=[
             'page'=>$page
         ];
+        $where['stauts']=1;
 
         $lists = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames ,
         (select count(1) from t_comment e where e.uid=a.id and e.type_id=11 and e.pid=0 ) as commentNum,
@@ -158,9 +161,10 @@ class Television extends Rest{
             "is_hot"=>1
         );
         $recommend=array(
-            "a.province"=>$code
+            "a.province"=>$code,
+            "stauts"=>1
 
-        );
+    );
         $new=array(
             "is_new"=>1
         );
@@ -175,6 +179,7 @@ class Television extends Rest{
             ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
             //->join(' t_comment e',' e.uid=a.id and e.type_id=11 and e.pid=0 ','left')
             //->where($hot)
+            ->where(' a.status=1 ')
             ->group('a.id')
             ->order('a.hit desc')
             ->limit(4)->select();
@@ -188,6 +193,7 @@ class Television extends Rest{
             ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
             //->join(' t_comment e',' e.uid=a.id and e.type_id=11 and e.pid=0 ','left')
             //->where($new)
+            ->where(' a.status=1 ')
             ->group('a.id')
             ->order(' rand() ')
             //->order('a.id desc')
@@ -215,7 +221,7 @@ class Television extends Rest{
             ->join(' t_region c ',' a.province = c.code ','left')
             ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
             //->join(' t_comment e',' e.uid=a.id and e.type_id=11 and e.pid=0 ','left')
-            ->where(' d.id = 23')
+            ->where(' d.id = 23 and status=1 ')
             ->group('a.id')
             ->order(' rand() ')
             //->order('a.id desc')
@@ -229,7 +235,7 @@ class Television extends Rest{
             ->join(' t_region c ',' a.province = c.code ','left')
             ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
             ->join(' t_comment e',' e.uid=a.id and e.type_id=11 and e.pid=0 ','left')
-            ->where(' d.id = 17')
+            ->where(' d.id = 17  and status=1 ')
             ->group('a.id')
             ->order(' rand() ')
             //->order('a.id desc')
@@ -243,7 +249,7 @@ class Television extends Rest{
             ->join(' t_region c ',' a.province = c.code ','left')
             ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
             ->join(' t_comment e',' e.uid=a.id and e.type_id=11 and e.pid=0 ','left')
-            ->where(' d.id = 18')
+            ->where(' d.id = 18  and status=1 ')
             ->group('a.id')
             ->order(' rand() ')
             //->order('a.id desc')
@@ -258,7 +264,7 @@ class Television extends Rest{
             ->join(' t_region c ',' a.province = c.code ','left')
             ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
             //->join(' t_comment e',' e.uid=a.id and e.type_id=11 and e.pid=0 ','left')
-            ->where(' a.is_recommend = 1 ')
+            ->where(' a.is_recommend = 1   and status=1 ')
             ->group('a.id')
             ->order(' rand() ')
             //->order('a.id desc')
@@ -291,7 +297,8 @@ class Television extends Rest{
 
         $where = [
             "a.user_id"=>$userId,
-            "a.type_id"=>$typeId
+            "a.type_id"=>$typeId,
+            "a.status"=>1
         ];
 
         $options=[
@@ -461,7 +468,8 @@ class Television extends Rest{
 
     public function getTvForPageByProvince($page = 1,$pageSize = 20,$code){
         $where=[
-            'province'=>$code
+            'province'=>$code,
+            "a.status"=>1
         ];
 
         $options=[
@@ -491,7 +499,8 @@ class Television extends Rest{
 
     public function getTvForPageByProvinceForIndex($code){
         $where=[
-            'province'=>$code
+            'province'=>$code,
+            "a.status"=>1
         ];
 
 
@@ -572,7 +581,7 @@ class Television extends Rest{
             ->join(' t_region b ',' a.country = b.code ','left')
             ->join(' t_region c ',' a.province = c.code ','left')
             ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
-            ->where(' a.name like "%'.$name.'%" ')
+            ->where(' a.name like "%'.$name.'%" and status=1 ')
             ->group('a.id')
             ->order('a.id asc')
             ->paginate($pageSize,false,$options);
