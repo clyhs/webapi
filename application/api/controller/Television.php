@@ -298,7 +298,7 @@ class Television extends Rest{
         $where = [
             "a.user_id"=>$userId,
             "a.type_id"=>$typeId,
-            "a.status"=>1
+            "b.status"=>1
         ];
 
         $options=[
