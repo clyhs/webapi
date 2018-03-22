@@ -581,7 +581,7 @@ class Television extends Rest{
             ->join(' t_region b ',' a.country = b.code ','left')
             ->join(' t_region c ',' a.province = c.code ','left')
             ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
-            ->where(' a.name like "%'.$name.'%" and status=1 ')
+            ->where(' a.name like "%'.$name.'%" and a.status=1 ')
             ->group('a.id')
             ->order('a.id asc')
             ->paginate($pageSize,false,$options);
