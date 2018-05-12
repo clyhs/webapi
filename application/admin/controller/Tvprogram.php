@@ -169,10 +169,10 @@ class Tvprogram extends BaseAdmin{
                         $insertData = [
                             'title'=>$programs[$j]['name'],
                             'tv_id'=>$tv_id,
-                            'play_time'=>$programs[$j]['starttime'],
+                            'play_time'=>substr($programs[$j]['starttime'],0,5),
                             'play_date'=>$date,
                             'type'=>$type,
-                            'play_at'=>$year."-".$month."-".$day." ".$programs[$j]['starttime'].":00"
+                            'play_at'=>$year."-".$month."-".$day." ".substr($programs[$j]['starttime'],0,5).":00"
                         ];
                         if($debug == 1){
                            // echo $data[$i]['keyword'].$programs[$j]['name'].$programs[$j]['starttime'].'<br>';
