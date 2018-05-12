@@ -160,7 +160,7 @@ class Tvprogram extends BaseAdmin{
                 $url = "https://m.tvsou.com/epg/".$data[$i]['keyword']."/".$date."?class=".$class;
                 $programs = QueryList::Query($url,array(
                     'name' => array('span.name','text'),
-                    'starttime' => array('span.start','text')
+                    'starttime' => array('span','text')
                 ),'.list>a')->data;
                 $tv_id = $data[$i]['id'];
                 $len = $len+count($programs);
