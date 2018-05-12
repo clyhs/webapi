@@ -631,7 +631,7 @@ class Television extends Rest{
                 $insertData = [
                     'title'=>$data[$i]['name'],
                     'tv_id'=>$tv_id[0],
-                    'play_time'=>$data[$i]['starttime'],
+                    'play_time'=>substr($data[$i]['starttime'],0,5),
                     'play_date'=>$date,
                     'play_at'=>$year."-".$month."-".$day." ".$data[$i]['starttime'].":00"
                 ];
