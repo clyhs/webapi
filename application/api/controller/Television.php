@@ -616,7 +616,7 @@ class Television extends Rest{
         $url = "https://m.tvsou.com/epg/".$name."/".$date."?class=".$class;
         $data = QueryList::Query($url,array(
             'name' => array('span.name','text'),
-            'starttime' => array('span.mainstars','text')
+            'starttime' => array('span.data-mainstars','text')
         ),'.list>a')->data;
 
         $db= Db::name("television_program") ;
