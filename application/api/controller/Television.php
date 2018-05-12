@@ -616,7 +616,7 @@ class Television extends Rest{
         $url = "https://m.tvsou.com/epg/".$name."/".$date."?class=".$class;
         $data = QueryList::Query($url,array(
             'name' => array('span.name','text'),
-            'starttime' => array('span','text')
+            'starttime' => substr(array('span','text'),0,5)
         ),'.list>a')->data;
 
         $db= Db::name("television_program") ;
@@ -646,7 +646,7 @@ class Television extends Rest{
         //print_r($data);
         $result = [
             "code"=>"10000",
-            "desc"=>$url.',id='.$tv_id[0].strtotime($year."-".$month."-".$day." ".substr($data[0]['starttime'],0,5).":00"),
+            "desc"=>$url.',id='.$tv_id[0].strtotime($year."-".$month."-".$day." ".$data[0]['starttime'].":00"),
             "data"=>$data
         ];
         return json($result);
