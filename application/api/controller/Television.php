@@ -617,7 +617,7 @@ class Television extends Rest{
         $data = QueryList::Query($url,array(
             'name' => array('li.data-name','text'),
             'starttime' => array('span','text')
-        ),'.relative>li')->data;
+        ),'.list>li')->data;
 
         $db= Db::name("television_program") ;
         $pk ='id';
