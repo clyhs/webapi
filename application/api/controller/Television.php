@@ -459,7 +459,7 @@ class Television extends Rest{
         $lists = $db->select();
         foreach ($lists as $key => &$item) {
             $sql = 'select a.* from t_television a '.
-                ' where FIND_IN_SET('.$item['id'].' , a.type_ids) order by a.id asc';
+                ' where FIND_IN_SET('.$item['id'].' , a.type_ids) and a.status=1 order by a.id asc';
             $childrens =Db::query($sql);
             $lists[$key]['tvs'] = $childrens;
         }
