@@ -770,7 +770,7 @@ class Television extends Rest{
         ];
         $db= Db::name("television") ;
         $pk ='id';
-        $type = 2;
+        $type = 7;
         $map[]=['exp','FIND_IN_SET('.$type.',type_ids)'];
         $tvs = Db::name($this->table)->where($map)->select();
         //$url = "https://m.tvsou.com/epg/".$name."/".$date."?class=".$class;
@@ -779,7 +779,7 @@ class Television extends Rest{
         $data = array();
         if(count($tvs)>0){
             for($i = 0;$i<count($tvs);$i++){
-                $keyword = $tvs[$i]['name'];
+                $keyword = $tvs[$i]['keyword'];
                 
                 if($keyword!=''){
                     $url="https://m.tvsou.com/epg/".$keyword."?class=".$class;
@@ -793,8 +793,8 @@ class Television extends Rest{
                         'id'=>$tvs[$i]['id'],
                         'channelid'=>$r[0]['channelid']
                     ];
-                    //print_r($insertData);
-                    $result = DataService::save($db, $insertData, $pk, []);
+                    print_r($insertData);
+                    //$result = DataService::save($db, $insertData, $pk, []);
                 }
             }
         }
