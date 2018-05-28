@@ -770,12 +770,17 @@ class Television extends Rest{
         ];
         $tv_id = Db::name($this->table)->where("name='".$name."' or keyword='".$name."'")->column('id');
 
-        $url = "https://m.tvsou.com/epg/".$name."/".$date."?class=".$class;
+        //$url = "https://m.tvsou.com/epg/".$name."/".$date."?class=".$class;
+        $url="https://m.tvsou.com/epg/".$name."?class=".$class;
+        /*
         $data = QueryList::Query($url,array(
-            'name' => array('span.name','text'),
+            'name' => array('input.name','text'),
             'starttime' => array('span.time','text')
-        ),'.list>a')->data;
+        ),'.list>a')->data;*/
 
+        $data = QueryList::Query($url,array(
+            'input' => array('#channelid','value')
+        ))->data;
 
         return json($data);
     }
