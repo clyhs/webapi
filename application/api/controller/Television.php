@@ -778,32 +778,30 @@ class Television extends Rest{
         if(count($tvs)>0){
             for($i = 0;$i<count($tvs);$i++){
                 $keyword = $tvs[$i]['name'];
-                /*
+                
                 if($keyword!=''){
                     $url="https://m.tvsou.com/epg/".$keyword."?class=".$class;
-                    echo $url;
+                    echo $url.'<br>';
                     $r = QueryList::Query($url,array(
                         'channelid' => array('input:hidden:eq(1)','value')
                     ))->data;
-                    if(''!=$r){
-                        $data[$i]=$r;
-                    }
-                    
+                    print_r($r);
+                    /*
                     $insertData[$i] = [
                         'id'=>$tvs[$i]['id'],
                         'channelid'=>$data[0]['channelid']
                     ];
-                    $result = DataService::save($db, $insertData, $pk, []);
-                }*/
+                    $result = DataService::save($db, $insertData, $pk, []);*/
+                }
             }
         }
         
-        
+        /*
         $data = QueryList::Query($url,array(
             'channelid' => array('input:hidden:eq(1)','value')
         ))->data;
 
-        return json($data);
+        return json($data);*/
     }
 }
 
