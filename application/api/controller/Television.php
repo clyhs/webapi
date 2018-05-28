@@ -781,9 +781,10 @@ class Television extends Rest{
 
                 if($keyword!=''){
                     $url="https://m.tvsou.com/epg/".$keyword."?class=".$class;
-                    $data[$i] = QueryList::Query($url,array(
+                    echo $url;
+                    /*$data[$i] = QueryList::Query($url,array(
                         'channelid' => array('input:hidden:eq(1)','value')
-                    ))->data;
+                    ))->data;*/
                     /*
                     $insertData[$i] = [
                         'id'=>$tvs[$i]['id'],
@@ -803,7 +804,7 @@ class Television extends Rest{
             'channelid' => array('input:hidden:eq(1)','value')
         ))->data;*/
 
-        return json($data);
+        //return json($data);
     }
 }
 
