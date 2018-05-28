@@ -625,6 +625,7 @@ class Television extends Rest{
         $year=((int)substr($date,0,4));//取得年份
         $month=((int)substr($date,4,2));//取得月份
         $day=((int)substr($date,6,2));//取得几号
+        /*
         if(is_array($tv_id) && count($data)>0){
             for($i=0;$i<count($data);$i++){
 
@@ -643,7 +644,7 @@ class Television extends Rest{
             }
         }else{
 
-        }
+        }*/
 
         //print_r($data);
         $result = [
