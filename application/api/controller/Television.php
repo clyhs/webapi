@@ -627,8 +627,6 @@ class Television extends Rest{
         $day=((int)substr($date,6,2));//取得几号
 
 
-        print_r($data);
-        
         $result = [
             "code"=>"10000",
             "desc"=>$url.',id='.$tv_id[0].strtotime($year."-".$month."-".$day." ".":00"),
@@ -749,11 +747,37 @@ class Television extends Rest{
             ];
             return json($result);
         }
-
-
-
-
         //return json([]);
+    }
+
+
+    public function getProgramFordebug(){
+        //https://www.tvsou.com/epg/HNTV-1/20171218?class=weishi
+        //https://www.tvsou.com/epg/CCTV-1/20171218?class=yangshi
+        //$url = "https://m.tvsou.com/epg/CCTV-1/20171218";
+
+        $name = empty(Request::instance()->param('name'))?"":Request::instance()->param('name');
+        $date = empty(Request::instance()->param('date'))?"":Request::instance()->param('date');
+        $class = empty(Request::instance()->param('class'))?"":Request::instance()->param('class');
+        $debug = empty(Request::instance()->param('debug'))?"":Request::instance()->param('debug');
+
+        if(empty($name) || empty($date) || empty($class)){
+            return json(["code"=>20001,"desc"=>"参数不能为空","data"=>[]]);
+        }
+
+        $where = [
+            'name' => $name
+        ];
+        $tv_id = Db::name($this->table)->where("name='".$name."' or keyword='".$name."'")->column('id');
+
+        $url = "https://m.tvsou.com/epg/".$name."/".$date."?class=".$class;
+        $data = QueryList::Query($url,array(
+            'name' => array('span.name','text'),
+            'starttime' => array('span.time','text')
+        ),'.list>a')->data;
+
+
+        return json($data);
     }
 }
 
