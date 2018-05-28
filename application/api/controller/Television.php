@@ -774,7 +774,7 @@ class Television extends Rest{
         //$url = "https://m.tvsou.com/epg/".$name."/".$date."?class=".$class;
         $url="https://m.tvsou.com/epg/".$name."?class=".$class;
         $insertData = [];
-        if(count(tvs)>0){
+        if(count($tvs)>0){
             for($i = 0;$i<count($tvs);$i++){
                 $keyword = $tvs[$i]['keyword'];
                 if($keyword!=''){
