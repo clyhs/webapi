@@ -774,18 +774,20 @@ class Television extends Rest{
         //$url = "https://m.tvsou.com/epg/".$name."/".$date."?class=".$class;
         $url="https://m.tvsou.com/epg/".$name."?class=".$class;
         $insertData = [];
+        $data = [];
         if(count($tvs)>0){
             for($i = 0;$i<count($tvs);$i++){
                 $keyword = $tvs[$i]['keyword'];
                 if($keyword!=''){
                     $url="https://m.tvsou.com/epg/".$keyword."?class=".$class;
-                    $data = QueryList::Query($url,array(
+                    $data[$i] = QueryList::Query($url,array(
                         'channelid' => array('input:hidden:eq(1)','value')
                     ))->data;
+                    /*
                     $insertData[$i] = [
                         'id'=>$tvs[$i]['id'],
                         'channelid'=>$data[0]['channelid']
-                    ];
+                    ];*/
                     //$result = DataService::save($db, $insertData, $pk, []);
                 }
             }
@@ -800,7 +802,7 @@ class Television extends Rest{
             'channelid' => array('input:hidden:eq(1)','value')
         ))->data;*/
 
-        return json($insertData);
+        return json($data);
     }
 }
 
