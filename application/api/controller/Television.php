@@ -786,7 +786,7 @@ class Television extends Rest{
                         'channelid' => array('input:hidden:eq(1)','value')
                     ))->data;
                     if(''!=$r){
-                        $data[$I]=$r;
+                        $data[$i]=$r;
                     }
                     /*
                     $insertData[$i] = [
