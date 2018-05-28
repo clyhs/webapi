@@ -795,6 +795,7 @@ class Television extends Rest{
                         'channelid'=>$r[0]['channelid']
                         ];
                         print_r($insertData);
+                        $result = DataService::save($db, $insertData, $pk, []);
                     }
                     
                     
