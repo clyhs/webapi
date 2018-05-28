@@ -768,7 +768,9 @@ class Television extends Rest{
         $where = [
             'name' => $name
         ];
-        $tv_id = Db::name($this->table)->where("name='".$name."' or keyword='".$name."'")->column('id');
+        $type = 2;
+        $map[]=['exp','FIND_IN_SET('.$type.',a.type_ids)'];
+        $tvs = Db::name($this->table)->where($map)->select();
 
         //$url = "https://m.tvsou.com/epg/".$name."/".$date."?class=".$class;
         $url="https://m.tvsou.com/epg/".$name."?class=".$class;
@@ -779,10 +781,10 @@ class Television extends Rest{
         ),'.list>a')->data;*/
 
         $data = QueryList::Query($url,array(
-            'input' => array('input:hidden:eq(1)','value')
+            'channelid' => array('input:hidden:eq(1)','value')
         ))->data;
 
-        return json($data);
+        return json($tvs);
     }
 }
 
