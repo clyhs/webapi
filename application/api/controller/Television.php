@@ -769,7 +769,7 @@ class Television extends Rest{
             'name' => $name
         ];
         $type = 2;
-        $map[]=['exp','FIND_IN_SET('.$type.',a.type_ids)'];
+        $map[]=['exp','FIND_IN_SET('.$type.',type_ids)'];
         $tvs = Db::name($this->table)->where($map)->select();
 
         //$url = "https://m.tvsou.com/epg/".$name."/".$date."?class=".$class;
