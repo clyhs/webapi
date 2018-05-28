@@ -785,13 +785,14 @@ class Television extends Rest{
                     $r = QueryList::Query($url,array(
                         'channelid' => array('input:hidden:eq(1)','value')
                     ))->data;
-                    print_r($r);
-                    /*
-                    $insertData[$i] = [
+                    //print_r($r);
+                    
+                    $insertData = [
                         'id'=>$tvs[$i]['id'],
-                        'channelid'=>$data[0]['channelid']
+                        'channelid'=>$r[0]['channelid']
                     ];
-                    $result = DataService::save($db, $insertData, $pk, []);*/
+                    print_r($insertData);
+                    /*$result = DataService::save($db, $insertData, $pk, []);*/
                 }
             }
         }
