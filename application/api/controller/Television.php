@@ -772,13 +772,13 @@ class Television extends Rest{
         $map[]=['exp','FIND_IN_SET('.$type.',type_ids)'];
         $tvs = Db::name($this->table)->where($map)->select();
         //$url = "https://m.tvsou.com/epg/".$name."/".$date."?class=".$class;
-        $url="https://m.tvsou.com/epg/".$name."?class=".$class;
+        $url="https://m.tvsou.com/epg/CCTV-8?class=yangshi";
         $insertData = array();
         $data = array();
         if(count($tvs)>0){
             for($i = 0;$i<count($tvs);$i++){
                 $keyword = $tvs[$i]['name'];
-
+                /*
                 if($keyword!=''){
                     $url="https://m.tvsou.com/epg/".$keyword."?class=".$class;
                     echo $url;
@@ -788,26 +788,22 @@ class Television extends Rest{
                     if(''!=$r){
                         $data[$i]=$r;
                     }
-                    /*
+                    
                     $insertData[$i] = [
                         'id'=>$tvs[$i]['id'],
                         'channelid'=>$data[0]['channelid']
-                    ];*/
-                    //$result = DataService::save($db, $insertData, $pk, []);
-                }
+                    ];
+                    $result = DataService::save($db, $insertData, $pk, []);
+                }*/
             }
         }
-        /*
-        $data = QueryList::Query($url,array(
-            'name' => array('input.name','text'),
-            'starttime' => array('span.time','text')
-        ),'.list>a')->data;*/
-        /*
+        
+        
         $data = QueryList::Query($url,array(
             'channelid' => array('input:hidden:eq(1)','value')
-        ))->data;*/
+        ))->data;
 
-        //return json($data);
+        return json($data);
     }
 }
 
