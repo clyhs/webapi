@@ -616,7 +616,7 @@ class Television extends Rest{
         $url = "https://m.tvsou.com/epg/".$name."/".$date."?class=".$class;
         $data = QueryList::Query($url,array(
             'name' => array('span.name','text'),
-            'starttime' => array('span','text')
+            'starttime' => array('span.time','text')
         ),'.list>a')->data;
 
         $db= Db::name("television_program") ;
@@ -631,9 +631,9 @@ class Television extends Rest{
                 $insertData = [
                     'title'=>$data[$i]['name'],
                     'tv_id'=>$tv_id[0],
-                    'play_time'=>substr($data[$i]['starttime'],0,5),
+                    'play_time'=>$data[$i]['starttime'],
                     'play_date'=>$date,
-                    'play_at'=>$year."-".$month."-".$day." ".substr($data[$i]['starttime'],0,5).":00"
+                    'play_at'=>$year."-".$month."-".$day." ".$data[$i]['starttime'].":00"
                 ];
                 if($debug == 1){
 
@@ -646,7 +646,7 @@ class Television extends Rest{
         //print_r($data);
         $result = [
             "code"=>"10000",
-            "desc"=>$url.',id='.$tv_id[0].strtotime($year."-".$month."-".$day." ".":00"),
+            "desc"=>$url.',id='.$tv_id[0].strtotime($year."-".$month."-".$day." ".$data[$i]['starttime'].":00"),
             "data"=>$insertData
         ];
         return json($result);
