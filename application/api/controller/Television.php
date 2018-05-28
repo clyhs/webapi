@@ -768,6 +768,8 @@ class Television extends Rest{
         $where = [
             'name' => $name
         ];
+        $db= Db::name("television") ;
+        $pk ='id';
         $type = 2;
         $map[]=['exp','FIND_IN_SET('.$type.',type_ids)'];
         $tvs = Db::name($this->table)->where($map)->select();
@@ -791,8 +793,8 @@ class Television extends Rest{
                         'id'=>$tvs[$i]['id'],
                         'channelid'=>$r[0]['channelid']
                     ];
-                    print_r($insertData);
-                    /*$result = DataService::save($db, $insertData, $pk, []);*/
+                    //print_r($insertData);
+                    $result = DataService::save($db, $insertData, $pk, []);
                 }
             }
         }
