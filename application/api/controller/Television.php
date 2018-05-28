@@ -779,7 +779,7 @@ class Television extends Rest{
         ),'.list>a')->data;*/
 
         $data = QueryList::Query($url,array(
-            'input' => array('#channelid','value')
+            'input' => array('#channelid>input','value')
         ))->data;
 
         return json($data);
