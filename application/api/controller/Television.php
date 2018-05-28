@@ -646,7 +646,7 @@ class Television extends Rest{
         //print_r($data);
         $result = [
             "code"=>"10000",
-            "desc"=>$url.',id='.$tv_id[0].strtotime($year."-".$month."-".$day." ".$data[1]['starttime'].":00"),
+            "desc"=>$url.',id='.$tv_id[0].strtotime($year."-".$month."-".$day." ".":00"),
             "data"=>$insertData
         ];
         return json($result);
