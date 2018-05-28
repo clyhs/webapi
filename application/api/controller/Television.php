@@ -771,20 +771,36 @@ class Television extends Rest{
         $type = 2;
         $map[]=['exp','FIND_IN_SET('.$type.',type_ids)'];
         $tvs = Db::name($this->table)->where($map)->select();
-
         //$url = "https://m.tvsou.com/epg/".$name."/".$date."?class=".$class;
         $url="https://m.tvsou.com/epg/".$name."?class=".$class;
+        $insertData = [];
+        if(count(tvs)>0){
+            for($i = 0;$i<count($tvs);$i++){
+                $keyword = $tvs[$i]['keyword'];
+                if($keyword!=''){
+                    $url="https://m.tvsou.com/epg/".$keyword."?class=".$class;
+                    $data = QueryList::Query($url,array(
+                        'channelid' => array('input:hidden:eq(1)','value')
+                    ))->data;
+                    $insertData[$i] = [
+                        'id'=>$tvs[$i]['id'],
+                        'channelid'=>$data['channelid']
+                    ];
+                    //$result = DataService::save($db, $insertData, $pk, []);
+                }
+            }
+        }
         /*
         $data = QueryList::Query($url,array(
             'name' => array('input.name','text'),
             'starttime' => array('span.time','text')
         ),'.list>a')->data;*/
-
+        /*
         $data = QueryList::Query($url,array(
             'channelid' => array('input:hidden:eq(1)','value')
-        ))->data;
+        ))->data;*/
 
-        return json($tvs);
+        return json($insertData);
     }
 }
 
