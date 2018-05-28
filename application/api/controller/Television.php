@@ -777,20 +777,21 @@ class Television extends Rest{
         $data = array();
         if(count($tvs)>0){
             for($i = 0;$i<count($tvs);$i++){
-                $keyword = $tvs[$i]['keyword'];
+                echo $keyword = $tvs[$i]['keyword'];
+                /*
                 if($keyword!=''){
                     $url="https://m.tvsou.com/epg/".$keyword."?class=".$class;
                     $data[$i] = QueryList::Query($url,array(
                         'channelid' => array('input:hidden:eq(1)','value')
                     ))->data;
                     print_r($data[$i]);
-                    /*
+
                     $insertData[$i] = [
                         'id'=>$tvs[$i]['id'],
                         'channelid'=>$data[0]['channelid']
-                    ];*/
-                    //$result = DataService::save($db, $insertData, $pk, []);
-                }
+                    ];
+                    $result = DataService::save($db, $insertData, $pk, []);
+                }*/
             }
         }
         /*
