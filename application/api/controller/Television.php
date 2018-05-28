@@ -783,6 +783,7 @@ class Television extends Rest{
                     $data[$i] = QueryList::Query($url,array(
                         'channelid' => array('input:hidden:eq(1)','value')
                     ))->data;
+                    print_r($data[$i]);
                     /*
                     $insertData[$i] = [
                         'id'=>$tvs[$i]['id'],
@@ -802,7 +803,7 @@ class Television extends Rest{
             'channelid' => array('input:hidden:eq(1)','value')
         ))->data;*/
 
-        return json($data);
+        //return json($data);
     }
 }
 
