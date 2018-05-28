@@ -773,8 +773,8 @@ class Television extends Rest{
         $tvs = Db::name($this->table)->where($map)->select();
         //$url = "https://m.tvsou.com/epg/".$name."/".$date."?class=".$class;
         $url="https://m.tvsou.com/epg/".$name."?class=".$class;
-        $insertData = [];
-        $data = [];
+        $insertData = array();
+        $data = array();
         if(count($tvs)>0){
             for($i = 0;$i<count($tvs);$i++){
                 $keyword = $tvs[$i]['keyword'];
