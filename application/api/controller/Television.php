@@ -777,7 +777,7 @@ class Television extends Rest{
         $data = array();
         if(count($tvs)>0){
             for($i = 0;$i<count($tvs);$i++){
-                echo $keyword = $tvs[$i]['keyword'];
+                echo $keyword = $tvs[$i]['name'];
                 /*
                 if($keyword!=''){
                     $url="https://m.tvsou.com/epg/".$keyword."?class=".$class;
