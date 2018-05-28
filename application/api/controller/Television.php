@@ -788,12 +788,16 @@ class Television extends Rest{
                         'channelid' => array('input:hidden:eq(1)','value')
                     ))->data;
                     //print_r($r);
-                    
-                    $insertData = [
+
+                    if(''!=$r){
+                        $insertData = [
                         'id'=>$tvs[$i]['id'],
                         'channelid'=>$r[0]['channelid']
-                    ];
-                    print_r($insertData);
+                        ];
+                        print_r($insertData);
+                    }
+                    
+                    
                     //$result = DataService::save($db, $insertData, $pk, []);
                 }
             }
