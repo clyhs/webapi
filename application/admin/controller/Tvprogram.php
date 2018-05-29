@@ -169,7 +169,9 @@ class Tvprogram extends BaseAdmin{
                         'channelid'=>$data[$i]['channelid']
                     ];
                     $tv_id = $data[$i]['id'];
-
+                    if($i>0 && $i%3 == 0){
+                        usleep(2000000);
+                    }
                     $result = $this->http($url,$params,'POST',array());
                     $programs = $result['list'];
                     $len = $len+count($programs);
