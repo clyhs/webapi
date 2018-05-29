@@ -182,6 +182,10 @@ class Tvprogram extends BaseAdmin{
                     $len = $len+count($programs);
                     if(!empty($tv_id) && count($programs)>0){
                         for($j=0;$j<count($programs);$j++){
+                            $content = "";
+                            if(""!=$programs[$j]['content']){
+                                $content = $programs[$j]['content'];
+                            }
                             $insertData = [
                                 'title'=>$programs[$j]['title'],
                                 'tv_id'=>$tv_id,
@@ -189,7 +193,7 @@ class Tvprogram extends BaseAdmin{
                                 'end_time'=>$programs[$j]['endtime'],
                                 'play_times'=>$programs[$j]['playtimes'],
                                 'end_times'=>$programs[$j]['endtimes'],
-                                'content'=>$programs[$j]['content'],
+                                'content'=>$content,
                                 'play_date'=>$date,
                                 'type'=>$type,
                                 'play_at'=>$year."-".$month."-".$day." ".$programs[$j]['playtime'].":00"
