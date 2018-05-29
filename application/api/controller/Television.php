@@ -862,7 +862,7 @@ class Television extends Rest{
         $error = curl_error($ch);
         curl_close($ch);
         if($error) throw new Exception('请求发生错误：' . $error);
-        return  array($data,$httpCode);
+        return  json(array($data,$httpCode));
     }
 }
 
