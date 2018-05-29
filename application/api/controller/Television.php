@@ -845,6 +845,7 @@ class Television extends Rest{
                 $opts[CURLOPT_URL] = $url;
                 $opts[CURLOPT_POST] = 1;
                 $opts[CURLOPT_POSTFIELDS] = $params;
+                $opts[CURLOPT_RETURNTRANSFER]= 1;
                 break;
             default:
                 throw new Exception('不支持的请求方式！');
