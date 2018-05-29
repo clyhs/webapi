@@ -867,7 +867,7 @@ class Television extends Rest{
         $error = curl_error($ch);
         curl_close($ch);
         if($error) throw new Exception('请求发生错误：' . $error);
-        return $data;
+        return json_decode($data,true);
     }
 
     private function http_post_json($url, $params)
