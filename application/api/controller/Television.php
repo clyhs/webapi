@@ -852,6 +852,8 @@ class Television extends Rest{
                 $params = $multi ? $params : http_build_query($params);
                 $opts[CURLOPT_URL] = $url;
                 $opts[CURLOPT_POST] = 1;
+                $opts[CURLOPT_CUSTOMREQUEST] = "POST";
+                //curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
                 $opts[CURLOPT_POSTFIELDS] = $params;
                 $opts[CURLOPT_RETURNTRANSFER]= 1;
                 break;
