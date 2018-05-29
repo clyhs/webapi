@@ -163,10 +163,10 @@ class Tvprogram extends BaseAdmin{
                     'name' => array('span.name','text'),
                     'starttime' => array('span','text')
                 ),'.list>a')->data;*/
-                if(''!=$data['channelid']){
+                if(''!=$data[$i]['channelid']){
                     $params = [
                         'date'=>$date,
-                        'channelid'=>$data['channelid']
+                        'channelid'=>$data[$i]['channelid']
                     ];
                     $tv_id = $data[$i]['id'];
 
