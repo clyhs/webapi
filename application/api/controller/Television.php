@@ -824,8 +824,7 @@ class Television extends Rest{
         $data['channelid']=$channelid;
         $jsonStr = json($data);
         $header = array(
-            'Content-Type: application/json; charset=utf-8',
-            'Content-Length: ' . strlen($jsonStr)
+            'Content-Type: application/json; charset=utf-8'
         );
         $httpstr = $this->http($url, $data, 'POST', $header);
         return($httpstr);
