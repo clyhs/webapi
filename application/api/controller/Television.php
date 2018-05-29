@@ -885,11 +885,11 @@ class Television extends Rest{
                 'Content-Type: application/json; charset=utf-8'
             )
         );*/
-        curl_setopt($ch, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1);
-        curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 5.2; rv:19.0) Gecko/20100101 Firefox/19.0");
+        //curl_setopt($ch, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1);
+        //curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 5.2; rv:19.0) Gecko/20100101 Firefox/19.0");
         $response = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        return array($httpCode,json_decode($response,true) );
+        return json_decode($response,true);
     }
 }
 
