@@ -827,8 +827,8 @@ class Television extends Rest{
             'channelid'=>$channelid
         ];
         //$jsonStr = json($data
-        $jsonStr = json_encode($params);
-        $result = $this->http_post_json($url,$jsonStr);
+        //$jsonStr = json_encode($params);
+        $result = $this->http_post_json($url,$params);
 
         return json($result);
     }
@@ -870,19 +870,18 @@ class Television extends Rest{
         return  json(array($data,$httpCode));
     }
 
-    private function http_post_json($url, $jsonStr)
+    private function http_post_json($url, $params)
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonStr);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HEADER,0);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); //不验证证书
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false); //不验证证书
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                'Content-Type: application/json; charset=utf-8',
-                'Content-Length: ' . strlen($jsonStr)
+                'Content-Type: application/json; charset=utf-8')
             )
         );
         $response = curl_exec($ch);
