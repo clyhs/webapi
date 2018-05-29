@@ -822,16 +822,11 @@ class Television extends Rest{
         $url = "https://m.tvsou.com/api/ajaxGetPlay";
         $data['date']=$date;
         $data['channelid']=$channelid;
-        $jsonStr = json($data);
-        //header("Access-Control-Allow-Origin:*");
-        //header('Access-Control-Allow-Headers:x-requested-with,content-type');
-        $header = array(
-            'Content-Type: application/json; charset=utf-8',
-            'Access-Control-Allow-Origin:*',
-            'Access-Control-Allow-Headers:x-requested-with,content-type'
-        );
-        $httpstr = $this->http($url, $data, 'POST', $header);
-        return($httpstr);
+        //$jsonStr = json($data
+        $jsonStr = json_encode($data);
+        $result = $this->http_post_json($url,$jsonStr);
+
+        return json($result);
     }
 
     private function http($url, $params, $method = 'GET', $header = array(), $multi = false){
@@ -863,12 +858,29 @@ class Television extends Rest{
         /* 初始化并执行curl请求 */
         $ch = curl_init();
         curl_setopt_array($ch, $opts);
-        echo $data  = curl_exec($ch);
+        $data  = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $error = curl_error($ch);
         curl_close($ch);
         if($error) throw new Exception('请求发生错误：' . $error);
         return  json(array($data,$httpCode));
+    }
+
+    private function http_post_json($url, $jsonStr)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonStr);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json; charset=utf-8',
+                'Content-Length: ' . strlen($jsonStr)
+            )
+        );
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        return array($httpCode, $response);
     }
 }
 
