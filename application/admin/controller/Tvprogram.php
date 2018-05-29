@@ -144,8 +144,8 @@ class Tvprogram extends BaseAdmin{
             }else if($class == 'yangshi'){
                 $type = 2;
             }
-            $map[]=['exp','FIND_IN_SET('.$type.',a.type_ids)'];
-            $map[]=['a.channelid is not null'];
+            $map['a.type_ids']=['exp','FIND_IN_SET('.$type.',a.type_ids)'];
+            $map['a.channelid']=['a.channelid',' is not null'];
             $lists = Db::field('a.channelid,a.id')
                 ->table("t_television")
                 ->alias('a')
