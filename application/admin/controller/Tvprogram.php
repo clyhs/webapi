@@ -98,13 +98,18 @@ class Tvprogram extends BaseAdmin{
             "play_date"=>$date,
             "type"=>$type
         ];
-
+        if(Db::name($this->table)->where($where)->find()){
+            Db::name($this->table)->where($where)->delete();
+        }
+        /*
         if(Db::name($this->table)->where($where)->find()){
             $this->error('节目已经存在, 请清空再试!');
         }else{
             $len = $this->getProgramForType($date,$tvtype,0);
             $this->success('恭喜, 成功导入'.$len.'条数据!', '');
-        }
+        }*/
+        $len = $this->getProgramForType($date,$tvtype,0);
+        $this->success('恭喜, 成功导入'.$len.'条数据!', '');
 
 
 
@@ -170,7 +175,7 @@ class Tvprogram extends BaseAdmin{
                     ];
                     $tv_id = $data[$i]['id'];
                     if($i>0 && $i%3 == 0){
-                        usleep(2000000);
+                        usleep(1000000);
                     }
                     $result = $this->http($url,$params,'POST',array());
                     $programs = $result['list'];
