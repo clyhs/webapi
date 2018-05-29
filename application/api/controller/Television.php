@@ -863,7 +863,7 @@ class Television extends Rest{
         /* 初始化并执行curl请求 */
         $ch = curl_init();
         curl_setopt_array($ch, $opts);
-        $data  = curl_exec($ch);
+        echo $data  = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $error = curl_error($ch);
         curl_close($ch);
