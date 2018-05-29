@@ -828,8 +828,8 @@ class Television extends Rest{
         ];
         //$jsonStr = json($data
         //$jsonStr = json_encode($params);
-        $result = $this->http_post_json($url,$params);
-
+        //$result = $this->http_post_json($url,$params);
+        $result = $this->http($url,$params,'POST',array());
         return json($result);
     }
 
@@ -867,7 +867,7 @@ class Television extends Rest{
         $error = curl_error($ch);
         curl_close($ch);
         if($error) throw new Exception('请求发生错误：' . $error);
-        return  json(array($data,$httpCode));
+        return $data;
     }
 
     private function http_post_json($url, $params)
