@@ -125,30 +125,30 @@ class Tvprogram extends BaseAdmin{
 
         $len = 0;
 
+        $url = "https://m.tvsou.com/api/ajaxGetPlay";
+        //$data['date']=$date;
+        //$data['channelid']=$channelid;
+
+
 
         if($class!='' && $date!=''){
             $data = array();
             if($class == 'weishi'){
                 $type = 7;
-                $map[]=['exp','FIND_IN_SET('.$type.',a.type_ids)'];
-                $lists = Db::field('a.keyword,a.id')
-                    ->table("t_television")
-                    ->alias('a')
-                    ->where($map)
-                    ->group('a.id')
-                    ->order('a.id asc');
-                $data = $lists->select();
+
             }else if($class == 'yangshi'){
                 $type = 2;
-                $map[]=['exp','FIND_IN_SET('.$type.',a.type_ids)'];
-                $lists = Db::field('a.name as keyword,a.id')
-                    ->table("t_television")
-                    ->alias('a')
-                    ->where($map)
-                    ->group('a.id')
-                    ->order('a.id asc');
-                $data = $lists->select();
             }
+            $map[]=['exp','FIND_IN_SET('.$type.',a.type_ids)'];
+            $lists = Db::field('a.channelid,a.id')
+                ->table("t_television")
+                ->alias('a')
+                ->where($map)
+                ->group('a.id')
+                ->order('a.id asc');
+            $data = $lists->select();
+
+
 
             $db= Db::name("television_program") ;
             $pk ='id';
@@ -157,37 +157,89 @@ class Tvprogram extends BaseAdmin{
             $month=((int)substr($date,4,2));//取得月份
             $day=((int)substr($date,6,2));//取得几号
             for($i=0;$i<count($data);$i++){
-                $url = "https://m.tvsou.com/epg/".$data[$i]['keyword']."/".$date."?class=".$class;
+                //$url = "https://m.tvsou.com/epg/".$data[$i]['keyword']."/".$date."?class=".$class;
+                /*
                 $programs = QueryList::Query($url,array(
                     'name' => array('span.name','text'),
                     'starttime' => array('span','text')
-                ),'.list>a')->data;
-                $tv_id = $data[$i]['id'];
-                $len = $len+count($programs);
-                if(!empty($tv_id) && count($programs)>0){
-                    for($j=0;$j<count($programs);$j++){
-                        $insertData = [
-                            'title'=>$programs[$j]['name'],
-                            'tv_id'=>$tv_id,
-                            'play_time'=>substr($programs[$j]['starttime'],0,5),
-                            'play_date'=>$date,
-                            'type'=>$type,
-                            'play_at'=>$year."-".$month."-".$day." ".substr($programs[$j]['starttime'],0,5).":00"
-                        ];
-                        if($debug == 1){
-                           // echo $data[$i]['keyword'].$programs[$j]['name'].$programs[$j]['starttime'].'<br>';
-                        }else{
-                            $result = DataService::save($db, $insertData, $pk, []);
-                            if($result){
-                                //echo $data[$i]['keyword'].$programs[$j]['name'].$programs[$j]['starttime'].'<br>';
+                ),'.list>a')->data;*/
+                if(''!=$data['channelid']){
+                    $params = [
+                        'date'=>$date,
+                        'channelid'=>$data['channelid']
+                    ];
+                    $tv_id = $data[$i]['id'];
+
+                    $result = $this->http($url,$params,'POST',array());
+                    $programs = $result['list'];
+                    $len = $len+count($programs);
+                    if(!empty($tv_id) && count($programs)>0){
+                        for($j=0;$j<count($programs);$j++){
+                            $insertData = [
+                                'title'=>$programs[$j]['title'],
+                                'tv_id'=>$tv_id,
+                                'play_time'=>$programs[$j]['playtime'],
+                                'end_time'=>$programs[$j]['endtime'],
+                                'play_times'=>$programs[$j]['playtimes'],
+                                'end_times'=>$programs[$j]['endtimes'],
+                                'content'=>$programs[$j]['content'],
+                                'play_date'=>$date,
+                                'type'=>$type,
+                                'play_at'=>$year."-".$month."-".$day." ".$programs[$j]['playtime'].":00"
+                            ];
+                            if($debug == 1){
+                                // echo $data[$i]['keyword'].$programs[$j]['name'].$programs[$j]['starttime'].'<br>';
+                            }else{
+                                $result = DataService::save($db, $insertData, $pk, []);
+                                if($result){
+                                    //echo $data[$i]['keyword'].$programs[$j]['name'].$programs[$j]['starttime'].'<br>';
+                                }
                             }
                         }
                     }
                 }
+
             }
 
         }
         return $len;
+    }
+
+    private function http($url, $params, $method = 'GET', $header = array(), $multi = false){
+        $opts = array(
+            CURLOPT_TIMEOUT        => 30,
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_SSL_VERIFYHOST => false,
+            CURLOPT_HTTPHEADER     => $header
+        );
+        /* 根据请求类型设置特定参数 */
+        switch(strtoupper($method)){
+            case 'GET':
+                $opts[CURLOPT_URL] = $url . '?' . http_build_query($params);
+                break;
+            case 'POST':
+                //判断是否传输文件
+                $params = $multi ? $params : http_build_query($params);
+                $opts[CURLOPT_URL] = $url;
+                $opts[CURLOPT_POST] = 1;
+                $opts[CURLOPT_CUSTOMREQUEST] = "POST";
+                //curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+                $opts[CURLOPT_POSTFIELDS] = $params;
+                $opts[CURLOPT_RETURNTRANSFER]= 1;
+                break;
+            default:
+                throw new Exception('不支持的请求方式！');
+        }
+        /* 初始化并执行curl请求 */
+        $ch = curl_init();
+        curl_setopt_array($ch, $opts);
+        $data  = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $error = curl_error($ch);
+        curl_close($ch);
+        if($error) throw new Exception('请求发生错误：' . $error);
+        return json_decode($data,true);
     }
 
 }
