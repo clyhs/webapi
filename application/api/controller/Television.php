@@ -823,8 +823,12 @@ class Television extends Rest{
         $data['date']=$date;
         $data['channelid']=$channelid;
         $jsonStr = json($data);
+        //header("Access-Control-Allow-Origin:*");
+        //header('Access-Control-Allow-Headers:x-requested-with,content-type');
         $header = array(
-            'Content-Type: application/json; charset=utf-8'
+            'Content-Type: application/json; charset=utf-8',
+            'Access-Control-Allow-Origin:*',
+            'Access-Control-Allow-Headers:x-requested-with,content-type'
         );
         $httpstr = $this->http($url, $data, 'POST', $header);
         return($httpstr);
