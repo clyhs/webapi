@@ -883,7 +883,7 @@ class Television extends Rest{
         );
         $response = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        return array($httpCode, $response);
+        return array($httpCode,json_decode($response,true) );
     }
 }
 
