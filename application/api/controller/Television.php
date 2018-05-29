@@ -822,9 +822,10 @@ class Television extends Rest{
         $url = "https://m.tvsou.com/api/ajaxGetPlay";
         $data['date']=$date;
         $data['channelid']=$channelid;
+        $jsonStr = json($data);
         $header = array(
             'Content-Type: application/json; charset=utf-8',
-            'Content-Length: ' . strlen($data)
+            'Content-Length: ' . strlen($jsonStr)
         );
         $httpstr = $this->http($url, $data, 'POST', $header);
         return($httpstr);
