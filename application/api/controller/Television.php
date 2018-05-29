@@ -53,12 +53,12 @@ class Television extends Rest{
         $data = $lists->all();
 
         for($i = 0;$i<count($data);$i++){
-             $sql = "select a.title from t_television_program a ".
+             $sql = "select a.title,a.play_time from t_television_program a ".
                    " where a.tv_id=".$data[$i]['id']." and a.play_date='".$date."'".
                    " and a.play_at < now() order by a.play_at desc limit 1";
             $row =Db::query($sql);
             if(count($row) == 1){
-                $data[$i]['playtitle'] = $row[0]['title'];
+                $data[$i]['playtitle'] =$row[0]['play_time'].":". $row[0]['title'];
             }else{
                 $data[$i]['playtitle'] = '';
             }
@@ -66,12 +66,12 @@ class Television extends Rest{
         }
 
         for($i = 0;$i<count($data);$i++){
-            $sql = "select a.title from t_television_program a ".
+            $sql = "select a.title,a.play_time from t_television_program a ".
                 " where a.tv_id=".$data[$i]['id']." and a.play_date='".$date."'".
                 " and a.play_at > now() order by a.play_at asc limit 1";
             $row =Db::query($sql);
             if(count($row) == 1){
-                $data[$i]['nexttitle'] = $row[0]['title'];
+                $data[$i]['nexttitle'] = $row[0]['play_time'].":".$row[0]['title'];
             }else{
                 $data[$i]['nexttitle'] = '';
             }
