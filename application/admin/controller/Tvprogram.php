@@ -144,12 +144,12 @@ class Tvprogram extends BaseAdmin{
             }else if($class == 'yangshi'){
                 $type = 2;
             }
-            $map['a.type_ids']=['exp','FIND_IN_SET('.$type.',a.type_ids)'];
-            $map['a.channelid']=['a.channelid',' is not null'];
+            //$map['a.type_ids']=['exp','FIND_IN_SET('.$type.',a.type_ids)'];
+            //$map['a.channelid']=['a.channelid',' is not null'];
             $lists = Db::field('a.channelid,a.id')
                 ->table("t_television")
                 ->alias('a')
-                ->where($map)
+                ->where('FIND_IN_SET('.$type.',a.type_ids) and a.channelid is not null ')
                 ->group('a.id')
                 ->order('a.id asc');
             $data = $lists->select();
