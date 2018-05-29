@@ -154,7 +154,7 @@ class Tvprogram extends BaseAdmin{
                 ->order('a.id asc');
             $data = $lists->select();
 
-
+            print_r($data);
 
             $db= Db::name("television_program") ;
             $pk ='id';
