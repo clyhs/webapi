@@ -881,7 +881,7 @@ class Television extends Rest{
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); //不验证证书
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false); //不验证证书
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                'Content-Type: application/json; charset=utf-8')
+                'Content-Type: application/json; charset=utf-8'
             )
         );
         $response = curl_exec($ch);
