@@ -145,6 +145,7 @@ class Tvprogram extends BaseAdmin{
                 $type = 2;
             }
             $map[]=['exp','FIND_IN_SET('.$type.',a.type_ids)'];
+            $map[]=['a.channelid is not null'];
             $lists = Db::field('a.channelid,a.id')
                 ->table("t_television")
                 ->alias('a')
@@ -178,6 +179,9 @@ class Tvprogram extends BaseAdmin{
                         usleep(1000000);
                     }
                     $result = $this->http($url,$params,'POST',array());
+
+                    //$programs = array();
+
                     $programs = $result['list'];
                     $len = $len+count($programs);
                     if(!empty($tv_id) && count($programs)>0){
