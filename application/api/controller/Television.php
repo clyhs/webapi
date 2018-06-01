@@ -53,12 +53,12 @@ class Television extends Rest{
         $data = $lists->all();
 
         for($i = 0;$i<count($data);$i++){
-             $sql = "select a.title,a.play_time from t_television_program a ".
+             $sql = "select a.title from t_television_program a ".
                    " where a.tv_id=".$data[$i]['id']." and a.play_date='".$date."'".
                    " and a.play_at < now() order by a.play_at desc limit 1";
             $row =Db::query($sql);
             if(count($row) == 1){
-                $data[$i]['playtitle'] =$row[0]['play_time'].":". $row[0]['title'];
+                $data[$i]['playtitle'] = $row[0]['title'];
             }else{
                 $data[$i]['playtitle'] = '';
             }
@@ -66,12 +66,12 @@ class Television extends Rest{
         }
 
         for($i = 0;$i<count($data);$i++){
-            $sql = "select a.title,a.play_time from t_television_program a ".
+            $sql = "select a.title from t_television_program a ".
                 " where a.tv_id=".$data[$i]['id']." and a.play_date='".$date."'".
                 " and a.play_at > now() order by a.play_at asc limit 1";
             $row =Db::query($sql);
             if(count($row) == 1){
-                $data[$i]['nexttitle'] = $row[0]['play_time'].":".$row[0]['title'];
+                $data[$i]['nexttitle'] = $row[0]['title'];
             }else{
                 $data[$i]['nexttitle'] = '';
             }
@@ -812,84 +812,37 @@ class Television extends Rest{
         return json($data);*/
     }
 
-    public function getProgramByChannelid(){
-        $channelid = empty(Request::instance()->param('channelid'))?"":Request::instance()->param('channelid');
-        $date = empty(Request::instance()->param('date'))?"":Request::instance()->param('date');
-        if(empty($channelid) || empty($date)){
-            return json(["code"=>20001,"desc"=>"参数不能为空","data"=>[]]);
+
+    public function getRandomProgram(){
+
+
+        $lists = Db::field('max(a.play_at),a.tv_id,a.title')
+            ->table("t_television_program")
+            ->alias('a')
+            ->where(' now() between from_unixtime(play_times) and from_unixtime(end_times)')
+            ->group('a.tv_id,a.title')
+            ->order(' rand() ')
+            ->limit(10)->select();
+
+        for($i = 0;$i<count($lists);$i++){
+            $sql = "select a.* from t_television a ".
+                " where a.id=".$lists[$i]['tv_id'];
+            $row =Db::query($sql);
+            if(count($row) == 1){
+                $data[$i]['model'] = $row;
+            }else{
+                $data[$i]['model'] = '';
+            }
+
         }
 
-        $url = "https://m.tvsou.com/api/ajaxGetPlay";
-        //$data['date']=$date;
-        //$data['channelid']=$channelid;
-        $params = [
-            'date'=>$date,
-            'channelid'=>$channelid
+        $result = [
+            "code"=>"10000",
+            "desc"=>"",
+            "data"=>$lists
         ];
-        //$jsonStr = json($data
-        //$jsonStr = json_encode($params);
-        //$result = $this->http_post_json($url,$params);
-        $result = $this->http($url,$params,'POST',array());
+
         return json($result);
-    }
-
-    private function http($url, $params, $method = 'GET', $header = array(), $multi = false){
-        $opts = array(
-            CURLOPT_TIMEOUT        => 30,
-            CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_SSL_VERIFYPEER => false,
-            CURLOPT_SSL_VERIFYHOST => false,
-            CURLOPT_HTTPHEADER     => $header
-        );
-        /* 根据请求类型设置特定参数 */
-        switch(strtoupper($method)){
-            case 'GET':
-                $opts[CURLOPT_URL] = $url . '?' . http_build_query($params);
-                break;
-            case 'POST':
-                //判断是否传输文件
-                $params = $multi ? $params : http_build_query($params);
-                $opts[CURLOPT_URL] = $url;
-                $opts[CURLOPT_POST] = 1;
-                $opts[CURLOPT_CUSTOMREQUEST] = "POST";
-                //curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-                $opts[CURLOPT_POSTFIELDS] = $params;
-                $opts[CURLOPT_RETURNTRANSFER]= 1;
-                break;
-            default:
-                throw new Exception('不支持的请求方式！');
-        }
-        /* 初始化并执行curl请求 */
-        $ch = curl_init();
-        curl_setopt_array($ch, $opts);
-        $data  = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $error = curl_error($ch);
-        curl_close($ch);
-        if($error) throw new Exception('请求发生错误：' . $error);
-        return json_decode($data,true);
-    }
-
-    private function http_post_json($url, $params)
-    {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HEADER,0);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); //不验证证书
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false); //不验证证书
-        /*
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                'Content-Type: application/json; charset=utf-8'
-            )
-        );*/
-        //curl_setopt($ch, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1);
-        //curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 5.2; rv:19.0) Gecko/20100101 Firefox/19.0");
-        $response = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        return json_decode($response,true);
     }
 }
 
