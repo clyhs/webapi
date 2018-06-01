@@ -829,9 +829,9 @@ class Television extends Rest{
                 " where a.id=".$lists[$i]['tv_id'];
             $row =Db::query($sql);
             if(count($row) == 1){
-                $data[$i]['model'] = $row;
+                $lists[$i]['model'] = $row;
             }else{
-                $data[$i]['model'] = '';
+                $lists[$i]['model'] = '{}';
             }
 
         }
