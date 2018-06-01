@@ -816,11 +816,11 @@ class Television extends Rest{
     public function getRandomProgram(){
 
 
-        $lists = Db::field('max(a.play_at) play_at,a.tv_id,a.title')
+        $lists = Db::field('max(a.play_at) play_at,a.play_time,a.tv_id,a.title')
             ->table("t_television_program")
             ->alias('a')
             ->where(' now() between from_unixtime(play_times) and from_unixtime(end_times)')
-            ->group('a.tv_id,a.title')
+            ->group('a.title,a.tv_id,a.play_time')
             ->order(' rand() ')
             ->limit(10)->select();
 
