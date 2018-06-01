@@ -831,7 +831,7 @@ class Television extends Rest{
             if(count($row) == 1){
                 $lists[$i]['model'] = $row;
             }else{
-                $lists[$i]['model'] = '{}';
+                $lists[$i]['model'] = '[]';
             }
 
         }
