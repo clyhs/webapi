@@ -816,7 +816,7 @@ class Television extends Rest{
     public function getRandomProgram(){
 
 
-        $lists = Db::field(' max(a.play_at),a.play_time,a.tv_id,a.title')
+        $lists = Db::field(' max(a.play_at) play_at,a.play_time,a.tv_id,a.title')
             ->table("t_television_program")
             ->alias('a')
             ->where(' now() between str_to_date(CONCAT(a.play_date," ",a.play_time,":00"),"%Y%m%d %H:%i:%s %p") and str_to_date(CONCAT(a.play_date," ",a.end_time,":00"),"%Y%m%d %H:%i:%s %p")')
