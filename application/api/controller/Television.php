@@ -820,7 +820,7 @@ class Television extends Rest{
             ->table("t_television_program")
             ->alias('a')
             ->where(' now() between from_unixtime(play_times) and from_unixtime(end_times)')
-            ->group('a.title,a.tv_id')
+            ->group('a.tv_id')
             ->order(' rand() ')
             ->limit(10)->select();
 
