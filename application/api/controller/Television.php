@@ -819,7 +819,7 @@ class Television extends Rest{
         $lists = Db::field(' max(a.play_at),a.play_time,a.tv_id,a.title')
             ->table("t_television_program")
             ->alias('a')
-            ->where(' now() between str_to_date(CONCAT(a.play_date," ",a.play_time,":00")) and str_to_date(CONCAT(a.play_date," ",a.end_time,":00"))')
+            ->where(' now() between str_to_date(CONCAT(a.play_date," ",a.play_time,":00"),"%Y%m%d %H:%i:%s %p") and str_to_date(CONCAT(a.play_date," ",a.end_time,":00"),"%Y%m%d %H:%i:%s %p")')
             ->group('a.tv_id')
             ->order(' rand() ')
             ->limit(10)->select();
