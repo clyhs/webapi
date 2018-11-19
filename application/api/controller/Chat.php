@@ -157,12 +157,12 @@ class Chat extends BaseApiRest
                     ' and friend_id='.$lists[$key]['user_id'];
                 $row2 =Db::query($sql2);
                 if($row2[0]['count']>0){
-                    $lists[$key]['isfriend'] = true;
+                    $lists[$key]['isfriend'] = 1;
                 }else{
-                    $lists[$key]['isfriend'] = false;
+                    $lists[$key]['isfriend'] = 0;
                 }
             }else{
-                $lists[$key]['isfriend'] = false;
+                $lists[$key]['isfriend'] = 0;
             }
 
 
