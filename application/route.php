@@ -63,7 +63,7 @@ Route::get('api/video/page/[:page]/[:pageSize]','api/Video/getVideoForPage');
  * 微话题接口
  */
 Route::post('api/chat/add','api/Chat/addChat');
-Route::get('api/chat/page/[:typeId]/[:userId]/[:page]/[:pageSize]','api/Chat/getChatForPage');
+Route::get('api/chat/page/[:typeId]/[:userId]/[:friendId]/[:page]/[:pageSize]','api/Chat/getChatForPage');
 
 /**
  * 地区接口

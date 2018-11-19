@@ -91,7 +91,7 @@ class Chat extends BaseApiRest
 
     }
 
-    public function getChatForPage($page = 1,$pageSize = 15,$typeId=0,$userId=0){
+    public function getChatForPage($page = 1,$pageSize = 15,$typeId=0,$userId=0,$friendId=0){
         $options=[
             'page'=>$page
         ];
@@ -118,13 +118,13 @@ class Chat extends BaseApiRest
         $result = [
             "code"=>10000,
             "desc"=>"",
-            "data"=>$this->filterData($db)
+            "data"=>$this->filterData($db,$friendId)
         ];
 
         return json($result);
     }
 
-    protected function filterData(&$db){
+    protected function filterData(&$db,&$friendId){
 
         $lists = $db->all();
         foreach ($lists as $key => &$item) {
@@ -151,6 +151,23 @@ class Chat extends BaseApiRest
                    ' and uid='.$item['id'].' and pid=0 ';
             $row =Db::query($sql);
             $lists[$key]['comment_num'] = $row[0]['count'];
+
+            if($friendId>0){
+                $sql2 = 'select count(1) as count from t_user_friend where user_id='.$friendId.
+                    ' and friend_id='.$lists[$key]['user_id'];
+                $row2 =Db::query($sql2);
+                if($row2[0]['count']>0){
+                    $lists[$key]['isfriend'] = true;
+                }else{
+                    $lists[$key]['isfriend'] = false;
+                }
+            }else{
+                $lists[$key]['isfriend'] = false;
+            }
+
+
+
+
 
         }
         return $lists;
