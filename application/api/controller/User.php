@@ -316,6 +316,32 @@ class User extends BaseApiRest{
 
     }
 
+    public function checkGuangZhu(){
+
+        $userid = empty(Request::instance()->param('userid'))?0:Request::instance()->param('userid');
+        $friendid = empty(Request::instance()->param('friendid'))?0:Request::instance()->param('friendid');
+
+        $res = 0;
+
+        $good = Db::name("user_friend")->where("user_id=".$userid." and user_id=".$friendid )->column('id');
+
+        if(is_array($good) && !empty($good)){
+            if($good[0]>0){
+                $res = $good[0];
+            }
+        }
+
+
+
+        $result = [
+            "code"=>"10000",
+            "desc"=>$res
+        ];
+
+        return json($result);
+
+    }
+
 //    public function getAllUsers(){
 //        $model = new UserModel();
 //        $data = $model->all();

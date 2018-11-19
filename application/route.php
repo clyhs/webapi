@@ -24,7 +24,7 @@ Route::post('api/user/profile','api/User/profile');
 Route::get('api/user/friends/:userId/[:page]/[:pageSize]','api/User/getFriendsForPage');
 Route::post('api/user/good','api/User/updateGoodLog');
 Route::get('api/user/getgood/:uid/:userId/:type_id','api/User/getGoodLog');
-
+Route::get('api/user/checkgz/:userid/:friendid','api/User/checkGuangZhu');
 /**
  * 电视接口
  */
