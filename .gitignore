@@ -1,5 +1,5 @@
 .idea
 composer.lock
 *.log
-thinkphp
+#thinkphp
 webapi*
