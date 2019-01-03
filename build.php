@@ -43,4 +43,11 @@ return [
         '__dir__'    => [ 'controller', 'model','lang'],
         'controller' => ['Index'],
     ],
+    'weichat' =>[
+        '__file__' =>['common.php'],
+        '__dir__'    => ['behavior', 'controller', 'model', 'view','lang'],
+        'controller' => ['Index'],
+        'view'       => ['index/index'],
+
+    ]
 ];
