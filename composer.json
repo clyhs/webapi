@@ -22,7 +22,8 @@
         "qiniu/php-sdk": "^7.0",
         "aliyuncs/oss-sdk-php": "^2.2",
         "topthink/think-image": "^1.0",
-        "jaeger/querylist": "^3.2"
+        "jaeger/querylist": "^3.2",
+        "endroid/qrcode": "^2.5"
     },
     "extra": {
         "think-path": "thinkphp"
