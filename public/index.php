@@ -9,6 +9,8 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
+define('HHVM_VERSION', false);
+
 require '../vendor/autoload.php';
 // [ 应用入口文件 ]
 

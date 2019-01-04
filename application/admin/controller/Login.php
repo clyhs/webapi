@@ -46,8 +46,8 @@ class Login extends BaseAdmin{
         }
         empty($user['status']) && $this->error('账号已经被禁用，请联系管理!');
         // 更新登录信息
-        $data = ['login_at' => ['exp', 'now()'], 'login_num' => ['exp', 'login_num+1']];
-        Db::name('user')->where(['id' => $user['id']])->update($data);
+        #$data = ['login_at' => ['exp', 'now()'], 'login_num' => ['exp', 'login_num+1']];
+        #Db::name('user')->where(['id' => $user['id']])->update($data);
         session('user', $user);
         !empty($user['authorize']) && NodeService::applyAuthNode();
         //LogService::write('系统管理', '用户登录系统成功');
