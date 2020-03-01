@@ -106,7 +106,9 @@ class BaseAdmin extends Controller{
         if ($isPage) {
             echo '1----';
             $rows = intval($this->request->get('rows', cookie('rows')));
+            echo '11----';
             cookie('rows', $rows >= 10 ? $rows : 20);
+            echo '111----';
             $page = $db->paginate($rows, $total, ['query' => $this->request->get('', '', 'urlencode')]);
             echo '2----';
             list($pattern, $replacement) = [['|href="(.*?)"|', '|pagination|'], ['data-open="$1"', 'pagination pull-right']];
