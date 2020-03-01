@@ -327,7 +327,7 @@ class Television extends Rest{
             ->join(' t_television b ',' a.tv_id = b.id ')
             ->join(' t_region c ',' b.country = c.code ','left')
             ->join(' t_region d ',' b.province = d.code ','left')
-            ->join(' t_dict e','FIND_IN_SET(e.id , b.type_ids) ','left')
+            ->join(' t_dict e',Db::raw("FIND_IN_SET(e.id , b.type_ids) "),'left')
             ->where($where)
             ->group('a.id')
             ->order('a.create_at desc')
