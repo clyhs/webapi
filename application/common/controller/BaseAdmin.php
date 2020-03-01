@@ -110,7 +110,7 @@ class BaseAdmin extends Controller{
             cookie('rows', $rows >= 10 ? $rows : 20);
             echo '111----';
             //$page = $db->paginate($rows, $total, ['query' => $this->request->get('', '', 'urlencode')]);
-            $db->paginate($rows,false,[]);
+            $page = $db->paginate($rows,false,['query'=>'']);
             echo '2----';
             list($pattern, $replacement) = [['|href="(.*?)"|', '|pagination|'], ['data-open="$1"', 'pagination pull-right']];
             echo '3----';
