@@ -33,8 +33,9 @@ class Television extends Rest{
         $options=[
             'page'=>$page
         ];
+
         $date = date('Ymd',time());
-        $map[]=['exp',"FIND_IN_SET($typeId,a.type_ids)"];
+        $map[]=['exp',Db::raw("FIND_IN_SET('$typeId',a.type_ids)")];
         $map['a.status']=1;
 
         $lists = Db::table('t_television')
