@@ -103,7 +103,7 @@ class BaseAdmin extends Controller{
             $fields = $db->getTableFields($db->getTable());
             in_array('sort', $fields) && $db->order('sort asc');
         }
-        if ($isPage) {
+        if (false) {
             /*
             echo '1----';
             $rows = intval($this->request->get('rows', cookie('rows')));
