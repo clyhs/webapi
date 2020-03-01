@@ -52,9 +52,6 @@ class Comment extends BaseAdmin{
 
             }
         }
-        //$db->select();
-        //$list = $db->select();
-        //var_dump($list);
         $where = [
             "char"=>"SUBJECT",
             "pid"=>10
@@ -85,7 +82,7 @@ class Comment extends BaseAdmin{
             }
         }
         $data = ToolService::arr2table($data);
-        
+
     }
 
 }
