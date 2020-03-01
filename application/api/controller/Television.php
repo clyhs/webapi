@@ -165,7 +165,7 @@ class Television extends Rest{
         );
         $recommend=array(
             "a.province"=>$code,
-            "status"=>1
+            "a.status"=>1
 
     );
         $new=array(
@@ -179,7 +179,7 @@ class Television extends Rest{
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
             ->join(' t_region c ',' a.province = c.code ','left')
-            ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
+            ->join(' t_dict d',Db::raw("FIND_IN_SET(d.id , a.type_ids) "),'left')
             //->join(' t_comment e',' e.uid=a.id and e.type_id=11 and e.pid=0 ','left')
             //->where($hot)
             ->where(' a.status=1 ')
@@ -193,12 +193,12 @@ class Television extends Rest{
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
             ->join(' t_region c ',' a.province = c.code ','left')
-            ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
+            ->join(' t_dict d',Db::raw("FIND_IN_SET(d.id , a.type_ids) "),'left')
             //->join(' t_comment e',' e.uid=a.id and e.type_id=11 and e.pid=0 ','left')
             //->where($new)
             ->where(' a.status=1 ')
             ->group('a.id')
-            ->order(' rand() ')
+            ->orderRaw('rand()')
             //->order('a.id desc')
             ->limit(2)->select();
         $lists_recommend = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames ,
@@ -208,11 +208,11 @@ class Television extends Rest{
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
             ->join(' t_region c ',' a.province = c.code ','left')
-            ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
+            ->join(' t_dict d',Db::raw("FIND_IN_SET(d.id , a.type_ids) "),'left')
             //->join(' t_comment e',' e.uid=a.id and e.type_id=11 and e.pid=0 ','left')
             ->where($recommend)
             ->group('a.id')
-            ->order(' rand() ')
+            ->orderRaw('rand()')
             //->order('a.id desc')
             ->limit(4)->select();
         $lists_cartoon = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames ,
@@ -222,11 +222,11 @@ class Television extends Rest{
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
             ->join(' t_region c ',' a.province = c.code ','left')
-            ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
+            ->join(' t_dict d',Db::raw("FIND_IN_SET(d.id , a.type_ids) "),'left')
             //->join(' t_comment e',' e.uid=a.id and e.type_id=11 and e.pid=0 ','left')
-            ->where(' d.id = 23 and status=1 ')
+            ->where(' d.id = 23 and a.status=1 ')
             ->group('a.id')
-            ->order(' rand() ')
+            ->orderRaw('rand()')
             //->order('a.id desc')
             ->limit(4)->select();
         $lists_foreign = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,
@@ -236,11 +236,11 @@ class Television extends Rest{
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
             ->join(' t_region c ',' a.province = c.code ','left')
-            ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
+            ->join(' t_dict d',Db::raw("FIND_IN_SET(d.id , a.type_ids) "),'left')
             ->join(' t_comment e',' e.uid=a.id and e.type_id=11 and e.pid=0 ','left')
-            ->where(' d.id = 17  and status=1 ')
+            ->where(' d.id = 17  and a.status=1 ')
             ->group('a.id')
-            ->order(' rand() ')
+            ->orderRaw('rand()')
             //->order('a.id desc')
             ->limit(2)->select();
         $lists_hongkong = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,
@@ -250,11 +250,11 @@ class Television extends Rest{
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
             ->join(' t_region c ',' a.province = c.code ','left')
-            ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
+            ->join(' t_dict d',Db::raw("FIND_IN_SET(d.id , a.type_ids) "),'left')
             ->join(' t_comment e',' e.uid=a.id and e.type_id=11 and e.pid=0 ','left')
-            ->where(' d.id = 18  and status=1 ')
+            ->where(' d.id = 18  and a.status=1 ')
             ->group('a.id')
-            ->order(' rand() ')
+            ->orderRaw('rand()')
             //->order('a.id desc')
             ->limit(4)->select();
 
@@ -265,11 +265,11 @@ class Television extends Rest{
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
             ->join(' t_region c ',' a.province = c.code ','left')
-            ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
+            ->join(' t_dict d',Db::raw("FIND_IN_SET(d.id , a.type_ids) "),'left')
             //->join(' t_comment e',' e.uid=a.id and e.type_id=11 and e.pid=0 ','left')
-            ->where(' a.is_recommend = 1   and status=1 ')
+            ->where(' a.is_recommend = 1   and a.status=1 ')
             ->group('a.id')
-            ->order(' rand() ')
+            ->orderRaw('rand()')
             //->order('a.id desc')
             ->limit(3)->select();
         $result_array = [
