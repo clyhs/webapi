@@ -43,7 +43,7 @@ class Comment extends BaseAdmin{
 
             }
         }*/
-        $db->order(' a.id desc');
+        //$db->order(' a.id desc');
 
         $where = [
             "char"=>"SUBJECT",
