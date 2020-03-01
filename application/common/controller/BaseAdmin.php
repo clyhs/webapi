@@ -115,6 +115,7 @@ class BaseAdmin extends Controller{
             !empty($this->title) && $this->assign('title', $this->title);
             return $this->fetch('', $result);
         }
+        var_dump($result);
         return $result;
     }
 
