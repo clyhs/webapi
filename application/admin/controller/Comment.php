@@ -52,7 +52,7 @@ class Comment extends BaseAdmin{
 
             }
         }*/
-        $db->select();
+        //$db->select();
         $list = $db->select();
         var_dump($list);
         $where = [
