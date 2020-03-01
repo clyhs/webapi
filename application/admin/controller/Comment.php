@@ -32,6 +32,8 @@ class Comment extends BaseAdmin{
         $db = Db::field('a.*')
             ->table("t_comment")
             ->alias('a')->order(' a.id desc');
+        $list = $db->select();
+        var_dump($list);
         /*
         foreach (['type_id'] as $key) {
             if (isset($get[$key]) && $get[$key] !== '') {
