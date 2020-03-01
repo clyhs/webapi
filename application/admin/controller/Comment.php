@@ -41,7 +41,7 @@ class Comment extends BaseAdmin{
             ->join(' t_user c ',' a.reply_id = c.id ','left')
             ->join(' t_dict d ','a.type_id = d.id ','left');
 
-        /*
+
         foreach (['type_id'] as $key) {
             if (isset($get[$key]) && $get[$key] !== '') {
 
@@ -51,7 +51,7 @@ class Comment extends BaseAdmin{
                 }
 
             }
-        }*/
+        }
         //$db->select();
         //$list = $db->select();
         //var_dump($list);
@@ -85,7 +85,7 @@ class Comment extends BaseAdmin{
             }
         }
         $data = ToolService::arr2table($data);
-        var_dump($data);
+        
     }
 
 }
