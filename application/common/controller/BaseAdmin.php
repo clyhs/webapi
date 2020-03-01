@@ -131,7 +131,10 @@ class BaseAdmin extends Controller{
             $result['page'] = preg_replace(['|href="(.*?)"|', '|pagination|'], ['data-open="$1" href="javascript:void(0);"', 'pagination pull-right'], $page->render());
             echo '6----';
         } else {
+            echo '000';
             $result['list'] = $db->select();
+            var_dump($result);
+            echo '111';
         }
 
         if (false !== $this->_callback('_data_filter', $result['list']) && $isDisplay) {
