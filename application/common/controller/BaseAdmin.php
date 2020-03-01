@@ -104,12 +104,14 @@ class BaseAdmin extends Controller{
             in_array('sort', $fields) && $db->order('sort asc');
         }
         if ($isPage) {
+            echo '----';
             $rows = intval($this->request->get('rows', cookie('rows')));
             cookie('rows', $rows >= 10 ? $rows : 20);
             $page = $db->paginate($rows, $total, ['query' => $this->request->get('', '', 'urlencode')]);
             list($pattern, $replacement) = [['|href="(.*?)"|', '|pagination|'], ['data-open="$1"', 'pagination pull-right']];
             list($result['list'], $result['page']) = [$page->all(), preg_replace($pattern, $replacement, $page->render())];
             var_dump($page->all());
+            echo '----';
         } else {
             $result['list'] = $db->select();
         }
