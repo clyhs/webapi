@@ -517,7 +517,7 @@ class Television extends Rest{
             //->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
             ->join(' t_region c ',' a.province = c.code ','left')
-            ->join(' t_dict d',Db::raw("FIND_IN_SET('d.id , a.type_ids) "),'left')
+            ->join(' t_dict d',Db::raw("FIND_IN_SET(d.id , a.type_ids) "),'left')
             ->where($where)
             ->group('a.id')
             ->order(' rand() ')
