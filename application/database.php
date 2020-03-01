@@ -19,7 +19,7 @@ return [
     // 用户名
     'username'        => 'root',
     // 密码
-    'password'        => 'wqda@%12',
+    'password'        => 'Wqda@%12',
     // 端口
     'hostport'        => '',
     // 连接dsn
