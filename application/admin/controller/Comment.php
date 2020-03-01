@@ -52,6 +52,7 @@ class Comment extends BaseAdmin{
 
             }
         }
+        $db->order('a.id desc');
         $where = [
             "char"=>"SUBJECT",
             "pid"=>10
