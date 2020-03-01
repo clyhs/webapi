@@ -49,7 +49,7 @@ class Comment extends BaseAdmin{
         $subjects = Db::name("dict")->where($where)->order('id asc')->select();
         $this->assign('subjects', $subjects);
 
-        return parent::_list($db, true);
+        return parent::_list($db);
     }
 
     protected function _index_data_filter(&$data)
