@@ -99,10 +99,11 @@ class BaseAdmin extends Controller{
             $this->success('列表排序成功, 正在刷新列表', '');
         }
         // 列表数据查询与显示
+        /*
         if (null === $db->getOptions('order')) {
             $fields = $db->getTableFields($db->getTable());
             in_array('sort', $fields) && $db->order('sort asc');
-        }
+        }*/
         if (false) {
             /*
             echo '1----';
