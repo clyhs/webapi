@@ -40,8 +40,8 @@ class Comment extends BaseAdmin{
             ->join(' t_user b ',' a.user_id = b.id ','left')
             ->join(' t_user c ',' a.reply_id = c.id ','left')
             ->join(' t_dict d ','a.type_id = d.id ','left');
-        //$list = $db->select();
-        //var_dump($list);
+        $list = $db->select();
+        var_dump($list);
         /*
         foreach (['type_id'] as $key) {
             if (isset($get[$key]) && $get[$key] !== '') {
