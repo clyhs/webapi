@@ -124,7 +124,7 @@ class BaseAdmin extends Controller{
             echo '2----';
             cookie('rows', $rows >= 10 ? $rows : 20);
             echo '3----';
-            $page = $db->paginate($rows, $total, ['query' => $this->request->get()]);
+            $page = $db->paginate($rows, $total, []);
             echo '4----';
             $result['list'] = $page->all();
             echo '5----';
