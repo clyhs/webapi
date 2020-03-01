@@ -119,11 +119,17 @@ class BaseAdmin extends Controller{
             echo '4----';
             var_dump($page->all());
             echo '5----';*/
+            echo '1----';
             $rows = intval($this->request->get('rows', cookie('rows')));
+            echo '2----';
             cookie('rows', $rows >= 10 ? $rows : 20);
+            echo '3----';
             $page = $db->paginate($rows, $total, ['query' => $this->request->get()]);
+            echo '4----';
             $result['list'] = $page->all();
+            echo '5----';
             $result['page'] = preg_replace(['|href="(.*?)"|', '|pagination|'], ['data-open="$1" href="javascript:void(0);"', 'pagination pull-right'], $page->render());
+            echo '6----';
         } else {
             $result['list'] = $db->select();
         }
