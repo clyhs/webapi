@@ -52,7 +52,7 @@ class Comment extends BaseAdmin{
 
             }
         }*/
-        $db->order(' a.id desc')->select();
+        $db->select();
         $list = $db->select();
         var_dump($list);
         $where = [
