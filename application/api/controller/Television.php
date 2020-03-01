@@ -50,7 +50,7 @@ class Television extends Rest{
             //->join(' t_comment e',' e.uid=a.id and e.type_id=11 and e.pid=0 ','left')
             //->where($map)
             ->group('a.id')
-            //->order('a.id,a.name asc')
+            ->order('a.id,a.name asc')
             ->paginate($pageSize,false,$options);
         $data = $lists->all();
 
