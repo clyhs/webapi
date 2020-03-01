@@ -34,7 +34,7 @@ class Television extends Rest{
             'page'=>$page
         ];
         $date = date('Ymd',time());
-        $map[]=['exp','FIND_IN_SET('.$typeId.',a.type_ids)'];
+        $map[]=['exp',Db::raw("FIND_IN_SET($typeId,a.type_ids)")];
         $map['a.status']=1;
 
         $lists = Db::table('t_television')
@@ -48,7 +48,7 @@ class Television extends Rest{
             ->join(' t_region c ',' a.province = c.code ','left')
             ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
             //->join(' t_comment e',' e.uid=a.id and e.type_id=11 and e.pid=0 ','left')
-            //->where($map)
+            ->where($map)
             ->group('a.id')
             ->order('a.id,a.name asc')
             ->paginate($pageSize,false,$options);
