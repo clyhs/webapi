@@ -104,7 +104,7 @@ class BaseAdmin extends Controller{
             $fields = $db->getTableFields($db->getTable());
             in_array('sort', $fields) && $db->order('sort asc');
         }*/
-        if (false) {
+        if ($isPage) {
             /*
             echo '1----';
             $rows = intval($this->request->get('rows', cookie('rows')));
@@ -120,22 +120,18 @@ class BaseAdmin extends Controller{
             echo '4----';
             var_dump($page->all());
             echo '5----';*/
-            echo '1----';
             $rows = intval($this->request->get('rows', cookie('rows')));
-            echo '2----';
+
             cookie('rows', $rows >= 10 ? $rows : 20);
-            echo '3----';
+
             $page = $db->paginate($rows, $total, []);
-            echo '4----';
+
             $result['list'] = $page->all();
-            echo '5----';
+
             $result['page'] = preg_replace(['|href="(.*?)"|', '|pagination|'], ['data-open="$1" href="javascript:void(0);"', 'pagination pull-right'], $page->render());
-            echo '6----';
+
         } else {
-            echo '000';
             $result['list'] = $db->select();
-            var_dump($result);
-            echo '111';
         }
 
         if (false !== $this->_callback('_data_filter', $result['list']) && $isDisplay) {
