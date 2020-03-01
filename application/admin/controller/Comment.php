@@ -32,7 +32,7 @@ class Comment extends BaseAdmin{
         $db = Db::field('a.*')
             ->table("t_comment")
             ->alias('a');
-
+        /*
         foreach (['type_id'] as $key) {
             if (isset($get[$key]) && $get[$key] !== '') {
 
@@ -42,7 +42,7 @@ class Comment extends BaseAdmin{
                 }
 
             }
-        }
+        }*/
         $db->order(' a.id desc');
 
         $where = [
