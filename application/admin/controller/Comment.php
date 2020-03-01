@@ -29,9 +29,11 @@ class Comment extends BaseAdmin{
             ->join(' t_user b ',' a.user_id = b.id ','left')
             ->join(' t_user c ',' a.reply_id = c.id ','left')
             ->join(' t_dict d ','a.type_id = d.id ','left');*/
-        $db = Db::field('a.*')
+        /*
+        $db = Db::field('*')
             ->table("t_comment")
-            ->alias('a')->order(' a.id desc');
+            ->order(' a.id desc');*/
+        $db = Db::name($this->table)->order('id asc');
         $list = $db->select();
         var_dump($list);
         /*
