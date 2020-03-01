@@ -521,7 +521,7 @@ class Television extends Rest{
             ->where($where)
             ->group('a.id')
             //->order(' rand() ')
-            //->order('a.id desc')
+            ->order('a.id desc')
             ->limit(4)->select();
 
         $result = [
