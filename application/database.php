@@ -17,7 +17,7 @@ return [
     // 数据库名
     'database'        => 'webapi',
     // 用户名
-    'username'        => 'root',
+    'username'        => 'wellmomey',
     // 密码
     'password'        => 'Wqda@%12',
     // 端口
