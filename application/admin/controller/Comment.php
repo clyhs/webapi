@@ -31,7 +31,7 @@ class Comment extends BaseAdmin{
             ->join(' t_dict d ','a.type_id = d.id ','left');*/
         $db = Db::field('a.*')
             ->table("t_comment")
-            ->alias('a');
+            ->alias('a')->order(' a.id desc');
         /*
         foreach (['type_id'] as $key) {
             if (isset($get[$key]) && $get[$key] !== '') {
