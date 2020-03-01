@@ -125,7 +125,7 @@ class Television extends Rest{
         $options=[
             'page'=>$page
         ];
-        $where['stauts']=1;
+        $where['a.stauts']=1;
 
         $lists = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames ,
         (select count(1) from t_comment e where e.uid=a.id and e.type_id=11 and e.pid=0 ) as commentNum,
@@ -134,7 +134,7 @@ class Television extends Rest{
             ->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
             ->join(' t_region c ',' a.province = c.code ','left')
-            ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
+            ->join(' t_dict d',Db::raw("FIND_IN_SET(d.id , a.type_ids) "),'left')
             //->join(' t_comment e',' e.uid=a.id and e.type_id=11 and e.pid=0 ','left')
             ->where($where)
             ->group('a.id')
