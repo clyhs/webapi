@@ -33,9 +33,15 @@ class Comment extends BaseAdmin{
         $db = Db::field('*')
             ->table("t_comment")
             ->order(' a.id desc');*/
-        $db = Db::name($this->table)->order('id asc');
-        $list = $db->select();
-        var_dump($list);
+        //$db = Db::name($this->table)->order('id asc');
+        $db = Db::table('t_comment')
+            ->alias('a')
+            ->field("a.*,b.username,c.username as replyname,d.name as typename")
+            ->join(' t_user b ',' a.user_id = b.id ','left')
+            ->join(' t_user c ',' a.reply_id = c.id ','left')
+            ->join(' t_dict d ','a.type_id = d.id ','left');
+        //$list = $db->select();
+        //var_dump($list);
         /*
         foreach (['type_id'] as $key) {
             if (isset($get[$key]) && $get[$key] !== '') {
@@ -47,7 +53,7 @@ class Comment extends BaseAdmin{
 
             }
         }*/
-        //$db->order(' a.id desc');
+        $db->order(' a.id desc');
 
         $where = [
             "char"=>"SUBJECT",
