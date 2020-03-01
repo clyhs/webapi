@@ -111,6 +111,7 @@ class BaseAdmin extends Controller{
         } else {
             $result['list'] = $db->select();
         }
+        var_dump($result);
         if (false !== $this->_callback('_data_filter', $result['list']) && $isDisplay) {
             !empty($this->title) && $this->assign('title', $this->title);
             return $this->fetch('', $result);
