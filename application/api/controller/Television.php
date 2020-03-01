@@ -520,7 +520,7 @@ class Television extends Rest{
             // ->join(' t_dict d',Db::raw("FIND_IN_SET(d.id , a.type_ids)"),'left')
             ->where($where)
             ->group('a.id')
-            ->order(' rand() ')
+            //->order(' rand() ')
             //->order('a.id desc')
             ->limit(4)->select();
 
