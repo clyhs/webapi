@@ -37,11 +37,13 @@ class Television extends Rest{
         $map[]=['exp','FIND_IN_SET('.$typeId.',a.type_ids)'];
         $map['a.status']=1;
 
-        $lists = Db::field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,
+        $lists = Db::table("t_television")
+            ->alias('a')
+            ->field('a.*,b.name as countryName,c.name as provinceName,GROUP_CONCAT(d.name) AS typeNames,
         (select count(1) from t_comment e where e.uid=a.id and e.type_id=11 and e.pid=0 ) as commentNum,
         (select sum(good) from t_good_log f where f.uid=a.id and f.type_id=11 ) as goodNum ')
-            ->table("t_television")
-            ->alias('a')
+            //->table("t_television")
+            //->alias('a')
             ->join(' t_region b ',' a.country = b.code ','left')
             ->join(' t_region c ',' a.province = c.code ','left')
             ->join(' t_dict d','FIND_IN_SET(d.id , a.type_ids) ','left')
