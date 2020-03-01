@@ -22,12 +22,16 @@ class Comment extends BaseAdmin{
         //$db = Db::name($this->table)->order('id asc');
 
         $get = $this->request->get();
+        /*
         $db = Db::field('a.*,b.username,c.username as replyname,d.name as typename')
             ->table("t_comment")
             ->alias('a')
             ->join(' t_user b ',' a.user_id = b.id ','left')
             ->join(' t_user c ',' a.reply_id = c.id ','left')
-            ->join(' t_dict d ','a.type_id = d.id ','left');
+            ->join(' t_dict d ','a.type_id = d.id ','left');*/
+        $db = Db::field('a.*')
+            ->table("t_comment")
+            ->alias('a');
 
         foreach (['type_id'] as $key) {
             if (isset($get[$key]) && $get[$key] !== '') {
