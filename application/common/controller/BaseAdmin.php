@@ -104,6 +104,7 @@ class BaseAdmin extends Controller{
             in_array('sort', $fields) && $db->order('sort asc');
         }
         if ($isPage) {
+            /*
             echo '1----';
             $rows = intval($this->request->get('rows', cookie('rows')));
             echo '11----';
@@ -117,7 +118,12 @@ class BaseAdmin extends Controller{
             list($result['list'], $result['page']) = [$page->all(), preg_replace($pattern, $replacement, $page->render())];
             echo '4----';
             var_dump($page->all());
-            echo '5----';
+            echo '5----';*/
+            $rows = intval($this->request->get('rows', cookie('rows')));
+            cookie('rows', $rows >= 10 ? $rows : 20);
+            $page = $db->paginate($rows, $total, ['query' => $this->request->get()]);
+            $result['list'] = $page->all();
+            $result['page'] = preg_replace(['|href="(.*?)"|', '|pagination|'], ['data-open="$1" href="javascript:void(0);"', 'pagination pull-right'], $page->render());
         } else {
             $result['list'] = $db->select();
         }
