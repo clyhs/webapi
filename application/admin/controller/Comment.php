@@ -54,7 +54,9 @@ class Comment extends BaseAdmin{
 
     protected function _index_data_filter(&$data)
     {
+
         foreach ($data as &$vo) {
+            var_dump($vo);
             $vo['ids'] = join(',', ToolService::getArrSubIds($data, $vo['id']));
             if($vo['type_id'] == 11){
                 $vo['title'] = Db::name('television')->where(['id' => $vo['uid']])->value('name');
@@ -69,6 +71,7 @@ class Comment extends BaseAdmin{
             }
         }
         $data = ToolService::arr2table($data);
+        var_dump($data);
     }
 
 }
