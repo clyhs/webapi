@@ -86,7 +86,7 @@ class BaseAdmin extends Controller{
     protected function _list($dbQuery = null, $isPage = true, $isDisplay = true, $total = false, $result = [])
     {
         $db = is_null($dbQuery) ? Db::name($this->table) : (is_string($dbQuery) ? Db::name($dbQuery) : $dbQuery);
-        echo $db;
+        // echo $db;
         // 列表排序默认处理
         if ($this->request->isPost() && $this->request->post('action') === 'resort') {
             $data = $this->request->post();
@@ -103,13 +103,13 @@ class BaseAdmin extends Controller{
             $fields = $db->getTableFields($db->getTable());
             in_array('sort', $fields) && $db->order('sort asc');
         }
-        echo $dbQuery;
         if ($isPage) {
             $rows = intval($this->request->get('rows', cookie('rows')));
             cookie('rows', $rows >= 10 ? $rows : 20);
             $page = $db->paginate($rows, $total, ['query' => $this->request->get('', '', 'urlencode')]);
             list($pattern, $replacement) = [['|href="(.*?)"|', '|pagination|'], ['data-open="$1"', 'pagination pull-right']];
             list($result['list'], $result['page']) = [$page->all(), preg_replace($pattern, $replacement, $page->render())];
+            var_dump($page->all());
         } else {
             $result['list'] = $db->select();
         }
