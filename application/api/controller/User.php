@@ -133,8 +133,8 @@ class User extends BaseApiRest{
             return json(["code"=>20001,"desc"=>"账号已经被禁用，请联系管理!"]);
         }
         // 更新登录信息
-        $data = ['login_at' => ['exp', 'now()'], 'login_num' => ['exp', 'login_num+1']];
-        Db::name('user')->where(['id' => $user['id']])->update($data);
+        //$data = ['login_at' => ['exp', 'now()'], 'login_num' => ['exp', 'login_num+1']];
+        //Db::name('user')->where(['id' => $user['id']])->update($data);
 
         return json(["code"=>10000,"desc"=>"登录成功","data"=>$this->_login_filter($user)]);
     }
