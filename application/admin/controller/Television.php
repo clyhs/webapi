@@ -43,7 +43,7 @@ class Television extends BaseAdmin{
 
                 if($get[$key]>0){
                     //$db->where('a.'.$key, '=', "{$get[$key]}");
-                    $map[]=['exp','FIND_IN_SET('.$get[$key].',a.type_ids)'];
+                    $map[]=['exp',Db::raw("FIND_IN_SET($get[$key],a.type_ids)")];
                     $db->where($map);
                 }
 
