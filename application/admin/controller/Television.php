@@ -115,6 +115,7 @@ class Television extends BaseAdmin{
                     //$data[$i]['url_1'] =mb_convert_encoding($context[1], "utf8", "gbk");;
                     $data[$i]['url_2'] ='#';
                     $data[$i]['url_3'] ='#';
+                    $data[$i]['status'] =1;
                     $data[$i]['type_ids'] =$vo['type_ids'];
                     $i++;
                 }
