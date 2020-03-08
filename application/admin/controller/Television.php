@@ -111,6 +111,7 @@ class Television extends BaseAdmin{
                     //$data[$i]['name'] = mb_convert_encoding($context[0], "utf8", "gbk");//iconv('gbk', 'utf8',$context[0]);
                     $data[$i]['name'] = $context[0];
                     $url_1 = str_replace('\r\n','', $context[1]);
+                    $url_1 = preg_replace('/[\r\n]/', '', $url_1);
                     $data[$i]['url_1'] = $url_1;
                     //$data[$i]['url_1'] =mb_convert_encoding($context[1], "utf8", "gbk");;
                     $data[$i]['url_2'] ='#';
